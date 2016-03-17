@@ -1,2 +1,2 @@
-# ciencia-da-computacao
+# Ciência da Computação
 Repositório para arquivos relacionados ao curso de graduação em Ciência da Computação, pela Universidade do Vale do Itajaí
