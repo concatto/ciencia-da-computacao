@@ -32,10 +32,20 @@ private:
     DoubleNode<T>* getNode(int position) {
 		if (position > size) return NULL;
 
-        DoubleNode<T>* navigator = initial;
-        for (int i = 0; i < position; i++) {
-            navigator = navigator->next;
+        //Evitar a utilizaÃ§Ã£o do membro iterator para prevenir possÃ­veis conflitos
+        DoubleNode<T>* navigator;
+        if (position > (size / 2)) {
+            navigator = initial;
+            for (int i = 0; i < position; i++) {
+                navigator = navigator->next;
+            }
+        } else {
+            navigator = last;
+            for (int i = 0; i < size - position - 1; i++) {
+                navigator = navigator->previous;
+            }
         }
+
 
         return navigator;
     }
@@ -61,30 +71,18 @@ private:
         left.begin();
         right.begin();
 
-        int leftIndex = 0;
-        int rightIndex = 0;
         for (int i = 0; i < left.size + right.size; i++) {
-            if (leftIndex == left.size) {
-                //Não resta nada na esquerda, então adicionamos os elementos da direita
+            if (!left.hasMoreElements()) {
                 combined.append(right.next());
-                rightIndex++;
-            } else if (rightIndex == right.size) {
-                //Não resta nada na direita, então os elementos da esquerda são adicionados
+            } else if (!right.hasMoreElements()) {
                 combined.append(left.next());
-                leftIndex++;
             } else if (left.iterator->value > right.iterator->value) {
-                //Elemento da esquerda é maior que elemento da direita, então adicionamos o elemento da direita
                 combined.append(right.next());
-                rightIndex++;
             } else {
-                //Caso nenhuma condição seja verdadeira, o elemento da direita é maior, então adiciona-se o elemento da esquerda
                 combined.append(left.next());
-                leftIndex++;
             }
         }
 
-        //Por fim, copiamos os valores ordenados para os elementos originais
-        //Como o último elemento da esquerda aponta para o primeiro da direita, podemos tratar como uma lista contínua
         left.begin();
         combined.begin();
         for (int i = 0; i < combined.size; i++) {
@@ -95,8 +93,10 @@ private:
     void mergeSort() {
         if (size > 1) {
             int middle = size / 2;
-            LinkedList<T> left(initial, middle);
-            LinkedList<T> right(getNode(middle), size - middle);
+            DoubleNode<T>* middleNode = getNode(middle);
+
+            DoublyLinkedList<T> left(initial, middleNode->previous, middle);
+            DoublyLinkedList<T> right(middleNode, last, size - middle);
 
             left.mergeSort();
             right.mergeSort();
@@ -106,7 +106,8 @@ private:
     }
 
 public:
-    DoublyLinkedList(DoubleNode<T>* initial = NULL, int size = 0) : initial(initial), size(size) {}
+    DoublyLinkedList(DoubleNode<T>* initial = NULL, DoubleNode<T>* last = NULL, int size = 0)
+        : initial(initial), last(last), size(size) {}
 
 	void sort(SortMode::Type mode = SortMode::Merge) {
         if (mode == SortMode::Bubble) {
@@ -121,13 +122,22 @@ public:
 
         DoubleNode<T>* obsolete;
 
-		if (position == 0) { //Caso especial para remoção no início
+        if (size == 1) {
             obsolete = initial;
-			initial = obsolete->next; //O primeiro se torna o segundo
+            initial = NULL;
+            last = NULL;
+        } else if (position == 0) { //Caso especial para remoÃ§Ã£o no inÃ­cio
+            obsolete = initial;
+			initial = obsolete->next;
 			initial->previous = NULL;
-		} else {
+		} else if (position == size - 1) { //Caso especial para remoÃ§Ã£o no final
+            obsolete = last;
+            last = obsolete->previous;
+            last->next = NULL;
+        } else {
             DoubleNode<T>* obsolete = getNode(position);
 			obsolete->previous->next = obsolete->next;
+            obsolete->next->previous = obsolete->previous;
 		}
 
 		delete obsolete;
@@ -147,18 +157,29 @@ public:
 		if (position > size) return false;
 
         DoubleNode<T>* element = new DoubleNode<T>(value);
-		if (element == NULL) { //Sem memória
+		if (element == NULL) { //Falha na alocaÃ§Ã£o
 			return false;
 		}
 
-        if (position == 0) { //Inserção no início requer caso especial
-            element->next = initial;
+        if (size == 0) {
             initial = element;
+            last = element;
+        } else if (position == 0) {
+            element->next = initial;
+            initial->previous = element;
+            initial = element;
+        } else if (position == size) {
+            element->previous = last;
+            last->next = element;
+            last = element;
         } else {
-            DoubleNode<T>* previous = getNode(position - 1);
+            DoubleNode<T>* node = getNode(position);
 
-            element->next = previous->next;
-            previous->next = element;
+            element->previous = node->previous;
+            element->next = node;
+
+            node->previous->next = element;
+            node->previous = element;
         }
 
         size++;
@@ -177,13 +198,23 @@ public:
         iterator = initial;
     }
 
-    bool hasNext() {
-        return iterator != NULL;
+    void end() {
+        iterator = last;
+    }
+
+    bool hasMoreElements() {
+        return iterator != last->next && iterator != initial->previous;
     }
 
     T next() {
         T value = iterator->value;
         iterator = iterator->next;
+        return value;
+    }
+
+    T previous() {
+        T value = iterator->value;
+        iterator = iterator->previous;
         return value;
     }
 
@@ -197,13 +228,13 @@ public:
 };
 
 template <class T>
-std::ostream& operator<<(std::ostream& out, LinkedList<T>& list) {
+std::ostream& operator<<(std::ostream& out, DoublyLinkedList<T>& list) {
     out << "{";
     list.begin();
-    while (list.hasNext()) {
+    while (list.hasMoreElements()) {
         out << list.next();
 
-        if (list.hasNext()) {
+        if (list.hasMoreElements()) {
 			out << ", ";
 		}
     }

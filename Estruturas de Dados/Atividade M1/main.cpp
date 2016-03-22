@@ -1,6 +1,7 @@
 #include <iostream>
 #include "linked_list.h"
 #include "static_list.h"
+#include "doubly_linked_list.h"
 
 enum Naipe {Copas, Ouro, Paus, Espadas};
 struct Carta {
@@ -28,7 +29,7 @@ std::ostream& operator<<(std::ostream& out, Carta& carta) {
 }
 
 int main() {
-    StaticList<int> list(20);
+    DoublyLinkedList<int> list;
     list.append(5);
     list.append(20);
     list.append(1);
