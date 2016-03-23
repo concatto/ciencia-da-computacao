@@ -1,59 +1,56 @@
 .data
 	A: 		.space	80
 	msg_input:	.asciiz	"Tamanho (max 20): "
+	msg_max:	.asciiz	"Valor maximo: "
 
 .text
 
 Main:
-	la	$t0, msg_input
-	la	$v0, 4
+	la	$a0, msg_input
+	li	$v0, 4
 	syscall			
 	
-	la	$v0, 5
+	li	$v0, 5
 	syscall
 	
-	move	$s6, $v0	#s6 contém o tamanho
-	li	$s2,0		#conterá I
+	move	$s5, $v0	#s5 contÃ©m o tamanho
+	li	$s2, 0		#conterÃ¡ o Ã­ndice
 	
+	la	$s1, A		#endereÃ§o base de A
 Read:
-	beq	$s2, $s6, ReadExit
+	beq	$s2, $s5, ReadExit
 	
+	li	$v0, 5
+	syscall			#lÃª um inteiro do console
+	
+	sll	$s3, $s2, 2	#multiplica o Ã­ndice por 4 e grava em s3
+	add	$s3, $s3, $s1	#desloca s3 para o endereÃ§o correto
+	sw	$v0, 0($s3)	#salva na memÃ³ria o valor lido
+	
+	addi	$s2, $s2, 1
 	
 	j 	Read
-	
 ReadExit:
-
-
-	la	$t0, A		#endereço base de A
-	la	$t1, size
-	la	$t2, i
-	la	$t3, sum
+	li 	$s2, 1		#Ã­ndice iniciarÃ¡ em 1
+	lw	$s4, 0($s1)	#primeiro valor de A; s4 conterÃ¡ o maior valor
+LoopMaximum:
+	beq	$s2, $s5, Exit
 	
-	lw	$s1,0($t1)	#contém o valor de size
-	li	$s3,0		#conterá Sum
+	sll	$s3, $s2, 2
+	add	$s3, $s3, $s1
+	lw	$t0, 0($s3)
 	
-	sw	$s2,0($t2)
-	sw	$s3,0($t3)
+	ble	$t0, $s4, NotGreater
+	move	$s4, $t0
+NotGreater:
+	addi	$s2, $s2, 1
 	
-	li	$s0, 0		#conterá o deslocamento
-Loop:
-	beq	$s2, $s1, Exit	#Branch de saída
-	
-	sll	$s0, $s2, 2	#prepara s0 com o deslocamento necessário
-	add	$s0, $s0, $t0	#move s0 para o endereço correto
-	lw	$s0, 0($s0)	#carrega o valor no endereço indicado por s0 no próprio s0
-	add	$s3, $s3, $s0	#acumula os valores em s3 (sum)
-	sw	$s3, 0($t3)	#salva o resultado na memória
-	
-	addi	$s2, $s2, 1	#i++
-	sw	$s2, 0($t2)	#Salva na memória o valor de i
-	
-	j	Loop
+	j	LoopMaximum
 Exit:
-	
+	la	$a0, msg_max
 	li	$v0, 4
-	la	$a0, msg_sum
 	syscall
+
+	move	$a0, $s4
 	li	$v0, 1
-	move	$a0, $s3
 	syscall
