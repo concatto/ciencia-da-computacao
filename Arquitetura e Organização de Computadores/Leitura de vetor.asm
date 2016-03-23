@@ -1,20 +1,35 @@
 .data
-	A: 		.word	 1,2,3,4,5,6,7,8
-	size: 		.word 	8
-	i: 		.word 	10
-	sum:		.word	20
-	msg_sum:	.asciiz	"Sum = "
+	A: 		.space	80
+	msg_input:	.asciiz	"Tamanho (max 20): "
 
 .text
 
 Main:
+	la	$t0, msg_input
+	la	$v0, 4
+	syscall			
+	
+	la	$v0, 5
+	syscall
+	
+	move	$s6, $v0	#s6 contém o tamanho
+	li	$s2,0		#conterá I
+	
+Read:
+	beq	$s2, $s6, ReadExit
+	
+	
+	j 	Read
+	
+ReadExit:
+
+
 	la	$t0, A		#endereço base de A
 	la	$t1, size
 	la	$t2, i
 	la	$t3, sum
 	
 	lw	$s1,0($t1)	#contém o valor de size
-	li	$s2,0		#conterá I
 	li	$s3,0		#conterá Sum
 	
 	sw	$s2,0($t2)
