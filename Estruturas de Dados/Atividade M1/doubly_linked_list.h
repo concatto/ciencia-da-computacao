@@ -117,6 +117,16 @@ public:
         }
 	}
 
+    void shuffle() {
+        DoubleNode<T>* navigator = initial;
+
+        for (int i = 0; i < size - 1; i++) {
+            int index = RandomNumberGenerator::generate(0, size - i - 1);
+            std::swap(navigator->value, getNode(i + index)->value);
+            navigator = navigator->next;
+        }
+    }
+
 	bool remove(int position) {
 		if (position >= size) return false;
 

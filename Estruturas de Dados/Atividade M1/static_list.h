@@ -67,8 +67,8 @@ private:
     }
 
 public:
-    StaticList(int maximum = 0) : maximum(maximum), size(0), data(new T[maximum]) {}
-    StaticList(T* data, int size) : data(data), size(size), maximum(size) {}
+    StaticList(int maximum = 10) : maximum(maximum), size(0), data(new T[maximum]) {}
+    StaticList(T* data, int size) : maximum(size), size(size), data(data) {}
 
     void sort(SortMode::Type mode = SortMode::Merge) {
         if (mode == SortMode::Bubble) {
@@ -77,6 +77,13 @@ public:
             mergeSort();
         }
 	}
+
+    void shuffle() {
+        for (int i = 0; i < size - 1; i++) {
+            int index = RandomNumberGenerator::generate(0, size - i - 1);
+            std::swap(data[i], data[i + index]);
+        }
+    }
 
     bool remove(int position) {
         if (position > size || position < 0) return false;

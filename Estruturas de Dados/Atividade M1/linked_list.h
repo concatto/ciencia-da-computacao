@@ -27,6 +27,7 @@ private:
 		return value;
 	}
 
+    //O(n)
     Node<T>* getNode(int position) {
 		if (position > size) return NULL;
 
@@ -38,6 +39,7 @@ private:
         return navigator;
     }
 
+    //O(n²)
     void bubbleSort() {
         bool moved;
         do {
@@ -53,6 +55,7 @@ private:
         } while (moved);
     }
 
+    //O(n)
     void combine(LinkedList<T>& left, LinkedList<T>& right) {
         LinkedList<T> combined;
 
@@ -90,6 +93,7 @@ private:
         }
     }
 
+    //O(n log n)
     void mergeSort() {
         if (size > 1) {
             int middle = size / 2;
@@ -114,27 +118,18 @@ public:
         }
 	}
 
-    int search(T value) {
-        begin();
-        for (int i = 0; hasNext(); i++) {
-            if (next() == value) {
-                return i;
-            }
-        }
+    //O(n²)
+    void shuffle() {
+        Node<T>* navigator = initial;
 
-        return -1;
+        for (int i = 0; i < size - 1; i++) {
+            int index = RandomNumberGenerator::generate(0, size - i - 1);
+            std::swap(navigator->value, getNode(i + index)->value);
+            navigator = navigator->next;
+        }
     }
 
-    bool removeValue(T value) {
-        int position = search(value);
-
-        if (position >= 0) {
-            return remove(position);
-        }
-
-        return false;
-    }
-
+    //O(n)
 	bool remove(int position) {
 		if (position >= size) return false;
 
@@ -154,14 +149,17 @@ public:
 		return true;
 	}
 
+    //O(1)
 	bool removeFirst() {
 		return remove(0);
 	}
 
+    //O(n)
 	bool removeLast() {
 		return remove(size - 1);
 	}
 
+    //O(n)
     bool insert(T value, int position) {
 		if (position > size) return false;
 
@@ -184,10 +182,12 @@ public:
 		return true;
     }
 
+    //O(n)
     bool append(T value) {
         return insert(value, size);
     }
 
+    //O(1)
     bool prepend(T value) {
         return insert(value, 0);
     }
@@ -210,6 +210,7 @@ public:
         return size;
     }
 
+    //O(n)
     T get(int position) {
         return getNode(position)->value;
     }

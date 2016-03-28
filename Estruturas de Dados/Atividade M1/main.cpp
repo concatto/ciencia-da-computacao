@@ -1,3 +1,5 @@
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include "linked_list.h"
 #include "static_list.h"
@@ -28,27 +30,46 @@ std::ostream& operator<<(std::ostream& out, Carta& carta) {
     return out;
 }
 
-int main() {
-    DoublyLinkedList<int> list;
-    list.append(5);
-    list.append(20);
-    list.append(1);
-    list.append(40);
-    list.append(2);
-    list.append(10);
-    list.append(30);
-    list.append(3);
+template <class L>
+void test() {
+    L list;
 
-    list.insert(27, 6);
-    list.insert(17, 0);
+    for (int i = 0; i < 7; i++) {
+        list.append(i);
+    }
 
-    list.remove(0);
-    list.insert(17, 0);
-    list.removeLast();
+    std::cout << list << "\n";
+
+    //Início
+    list.prepend(17);
+    list.removeFirst();
+    list.prepend(12);
+    std::cout << list << "\n";
+
+    //Meio
+    list.insert(55, 3);
+    list.remove(3);
+    list.insert(1337, 3);
+    std::cout << list << "\n";
+
+    //Fim
     list.append(666);
-
+    list.removeLast();
+    list.append(667);
 	std::cout << list << "\n";
+
     list.sort(SortMode::Merge);
 	std::cout << list << "\n";
-    return 0;
+
+    list.shuffle();
+    std::cout << list << "\n";
+
+    list.sort(SortMode::Bubble);
+	std::cout << list << "\n\n";
+}
+
+int main() {
+    test<StaticList<int>>();
+    test<LinkedList<int>>();
+    test<DoublyLinkedList<int>>();
 }
