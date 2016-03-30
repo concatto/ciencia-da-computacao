@@ -35,12 +35,26 @@ LoopEntrada:
 	move	$a0, $s0
 	move	$a1, $s1
 	move	$a2, $s2
-	jal
+	jal	RealizarAcao
 	
+	j	LoopEntrada
 
 #a0: dia; $a1: aluno; $a2: ação
 RealizarAcao:
+	la	$t1, Dias
+	sll	$t0, $a0, 2
+	add	$t0, $t0, $t1
+	lw	$t1, 0($t0)
 	
-	
-	
-	
+	li	$t2, 1
+	sllv	$t2, $t2, $a1		#t2 contém a máscara
+	beqz	$a2, And
+Or:
+	or	$t1, $t1, $t2
+	j	FimAcao
+And:
+	not	$t2, $t2
+	and	$t1, $t1, $t2
+FimAcao:
+	sw	$t1, 0($t0)
+	jr	$ra
