@@ -134,6 +134,82 @@ void quatroTeste() {
 	std::cout << a << "\n" << b << "\n" << c << "\n";
 }
 
+StaticList<int> removeRepeated(StaticList<int> origin, StaticList<int> comparator) {
+	StaticList<int> newList(origin.getSize());
+	
+	for (int i = 0; i < origin.getSize(); i++) {
+		bool exists = false;
+		for (int j = 0; j < comparator.getSize(); j++) {
+			if (origin[i] == comparator[j]) {
+				exists = true;
+				break;
+			}
+		}
+		
+		if (!exists) {
+			newList.append(origin[i]);
+		}
+	}
+	
+	return newList;
+}
+
+void listXor(StaticList<int>& a, StaticList<int>& b, StaticList<int>& c) {
+	StaticList<int> aRemoved = removeRepeated(a, b);
+	StaticList<int> bRemoved = removeRepeated(b, a);
+	
+	for (int i = 0; i < aRemoved.getSize(); i++) {
+		c.append(aRemoved[i]);
+	}
+	for (int i = 0; i < bRemoved.getSize(); i++) {
+		c.append(bRemoved[i]);
+	}
+}
+
+template <class T>
+void swap(DoublyLinkedList<T>& a, int j, int k) {
+	DoubleNode<T>* jNav = a.initial;
+	for (int i = 0; i < j; i++) {
+		jNav = jNav->next;
+	}
+	DoubleNode<T>* kNav = a.initial;
+	for (int i = 0; i < k; i++) {
+		kNav = kNav->next;
+	}
+	
+	T jValue = jNav->value;
+	jNav->value = kNav->value;
+	kNav->value = jValue;
+}
+
+template <class T>
+void transfer(StaticList<T>& a, DoublyLinkedList<T>& b) {
+	b.initial = new DoubleNode<T>(a[0]);
+	b.last = b.initial;
+	b.size++;
+	for (int i = 1; i < a.getSize(); i++) {
+		b.last->next = new DoubleNode<T>(a[i]);
+		b.last->next->previous = b.last;
+		b.last = b.last->next;
+		b.size++;
+	}
+	
+	a.size = 0;
+}
+
 int main() {
-	tresTeste();
+	StaticList<int> a(100);
+	DoublyLinkedList<int> b;
+	
+	a.append(10);
+	a.append(2);
+	a.append(35);
+	a.append(4);
+	a.append(5);
+	a.append(1);
+	
+	transfer(a, b);
+	std::cout << a << "\n" << b << "\n";
+	b.sort(SortMode::Merge);
+	std::cout << b << "\n";
 }

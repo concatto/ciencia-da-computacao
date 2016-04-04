@@ -19,7 +19,7 @@ template <class T>
 class DoublyLinkedList {
 private:
     
-    int size;
+    
 
     DoubleNode<T>* nextNode() {
 		DoubleNode<T>* value = iterator;
@@ -104,6 +104,7 @@ private:
     }
 
 public:
+	int size;
 	DoubleNode<T>* initial;
 	DoubleNode<T>* last;
     DoubleNode<T>* iterator;

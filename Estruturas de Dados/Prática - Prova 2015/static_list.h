@@ -9,7 +9,6 @@ template <class T>
 class StaticList {
 private:
     int maximum;
-    int size;
     T* data;
 
     void bubbleSort() {
@@ -67,6 +66,7 @@ private:
     }
 
 public:
+	int size;
     StaticList(int maximum = 10) : maximum(maximum), size(0), data(new T[maximum]) {}
     StaticList(T* data, int size) : maximum(size), size(size), data(data) {}
 
