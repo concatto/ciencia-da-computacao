@@ -12,37 +12,74 @@
 	MessageDia:	.asciiz	"Dia (0 a 15): "
 	MessageAluno:	.asciiz	"Aluno (0 a 31): "
 	MessageAcao:	.asciiz	"Acao (0 para falta, 1 para presenca): "
+	MessageInvalid:	.asciiz	"Valor inválido.\n"
+	MessageSuccess:	.asciiz	"Alteracao realizada com sucesso.\n"
 .text
 
-LoopEntrada:
+EntradaDia:
 	li	$v0, 4
 	la	$a0, MessageDia
-	syscall
+	syscall				#Mensagem de dia
 	li	$v0, 5
-	syscall
+	syscall				#Entrada de inteiro
 	move	$s0, $v0		#s0 contém o dia
 	
+	slti	$t0, $s0, 0		#Se dia < 0, t0 contém 1
+	sgt	$t1, $s0, 15		#Se dia > 15, t1 contém 1
+	or	$t0, $t0, $t1		#Se o dia for menor que 0 ou maior que 15, t0 contém 1
+	beqz	$t0, EntradaAluno	#Se o valor for válido, continuar para a próxima entrada de dados
+					#Senão, exibir mensagem de erro e voltar
+	li	$v0, 4
+	la	$a0, MessageInvalid
+	syscall				#Mensagem de valor inválido
+	j	EntradaDia
+	
+EntradaAluno:
 	li	$v0, 4
 	la	$a0, MessageAluno
-	syscall
+	syscall				#Mensagem do aluno
 	li	$v0, 5
 	syscall
 	move	$s1, $v0		#s1 contém o aluno
+
+	slti	$t0, $s1, 0		#Se aluno < 0, t0 contém 1
+	sgt	$t1, $s1, 31		#Se aluno > 31, t1 contém 1
+	or	$t0, $t0, $t1		#Se o índice do aluno for menor que 0 ou maior que 31, t0 conterá 1
+	beqz	$t0, EntradaAcao	#Se t0 ainda for zero, o valor é válido; pular para a próxima entrada
 	
 	li	$v0, 4
-	la	$a0, MessageAcao
+	la	$a0, MessageInvalid
 	syscall
+	j	EntradaAluno
+	
+EntradaAcao:	
+	li	$v0, 4
+	la	$a0, MessageAcao
+	syscall				#Mensagem da ação
 	li	$v0, 5
 	syscall
 	move	$s2, $v0		#s2 contém a ação
 	
+	slti	$t0, $s2, 0
+	sgt	$t1, $s2, 1
+	or	$t0, $t0, $t1		#Se ação < 0 ou ação > 1, t0 contém 1
+	beqz	$t0, Acao		#Se t0 for 0, avançar para a realização da ação
+					#Senão, voltar para a entrada da ação	
+	li	$v0, 4
+	la	$a0, MessageInvalid
+	syscall
+	j	EntradaAcao
 	
+Acao:
 	move	$a0, $s0
 	move	$a1, $s1
 	move	$a2, $s2
-	jal	RealizarAcao
+	jal	RealizarAcao		#Chamada da função RealizarAcao
 	
-	j	LoopEntrada
+	li	$v0, 4
+	la	$a0, MessageSuccess
+	syscall				#Mensagem de sucesso
+	j	EntradaDia		#Jump para o início do programa
 
 #a0: dia; $a1: aluno; $a2: ação
 RealizarAcao:
