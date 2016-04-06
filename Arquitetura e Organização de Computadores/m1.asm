@@ -25,7 +25,7 @@ LeituraTamanho:
 	li	$v0, 5
 	syscall				#Lê um número inteiro
 	move	$s0, $v0		#s0 conterá o tamanho dos vetores
-	slti	$t0, $s0, 1		#t0 é 1 se o tamanho for menor que 1
+	slti	$t0, $s0, 2		#t0 é 1 se o tamanho for menor que 1
 	sgt	$t1, $s0, 8		#t1 é 1 se o tamanho for maior que 8
 	or	$t0, $t0, $t1		#t0 é 1 se o tamanho for menor que 1 OU maior que 8
 	beqz	$t0, LeituraA		#se o tamanho for válido, pular para leitura de dados
