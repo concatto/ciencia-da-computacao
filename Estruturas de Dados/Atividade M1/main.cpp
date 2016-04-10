@@ -58,6 +58,9 @@ void test() {
     list.append(667);
 	std::cout << list << "\n";
 
+    list.shuffle();
+    std::cout << list << "\n";
+
     list.sort(SortMode::Merge);
 	std::cout << list << "\n";
 
@@ -69,7 +72,7 @@ void test() {
 }
 
 int main() {
-    test<StaticList<int>>();
     test<LinkedList<int>>();
+    test<StaticList<int>>();
     test<DoublyLinkedList<int>>();
 }

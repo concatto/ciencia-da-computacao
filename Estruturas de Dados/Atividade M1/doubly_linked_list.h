@@ -1,9 +1,7 @@
 #ifndef DOUBLY_LINKED_LIST_H
 #define DOUBLY_LINKED_LIST_H
 
-#include "base.h"
-#include <iostream>
-#include <algorithm>
+#include "list.h"
 
 template <class T>
 struct DoubleNode {
@@ -16,18 +14,12 @@ struct DoubleNode {
 };
 
 template <class T>
-class DoublyLinkedList {
+class DoublyLinkedList : public List<T> {
 private:
+    using List<T>::size;
     DoubleNode<T>* initial;
 	DoubleNode<T>* last;
     DoubleNode<T>* iterator;
-    int size;
-
-    DoubleNode<T>* nextNode() {
-		DoubleNode<T>* value = iterator;
-		iterator = iterator->next;
-		return value;
-	}
 
     DoubleNode<T>* getNode(int position) {
 		if (position > size) return NULL;
@@ -50,84 +42,11 @@ private:
         return navigator;
     }
 
-    void bubbleSort() {
-        bool moved;
-        do {
-            moved = false;
-            begin();
-            for (int i = 0; i < size - 1; i++) {
-                DoubleNode<T>* node = nextNode();
-                if (node->value > node->next->value) {
-                    std::swap(node->value, node->next->value);
-                    moved = true;
-                }
-            }
-        } while (moved);
-    }
-
-    void combine(DoublyLinkedList<T>& left, DoublyLinkedList<T>& right) {
-        DoublyLinkedList<T> combined;
-
-        left.begin();
-        right.begin();
-
-        for (int i = 0; i < left.size + right.size; i++) {
-            if (!left.hasMoreElements()) {
-                combined.append(right.next());
-            } else if (!right.hasMoreElements()) {
-                combined.append(left.next());
-            } else if (left.iterator->value > right.iterator->value) {
-                combined.append(right.next());
-            } else {
-                combined.append(left.next());
-            }
-        }
-
-        left.begin();
-        combined.begin();
-        for (int i = 0; i < combined.size; i++) {
-            left.nextNode()->value = combined.next();
-        }
-    }
-
-    void mergeSort() {
-        if (size > 1) {
-            int middle = size / 2;
-            DoubleNode<T>* middleNode = getNode(middle);
-
-            DoublyLinkedList<T> left(initial, middleNode->previous, middle);
-            DoublyLinkedList<T> right(middleNode, last, size - middle);
-
-            left.mergeSort();
-            right.mergeSort();
-
-            combine(left, right);
-        }
-    }
-
 public:
     DoublyLinkedList(DoubleNode<T>* initial = NULL, DoubleNode<T>* last = NULL, int size = 0)
-        : initial(initial), last(last), size(size) {}
+        : List<T>(size), initial(initial), last(last) {}
 
-	void sort(SortMode::Type mode = SortMode::Merge) {
-        if (mode == SortMode::Bubble) {
-            bubbleSort();
-        } else if (mode == SortMode::Merge) {
-            mergeSort();
-        }
-	}
-
-    void shuffle() {
-        DoubleNode<T>* navigator = initial;
-
-        for (int i = 0; i < size - 1; i++) {
-            int index = RandomNumberGenerator::generate(0, size - i - 1);
-            std::swap(navigator->value, getNode(i + index)->value);
-            navigator = navigator->next;
-        }
-    }
-
-	bool remove(int position) {
+	bool remove(int position) override {
 		if (position >= size) return false;
 
         DoubleNode<T>* obsolete;
@@ -155,15 +74,7 @@ public:
 		return true;
 	}
 
-	bool removeFirst() {
-		return remove(0);
-	}
-
-	bool removeLast() {
-		return remove(size - 1);
-	}
-
-    bool insert(T value, int position) {
+    bool insert(T value, int position) override {
 		if (position > size) return false;
 
         DoubleNode<T>* element = new DoubleNode<T>(value);
@@ -196,15 +107,7 @@ public:
 		return true;
     }
 
-    bool append(T value) {
-        return insert(value, size);
-    }
-
-    bool prepend(T value) {
-        return insert(value, 0);
-    }
-
-    void begin() {
+    void begin() override {
         iterator = initial;
     }
 
@@ -212,44 +115,33 @@ public:
         iterator = last;
     }
 
-    bool hasMoreElements() {
+    bool hasNext() override {
         return iterator != last->next && iterator != initial->previous;
     }
 
-    T next() {
-        T value = iterator->value;
+    T& next() override {
+        T& value = iterator->value;
         iterator = iterator->next;
         return value;
     }
 
-    T previous() {
-        T value = iterator->value;
+    T& peek() override {
+        return iterator->value;
+    }
+
+    T& previous() {
+        T& value = iterator->value;
         iterator = iterator->previous;
         return value;
     }
 
-    int getSize() {
-        return size;
-    }
-
-    T get(int position) {
+    T& get(int position) override {
         return getNode(position)->value;
     }
-};
 
-template <class T>
-std::ostream& operator<<(std::ostream& out, DoublyLinkedList<T>& list) {
-    out << "{";
-    list.begin();
-    while (list.hasMoreElements()) {
-        out << list.next();
-
-        if (list.hasMoreElements()) {
-			out << ", ";
-		}
+    List<T>* subList(int begin, int length) override {
+        return new DoublyLinkedList<T>(getNode(begin), getNode(begin + length - 1), length);
     }
-    out << "}";
-    return out;
-}
+};
 
 #endif

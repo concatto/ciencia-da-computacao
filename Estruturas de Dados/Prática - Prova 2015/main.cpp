@@ -198,18 +198,47 @@ void transfer(StaticList<T>& a, DoublyLinkedList<T>& b) {
 }
 
 int main() {
-	StaticList<int> a(100);
+	DoublyLinkedList<int> a;
 	DoublyLinkedList<int> b;
 	
-	a.append(10);
-	a.append(2);
-	a.append(35);
-	a.append(4);
-	a.append(5);
 	a.append(1);
+	a.append(20);
+	a.append(3);
+	a.append(43);
+	a.append(51);
+	a.append(12);
 	
-	transfer(a, b);
-	std::cout << a << "\n" << b << "\n";
-	b.sort(SortMode::Merge);
-	std::cout << b << "\n";
+	b.append(10);
+	b.append(2);
+	b.append(35);
+	b.append(4);
+	b.append(5);
+	b.append(1);
+	
+	DoublyLinkedList<int> c;
+	DoubleNode<int>* aNav = a.initial;
+	DoubleNode<int>* bNav = b.initial;
+	while (aNav != NULL) {
+		DoubleNode<int>* na = new DoubleNode<int>;
+		DoubleNode<int>* nb = new DoubleNode<int>;
+		na->next = nb;
+		na->previous = c.last;
+		na->value = aNav->value;
+		
+		nb->next = NULL;
+		nb->previous = na;
+		nb->value = bNav->value;
+		
+		if (c.size == 0) {
+			c.initial = na;
+		} else {
+			c.last->next = na;
+		}
+		c.last = nb;
+		c.size += 2;
+		
+		aNav = aNav->next;
+		bNav = bNav->next;
+	}
+	std::cout << c << "\n";
 }
