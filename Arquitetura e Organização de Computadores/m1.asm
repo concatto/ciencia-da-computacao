@@ -16,6 +16,8 @@
 	MessageLine:	.asciiz	"\n"
 
 .text
+	la	$s4, VetorA		#s4 contém o endereço base do vetor A
+	la	$s5, VetorB		#s5 contém o endereço base do vetor B
 	
 LeituraTamanho:
 	li	$v0, 4
@@ -25,9 +27,9 @@ LeituraTamanho:
 	li	$v0, 5
 	syscall				#Lê um número inteiro
 	move	$s0, $v0		#s0 conterá o tamanho dos vetores
-	slti	$t0, $s0, 2		#t0 é 1 se o tamanho for menor que 1
+	slti	$t0, $s0, 2		#t0 é 1 se o tamanho for menor que 2
 	sgt	$t1, $s0, 8		#t1 é 1 se o tamanho for maior que 8
-	or	$t0, $t0, $t1		#t0 é 1 se o tamanho for menor que 1 OU maior que 8
+	or	$t0, $t0, $t1		#t0 é 1 se o tamanho for menor que 2 OU maior que 8
 	beqz	$t0, LeituraA		#se o tamanho for válido, pular para leitura de dados
 	li	$v0, 4
 	la	$a0, MessageInvalid
@@ -35,29 +37,31 @@ LeituraTamanho:
 	j	LeituraTamanho
 	
 LeituraA:
-	move	$a0, $s0
-	la	$a1, VetorA
-	la	$a2, MessageA
+	move	$a0, $s0		#Argumento 0: tamanho
+	move	$a1, $s4		#Argumento 1: endereço base
+	la	$a2, MessageA		#Argumento 2: endereço da mensagem
 	jal	LerVetor		#Lê valores no vetor A
+
+	li	$v0, 4
+	la	$a0, MessageLine
+	syscall				#Nova linha
 
 LeituraB:
 	move	$a0, $s0
-	la	$a1, VetorB
+	move	$a1, $s5
 	la	$a2, MessageB
 	jal	LerVetor		#Lê valores no vetor B
 	
 	li	$s1, 0			#s1 conterá o índice
 LoopInversao:
-	beq	$s1, $s0, FimInversao
+	beq	$s1, $s0, FimInversao	#Se o índice for igual ao tamanho, terminar o loop
 	
 	sll	$t0, $s1, 2		#Multiplica o índice por 4 e salva em t0
 	
-	la	$t2, VetorA		#Carrega o endereço base em t2
-	add	$t2, $t2, $t0		#t2 agora está deslocado até o índice atual, com base em A
+	add	$t2, $s4, $t0		#t2 agora está deslocado até o índice atual, com base em A
 	lw	$s2, 0($t2)		#s2 conterá o valor no índice atual no vetor A
 	
-	la	$t3, VetorB
-	add	$t3, $t3, $t0		#t3 agora está deslocado até o índice atual, com base em B
+	add	$t3, $s5, $t0		#t3 agora está deslocado até o índice atual, com base em B
 	lw	$s3, 0($t3)		#s3 conterá o valor no índice atual no vetor B
 	
 	sw	$s2, 0($t3)		#O valor do vetor A agora está salvo em B
@@ -72,12 +76,16 @@ FimInversao:
 	syscall				#Mostra "Resultado" na tela
 
 	move	$a0, $s0
-	la	$a1, VetorA
+	move	$a1, $s4
 	la	$a2, MessageA
 	jal	ImprimirVetor		#Imprime na tela o conteúdo do vetor A
 
+	li	$v0, 4
+	la	$a0, MessageLine
+	syscall				#Nova linha
+
 	move	$a0, $s0
-	la	$a1, VetorB
+	move	$a1, $s5
 	la	$a2, MessageB
 	jal	ImprimirVetor		#Imprime na tela o conteúdo do vetor B
 

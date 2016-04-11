@@ -15,7 +15,7 @@ public:
     StaticList(int maximum = 10) : List<T>(0), maximum(maximum), data(new T[maximum]) {}
     StaticList(T* data, int size) : List<T>(size), maximum(size), data(data) {}
 
-    bool remove(int position) {
+    bool remove(int position) override {
         if (position > size || position < 0) return false;
 
         for (int i = position; i < size - 1; i++) {
@@ -26,7 +26,7 @@ public:
         return true;
     }
 
-    bool insert(T value, int position) {
+    bool insert(T value, int position) override {
         if (position > size || position < 0 || size == maximum) return false;
 
         for (int i = size; i > position; i--) {

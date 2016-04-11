@@ -72,7 +72,10 @@ void test() {
 }
 
 int main() {
+    std::cout << "Linked List:\n";
     test<LinkedList<int>>();
+    std::cout << "\nStatic List:\n";
     test<StaticList<int>>();
+    std::cout << "\nDoubly Linked List:\n";
     test<DoublyLinkedList<int>>();
 }

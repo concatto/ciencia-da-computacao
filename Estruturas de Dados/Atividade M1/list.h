@@ -2,6 +2,7 @@
 #define LIST_H
 
 #include <iostream>
+#include <algorithm>
 #include <cstdlib>
 #include <ctime>
 
@@ -18,14 +19,15 @@ public:
             initialized = true;
         }
 
-        return min + std::rand() % (max - min + 1);
+        return min + (std::rand() % (max - min + 1));
     }
 };
-bool RandomNumberGenerator::initialized = false;//!!!
+bool RandomNumberGenerator::initialized = false;
 
 template <class T>
 class List {
 private:
+    //O(n²)
     void bubbleSort() {
         bool moved;
         do {
@@ -72,11 +74,12 @@ private:
         }
 
         //Por fim, copiamos os valores ordenados para os elementos originais
-        //Como o último elemento da esquerda aponta para o primeiro da direita, podemos tratar como uma lista contínua
+        //Como o último elemento da esquerda está logo atrás do para o primeiro da direita, podemos tratar como uma lista contínua
         left->begin();
         for (int i = 0; i < left->size + right->size; i++) {
-            left->next() = combined[i];
+            left->next() = combined[i]; //next() retorna uma referência, então podemos reatribuir
         }
+        delete[] combined;
     }
 
     //O(n log n)
