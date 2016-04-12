@@ -71,9 +71,9 @@ EntradaAcao:
 	j	EntradaAcao
 	
 Acao:
-	move	$a0, $s0
-	move	$a1, $s1
-	move	$a2, $s2
+	move	$a0, $s0		#Dia
+	move	$a1, $s1		#Aluno
+	move	$a2, $s2		#Ação
 	jal	RealizarAcao		#Chamada da função RealizarAcao
 	
 	li	$v0, 4
@@ -86,7 +86,7 @@ RealizarAcao:
 	la	$t1, Dias		#t1 contém o endereço base do vetor Dias
 	sll	$t0, $a0, 2		#t0 contém o índice do dia * 4
 	add	$t0, $t0, $t1		#t0 agora aponta para o endereço correto do vetor Dias
-	lw	$t1, 0($t0)		#O valor contido no endereço apontado por t0 agora está em t1
+	lw	$t1, 0($t0)		#O valor contido no endereço apontado por t0 agora está em t1.
 	
 	li	$t2, 1
 	sllv	$t2, $t2, $a1		#t2 contém o bit 1 deslocado para a esquerda com base do índice do aluno

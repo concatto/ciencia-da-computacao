@@ -16,8 +16,6 @@
 	MessageLine:	.asciiz	"\n"
 
 .text
-	la	$s4, VetorA		#s4 contém o endereço base do vetor A
-	la	$s5, VetorB		#s5 contém o endereço base do vetor B
 	
 LeituraTamanho:
 	li	$v0, 4
@@ -38,7 +36,7 @@ LeituraTamanho:
 	
 LeituraA:
 	move	$a0, $s0		#Argumento 0: tamanho
-	move	$a1, $s4		#Argumento 1: endereço base
+	la	$a1, VetorA		#Argumento 1: endereço base
 	la	$a2, MessageA		#Argumento 2: endereço da mensagem
 	jal	LerVetor		#Lê valores no vetor A
 
@@ -48,7 +46,7 @@ LeituraA:
 
 LeituraB:
 	move	$a0, $s0
-	move	$a1, $s5
+	la	$a1, VetorB
 	la	$a2, MessageB
 	jal	LerVetor		#Lê valores no vetor B
 	
@@ -58,16 +56,18 @@ LoopInversao:
 	
 	sll	$t0, $s1, 2		#Multiplica o índice por 4 e salva em t0
 	
-	add	$t2, $s4, $t0		#t2 agora está deslocado até o índice atual, com base em A
+	la	$t2, VetorA
+	add	$t2, $t2, $t0		#t2 agora está deslocado até o índice atual, com base em A
 	lw	$s2, 0($t2)		#s2 conterá o valor no índice atual no vetor A
 	
-	add	$t3, $s5, $t0		#t3 agora está deslocado até o índice atual, com base em B
+	la	$t3, VetorB
+	add	$t3, $t3, $t0		#t3 agora está deslocado até o índice atual, com base em B
 	lw	$s3, 0($t3)		#s3 conterá o valor no índice atual no vetor B
 	
 	sw	$s2, 0($t3)		#O valor do vetor A agora está salvo em B
 	sw	$s3, 0($t2)		#O valor do vetor B agora está salvo em A
 	
-	addi	$s1, $s1, 1
+	addi	$s1, $s1, 1		#índice++
 	j 	LoopInversao	
 	
 FimInversao:
@@ -76,7 +76,7 @@ FimInversao:
 	syscall				#Mostra "Resultado" na tela
 
 	move	$a0, $s0
-	move	$a1, $s4
+	la	$a1, VetorA
 	la	$a2, MessageA
 	jal	ImprimirVetor		#Imprime na tela o conteúdo do vetor A
 
@@ -85,7 +85,7 @@ FimInversao:
 	syscall				#Nova linha
 
 	move	$a0, $s0
-	move	$a1, $s5
+	la	$a1, VetorB
 	la	$a2, MessageB
 	jal	ImprimirVetor		#Imprime na tela o conteúdo do vetor B
 
