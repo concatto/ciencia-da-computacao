@@ -95,7 +95,7 @@ Or:					#Senão, realizar OR
 	or	$t1, $t1, $t2		#Bit solicitado agora está em 1
 	j	FimAcao
 And:
-	not	$t2, $t2
+	not	$t2, $t2		#Inversão da máscara
 	and	$t1, $t1, $t2		#Bit solicitado agora está em 0
 FimAcao:
 	sw	$t1, 0($t0)		#t1 contém os novos bits, e serão salvos no endereço apontado por t0
