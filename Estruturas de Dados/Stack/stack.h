@@ -24,22 +24,15 @@ public:
         size++;
     }
 
-    StackNode<T>* pop() {
-        if (head == NULL) return NULL;
+    T pop() {
+        if (head == NULL) return static_cast<T>(NULL);
 
-        StackNode<T>* previousHead = head;
+        StackNode<T>* obsolete = head;
         head = head->next;
-
+		T data = obsolete->data;
+		delete obsolete;
         size--;
-        return previousHead;
-    }
-
-    T popData() {
-        if (head == NULL) {
-            return static_cast<T>(NULL);
-        } else {
-            return pop()->data;
-        }
+        return data;
     }
 
     T peek() {
