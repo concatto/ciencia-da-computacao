@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1461054251 source:c:\qt\projects\mips_sim\main.cpp
+	"mips.h"
+
+1461053919 c:\qt\projects\mips_sim\mips.h
+	"mips_definitions.h"
+	<iostream>
+	<stdlib.h>
+	<string.h>
+	<fstream>
+	<sstream>
+
+1460933961 c:\qt\projects\mips_sim\mips_instructions.h
+
+1461054294 source:c:\qt\projects\mips_sim\mips.cpp
+	"mips.h"
+
+1461025236 c:\qt\projects\mips_sim\mips_definitions.h
+
