@@ -34,5 +34,7 @@ int main(int argc, char *argv[])
     mips.loadProgram(program);
     mips.beginExecution();
 
+    mips.printMemory(16);
+
 //    return a.exec();
 }
