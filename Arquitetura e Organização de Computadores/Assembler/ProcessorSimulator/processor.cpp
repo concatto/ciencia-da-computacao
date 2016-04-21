@@ -93,6 +93,12 @@ void Processor::loadMemory(std::vector<unsigned int> memory)
     this->memory = memory;
 }
 
+void Processor::loadDefaultMemory(unsigned int size)
+{
+    std::vector<unsigned int> mem(size, 0);
+    loadMemory(mem);
+}
+
 void Processor::printMemory(unsigned int amount) const
 {
     for (unsigned int i = 0; i < amount; i++) {

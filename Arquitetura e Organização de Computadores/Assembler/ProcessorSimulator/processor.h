@@ -40,6 +40,7 @@ public:
     void beginExecution();
     void loadProgram(Program program);
     void loadMemory(std::vector<unsigned int> memory);
+    void loadDefaultMemory(unsigned int size);
     void printMemory(unsigned int amount) const;
 
 signals:
