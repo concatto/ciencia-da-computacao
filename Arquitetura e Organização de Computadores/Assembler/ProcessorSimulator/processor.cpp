@@ -2,7 +2,6 @@
 #include <algorithm>
 #include <iostream>
 
-
 Processor::Processor(QObject *parent) : QObject(parent), registers(32, 0)
 {
     initializeInstructions();
@@ -13,8 +12,9 @@ void Processor::beginExecution()
     std::fill(registers.begin(), registers.end(), 0); //Set registers to 0
     programCounter = Processor::ProgramCounterOffset; //Initialize program counter
 
-    while (adjustProgramCounter(programCounter) < program.getLength()) {
-        Instruction instruction = fetchInstruction();
+    while (adjustProgramCounter(programCounter) < program.size()) {
+        unsigned int data = fetchInstruction();
+        Instruction instruction = decodeInstruction(data);
         executeInstruction(instruction);
     }
 }
@@ -34,6 +34,7 @@ void Processor::initializeInstructions()
 
     //R format
     rInstructions[0x00] = [&](Instruction ins) { registers[ins.rd] = registers[ins.rt] << ins.shiftAmount; }; //sll
+    rInstructions[0x02] = [&](Instruction ins) { registers[ins.rd] = registers[ins.rt] >> ins.shiftAmount; }; //srl
     rInstructions[0x08] = [&](Instruction ins) { programCounter = registers[ins.rs]; }; //jr
     rInstructions[0x20] = [&](Instruction ins) { registers[ins.rd] = registers[ins.rs] + registers[ins.rt]; }; //add
     rInstructions[0x22] = [&](Instruction ins) { registers[ins.rd] = registers[ins.rs] - registers[ins.rt]; }; //sub
@@ -66,24 +67,16 @@ void Processor::executeInstruction(Instruction instruction)
 {
     InstructionMap::iterator func = instructionSet.find(instruction.opCode);
 
-//    std::cout << "PC: ";
-//    printWord(programCounter);
-//    std::cout << std::endl;
-
     if (func != instructionSet.end()) {
         func->second(instruction);
     } else {
         std::cout << "Instruction " << std::hex << instruction.opCode << std::dec << " not found." << std::endl;
     }
 
-//    std::cout << "instruction executed: ";
-//    printWord(instruction.rawData);
-//    std::cout << std::endl;
-
     programCounter += 4;
 }
 
-void Processor::loadProgram(Program program)
+void Processor::loadProgram(std::vector<unsigned int> program)
 {
     this->program = program;
 }
@@ -99,19 +92,28 @@ void Processor::loadDefaultMemory(unsigned int size)
     loadMemory(mem);
 }
 
-void Processor::printMemory(unsigned int amount) const
+const std::vector<unsigned int>&Processor::memoryReference() const
 {
-    for (unsigned int i = 0; i < amount; i++) {
-        Processor::printWord((i * 4) + Processor::MemoryOffset);
-        std::cout << ":\t";
-        Processor::printWord(memory[i]);
-        std::cout << std::endl;
-    }
+    return memory;
 }
 
-Instruction Processor::fetchInstruction() const
+unsigned int Processor::fetchInstruction() const
 {
-    return program.fetch(adjustProgramCounter(programCounter));
+    return program[(adjustProgramCounter(programCounter))];
+}
+
+Instruction Processor::decodeInstruction(unsigned int rawData) const
+{
+    unsigned int opCode = rawData >> 26 & 0x3F;
+    unsigned int rs = (rawData >> 21) & 0x1F;
+    unsigned int rt = (rawData >> 16) & 0x1F;
+    unsigned int rd = (rawData >> 11) & 0x1F;
+    unsigned int shiftAmount = (rawData >> 6) & 0x1F;
+    unsigned int function = rawData & 0x3F;
+    unsigned int immediate16 = rawData & 0xFFFF;
+    unsigned int immediate26 = rawData & 0x3FFFF;
+
+    return Instruction(rawData, opCode, rs, rt, rd, shiftAmount, function, immediate16, immediate26);
 }
 
 unsigned int Processor::getMemory(unsigned int address) const
@@ -142,12 +144,4 @@ unsigned int Processor::adjustProgramCounter(unsigned int address)
 unsigned int Processor::adjustMemory(unsigned int address)
 {
     return (address - Processor::MemoryOffset) / 4;
-}
-
-void Processor::printWord(unsigned int word)
-{
-    std::cout << "0x";
-    for (int i = 1; i <= 8; i++) {
-        std::cout << std::hex << ((word >> (32 - (i * 4))) & 0xF);
-    }
 }

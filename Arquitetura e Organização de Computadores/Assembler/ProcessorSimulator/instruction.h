@@ -18,8 +18,6 @@ public:
     Instruction();
     Instruction(unsigned int rawData, unsigned int opCode, unsigned int rs, unsigned int rt, unsigned int rd,
                 unsigned int shiftAmount, unsigned int function, unsigned int immediate16, unsigned int immediate26);
-
-    static Instruction decode(unsigned int rawData);
 };
 
 #endif // INSTRUCTION_H

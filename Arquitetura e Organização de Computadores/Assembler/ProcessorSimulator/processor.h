@@ -1,7 +1,7 @@
 #ifndef PROCESSOR_H
 #define PROCESSOR_H
 
-#include "program.h"
+#include "instruction.h"
 #include <vector>
 #include <unordered_map>
 #include <functional>
@@ -20,12 +20,13 @@ private:
     InstructionMap instructionSet;
     std::vector<unsigned int> registers;
     std::vector<unsigned int> memory;
-    Program program;
+    std::vector<unsigned int> program;
     unsigned int programCounter;
 
     void initializeInstructions();
     void executeInstruction(Instruction instruction);
-    Instruction fetchInstruction() const;
+    unsigned int fetchInstruction() const;
+    Instruction decodeInstruction(unsigned int rawData) const;
     unsigned int getMemory(unsigned int address) const;
     void setMemory(unsigned int address, unsigned int value);
     void jump(unsigned int value);
@@ -33,15 +34,13 @@ private:
 
     static unsigned int adjustProgramCounter(unsigned int address);
     static unsigned int adjustMemory(unsigned int address);
-    static void printWord(unsigned int word);
-
 public:
     explicit Processor(QObject *parent = 0);
     void beginExecution();
-    void loadProgram(Program program);
+    void loadProgram(std::vector<unsigned int> program);
     void loadMemory(std::vector<unsigned int> memory);
     void loadDefaultMemory(unsigned int size);
-    void printMemory(unsigned int amount) const;
+    const std::vector<unsigned int>& memoryReference() const;
 
 signals:
 

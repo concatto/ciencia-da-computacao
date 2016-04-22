@@ -2,10 +2,11 @@
 #define CONTROLLER_H
 
 #include "processor.h"
-#include "program.h"
 #include "mainwindow.h"
 #include <QObject>
 #include <vector>
+#include <functional>
+#include <string>
 
 class Controller : public QObject
 {
@@ -14,13 +15,13 @@ class Controller : public QObject
     MainWindow window;
     Processor processor;
 
-    static std::vector<unsigned int> readMemoryFile(std::string path);
+    static void readHexadecimalFile(std::string path, std::function<void (unsigned int)> callback);
+    static std::string toHexString(unsigned int word);
 
 public:
     explicit Controller(QObject *parent = 0);
 
     void execute();
-
 signals:
 
 public slots:
