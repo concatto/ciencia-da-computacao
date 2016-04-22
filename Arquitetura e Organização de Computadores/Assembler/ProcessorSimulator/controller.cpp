@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 Controller::Controller(QObject *parent) : QObject(parent)
 {
@@ -17,14 +18,29 @@ void Controller::execute()
 
     processor.loadMemory(memory);
     processor.loadProgram(program);
-    processor.beginExecution();
 
-    std::vector<std::string> programStrings;
-    for (unsigned int& ins : program) {
-        programStrings.push_back(toHexString(ins));
+    for (unsigned int i = 0; i < program.size(); i++) {
+        window.addInstruction(toHexString(Processor::ProgramCounterOffset + (i * 4)), toHexString(program[i]));
     }
 
-    window.setInstructions(programStrings);
+    for (unsigned int i = 0; i < memory.size(); i++) {
+        window.addMemoryWord(toHexString(Processor::MemoryOffset + (i * 4)), toHexString(memory[i]));
+    }
+
+    for (unsigned int i = 0; i < Processor::RegisterNames.size(); i++) {
+        window.addRegister(Processor::RegisterNames[i], toHexString(0));
+    }
+
+    QObject::connect(&window, &MainWindow::executionRequested, &processor, &Processor::beginExecution);
+    QObject::connect(&processor, &Processor::programCounterChanged, &window, &MainWindow::highlightInstructionRow);
+    QObject::connect(&processor, &Processor::memoryChanged, [&](unsigned int address, unsigned int value) {
+        window.setMemory(address, toHexString(value));
+    });
+
+    QObject::connect(&processor, &Processor::registerChanged, [&](unsigned int index, unsigned int value) {
+        window.setRegister(index, toHexString(value));
+    });
+
     window.show();
 }
 
