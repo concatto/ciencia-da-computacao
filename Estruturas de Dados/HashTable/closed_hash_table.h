@@ -1,47 +1,59 @@
+#ifndef CLOSED_HASH_TABLE_H
+#define CLOSED_HASH_TABLE_H
+
 #include "hash_table.h"
 #include "linked_list.h"
 
 template <class K, class V>
-struct Pair {
-	K key;
-	V value;
-	
-	Pair() {}
-	Pair(K key, V value) : key(key), value(value) {}
-};
-
-template <class K, class V>
 class ClosedHashTable : public HashTable<K, V> {
 	using PairList = LinkedList<Pair<K, V>>;
-	
-private:
-	PairList data[HashTable<K, V>::Capacity];
 
-public:	
-	void insert(K key, V value) override {
-		PairList& list = data[this->getIndex(key)];
-		
-		list.append(Pair<K, V>(key, value));
+private:
+	using HashTable<V, V>::size;
+	PairList data[HashTable<K, V>::Capacity];
+	int iterations;
+
+public:
+	bool insert(K key, V value) override {
+		int index = this->getIndex(key);
+		PairList& list = data[index];
+
+		bool success = list.prepend(Pair<K, V>(key, value));
+		iterations = list.getIterations();
+		size++;
+		return success;
 	}
-	
-	bool contains(K key) override {
-		
+
+	bool contains(const K& key) override {
+		return find(key).isInitialized();
 	}
-	
-	V find(K key) override {
+
+	Pair<K, V> find(const K& key) override {
+		iterations = 1;
 		PairList& list = data[this->getIndex(key)];
 		list.begin();
 		while (list.hasNext()) {
 			Pair<K, V>& pair = list.next();
-			if (pair.key == key) {
-				return pair.value;
+			iterations++;
+			if (pair.getKey() == key) {
+				return pair;
 			}
 		}
 		//Não existe!
-		return V();
+		return Pair<K, V>();
 	}
-	
-	void remove(K key) override {
-		
+
+	bool remove(const K& key) override {
+		if (contains(key)) {
+			size--;
+			return data[this->getIndex(key)].remove(iterations - 1);
+		}
+		return false;
+	}
+
+	int getIterations() const {
+		return iterations;
 	}
 };
+
+#endif

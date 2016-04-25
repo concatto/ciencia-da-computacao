@@ -18,13 +18,16 @@ private:
     using List<T>::size;
     Node<T>* initial;
     Node<T>* iterator;
+    int iterations;
 
     Node<T>* getNode(int position) {
 		if (position > size) return NULL;
 
+        iterations = 1;
         Node<T>* navigator = initial;
         for (int i = 0; i < position; i++) {
             navigator = navigator->next;
+            iterations++;
         }
 
         return navigator;
@@ -36,6 +39,7 @@ public:
 	bool remove(int position) override {
 		if (position >= size) return false;
 
+        iterations = 1;
         Node<T>* obsolete;
 
 		if (position == 0) { //Caso especial para remoção no início
@@ -55,6 +59,7 @@ public:
     bool insert(T value, int position) override {
 		if (position > size) return false;
 
+        iterations = 1;
         Node<T>* element = new Node<T>(value);
 		if (element == NULL) { //Sem memória
 			return false;
@@ -98,6 +103,10 @@ public:
 
     List<T>* subList(int begin, int length) override {
         return new LinkedList<T>(getNode(begin), length);
+    }
+
+    int getIterations() const {
+        return iterations;
     }
 };
 
