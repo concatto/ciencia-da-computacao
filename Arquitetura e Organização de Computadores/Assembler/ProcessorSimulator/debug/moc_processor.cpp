@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'processor.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.5.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.4.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,44 +12,47 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'processor.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.5.1. It"
+#error "This file was generated using the moc from 5.4.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Processor_t {
-    QByteArrayData data[14];
-    char stringdata0[177];
+    QByteArrayData data[16];
+    char stringdata[197];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_Processor_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Processor_t, stringdata) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
 static const qt_meta_stringdata_Processor_t qt_meta_stringdata_Processor = {
     {
 QT_MOC_LITERAL(0, 0, 9), // "Processor"
-QT_MOC_LITERAL(1, 10, 21), // "programCounterChanged"
-QT_MOC_LITERAL(2, 32, 0), // ""
-QT_MOC_LITERAL(3, 33, 8), // "newIndex"
-QT_MOC_LITERAL(4, 42, 13), // "memoryChanged"
-QT_MOC_LITERAL(5, 56, 7), // "address"
-QT_MOC_LITERAL(6, 64, 8), // "newValue"
-QT_MOC_LITERAL(7, 73, 15), // "registerChanged"
-QT_MOC_LITERAL(8, 89, 5), // "index"
-QT_MOC_LITERAL(9, 95, 19), // "executionTerminated"
-QT_MOC_LITERAL(10, 115, 14), // "beginExecution"
-QT_MOC_LITERAL(11, 130, 21), // "executeProcessorCycle"
-QT_MOC_LITERAL(12, 152, 13), // "stopExecution"
-QT_MOC_LITERAL(13, 166, 10) // "resetState"
+QT_MOC_LITERAL(1, 10, 18), // "instructionDecoded"
+QT_MOC_LITERAL(2, 29, 0), // ""
+QT_MOC_LITERAL(3, 30, 11), // "std::string"
+QT_MOC_LITERAL(4, 42, 4), // "name"
+QT_MOC_LITERAL(5, 47, 14), // "programCounter"
+QT_MOC_LITERAL(6, 62, 13), // "memoryChanged"
+QT_MOC_LITERAL(7, 76, 7), // "address"
+QT_MOC_LITERAL(8, 84, 8), // "newValue"
+QT_MOC_LITERAL(9, 93, 15), // "registerChanged"
+QT_MOC_LITERAL(10, 109, 5), // "index"
+QT_MOC_LITERAL(11, 115, 19), // "executionTerminated"
+QT_MOC_LITERAL(12, 135, 14), // "beginExecution"
+QT_MOC_LITERAL(13, 150, 21), // "executeProcessorCycle"
+QT_MOC_LITERAL(14, 172, 13), // "stopExecution"
+QT_MOC_LITERAL(15, 186, 10) // "resetState"
 
     },
-    "Processor\0programCounterChanged\0\0"
-    "newIndex\0memoryChanged\0address\0newValue\0"
-    "registerChanged\0index\0executionTerminated\0"
-    "beginExecution\0executeProcessorCycle\0"
-    "stopExecution\0resetState"
+    "Processor\0instructionDecoded\0\0std::string\0"
+    "name\0programCounter\0memoryChanged\0"
+    "address\0newValue\0registerChanged\0index\0"
+    "executionTerminated\0beginExecution\0"
+    "executeProcessorCycle\0stopExecution\0"
+    "resetState"
 };
 #undef QT_MOC_LITERAL
 
@@ -67,21 +70,21 @@ static const uint qt_meta_data_Processor[] = {
        4,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   54,    2, 0x06 /* Public */,
-       4,    2,   57,    2, 0x06 /* Public */,
-       7,    2,   62,    2, 0x06 /* Public */,
-       9,    0,   67,    2, 0x06 /* Public */,
+       1,    2,   54,    2, 0x06 /* Public */,
+       6,    2,   59,    2, 0x06 /* Public */,
+       9,    2,   64,    2, 0x06 /* Public */,
+      11,    0,   69,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      10,    0,   68,    2, 0x0a /* Public */,
-      11,    0,   69,    2, 0x0a /* Public */,
       12,    0,   70,    2, 0x0a /* Public */,
       13,    0,   71,    2, 0x0a /* Public */,
+      14,    0,   72,    2, 0x0a /* Public */,
+      15,    0,   73,    2, 0x0a /* Public */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::UInt,    3,
-    QMetaType::Void, QMetaType::UInt, QMetaType::UInt,    5,    6,
-    QMetaType::Void, QMetaType::UInt, QMetaType::UInt,    8,    6,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::UInt,    4,    5,
+    QMetaType::Void, QMetaType::UInt, QMetaType::UInt,    7,    8,
+    QMetaType::Void, QMetaType::UInt, QMetaType::UInt,   10,    8,
     QMetaType::Void,
 
  // slots: parameters
@@ -97,9 +100,8 @@ void Processor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         Processor *_t = static_cast<Processor *>(_o);
-        Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->programCounterChanged((*reinterpret_cast< uint(*)>(_a[1]))); break;
+        case 0: _t->instructionDecoded((*reinterpret_cast< std::string(*)>(_a[1])),(*reinterpret_cast< uint(*)>(_a[2]))); break;
         case 1: _t->memoryChanged((*reinterpret_cast< uint(*)>(_a[1])),(*reinterpret_cast< uint(*)>(_a[2]))); break;
         case 2: _t->registerChanged((*reinterpret_cast< uint(*)>(_a[1])),(*reinterpret_cast< uint(*)>(_a[2]))); break;
         case 3: _t->executionTerminated(); break;
@@ -113,8 +115,8 @@ void Processor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         int *result = reinterpret_cast<int *>(_a[0]);
         void **func = reinterpret_cast<void **>(_a[1]);
         {
-            typedef void (Processor::*_t)(unsigned int );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Processor::programCounterChanged)) {
+            typedef void (Processor::*_t)(std::string , unsigned int );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Processor::instructionDecoded)) {
                 *result = 0;
             }
         }
@@ -153,7 +155,7 @@ const QMetaObject *Processor::metaObject() const
 void *Processor::qt_metacast(const char *_clname)
 {
     if (!_clname) return Q_NULLPTR;
-    if (!strcmp(_clname, qt_meta_stringdata_Processor.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Processor.stringdata))
         return static_cast<void*>(const_cast< Processor*>(this));
     return QObject::qt_metacast(_clname);
 }
@@ -176,9 +178,9 @@ int Processor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void Processor::programCounterChanged(unsigned int _t1)
+void Processor::instructionDecoded(std::string _t1, unsigned int _t2)
 {
-    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 

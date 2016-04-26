@@ -26,7 +26,7 @@ private:
     void initializeInstructions();
     void executeInstruction(Instruction instruction);
     unsigned int fetchInstruction();
-    Instruction decodeInstruction(unsigned int rawData) const;
+    Instruction decodeInstruction(unsigned int rawData);
     unsigned int getMemory(unsigned int address) const;
     void setMemory(unsigned int address, unsigned int value);
     void setRegister(unsigned int index, unsigned int value);
@@ -49,7 +49,7 @@ public:
     const std::vector<unsigned int>& memoryReference() const;
 
 signals:
-    void programCounterChanged(unsigned int newIndex);
+    void instructionDecoded(std::string name, unsigned int programCounter);
     void memoryChanged(unsigned int address, unsigned int newValue);
     void registerChanged(unsigned int index, unsigned int newValue);
     void executionTerminated();

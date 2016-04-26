@@ -1,4 +1,5 @@
 #include "controller.h"
+#include "utils.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -20,15 +21,15 @@ void Controller::execute()
     processor.loadProgram(program);
 
     for (unsigned int i = 0; i < program.size(); i++) {
-        window.addInstruction(toHexString(Processor::ProgramCounterOffset + (i * 4)), toHexString(program[i]));
+        window.addInstruction(Utils::toHexString(Processor::ProgramCounterOffset + (i * 4)), Utils::toHexString(program[i]));
     }
 
     for (unsigned int i = 0; i < memory.size(); i++) {
-        window.addMemoryWord(toHexString(Processor::MemoryOffset + (i * 4)), toHexString(memory[i]));
+        window.addMemoryWord(Utils::toHexString(Processor::MemoryOffset + (i * 4)), Utils::toHexString(memory[i]));
     }
 
     for (unsigned int i = 0; i < Processor::RegisterNames.size(); i++) {
-        window.addRegister(Processor::RegisterNames[i], toHexString(0));
+        window.addRegister(Processor::RegisterNames[i], Utils::toHexString(0));
     }
 
     QObject::connect(&window, &MainWindow::executionRequested, &processor, &Processor::beginExecution);
@@ -36,28 +37,20 @@ void Controller::execute()
     QObject::connect(&window, &MainWindow::advanceRequested, &processor, &Processor::executeProcessorCycle);
     QObject::connect(&window, &MainWindow::revertRequested, &processor, &Processor::resetState);
 
-    QObject::connect(&processor, &Processor::programCounterChanged, &window, &MainWindow::highlightInstructionRow);
     QObject::connect(&processor, &Processor::executionTerminated, &window, &MainWindow::finishExecution);
     QObject::connect(&processor, &Processor::memoryChanged, [&](unsigned int address, unsigned int value) {
-        window.setMemory(address, toHexString(value));
+        window.setMemory(address, Utils::toHexString(value));
     });
     QObject::connect(&processor, &Processor::registerChanged, [&](unsigned int index, unsigned int value) {
-        window.setRegister(index, toHexString(value));
+        window.setRegister(index, Utils::toHexString(value));
+    });
+    QObject::connect(&processor, &Processor::instructionDecoded, &window, [&](std::string name, unsigned int programCounter) {
+        window.setInstructionLabel(name);
+        window.highlightInstructionRow(programCounter);
     });
 
     window.show();
 }
-
-std::string Controller::toHexString(unsigned int word)
-{
-    std::stringstream stream;
-    stream << "0x";
-    for (int i = 1; i <= 8; i++) {
-        stream << std::hex << ((word >> (32 - (i * 4))) & 0xF);
-    }
-    return stream.str();
-}
-
 
 void Controller::readHexadecimalFile(std::string path, std::function<void (unsigned int)> callback)
 {

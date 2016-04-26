@@ -46,6 +46,7 @@ public slots:
     void setMemory(int row, const std::string& newValue);
     void setRegister(int row, const std::string& newValue);
     void finishExecution();
+    void setInstructionLabel(const std::string &name);
 };
 
 #endif // MAINWINDOW_H

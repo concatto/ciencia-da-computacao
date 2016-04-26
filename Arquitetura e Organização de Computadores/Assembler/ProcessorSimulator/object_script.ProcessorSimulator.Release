@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\processor.o
+./release\instruction.o
+./release\controller.o
+./release\instructiontranslator.o
+./release\utils.o
+./release\moc_mainwindow.o
+./release\moc_processor.o
+./release\moc_controller.o
+);

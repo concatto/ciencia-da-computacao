@@ -3,9 +3,9 @@
 #include <vector>
 
 std::unordered_map<unsigned int, std::string> InstructionTranslator::RNames({
-        {0x00, "sll"}, {0x02, "srl"}, {0x08, "jr"}, {0x20, "add"},
-        {0x22, "sub"}, {0x24, "and"}, {0x25, "or"}, {0x26, "xor"},
-        {0x27, "nor"}
+        {0x00, "sll"},  {0x02, "srl"}, {0x08, "jr"}, {0x20, "add"},
+        {0x21, "addu"}, {0x22, "sub"}, {0x24, "and"}, {0x25, "or"},
+        {0x26, "xor"},  {0x27, "nor"}
 });
 
 std::unordered_map<unsigned int, std::string> InstructionTranslator::IJNames({

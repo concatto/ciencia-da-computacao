@@ -11,10 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Simulador do Processador MIPS</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
+    <property name="spacing">
+     <number>18</number>
+    </property>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
@@ -91,11 +94,27 @@
      </layout>
     </item>
     <item>
+     <widget class="QLabel" name="instructionLabel">
+      <property name="font">
+       <font>
+        <family>Courier New</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>12</number>
+      </property>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QLabel" name="instructionLabel">
+         <widget class="QLabel" name="instructionTableLabel">
           <property name="text">
            <string>Instruções</string>
           </property>
@@ -126,7 +145,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QLabel" name="memoryLabel">
+         <widget class="QLabel" name="memoryTableLabel_2">
           <property name="text">
            <string>Memória</string>
           </property>
@@ -166,7 +185,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QLabel" name="registerLabel">
+         <widget class="QLabel" name="registerTableLabel">
           <property name="text">
            <string>Registradores</string>
           </property>

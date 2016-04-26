@@ -16,7 +16,6 @@ class Controller : public QObject
     Processor processor;
 
     static void readHexadecimalFile(std::string path, std::function<void (unsigned int)> callback);
-    static std::string toHexString(unsigned int word);
 
 public:
     explicit Controller(QObject *parent = 0);

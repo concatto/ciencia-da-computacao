@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->advanceButton, &QPushButton::clicked, [&]() { emit advanceRequested(); });
     QObject::connect(ui->revertButton, &QPushButton::clicked, [&]() {
         clearHighlights();
+        setInstructionLabel("");
         emit revertRequested();
     });
 
@@ -115,4 +116,9 @@ void MainWindow::finishExecution()
 void MainWindow::highlightInstructionRow(int row)
 {
     highlightTableRow(ui->instructionTable, highlightedInstructionRow, row);
+}
+
+void MainWindow::setInstructionLabel(const std::string& name)
+{
+    ui->instructionLabel->setText(name.c_str());
 }

@@ -18,12 +18,14 @@ SOURCES += main.cpp\
     processor.cpp \
     instruction.cpp \
     controller.cpp \
-    instructiontranslator.cpp
+    instructiontranslator.cpp \
+    utils.cpp
 
 HEADERS  += mainwindow.h \
     processor.h \
     instruction.h \
     controller.h \
-    instructiontranslator.h
+    instructiontranslator.h \
+    utils.h
 
 FORMS    += mainwindow.ui
