@@ -31,15 +31,21 @@ private:
     static const QColor defaultTableBackground;
     static const QColor activeTableBackground;
 
+    void switchButtonStates(bool startState, bool stopState, bool advanceState, bool revertState);
+    void clearHighlights();
     static void highlightTableRow(QTableWidget *table, int &previousRow, int row);
 
 signals:
     void executionRequested();
+    void stopRequested();
+    void advanceRequested();
+    void revertRequested();
 
 public slots:
     void highlightInstructionRow(int row);
     void setMemory(int row, const std::string& newValue);
     void setRegister(int row, const std::string& newValue);
+    void finishExecution();
 };
 
 #endif // MAINWINDOW_H

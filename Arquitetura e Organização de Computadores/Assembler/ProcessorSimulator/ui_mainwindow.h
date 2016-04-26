@@ -18,6 +18,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -29,7 +30,12 @@ class Ui_MainWindow
 public:
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout_4;
+    QHBoxLayout *horizontalLayout_2;
     QPushButton *startButton;
+    QPushButton *stopButton;
+    QPushButton *advanceButton;
+    QPushButton *revertButton;
+    QSpacerItem *horizontalSpacer;
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout_2;
     QLabel *instructionLabel;
@@ -52,10 +58,49 @@ public:
         verticalLayout_4->setSpacing(6);
         verticalLayout_4->setContentsMargins(11, 11, 11, 11);
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         startButton = new QPushButton(centralWidget);
         startButton->setObjectName(QStringLiteral("startButton"));
+        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(startButton->sizePolicy().hasHeightForWidth());
+        startButton->setSizePolicy(sizePolicy);
+        startButton->setMinimumSize(QSize(117, 0));
+        startButton->setMaximumSize(QSize(16777213, 16777215));
 
-        verticalLayout_4->addWidget(startButton);
+        horizontalLayout_2->addWidget(startButton);
+
+        stopButton = new QPushButton(centralWidget);
+        stopButton->setObjectName(QStringLiteral("stopButton"));
+        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(stopButton->sizePolicy().hasHeightForWidth());
+        stopButton->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_2->addWidget(stopButton);
+
+        advanceButton = new QPushButton(centralWidget);
+        advanceButton->setObjectName(QStringLiteral("advanceButton"));
+        sizePolicy1.setHeightForWidth(advanceButton->sizePolicy().hasHeightForWidth());
+        advanceButton->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_2->addWidget(advanceButton);
+
+        revertButton = new QPushButton(centralWidget);
+        revertButton->setObjectName(QStringLiteral("revertButton"));
+
+        horizontalLayout_2->addWidget(revertButton);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_2);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
@@ -152,6 +197,9 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         startButton->setText(QApplication::translate("MainWindow", "Iniciar execu\303\247\303\243o", 0));
+        stopButton->setText(QApplication::translate("MainWindow", "Parar", 0));
+        advanceButton->setText(QApplication::translate("MainWindow", "Avan\303\247ar", 0));
+        revertButton->setText(QApplication::translate("MainWindow", "Reverter", 0));
         instructionLabel->setText(QApplication::translate("MainWindow", "Instru\303\247\303\265es", 0));
         QTableWidgetItem *___qtablewidgetitem = instructionTable->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Endere\303\247o", 0));

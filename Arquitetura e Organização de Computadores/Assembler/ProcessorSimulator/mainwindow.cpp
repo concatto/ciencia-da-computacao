@@ -13,8 +13,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->memoryTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->registerTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    QObject::connect(ui->startButton, &QPushButton::clicked, [&]() { emit executionRequested(); });
+    QObject::connect(ui->startButton, &QPushButton::clicked, [&]() {
+        switchButtonStates(false, true, false, false);
+        emit executionRequested();
+    });
+    QObject::connect(ui->stopButton, &QPushButton::clicked, [&]() { emit stopRequested(); });
+    QObject::connect(ui->advanceButton, &QPushButton::clicked, [&]() { emit advanceRequested(); });
+    QObject::connect(ui->revertButton, &QPushButton::clicked, [&]() {
+        clearHighlights();
+        emit revertRequested();
+    });
+
     setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter,size(), qApp->desktop()->availableGeometry()));
+    finishExecution(); //Initialize button states
 }
 
 MainWindow::~MainWindow()
@@ -45,6 +56,34 @@ void MainWindow::addWordToTable(QTableWidget* table, const std::string& key, con
     table->setItem(row, 1, new QTableWidgetItem(word.c_str()));
 }
 
+void MainWindow::switchButtonStates(bool startState, bool stopState, bool advanceState, bool revertState)
+{
+    ui->startButton->setEnabled(startState);
+    ui->stopButton->setEnabled(stopState);
+    ui->advanceButton->setEnabled(advanceState);
+    ui->revertButton->setEnabled(revertState);
+
+    qApp->processEvents();
+}
+
+void MainWindow::clearHighlights()
+{
+    if (highlightedInstructionRow < ui->instructionTable->rowCount()) {
+        ui->instructionTable->item(highlightedInstructionRow, 0)->setBackgroundColor(defaultTableBackground);
+        ui->instructionTable->item(highlightedInstructionRow, 1)->setBackgroundColor(defaultTableBackground);
+    }
+
+    if (highlightedMemoryRow < ui->memoryTable->rowCount()) {
+        ui->memoryTable->item(highlightedMemoryRow, 0)->setBackgroundColor(defaultTableBackground);
+        ui->memoryTable->item(highlightedMemoryRow, 1)->setBackgroundColor(defaultTableBackground);
+    }
+
+    if (highlightedRegisterRow < ui->registerTable->rowCount()) {
+        ui->registerTable->item(highlightedRegisterRow, 0)->setBackgroundColor(defaultTableBackground);
+        ui->registerTable->item(highlightedRegisterRow, 1)->setBackgroundColor(defaultTableBackground);
+    }
+}
+
 void MainWindow::highlightTableRow(QTableWidget* table, int& previousRow, int row) {
     table->item(previousRow, 0)->setBackgroundColor(defaultTableBackground);
     table->item(previousRow, 1)->setBackgroundColor(defaultTableBackground);
@@ -65,6 +104,12 @@ void MainWindow::setRegister(int row, const std::string &newValue)
 {
     ui->registerTable->setItem(row, 1, new QTableWidgetItem(newValue.c_str()));
     highlightTableRow(ui->registerTable, highlightedRegisterRow, row);
+}
+
+void MainWindow::finishExecution()
+{
+    clearHighlights();
+    switchButtonStates(true, false, true, true);
 }
 
 void MainWindow::highlightInstructionRow(int row)

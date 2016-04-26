@@ -32,11 +32,15 @@ void Controller::execute()
     }
 
     QObject::connect(&window, &MainWindow::executionRequested, &processor, &Processor::beginExecution);
+    QObject::connect(&window, &MainWindow::stopRequested, &processor, &Processor::stopExecution);
+    QObject::connect(&window, &MainWindow::advanceRequested, &processor, &Processor::executeProcessorCycle);
+    QObject::connect(&window, &MainWindow::revertRequested, &processor, &Processor::resetState);
+
     QObject::connect(&processor, &Processor::programCounterChanged, &window, &MainWindow::highlightInstructionRow);
+    QObject::connect(&processor, &Processor::executionTerminated, &window, &MainWindow::finishExecution);
     QObject::connect(&processor, &Processor::memoryChanged, [&](unsigned int address, unsigned int value) {
         window.setMemory(address, toHexString(value));
     });
-
     QObject::connect(&processor, &Processor::registerChanged, [&](unsigned int index, unsigned int value) {
         window.setRegister(index, toHexString(value));
     });

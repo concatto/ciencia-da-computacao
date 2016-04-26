@@ -24,9 +24,8 @@ private:
     QTimer timer;
 
     void initializeInstructions();
-    void executeProcessorCycle();
     void executeInstruction(Instruction instruction);
-    unsigned int fetchInstruction() const;
+    unsigned int fetchInstruction();
     Instruction decodeInstruction(unsigned int rawData) const;
     unsigned int getMemory(unsigned int address) const;
     void setMemory(unsigned int address, unsigned int value);
@@ -53,9 +52,13 @@ signals:
     void programCounterChanged(unsigned int newIndex);
     void memoryChanged(unsigned int address, unsigned int newValue);
     void registerChanged(unsigned int index, unsigned int newValue);
+    void executionTerminated();
 
 public slots:
     void beginExecution();
+    void executeProcessorCycle();
+    void stopExecution();
+    void resetState();
 };
 
 #endif // PROCESSOR_H

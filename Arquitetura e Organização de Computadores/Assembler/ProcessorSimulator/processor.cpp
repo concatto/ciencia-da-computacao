@@ -1,4 +1,5 @@
 #include "processor.h"
+#include "instructiontranslator.h"
 #include <algorithm>
 #include <iostream>
 
@@ -17,8 +18,7 @@ Processor::Processor(QObject *parent) : QObject(parent), registers(32, 0)
 
 void Processor::beginExecution()
 {
-    std::fill(registers.begin(), registers.end(), 0); //Set registers to 0
-    programCounter = Processor::ProgramCounterOffset; //Initialize program counter
+    resetState();
 
     executeProcessorCycle();
     timer.start(1000);
@@ -75,15 +75,28 @@ void Processor::executeProcessorCycle()
         Instruction instruction = decodeInstruction(data);
         executeInstruction(instruction);
     } else {
-        timer.stop();
+        stopExecution();
     }
+}
+
+void Processor::stopExecution()
+{
+    timer.stop();
+    resetState();
+    emit executionTerminated();
+}
+
+void Processor::resetState()
+{
+    std::fill(registers.begin(), registers.end(), 0); //Set registers to 0
+    programCounter = Processor::ProgramCounterOffset;
 }
 
 void Processor::executeInstruction(Instruction instruction)
 {
     InstructionMap::iterator func = instructionSet.find(instruction.opCode);
-    emit programCounterChanged(adjustProgramCounter(programCounter));
 
+    std::cout << InstructionTranslator::toString(instruction) << "\n";
     if (func != instructionSet.end()) {
         func->second(instruction);
     } else {
@@ -96,6 +109,7 @@ void Processor::executeInstruction(Instruction instruction)
 void Processor::loadProgram(std::vector<unsigned int> program)
 {
     this->program = program;
+    resetState();
 }
 
 void Processor::loadMemory(std::vector<unsigned int> memory)
@@ -109,19 +123,20 @@ void Processor::loadDefaultMemory(unsigned int size)
     loadMemory(mem);
 }
 
-const std::vector<unsigned int>&Processor::memoryReference() const
+const std::vector<unsigned int>& Processor::memoryReference() const
 {
     return memory;
 }
 
-unsigned int Processor::fetchInstruction() const
+unsigned int Processor::fetchInstruction()
 {
+    emit programCounterChanged(adjustProgramCounter(programCounter));
     return program[(adjustProgramCounter(programCounter))];
 }
 
 Instruction Processor::decodeInstruction(unsigned int rawData) const
 {
-    unsigned int opCode = rawData >> 26 & 0x3F;
+    unsigned int opCode = (rawData >> 26) & 0x3F;
     unsigned int rs = (rawData >> 21) & 0x1F;
     unsigned int rt = (rawData >> 16) & 0x1F;
     unsigned int rd = (rawData >> 11) & 0x1F;
@@ -152,7 +167,7 @@ void Processor::setRegister(unsigned int index, unsigned int value)
 
 void Processor::jump(unsigned int value)
 {
-    programCounter = ((programCounter & 0xFFF00000) | (value << 2)) - 4;
+    programCounter = (Processor::ProgramCounterOffset + (value << 2)) - 4;
 }
 
 void Processor::jumpRelative(unsigned int offset)
