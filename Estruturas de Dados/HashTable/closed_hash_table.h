@@ -6,7 +6,8 @@
 
 template <class K, class V>
 class ClosedHashTable : public HashTable<K, V> {
-	using PairList = LinkedList<Pair<K, V>>;
+	
+	using PairList = LinkedList<Pair<K, V>*>;
 
 private:
 	using HashTable<V, V>::size;
@@ -18,35 +19,43 @@ public:
 		int index = this->getIndex(key);
 		PairList& list = data[index];
 
-		bool success = list.prepend(Pair<K, V>(key, value));
+		bool success = list.prepend(new Pair<K, V>(key, value));
 		iterations = list.getIterations();
 		size++;
 		return success;
 	}
 
 	bool contains(const K& key) override {
-		return find(key).isInitialized();
+		return find(key) != nullptr;
 	}
 
-	Pair<K, V> find(const K& key) override {
+	Pair<K, V>* find(const K& key) override {
 		iterations = 1;
 		PairList& list = data[this->getIndex(key)];
 		list.begin();
 		while (list.hasNext()) {
-			Pair<K, V>& pair = list.next();
+			Pair<K, V>* pair = list.next();
 			iterations++;
-			if (pair.getKey() == key) {
+			if (pair->getKey() == key) {
 				return pair;
 			}
 		}
 		//Não existe!
-		return Pair<K, V>();
+		return nullptr;
 	}
 
 	bool remove(const K& key) override {
-		if (contains(key)) {
-			size--;
-			return data[this->getIndex(key)].remove(iterations - 1);
+		int index = this->getIndex(key);
+		PairList& list = data[index];
+		
+		iterations = 1;
+		list.begin();
+		for (int i = 0; list.hasNext(); i++) {
+			iterations++;
+			Pair<K, V>* pair = list.next();
+			if (pair->getKey() == key) {
+				return list.remove(i);
+			}
 		}
 		return false;
 	}

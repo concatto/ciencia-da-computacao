@@ -9,7 +9,7 @@ int main() {
 	OpenHashTable<int, int> table;
 
 	for (int i = 0; i < 2000; i++) {
-		std::cout << "t resu: " << table.insert(1 + (std::rand() % 31999), i) << "; it " << table.getIterations() << " i = " << i << "\n";
+		std::cout << "t resu: " << table.insert(1 + (std::rand() % 31999), i) << "; it " << table.getIterations() << " i = " << i << " size: " << table.getSize() << "\n";
 		Sleep(10);
 	}
 }

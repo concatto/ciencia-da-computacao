@@ -21,9 +21,11 @@ public:
 
 template <class K, class V>
 class HashTable {
+private:
+	std::hash<K> hasher;
+	
 protected:
 	const static unsigned int Capacity = 1000;
-	std::hash<K> hasher;
 	int size;
 
 	int getIndex(const K& key) {
@@ -36,7 +38,7 @@ public:
 
 	virtual bool insert(K key, V value) = 0;
 	virtual bool contains(const K& key) = 0;
-	virtual Pair<K, V> find(const K& key) = 0;
+	virtual Pair<K, V>* find(const K& key) = 0;
 	virtual bool remove(const K& key) = 0;
 
 	V get(const K& key) {
