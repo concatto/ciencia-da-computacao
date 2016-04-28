@@ -2,7 +2,6 @@
 #define OPEN_HASH_TABLE_H
 
 #include "hash_table.h"
-#include "Windows.h"
 #include <iostream>
 
 template <class K, class V>
@@ -20,11 +19,8 @@ private:
 			iterations++;
 			int index = i % Capacity;
 			Pair<K, V>* pair = data[index];
-			Sleep(20);
 			if (pair == nullptr) {
 				return index;
-			} else {
-				std::cout << "Key at " << index << " is " << pair->getKey() << "\n";
 			}
 		}
 		return -1;
@@ -49,7 +45,7 @@ private:
 public:
 	OpenHashTable() : HashTable<K, V>() {
 		for (int i = 0; i < Capacity; i++) {
-			data[i] == nullptr;
+			data[i] = nullptr;
 		}
 	}
 
@@ -61,17 +57,10 @@ public:
 		}
 
 		unsigned int hash = this->getIndex(key);
-		std::cout << "Hashed to " << hash << "!; ";
 		int index = probeOpenSlot(hash);
-		if (index == -1) {
-			std::cout << "what\n";
-			return false;
-		} else {
-			std::cout << "found slot at " << index << "\n";
-			data[index] = new Pair<K, V>(key, value);
-			size++;
-			return true;
-		}
+		data[index] = new Pair<K, V>(key, value);
+		size++;
+		return true;
 	}
 
 	bool contains(const K& key) override {

@@ -15,6 +15,8 @@ private:
 	int iterations;
 
 public:
+	ClosedHashTable() : HashTable<K, V>() {}
+
 	bool insert(K key, V value) override {
 		int index = this->getIndex(key);
 		PairList& list = data[index];

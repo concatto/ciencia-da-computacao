@@ -34,7 +34,7 @@ protected:
 	}
 
 public:
-	HashTable() {}
+	HashTable() : size(0) {}
 
 	virtual bool insert(K key, V value) = 0;
 	virtual bool contains(const K& key) = 0;
