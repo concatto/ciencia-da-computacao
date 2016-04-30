@@ -8,5 +8,5 @@ int main() {
 	std::cout << tree.insert(11, 999) << "\n";
 	std::cout << tree.insert(9, 2) << "\n";
 	
-	std::cout << tree.search(11)->value << "\n";
+	tree.depthFirstSearch([&](TreeNode<int, int>* node) { std::cout << node->key << ", " << node->value << "\n"; });
 }

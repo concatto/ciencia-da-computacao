@@ -1,4 +1,5 @@
 #include <iostream>
+#include <functional>
 
 template <class K, class V>
 class TreeNode {
@@ -42,6 +43,14 @@ private:
 		} else {
 			return node; //Found
 		}
+	}
+	
+	void depthFirstSearch(std::function<void(Node*)> action, Node* node) const {
+		if (node == nullptr) return;
+		
+		action(node);
+		depthFirstSearch(action, node->left);
+		depthFirstSearch(action, node->right);
 	}
 	
 public:
@@ -103,5 +112,9 @@ public:
 	
 	bool contains(const K& key) const {
 		return search(key) != nullptr;
+	}
+	
+	void depthFirstSearch(std::function<void(Node*)> action) const {
+		depthFirstSearch(action, root);
 	}
 };
