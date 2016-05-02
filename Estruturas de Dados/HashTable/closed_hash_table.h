@@ -2,29 +2,51 @@
 #define CLOSED_HASH_TABLE_H
 
 #include "hash_table.h"
-#include "linked_list.h"
+
+template <class K, class V>
+class PairNode : public Pair<K, V> {
+public:
+    PairNode<K, V>* next;
+
+    PairNode() : Pair<K, V>(), next(nullptr) {}
+    PairNode(K key, V value) : Pair<K, V>(key, value), next(nullptr) {}
+};
 
 template <class K, class V>
 class ClosedHashTable : public HashTable<K, V> {
-	
-	using PairList = LinkedList<Pair<K, V>*>;
+	using Node = PairNode<K, V>;
 
 private:
+	using HashTable<K, V>::Capacity;
 	using HashTable<V, V>::size;
-	PairList data[HashTable<K, V>::Capacity];
-	int iterations;
+	using HashTable<K, V>::iterations;
+	Node* data[Capacity];
 
 public:
-	ClosedHashTable() : HashTable<K, V>() {}
+	ClosedHashTable() : HashTable<K, V>() {
+		for (int i = 0; i < Capacity; i++) {
+			data[i] = nullptr;
+		}
+	}
 
 	bool insert(K key, V value) override {
-		int index = this->getIndex(key);
-		PairList& list = data[index];
+		iterations = 1;
+		int index = this->generateIndex(key);
+		Node* node = data[index];
 
-		bool success = list.prepend(new Pair<K, V>(key, value));
-		iterations = list.getIterations();
-		size++;
-		return success;
+		if (node == nullptr) {
+			data[index] = new Node(key, value);
+		} else {
+			while (node->next != nullptr) {
+				iterations++;
+				if (node->getKey() == key) return false; //Already exists
+				node = node->next;
+			}
+
+			node->next = new Node(key, value);
+			size++;
+			return true;
+		}
 	}
 
 	bool contains(const K& key) override {
@@ -33,37 +55,31 @@ public:
 
 	Pair<K, V>* find(const K& key) override {
 		iterations = 1;
-		PairList& list = data[this->getIndex(key)];
-		list.begin();
-		while (list.hasNext()) {
-			Pair<K, V>* pair = list.next();
+		Node* node = data[this->generateIndex(key)];
+		while (node != nullptr) {
+			if (node->getKey() == key) return node;
+			node = node->next;
 			iterations++;
-			if (pair->getKey() == key) {
-				return pair;
-			}
 		}
-		//Não existe!
-		return nullptr;
-	}
 
-	bool remove(const K& key) override {
-		int index = this->getIndex(key);
-		PairList& list = data[index];
-		
-		iterations = 1;
-		list.begin();
-		for (int i = 0; list.hasNext(); i++) {
-			iterations++;
-			Pair<K, V>* pair = list.next();
-			if (pair->getKey() == key) {
-				return list.remove(i);
-			}
-		}
-		return false;
+		return nullptr;
 	}
 
 	int getIterations() const {
 		return iterations;
+	}
+
+	void clear() override {
+		for (int i = 0; i < Capacity; i++) {
+			Node* navigator = data[i];
+			while (navigator != nullptr) {
+				Node* obsolete = navigator;
+				navigator = navigator->next;
+				delete obsolete;
+			}
+			data[i] = nullptr;
+		}
+		size = 0;
 	}
 };
 
