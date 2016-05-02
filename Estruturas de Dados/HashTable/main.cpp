@@ -18,7 +18,7 @@ int generateRandom() {
 
 std::vector<Result> testTable(HashTable<int, int>& table, const std::vector<int>& startingSizes, int elements) {
 	std::vector<Result> results;
-	for (int& size : startingSizes) {
+	for (const int& size : startingSizes) {
 		int fillAmount = size - table.getSize();
 		for (int i = 0; i < fillAmount; i++) {
 			table.insert(generateRandom(), 1); //Fill the table with random elements until it has the requested size

@@ -1,6 +1,5 @@
 #include "processor.h"
 #include "utils.h"
-#include "instructiontranslator.h"
 #include <algorithm>
 #include <iostream>
 
@@ -32,7 +31,7 @@ void Processor::initializeInstructions()
         if (funcIt != rInstructions.end()) {
             funcIt->second(instruction);
         } else {
-            std::cout << "Instruction " << std::hex << instruction.opCode << std::dec << " not found." << std::endl;
+            std::cout << "Instruction " << std::hex << instruction.function << std::dec << " not found." << std::endl;
         }
     };
 
@@ -143,9 +142,7 @@ Instruction Processor::decodeInstruction(unsigned int rawData)
     unsigned int immediate26 = rawData & 0x7FFFFF;
 
     Instruction instruction(rawData, opCode, rs, rt, rd, shiftAmount, function, immediate16, immediate26);
-
-    std::string str(Utils::toHexString(instruction.rawData) + " => " + InstructionTranslator::toString(instruction));
-    emit instructionDecoded(str, adjustProgramCounter(programCounter));
+    emit instructionDecoded(instruction, adjustProgramCounter(programCounter));
     return instruction;
 }
 

@@ -9,14 +9,12 @@ class Pair {
 private:
 	K key;
 	V value;
-	bool initialized;
 
 public:
-	Pair() : initialized(false) {}
-	Pair(K key, V value) : key(key), value(value), initialized(true) {}
+	Pair() {}
+	Pair(K key, V value) : key(key), value(value) {}
 	K getKey() const { return key; }
 	V getValue() const { return value; }
-	bool isInitialized() const { return initialized; }
 };
 
 template <class K, class V>

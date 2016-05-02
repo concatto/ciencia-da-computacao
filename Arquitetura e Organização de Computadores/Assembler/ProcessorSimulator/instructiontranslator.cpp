@@ -1,4 +1,5 @@
 #include "instructiontranslator.h"
+#include "utils.h"
 #include <sstream>
 #include <vector>
 
@@ -42,13 +43,13 @@ std::string InstructionTranslator::toString(const Instruction& instruction)
 
         if (instruction.opCode <= 2) {
             //j, jal
-            stream << instruction.immediate26;
+            stream << Utils::toHexString(instruction.immediate26);
         } else if (instruction.opCode <= 14) {
             //register, register, immediate
             stream << names[instruction.rs] << ", " << names[instruction.rt] << ", " << instruction.immediate16;
         } else if (instruction.opCode == 15) {
             //lui
-            stream << names[instruction.rt] << ", " << instruction.immediate16;
+            stream << names[instruction.rt] << ", " << Utils::toHexString(instruction.immediate16);
         } else {
             //lw, sw
             stream << names[instruction.rt] << ", " << instruction.immediate16 << "(" << names[instruction.rs] << ")";

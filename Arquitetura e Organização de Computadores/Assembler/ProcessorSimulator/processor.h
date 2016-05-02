@@ -49,7 +49,7 @@ public:
     const std::vector<unsigned int>& memoryReference() const;
 
 signals:
-    void instructionDecoded(std::string name, unsigned int programCounter);
+    void instructionDecoded(Instruction instruction, unsigned int programCounter);
     void memoryChanged(unsigned int address, unsigned int newValue);
     void registerChanged(unsigned int index, unsigned int newValue);
     void executionTerminated();

@@ -1,4 +1,5 @@
 #include "controller.h"
+#include "instructiontranslator.h"
 #include "utils.h"
 #include <iostream>
 #include <fstream>
@@ -44,8 +45,9 @@ void Controller::execute()
     QObject::connect(&processor, &Processor::registerChanged, [&](unsigned int index, unsigned int value) {
         window.setRegister(index, Utils::toHexString(value));
     });
-    QObject::connect(&processor, &Processor::instructionDecoded, &window, [&](std::string name, unsigned int programCounter) {
-        window.setInstructionLabel(name);
+    QObject::connect(&processor, &Processor::instructionDecoded, &window, [&](Instruction instruction, unsigned int programCounter) {
+        std::string str(Utils::toHexString(instruction.rawData) + " => " + InstructionTranslator::toString(instruction));
+        window.setInstructionLabel(str);
         window.highlightInstructionRow(programCounter);
     });
 

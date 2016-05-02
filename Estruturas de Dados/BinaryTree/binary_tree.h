@@ -8,7 +8,7 @@ public:
 	V value;
 	TreeNode<K, V>* left;
 	TreeNode<K, V>* right;
-	
+
 	TreeNode(K key, V value) : key(key), value(value), left(nullptr), right(nullptr) {}
 };
 
@@ -32,7 +32,7 @@ private:
 			return false; //Key exists
 		}
 	}
-	
+
 	Node* searchRecursively(Node* node, const K& key) const {
 		if (node == nullptr) {
 			return nullptr; //Does not exist
@@ -44,18 +44,34 @@ private:
 			return node; //Found
 		}
 	}
-	
-	void depthFirstSearch(std::function<void(Node*)> action, Node* node) const {
+
+	void preOrder(std::function<void(Node*)> action, Node* node) const {
 		if (node == nullptr) return;
-		
+
 		action(node);
-		depthFirstSearch(action, node->left);
-		depthFirstSearch(action, node->right);
+		preOrder(action, node->left);
+		preOrder(action, node->right);
 	}
-	
+
+	void postOrder(std::function<void(Node*)> action, Node* node) const {
+		if (node == nullptr) return;
+
+		postOrder(action, node->left);
+		postOrder(action, node->right);
+		action(node);
+	}
+
+	void inOrder(std::function<void(Node*)> action, Node* node) const {
+		if (node == nullptr) return;
+
+		inOrder(action, node->left);
+		action(node);
+		inOrder(action, node->right);
+	}
+
 public:
 	BinaryTree() : root(nullptr), size(0) {}
-	
+
 	bool insert(K key, V value) {
 		Node* node = new Node(key, value);
 		if (root == nullptr) {
@@ -63,18 +79,18 @@ public:
 			size++;
 			return true;
 		}
-		
+
 		Node* it = root;
 		Node* parent = nullptr;
 		while (it != nullptr) {
 			if (key == it->key) {
 				return false; //Already exists
 			}
-			
+
 			parent = it;
 			it = (key < it->key) ? it->left : it->right;
 		}
-		
+
 		//Ready to insert
 		if (key < parent->key) {
 			parent->left = node;
@@ -84,13 +100,13 @@ public:
 		size++;
 		return true;
 	}
-	
+
 	bool insertRecursively(K key, V value) {
 		Node* node = new Node(key, value);
-		
+
 		return insertRecursively(root, node);
 	}
-	
+
 	Node* search(const K& key) const {
 		Node* it = root;
 		while (it != nullptr) {
@@ -102,19 +118,27 @@ public:
 				return it; //Found
 			}
 		}
-		
+
 		return nullptr; //Does not exist
 	}
-	
+
 	Node* searchRecursively(const K& key) const {
 		return searchRecursively(root, key);
 	}
-	
+
 	bool contains(const K& key) const {
 		return search(key) != nullptr;
 	}
-	
-	void depthFirstSearch(std::function<void(Node*)> action) const {
-		depthFirstSearch(action, root);
+
+	void traversePreOrder(std::function<void(Node*)> action) const {
+		preOrder(action, root);
+	}
+
+	void traversePostOrder(std::function<void(Node*)> action) const {
+		postOrder(action, root);
+	}
+
+	void traverseInOrder(std::function<void(Node*)> action) const {
+		inOrder(action, root);
 	}
 };

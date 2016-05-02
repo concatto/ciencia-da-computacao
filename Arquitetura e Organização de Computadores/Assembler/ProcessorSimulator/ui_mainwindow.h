@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.4.2
+** Created by: Qt User Interface Compiler version 5.5.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -131,6 +131,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
         instructionTable->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         instructionTable->setObjectName(QStringLiteral("instructionTable"));
+        instructionTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
         instructionTable->setColumnCount(2);
         instructionTable->verticalHeader()->setVisible(false);
 
@@ -155,6 +156,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
         memoryTable->setHorizontalHeaderItem(1, __qtablewidgetitem3);
         memoryTable->setObjectName(QStringLiteral("memoryTable"));
+        memoryTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
         memoryTable->setColumnCount(2);
         memoryTable->horizontalHeader()->setCascadingSectionResizes(false);
         memoryTable->horizontalHeader()->setDefaultSectionSize(100);
@@ -182,6 +184,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
         registerTable->setHorizontalHeaderItem(1, __qtablewidgetitem5);
         registerTable->setObjectName(QStringLiteral("registerTable"));
+        registerTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
         registerTable->setColumnCount(2);
         registerTable->horizontalHeader()->setCascadingSectionResizes(false);
         registerTable->horizontalHeader()->setDefaultSectionSize(100);
