@@ -10,6 +10,9 @@ public:
 	TreeNode<K, V>* right;
 
 	TreeNode(K key, V value) : key(key), value(value), left(nullptr), right(nullptr) {}
+	bool isLeaf() const {
+		return left == nullptr && right == nullptr;
+	}
 };
 
 template <class K, class V>
@@ -67,6 +70,30 @@ private:
 		inOrder(action, node->left);
 		action(node);
 		inOrder(action, node->right);
+	}
+	
+	void removeNode(Node*& node) {		
+		Node* greater = node->left;
+		if (greater == nullptr) {
+			Node* obsolete = node;
+			node = node->right;
+			delete obsolete;
+		} else {
+			Node* parent = nullptr;
+			while (greater->right != nullptr) {
+				parent = greater;
+				greater = greater->right;
+			}
+			
+			if (parent != nullptr) {
+				parent->right = greater->left;
+				greater->left = node->left;
+			}
+			
+			greater->right = node->right;
+			delete node;
+			node = greater;
+		}
 	}
 
 public:
