@@ -9,9 +9,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow), highlightedInstructionRow(0), highlightedMemoryRow(0), highlightedRegisterRow(0)
 {
     ui->setupUi(this);
-    ui->instructionTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->memoryTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->registerTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    QTableWidget* tables[] = {ui->instructionTable, ui->memoryTable, ui->registerTable};
+    for (QTableWidget* table : tables) {
+        table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        table->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+        table->verticalHeader()->setDefaultSectionSize(22);
+    }
 
     QObject::connect(ui->startButton, &QPushButton::clicked, [&]() {
         switchButtonStates(false, true, false, false);

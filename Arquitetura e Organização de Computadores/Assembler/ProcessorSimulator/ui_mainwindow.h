@@ -132,6 +132,8 @@ public:
         instructionTable->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         instructionTable->setObjectName(QStringLiteral("instructionTable"));
         instructionTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        instructionTable->setAlternatingRowColors(false);
+        instructionTable->setSelectionMode(QAbstractItemView::NoSelection);
         instructionTable->setColumnCount(2);
         instructionTable->verticalHeader()->setVisible(false);
 
