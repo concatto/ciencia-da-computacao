@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDesktopWidget>
+#include <QMessageBox>
 
 const QColor MainWindow::defaultTableBackground = QColor(255, 255, 255);
 const QColor MainWindow::activeTableBackground = QColor(127, 200, 127);
@@ -28,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
         emit revertRequested();
     });
 
-    setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter,size(), qApp->desktop()->availableGeometry()));
+    setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, size(), qApp->desktop()->availableGeometry()));
     finishExecution(); //Initialize button states
 }
 
@@ -124,4 +125,9 @@ void MainWindow::highlightInstructionRow(int row)
 void MainWindow::setInstructionLabel(const std::string& name)
 {
     ui->instructionLabel->setText(name.c_str());
+}
+
+void MainWindow::showError(const std::string& message)
+{
+    QMessageBox::critical(this, "Erro", message.c_str());
 }

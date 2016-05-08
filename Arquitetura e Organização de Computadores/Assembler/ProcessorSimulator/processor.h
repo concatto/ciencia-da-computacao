@@ -53,6 +53,7 @@ signals:
     void memoryChanged(unsigned int address, unsigned int newValue);
     void registerChanged(unsigned int index, unsigned int newValue);
     void executionTerminated();
+    void instructionNotFound(unsigned int instruction);
 
 public slots:
     void beginExecution();

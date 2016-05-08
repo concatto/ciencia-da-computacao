@@ -31,7 +31,8 @@ void Processor::initializeInstructions()
         if (funcIt != rInstructions.end()) {
             funcIt->second(instruction);
         } else {
-            std::cout << "Instruction " << std::hex << instruction.function << std::dec << " not found." << std::endl;
+            emit instructionNotFound(instruction.rawData);
+            //std::cout << "Instruction " << std::hex << instruction.function << std::dec << " not found." << std::endl;
         }
     };
 
@@ -97,7 +98,8 @@ void Processor::executeInstruction(Instruction instruction)
     if (func != instructionSet.end()) {
         func->second(instruction);
     } else {
-        std::cout << "Instruction " << std::hex << instruction.opCode << std::dec << " not found." << std::endl;
+        emit instructionNotFound(instruction.rawData);
+        //std::cout << "Instruction " << std::hex << instruction.opCode << std::dec << " not found." << std::endl;
     }
 
     programCounter += 4;

@@ -50,6 +50,11 @@ void Controller::execute()
         window.setInstructionLabel(str);
         window.highlightInstructionRow(programCounter);
     });
+    QObject::connect(&processor, &Processor::instructionNotFound, &window, [&](unsigned int instruction) {
+        processor.stopExecution();
+        processor.resetState();
+        window.showError("A instrução " + Utils::toHexString(instruction) + " não foi reconhecida.");
+    });
 
     window.show();
 }

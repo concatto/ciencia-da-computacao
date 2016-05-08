@@ -26,7 +26,8 @@ std::string InstructionTranslator::toString(const Instruction& instruction)
     std::stringstream stream;
 
     if (instruction.opCode == 0) { //R format
-        stream << RNames[instruction.function] << " ";
+        auto it = RNames.find(instruction.function);
+        stream << ((it == RNames.end()) ? "????" : it->second) << " ";
 
         if (instruction.function <= 2) {
             //Shift
@@ -39,7 +40,8 @@ std::string InstructionTranslator::toString(const Instruction& instruction)
             stream << names[instruction.rd] << ", " << names[instruction.rs] << ", " << names[instruction.rt];
         }
     } else { //I or J format
-        stream << IJNames[instruction.opCode] << " ";
+        auto it = IJNames.find(instruction.opCode);
+        stream << ((it == IJNames.end()) ? "????" : it->second) << " ";
 
         if (instruction.opCode <= 2) {
             //j, jal
