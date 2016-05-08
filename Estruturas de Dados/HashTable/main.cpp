@@ -26,14 +26,17 @@ std::vector<Result> testTable(HashTable<int, int>& table, const std::vector<int>
 
 		Result r;
 		for (int i = 0; i < elements; ) {
-			if (table.insert(generateRandom(), 1)) {
-				r.insertion += static_cast<double>(table.getIterations()) / elements;
+			bool success = table.insert(generateRandom(), 1);
+			r.insertion += static_cast<double>(table.getIterations()) / elements;
 
-				while (table.find(generateRandom()) == nullptr); //Searches randomly until a valid element is found
-				r.search += static_cast<double>(table.getIterations()) / elements;
-
-				i++;
+			while (!success) { //If the insertion didn't succeed, keep trying until an element is inserted
+				success = table.insert(generateRandom(), 1);
 			}
+
+			table.find(generateRandom());
+			r.search += static_cast<double>(table.getIterations()) / elements;
+
+			i++;
 		}
 
 		results.push_back(r);
@@ -59,17 +62,19 @@ void runTests(HashTable<int, int>& table, int tests, const std::vector<int>& sta
 	}
 
 	std::cout << "Tests completed.\n";
-	std::ofstream arquivo("C:/Home/closed.txt");
+	std::ofstream arquivo("closed.csv");
 	for (int i = 0; i < averages.size(); i++) {
-		arquivo << startingSizes[i] << "," << averages[i].insertion << "," << averages[i].search << "\n";
+		std::cout << startingSizes[i] << ";" << averages[i].insertion << ";" << averages[i].search << "\n";
+		arquivo << startingSizes[i] << ";" << averages[i].insertion << ";" << averages[i].search << "\n";
 	}
 	arquivo.close();
 }
 
 int main() {
 	std::srand(std::time(nullptr));
-	std::vector<int> sizes({90, 240, 740, 990, 1990});
+	std::vector<int> sizes({90, 240, 490, 740, 990, 1990});
 
-	ClosedHashTable<int, int> open;
-	runTests(open, 100000, sizes);
+	ClosedHashTable<int, int> table;
+	runTests(table, 1000, sizes);
+
 }

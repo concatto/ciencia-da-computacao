@@ -42,6 +42,8 @@ public:
 		}
 
 		int index = probe(key);
+		if (index == -1) return false;
+
 		if (data[index] == nullptr) {
 			data[index] = new Pair<K, V>(key, value);
 			size++;
