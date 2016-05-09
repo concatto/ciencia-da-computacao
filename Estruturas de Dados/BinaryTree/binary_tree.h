@@ -37,14 +37,14 @@ private:
 	}
 
 	Node* searchRecursively(Node* node, const K& key) const {
-		if (node == nullptr) {
-			return nullptr; //Does not exist
+		if (node == nullptr) { //Does not exist
+			return nullptr;
 		} else if (key < node->key) {
 			return search(node->left, key);
 		} else if (key > node->key) {
 			return search(node->right, key);
-		} else {
-			return node; //Found
+		} else { //Found
+			return node;
 		}
 	}
 
@@ -71,8 +71,8 @@ private:
 		action(node);
 		inOrder(action, node->right);
 	}
-	
-	void removeNode(Node*& node) {		
+
+	void removeNode(Node*& node) {
 		Node* greater = node->left;
 		if (greater == nullptr) {
 			Node* obsolete = node;
@@ -84,12 +84,12 @@ private:
 				parent = greater;
 				greater = greater->right;
 			}
-			
+
 			if (parent != nullptr) {
 				parent->right = greater->left;
 				greater->left = node->left;
 			}
-			
+
 			greater->right = node->right;
 			delete node;
 			node = greater;
@@ -167,5 +167,9 @@ public:
 
 	void traverseInOrder(std::function<void(Node*)> action) const {
 		inOrder(action, root);
+	}
+
+	Node* getRoot() const {
+		return root;
 	}
 };
