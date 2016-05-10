@@ -40,9 +40,9 @@ void Processor::initializeInstructions()
     rInstructions[0x00] = [&](Instruction ins) { setRegister(ins.rd, registers[ins.rt] << ins.shiftAmount); }; //sll
     rInstructions[0x02] = [&](Instruction ins) { setRegister(ins.rd, registers[ins.rt] >> ins.shiftAmount); }; //srl
     rInstructions[0x08] = [&](Instruction ins) { programCounter = registers[ins.rs]; }; //jr
-    rInstructions[0x20] = [&](Instruction ins) { setRegister(ins.rd, registers[ins.rs] + static_cast<int>(registers[ins.rt])); }; //add
-    rInstructions[0x21] = [&](Instruction ins) { setRegister(ins.rd, registers[ins.rs] + registers[ins.rt]); }; //addu
-    rInstructions[0x22] = [&](Instruction ins) { setRegister(ins.rd, registers[ins.rs] - registers[ins.rt]); }; //sub
+    rInstructions[0x20] = [&](Instruction ins) { setRegister(ins.rd, static_cast<int>(registers[ins.rs]) + static_cast<int>(registers[ins.rt])); }; //add
+    rInstructions[0x21] = [&](Instruction ins) { setRegister(ins.rd, static_cast<int>(registers[ins.rs]) + static_cast<int>(registers[ins.rt])); }; //addu
+    rInstructions[0x22] = [&](Instruction ins) { setRegister(ins.rd, static_cast<int>(registers[ins.rs]) - static_cast<int>(registers[ins.rt])); }; //sub
     rInstructions[0x24] = [&](Instruction ins) { setRegister(ins.rd, registers[ins.rs] & registers[ins.rt]); }; //and
     rInstructions[0x25] = [&](Instruction ins) { setRegister(ins.rd, registers[ins.rs] | registers[ins.rt]); }; //or
     rInstructions[0x26] = [&](Instruction ins) { setRegister(ins.rd, registers[ins.rs] ^ registers[ins.rt]); }; //xor
@@ -55,15 +55,15 @@ void Processor::initializeInstructions()
     //I format
     instructionSet[0x04] = [&](Instruction ins) { if (registers[ins.rs] == registers[ins.rt]) jumpRelative(ins.immediate16); }; //beq
     instructionSet[0x05] = [&](Instruction ins) { if (registers[ins.rs] != registers[ins.rt]) jumpRelative(ins.immediate16); }; //bne
-    instructionSet[0x08] = [&](Instruction ins) { setRegister(ins.rt, registers[ins.rs] + static_cast<int>(ins.immediate16)); }; //addi
-    instructionSet[0x09] = [&](Instruction ins) { setRegister(ins.rt, registers[ins.rs] + ins.immediate16); }; //addiu
-    instructionSet[0x0A] = [&](Instruction ins) { setRegister(ins.rt, registers[ins.rs] < ins.immediate16 ? 1 : 0); }; //slti
+    instructionSet[0x08] = [&](Instruction ins) { setRegister(ins.rt, static_cast<int>(registers[ins.rs]) + extendSign(ins.immediate16)); }; //addi
+    instructionSet[0x09] = [&](Instruction ins) { setRegister(ins.rt, static_cast<int>(registers[ins.rs]) + extendSign(ins.immediate16)); }; //addiu
+    instructionSet[0x0A] = [&](Instruction ins) { setRegister(ins.rt, static_cast<int>(registers[ins.rs]) < extendSign(ins.immediate16) ? 1 : 0); }; //slti
     instructionSet[0x0C] = [&](Instruction ins) { setRegister(ins.rt, registers[ins.rs] & ins.immediate16); }; //andi
     instructionSet[0x0D] = [&](Instruction ins) { setRegister(ins.rt, registers[ins.rs] | ins.immediate16); }; //ori
     instructionSet[0x0E] = [&](Instruction ins) { setRegister(ins.rt, registers[ins.rs] ^ ins.immediate16); }; //xori
     instructionSet[0x0F] = [&](Instruction ins) { setRegister(ins.rt, ins.immediate16 << 16); }; //lui
-    instructionSet[0x23] = [&](Instruction ins) { setRegister(ins.rt, getMemory(registers[ins.rs] + ins.immediate16)); }; //lw
-    instructionSet[0x2B] = [&](Instruction ins) { setMemory(registers[ins.rs] + ins.immediate16, registers[ins.rt]); }; //sw
+    instructionSet[0x23] = [&](Instruction ins) { setRegister(ins.rt, getMemory(registers[ins.rs] + extendSign(ins.immediate16))); }; //lw
+    instructionSet[0x2B] = [&](Instruction ins) { setMemory(registers[ins.rs] + extendSign(ins.immediate16), registers[ins.rt]); }; //sw
 }
 
 void Processor::executeProcessorCycle()
@@ -172,7 +172,7 @@ void Processor::jump(unsigned int value)
 
 void Processor::jumpRelative(unsigned int offset)
 {
-    programCounter += static_cast<int>(offset) * 4;
+    programCounter += extendSign(offset) << 2;
 }
 
 unsigned int Processor::adjustProgramCounter(unsigned int address)
@@ -183,4 +183,13 @@ unsigned int Processor::adjustProgramCounter(unsigned int address)
 unsigned int Processor::adjustMemory(unsigned int address)
 {
     return (address - Processor::MemoryOffset) / 4;
+}
+
+int Processor::extendSign(int value) {
+    int signBit = (value >> 15) & 1;
+    if (signBit == 1) {
+        return 0xFFFF0000 | value;
+    } else {
+        return 0x0000FFFF & value;
+    }
 }

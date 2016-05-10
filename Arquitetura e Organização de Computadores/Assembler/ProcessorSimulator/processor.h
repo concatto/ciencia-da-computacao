@@ -35,8 +35,7 @@ private:
 
     static unsigned int adjustProgramCounter(unsigned int address);
     static unsigned int adjustMemory(unsigned int address);
-
-
+    static int extendSign(int value);
 public:
     static const unsigned int ProgramCounterOffset = 0x00400000;
     static const unsigned int MemoryOffset = 0x10010000;
