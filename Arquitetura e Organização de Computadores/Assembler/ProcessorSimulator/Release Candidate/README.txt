@@ -1,2 +1,5 @@
 Este projeto consiste de um simulador do MIPS, desenvolvido como avaliação da disciplina de Arquitetura e Organização de Computadores, na Universidade do Vale do Itajaí, pelo acadêmico Fernando Concatto.
+
 O programa utiliza o framework Qt. Ao carregar o projeto no QtCreator, é necessário definir o Working directory, na aba Projects/Run, para o diretório contendo os arquivos rom.hex e ram.hex.
+
+O programa em assembly que realiza a soma dos vetores é chamado de "FernandoConcatto-Soma.asm".

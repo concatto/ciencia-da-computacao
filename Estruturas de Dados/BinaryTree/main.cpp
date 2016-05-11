@@ -19,14 +19,12 @@ TreeNode<K, V>* dfs(TreeNode<K, V>* root, V value) {
 }
 
 int main() {
-	BinaryTree<int, int> tree;
+	BinaryTree<int, int> tree{{10, 1}, {7, 1}, {8, 1}, {18, 1}, {1, 1}, {12, 1}, {18, 1}, {-1, 1}, {0, 1}, {11, 1}};
 
-	std::cout << tree.insert(10, 100) << "\n";
-	std::cout << tree.insert(11, 999) << "\n";
-	std::cout << tree.insert(9, 2) << "\n";
-	std::cout << tree.insert(12, 999) << "\n";
-
-
-	TreeNode<int, int>* a = dfs(tree.getRoot(), 999);
-	std::cout << a->key << "\n";
+	tree.remove(1);
+	tree.remove(18);
+	tree.remove(8);
+	tree.traversePreOrder([&](TreeNode<int, int>* node) {
+		std::cout << node->key << "\n";
+	});
 }

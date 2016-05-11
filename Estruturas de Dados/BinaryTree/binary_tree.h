@@ -1,5 +1,6 @@
 #include <iostream>
 #include <functional>
+#include <initializer_list>
 
 template <class K, class V>
 class TreeNode {
@@ -36,13 +37,13 @@ private:
 		}
 	}
 
-	Node* searchRecursively(Node* node, const K& key) const {
+	Node*& searchRecursively(Node*& node, const K& key) const {
 		if (node == nullptr) { //Does not exist
-			return nullptr;
+			return node;
 		} else if (key < node->key) {
-			return search(node->left, key);
+			return searchRecursively(node->left, key);
 		} else if (key > node->key) {
-			return search(node->right, key);
+			return searchRecursively(node->right, key);
 		} else { //Found
 			return node;
 		}
@@ -98,6 +99,11 @@ private:
 
 public:
 	BinaryTree() : root(nullptr), size(0) {}
+	BinaryTree(std::initializer_list<Node> list) : root(nullptr), size(0) {
+		for (const Node& node : list) {
+			insert(node.key, node.value);
+		}
+	}
 
 	bool insert(K key, V value) {
 		Node* node = new Node(key, value);
@@ -147,6 +153,16 @@ public:
 		}
 
 		return nullptr; //Does not exist
+	}
+
+	bool remove(const K& key) {
+		Node*& node = searchRecursively(root, key);
+		if (node == nullptr) {
+			return false;
+		} else {
+			removeNode(node);
+			return true;
+		}
 	}
 
 	Node* searchRecursively(const K& key) const {
