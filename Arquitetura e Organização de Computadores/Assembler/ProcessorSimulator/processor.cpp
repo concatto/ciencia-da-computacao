@@ -5,9 +5,9 @@
 
 const std::vector<std::string> Processor::RegisterNames({
         "$zero", "$at", "$v0", "$v1", "$a0", "$a1", "$a2", "$a3",
-        "$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6", "$t7",
-        "$s0", "$s1", "$s2", "$s3", "$s4", "$s5", "$s6", "$s7",
-        "$t8", "$t9", "$k0", "$k1", "$gp", "$sp", "$fp", "$ra",
+        "$t0",   "$t1", "$t2", "$t3", "$t4", "$t5", "$t6", "$t7",
+        "$s0",   "$s1", "$s2", "$s3", "$s4", "$s5", "$s6", "$s7",
+        "$t8",   "$t9", "$k0", "$k1", "$gp", "$sp", "$fp", "$ra",
 });
 
 Processor::Processor(QObject *parent) : QObject(parent), registers(32, 0)
@@ -32,7 +32,6 @@ void Processor::initializeInstructions()
             funcIt->second(instruction);
         } else {
             emit instructionNotFound(instruction.rawData);
-            //std::cout << "Instruction " << std::hex << instruction.function << std::dec << " not found." << std::endl;
         }
     };
 
@@ -99,7 +98,6 @@ void Processor::executeInstruction(Instruction instruction)
         func->second(instruction);
     } else {
         emit instructionNotFound(instruction.rawData);
-        //std::cout << "Instruction " << std::hex << instruction.opCode << std::dec << " not found." << std::endl;
     }
 
     programCounter += 4;

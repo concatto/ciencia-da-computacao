@@ -24,9 +24,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->stopButton, &QPushButton::clicked, [&]() { emit stopRequested(); });
     QObject::connect(ui->advanceButton, &QPushButton::clicked, [&]() { emit advanceRequested(); });
     QObject::connect(ui->revertButton, &QPushButton::clicked, [&]() {
+        emit revertRequested();
         clearHighlights();
         setInstructionLabel("");
-        emit revertRequested();
     });
 
     setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, size(), qApp->desktop()->availableGeometry()));
