@@ -27,13 +27,15 @@ std::vector<Result> testTable(HashTable<int, int>& table, const std::vector<int>
 		Result r;
 		std::cout << "Table has " << table.getSize() << " elements.\n";
 		for (int i = 0; i < elements; ) {
-			bool success = table.insert(generateRandom(), 1);
-			//std::cout << "Tried to insert. Took " << table.getIterations() << " iterations.\n";
-			r.insertion += static_cast<double>(table.getIterations()) / elements;
+			//if (table.getSize() < 1000) {
+				bool success = table.insert(generateRandom(), 1);
+				//std::cout << "Tried to insert. Took " << table.getIterations() << " iterations.\n";
+				r.insertion += static_cast<double>(table.getIterations()) / elements;
 
-			while (!success) { //If the insertion didn't succeed, keep trying until an element is inserted
-				success = table.insert(generateRandom(), 1);
-			}
+				while (!success) { //If the insertion didn't succeed, keep trying until an element is inserted
+					success = table.insert(generateRandom(), 1);
+				}
+			//}
 
 			table.find(generateRandom());
 			r.search += static_cast<double>(table.getIterations()) / elements;

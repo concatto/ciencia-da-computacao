@@ -28,7 +28,7 @@ protected:
 	int iterations;
 
 	int generateIndex(const K& key) {
-		int hash = hasher(key);
+		int hash = key * 31;
 		return hash % Capacity;
 	}
 
