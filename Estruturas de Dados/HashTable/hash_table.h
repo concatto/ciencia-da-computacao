@@ -20,7 +20,7 @@ public:
 template <class K, class V>
 class HashTable {
 private:
-	std::hash<K> hasher;
+	//std::hash<K> hasher;
 
 protected:
 	const static unsigned int Capacity = 1000;
@@ -28,6 +28,7 @@ protected:
 	int iterations;
 
 	int generateIndex(const K& key) {
+		//int hash = hasher(key);
 		int hash = key * 31;
 		return hash % Capacity;
 	}
