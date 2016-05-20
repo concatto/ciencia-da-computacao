@@ -1,0 +1,69 @@
+package br.univali.concatto;
+
+public class Cliente {
+	private String nome;
+	private String sobrenome;
+	private String cpf;
+	private double saldo;
+	private double limite;
+	private int numeroConta;
+	private static int contadorConta = 0;
+	
+	
+	public Cliente(String nome, String sobrenome, String cpf) {
+		this(nome, sobrenome, cpf, 0, 0);
+	}
+
+	public Cliente(String nome, String sobrenome, String cpf, double saldo, double limite) {
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.cpf = cpf;
+		this.saldo = saldo;
+		this.limite = limite;
+		this.numeroConta = contadorConta++;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public double getSaldo() {
+		return saldo;
+	}
+
+	public double getLimite() {
+		return limite;
+	}
+
+	public int getNumeroConta() {
+		return numeroConta;
+	}
+	
+	public void depositar(double valor) {
+		this.saldo += valor;
+	}
+	
+	public boolean sacar(double valor) {
+		if (valor < getValorDisponivel()) {
+			this.saldo -= valor;
+			return true;
+		}
+		return false;
+	}
+	
+	public double getValorDisponivel() {
+		return saldo + limite;
+	}
+	
+	public String getNomeCompleto() {
+		return getNome() + getSobrenome();
+	}
+}

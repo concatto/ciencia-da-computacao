@@ -1,0 +1,13 @@
+package br.univali.concatto;
+
+import java.util.Scanner;
+
+public class Programa {
+	
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+
+		
+	}
+
+}
