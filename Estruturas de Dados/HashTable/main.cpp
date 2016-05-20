@@ -25,17 +25,9 @@ std::vector<Result> testTable(HashTable<int, int>& table, const std::vector<int>
 		}
 
 		Result r;
-		std::cout << "Table has " << table.getSize() << " elements.\n";
 		for (int i = 0; i < elements; ) {
-			//if (table.getSize() < 1000) {
-				bool success = table.insert(generateRandom(), 1);
-				//std::cout << "Tried to insert. Took " << table.getIterations() << " iterations.\n";
-				r.insertion += static_cast<double>(table.getIterations()) / elements;
-
-				while (!success) { //If the insertion didn't succeed, keep trying until an element is inserted
-					success = table.insert(generateRandom(), 1);
-				}
-			//}
+			bool success = table.insert(generateRandom(), 1);
+			r.insertion += static_cast<double>(table.getIterations()) / elements;
 
 			table.find(generateRandom());
 			r.search += static_cast<double>(table.getIterations()) / elements;
@@ -49,7 +41,7 @@ std::vector<Result> testTable(HashTable<int, int>& table, const std::vector<int>
 	return results;
 }
 
-void runTests(HashTable<int, int>& table, int tests, const std::vector<int>& startingSizes) {
+void runTests(HashTable<int, int>& table, int tests, const std::vector<int>& startingSizes, std::string fileName) {
 	std::vector<Result> averages(startingSizes.size());
 
 	for (int i = 0; i < tests; i++) {
@@ -66,19 +58,21 @@ void runTests(HashTable<int, int>& table, int tests, const std::vector<int>& sta
 	}
 
 	std::cout << "Tests completed.\n";
-	//std::ofstream arquivo("closed.csv");
+	std::ofstream arquivo(fileName);
 	for (int i = 0; i < averages.size(); i++) {
 		std::cout << startingSizes[i] << ";" << averages[i].insertion << ";" << averages[i].search << "\n";
-		//arquivo << startingSizes[i] << ";" << averages[i].insertion << ";" << averages[i].search << "\n";
+		arquivo << startingSizes[i] << ";" << averages[i].insertion << ";" << averages[i].search << "\n";
 	}
-	//arquivo.close();
+	arquivo.close();
 }
 
 int main() {
 	std::srand(std::time(nullptr));
 	std::vector<int> sizes({90, 240, 490, 740, 990, 1990});
 
-	ClosedHashTable<int, int> table;
-	runTests(table, 100000, sizes);
+	ClosedHashTable<int, int> closed;
+	runTests(closed, 100000, sizes, "closed.csv");
 
+	OpenHashTable<int, int> open;
+	runTests(open, 100000, sizes, "open.csv");
 }

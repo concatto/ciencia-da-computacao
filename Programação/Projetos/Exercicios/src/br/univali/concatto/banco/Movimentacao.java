@@ -13,7 +13,7 @@ public class Movimentacao {
 
     @Override
     public String toString() {
-        return descricao + " tipo: " + tipo + " valor: " + valor;
+        return descricao + " " + tipo + " valor: " + valor + " (" + tipo + ")";
     }
 
 }
