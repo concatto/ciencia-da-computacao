@@ -2,9 +2,15 @@
 #include "avl_tree.h"
 
 int main() {
-	AVLTree<int, int> tree{
-		{1, 1}, {3, 1}, {4, 1}
+	/*AVLTree<int, int> tree{
+		{1}, {2}, {3}, {5}, {0}, {77}, {100}, {150}
 	};
 	
-	//std::cout << tree.root->calculateHeight();
+	tree.print();*/
+	
+	AVLTree<int, int> tree{
+		{81}, {40}, {41}, {23}, {45}, {72}, {101}, {-3}, {-48}, {99}, {1}, {2}, {0}
+	};
+	
+	tree.print();
 }

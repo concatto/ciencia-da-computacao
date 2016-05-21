@@ -1,0 +1,23 @@
+//a = violator; b = right of a; c = left of b
+void diresq(Node*& a, Node*& b, Node*& c) {
+  a->right = c->left;
+  b->left = c->right;
+  c->left = a;
+  c->right = b;
+
+  if (c->balancingFactor == 0) {
+    a->balancingFactor = 0;
+    b->balancingFactor = 0;
+  }
+  if (c->balancingFactor == -1) {
+    a->balancingFactor = 0;
+    b->balancingFactor = 1;
+  }
+  if (c->balancingFactor == 1) {
+    a->balancingFactor = -1;
+    b->balancingFactor = 0;
+  }
+
+  c->balancingFactor = 0;
+  a = c;
+}

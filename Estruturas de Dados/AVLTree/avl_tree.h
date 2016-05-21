@@ -1,4 +1,5 @@
 #include <initializer_list>
+#include <iostream>
 
 template <class K, class V>
 class AVLNode {
@@ -9,7 +10,7 @@ public:
 	AVLNode<K, V>* left;
 	AVLNode<K, V>* right;
 	
-	AVLNode(K key, V value) : key(key), value(value), balancingFactor(0), left(nullptr), right(nullptr)  {}
+	AVLNode(K key, V value = V()) : key(key), value(value), balancingFactor(0), left(nullptr), right(nullptr)  {}
 	
 	int calculateHeight() {
 		int leftHeight = left == nullptr ? 0 : left->calculateHeight();
@@ -36,23 +37,57 @@ private:
 		std::cout << names[first] << "\n";
 	}*/
 	
-	void rotateRight(Node* violator, Node* inserted) {
-		if (inserted->key > violator->right->key) {
-			//dirdir
-		} else {
-			//diresq
-		}
+	void rotateLeft(Node*& node) {
+		Node* newRoot = node->right;
+		node->right = newRoot->left;
+		newRoot->left = node;
+		
+		node->balancingFactor = 0;
+		newRoot->balancingFactor = 0;
+		node = newRoot;
 	}
 	
-	void rotateLeft(Node* violator, Node* inserted) {
-		if (inserted->key < violator->left->key) {
-			//esqesq
+	void rotateRight(Node*& node) {
+		Node* newRoot = node->left;
+		node->left = newRoot->right;
+		newRoot->right = node;
+		
+		node->balancingFactor = 0;
+		newRoot->balancingFactor = 0;
+		node = newRoot;
+	}
+	
+	void balanceRight(Node*& violator, K key) {
+		//std::cout << "Violation at " << key << "\n";
+		//print();
+		if (key > violator->right->key) {
+			//Direita-direita
+			rotateLeft(violator);
 		} else {
-			//esqdir
+			//Direita-esquerda
+			rotateRight(violator->right);
+			rotateLeft(violator);
 		}
+		//std::cout << "Afterwards:\n";
+		//print();
+	}
+	
+	void balanceLeft(Node*& violator, K key) {
+		//std::cout << "Violation at " << key << "\n";
+		//print();
+		if (key < violator->left->key) {
+			//Esquerda-esquerda
+			rotateRight(violator);
+		} else {
+			//Esquerda-direita
+			rotateLeft(violator->left);  
+			rotateRight(violator);
+		}
+		//std::cout << "Afterwards:\n";
+		//print();
 	}
 
-	int insert(Node*& parent, Node* node) {		
+	int insert(Node*& parent, Node* node) {
 		if (parent == nullptr) {
 			parent = node;
 			size++;
@@ -64,28 +99,35 @@ private:
 			if (parent->balancingFactor == 0) {
 				return 0;
 			} else if (parent->balancingFactor > 1) {
-				rotateRight(parent, node);
+				balanceRight(parent, node->key);
 				return 0;
 			}
 			
 			return val;
 		} else if (node->key < parent->key) {
-			int val = insert(parent->right, node);
+			int val = insert(parent->left, node);
 			parent->balancingFactor -= val;
 			
 			if (parent->balancingFactor == 0) {
 				return 0;
 			} else if (parent->balancingFactor < -1) {
-				rotateLeft(parent, node);
+				balanceLeft(parent, node->key);
 				return 0;
 			}
 			
-			return val; //Confirmar!
+			return val;
 		} else {
 			return 0;
 		}
 	}
 	
+	void printRecursively(Node* node) {
+		if (node == nullptr) return;
+		
+		std::cout << "(" << node->key << ", " << node->value << ")\n";
+		printRecursively(node->left);
+		printRecursively(node->right);
+	}
 	
 public:
 	Node* root;
@@ -95,7 +137,6 @@ public:
 	AVLTree(std::initializer_list<Node> nodes) : AVLTree<K, V>() {
 		for (Node node : nodes) {
 			insert(node.key, node.value);
-			std::cout << "\n";
 		}
 	}
 	
@@ -105,5 +146,10 @@ public:
 			return true;
 		}
 		return insert(root, new Node(key, value));
+	}
+	
+	void print() {
+		printRecursively(root);
+		std::cout << "\n";
 	}
 };
