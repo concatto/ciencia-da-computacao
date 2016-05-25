@@ -1,15 +1,15 @@
-Fitter Status : Successful - Tue May 24 22:05:23 2016
-Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
+Fitter Status : Successful - Wed May 25 02:09:32 2016
+Quartus II 32-bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
 Revision Name : MIPS
 Top-level Entity Name : mips_mono
 Family : Cyclone II
 Device : EP2C35F672C6
 Timing Models : Final
-Total logic elements : 2,401 / 33,216 ( 7 % )
-    Total combinational functions : 1,989 / 33,216 ( 6 % )
+Total logic elements : 2,528 / 33,216 ( 8 % )
+    Total combinational functions : 2,074 / 33,216 ( 6 % )
     Dedicated logic registers : 1,027 / 33,216 ( 3 % )
 Total registers : 1027
-Total pins : 216 / 475 ( 45 % )
+Total pins : 187 / 475 ( 39 % )
 Total virtual pins : 0
 Total memory bits : 16,384 / 483,840 ( 3 % )
 Embedded Multiplier 9-bit elements : 0 / 70 ( 0 % )

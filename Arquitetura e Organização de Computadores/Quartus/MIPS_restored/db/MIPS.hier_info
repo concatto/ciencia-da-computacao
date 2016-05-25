@@ -66,49 +66,20 @@ PC[29] <= program_counter:ProgramCounter.PC[29]
 PC[30] <= program_counter:ProgramCounter.PC[30]
 PC[31] <= program_counter:ProgramCounter.PC[31]
 reset => inst.IN0
+JumpReg <= control:inst2.JumpReg
+Jump <= control:inst2.Jump
 Operation[0] <= alu_operation:135.Operation[0]
 Operation[1] <= alu_operation:135.Operation[1]
 Operation[2] <= alu_operation:135.Operation[2]
 ALUOp[0] <= control:inst2.ALUOp0
 ALUOp[1] <= control:inst2.ALUOp1
 RegWrite <= control:inst2.RegWrite
+Link <= control:inst2.Link
 RegDst <= control:inst2.RegDst
 MemToReg <= control:inst2.MemToReg
 MemWrite <= control:inst2.MemWrite
 ALUSrc <= control:inst2.ALUSrc
 clkSys <= clk.DB_MAX_OUTPUT_PORT_TYPE
-Concat_out[0] <= concat:inst3.Q[0]
-Concat_out[1] <= concat:inst3.Q[1]
-Concat_out[2] <= concat:inst3.Q[2]
-Concat_out[3] <= concat:inst3.Q[3]
-Concat_out[4] <= concat:inst3.Q[4]
-Concat_out[5] <= concat:inst3.Q[5]
-Concat_out[6] <= concat:inst3.Q[6]
-Concat_out[7] <= concat:inst3.Q[7]
-Concat_out[8] <= concat:inst3.Q[8]
-Concat_out[9] <= concat:inst3.Q[9]
-Concat_out[10] <= concat:inst3.Q[10]
-Concat_out[11] <= concat:inst3.Q[11]
-Concat_out[12] <= concat:inst3.Q[12]
-Concat_out[13] <= concat:inst3.Q[13]
-Concat_out[14] <= concat:inst3.Q[14]
-Concat_out[15] <= concat:inst3.Q[15]
-Concat_out[16] <= concat:inst3.Q[16]
-Concat_out[17] <= concat:inst3.Q[17]
-Concat_out[18] <= concat:inst3.Q[18]
-Concat_out[19] <= concat:inst3.Q[19]
-Concat_out[20] <= concat:inst3.Q[20]
-Concat_out[21] <= concat:inst3.Q[21]
-Concat_out[22] <= concat:inst3.Q[22]
-Concat_out[23] <= concat:inst3.Q[23]
-Concat_out[24] <= concat:inst3.Q[24]
-Concat_out[25] <= concat:inst3.Q[25]
-Concat_out[26] <= concat:inst3.Q[26]
-Concat_out[27] <= concat:inst3.Q[27]
-Concat_out[28] <= concat:inst3.Q[28]
-Concat_out[29] <= concat:inst3.Q[29]
-Concat_out[30] <= concat:inst3.Q[30]
-Concat_out[31] <= concat:inst3.Q[31]
 function[0] <= instruction_memory:InstructionMemory.instruction[0]
 function[1] <= instruction_memory:InstructionMemory.instruction[1]
 function[2] <= instruction_memory:InstructionMemory.instruction[2]
@@ -157,38 +128,38 @@ imed26[22] <= instruction_memory:InstructionMemory.instruction[22]
 imed26[23] <= instruction_memory:InstructionMemory.instruction[23]
 imed26[24] <= instruction_memory:InstructionMemory.instruction[24]
 imed26[25] <= instruction_memory:InstructionMemory.instruction[25]
-nextPC[0] <= mux_2x1_32bit:35.S[0]
-nextPC[1] <= mux_2x1_32bit:35.S[1]
-nextPC[2] <= mux_2x1_32bit:35.S[2]
-nextPC[3] <= mux_2x1_32bit:35.S[3]
-nextPC[4] <= mux_2x1_32bit:35.S[4]
-nextPC[5] <= mux_2x1_32bit:35.S[5]
-nextPC[6] <= mux_2x1_32bit:35.S[6]
-nextPC[7] <= mux_2x1_32bit:35.S[7]
-nextPC[8] <= mux_2x1_32bit:35.S[8]
-nextPC[9] <= mux_2x1_32bit:35.S[9]
-nextPC[10] <= mux_2x1_32bit:35.S[10]
-nextPC[11] <= mux_2x1_32bit:35.S[11]
-nextPC[12] <= mux_2x1_32bit:35.S[12]
-nextPC[13] <= mux_2x1_32bit:35.S[13]
-nextPC[14] <= mux_2x1_32bit:35.S[14]
-nextPC[15] <= mux_2x1_32bit:35.S[15]
-nextPC[16] <= mux_2x1_32bit:35.S[16]
-nextPC[17] <= mux_2x1_32bit:35.S[17]
-nextPC[18] <= mux_2x1_32bit:35.S[18]
-nextPC[19] <= mux_2x1_32bit:35.S[19]
-nextPC[20] <= mux_2x1_32bit:35.S[20]
-nextPC[21] <= mux_2x1_32bit:35.S[21]
-nextPC[22] <= mux_2x1_32bit:35.S[22]
-nextPC[23] <= mux_2x1_32bit:35.S[23]
-nextPC[24] <= mux_2x1_32bit:35.S[24]
-nextPC[25] <= mux_2x1_32bit:35.S[25]
-nextPC[26] <= mux_2x1_32bit:35.S[26]
-nextPC[27] <= mux_2x1_32bit:35.S[27]
-nextPC[28] <= mux_2x1_32bit:35.S[28]
-nextPC[29] <= mux_2x1_32bit:35.S[29]
-nextPC[30] <= mux_2x1_32bit:35.S[30]
-nextPC[31] <= mux_2x1_32bit:35.S[31]
+nextPC[0] <= mux_2x1_32bit:38.S[0]
+nextPC[1] <= mux_2x1_32bit:38.S[1]
+nextPC[2] <= mux_2x1_32bit:38.S[2]
+nextPC[3] <= mux_2x1_32bit:38.S[3]
+nextPC[4] <= mux_2x1_32bit:38.S[4]
+nextPC[5] <= mux_2x1_32bit:38.S[5]
+nextPC[6] <= mux_2x1_32bit:38.S[6]
+nextPC[7] <= mux_2x1_32bit:38.S[7]
+nextPC[8] <= mux_2x1_32bit:38.S[8]
+nextPC[9] <= mux_2x1_32bit:38.S[9]
+nextPC[10] <= mux_2x1_32bit:38.S[10]
+nextPC[11] <= mux_2x1_32bit:38.S[11]
+nextPC[12] <= mux_2x1_32bit:38.S[12]
+nextPC[13] <= mux_2x1_32bit:38.S[13]
+nextPC[14] <= mux_2x1_32bit:38.S[14]
+nextPC[15] <= mux_2x1_32bit:38.S[15]
+nextPC[16] <= mux_2x1_32bit:38.S[16]
+nextPC[17] <= mux_2x1_32bit:38.S[17]
+nextPC[18] <= mux_2x1_32bit:38.S[18]
+nextPC[19] <= mux_2x1_32bit:38.S[19]
+nextPC[20] <= mux_2x1_32bit:38.S[20]
+nextPC[21] <= mux_2x1_32bit:38.S[21]
+nextPC[22] <= mux_2x1_32bit:38.S[22]
+nextPC[23] <= mux_2x1_32bit:38.S[23]
+nextPC[24] <= mux_2x1_32bit:38.S[24]
+nextPC[25] <= mux_2x1_32bit:38.S[25]
+nextPC[26] <= mux_2x1_32bit:38.S[26]
+nextPC[27] <= mux_2x1_32bit:38.S[27]
+nextPC[28] <= mux_2x1_32bit:38.S[28]
+nextPC[29] <= mux_2x1_32bit:38.S[29]
+nextPC[30] <= mux_2x1_32bit:38.S[30]
+nextPC[31] <= mux_2x1_32bit:38.S[31]
 op[26] <= instruction_memory:InstructionMemory.instruction[26]
 op[27] <= instruction_memory:InstructionMemory.instruction[27]
 op[28] <= instruction_memory:InstructionMemory.instruction[28]
@@ -222,10 +193,11 @@ ALUOp1 <= 60.DB_MAX_OUTPUT_PORT_TYPE
 Op[0] => 79.IN0
 Op[0] => 61.IN1
 Op[0] => 62.IN1
+Op[0] => inst6.IN1
 Op[1] => 78.IN0
 Op[1] => 61.IN2
 Op[1] => 62.IN2
-Op[1] => inst1.IN4
+Op[1] => inst4.IN4
 Op[2] => 77.IN0
 Op[2] => 63.IN0
 Op[3] => 76.IN0
@@ -243,7 +215,15 @@ ALUSrc <= 108.DB_MAX_OUTPUT_PORT_TYPE
 RegWrite <= 117.DB_MAX_OUTPUT_PORT_TYPE
 clk => 111.IN0
 MemWrite <= 116.DB_MAX_OUTPUT_PORT_TYPE
-Jump <= inst1.DB_MAX_OUTPUT_PORT_TYPE
+Jump <= inst4.DB_MAX_OUTPUT_PORT_TYPE
+Link <= inst6.DB_MAX_OUTPUT_PORT_TYPE
+JumpReg <= inst11.DB_MAX_OUTPUT_PORT_TYPE
+Funct[0] => inst9.IN0
+Funct[1] => inst7.IN0
+Funct[2] => inst3.IN0
+Funct[3] => inst10.IN0
+Funct[4] => inst1.IN0
+Funct[5] => inst8.IN0
 
 
 |mips_mono|DivisorFrequencia:inst4
@@ -403,18 +383,18 @@ data_a[29] => ~NO_FANOUT~
 data_a[30] => ~NO_FANOUT~
 data_a[31] => ~NO_FANOUT~
 data_b[0] => ~NO_FANOUT~
-address_a[0] => altsyncram_vg91:auto_generated.address_a[0]
-address_a[1] => altsyncram_vg91:auto_generated.address_a[1]
-address_a[2] => altsyncram_vg91:auto_generated.address_a[2]
-address_a[3] => altsyncram_vg91:auto_generated.address_a[3]
-address_a[4] => altsyncram_vg91:auto_generated.address_a[4]
-address_a[5] => altsyncram_vg91:auto_generated.address_a[5]
-address_a[6] => altsyncram_vg91:auto_generated.address_a[6]
-address_a[7] => altsyncram_vg91:auto_generated.address_a[7]
+address_a[0] => altsyncram_hu91:auto_generated.address_a[0]
+address_a[1] => altsyncram_hu91:auto_generated.address_a[1]
+address_a[2] => altsyncram_hu91:auto_generated.address_a[2]
+address_a[3] => altsyncram_hu91:auto_generated.address_a[3]
+address_a[4] => altsyncram_hu91:auto_generated.address_a[4]
+address_a[5] => altsyncram_hu91:auto_generated.address_a[5]
+address_a[6] => altsyncram_hu91:auto_generated.address_a[6]
+address_a[7] => altsyncram_hu91:auto_generated.address_a[7]
 address_b[0] => ~NO_FANOUT~
 addressstall_a => ~NO_FANOUT~
 addressstall_b => ~NO_FANOUT~
-clock0 => altsyncram_vg91:auto_generated.clock0
+clock0 => altsyncram_hu91:auto_generated.clock0
 clock1 => ~NO_FANOUT~
 clocken0 => ~NO_FANOUT~
 clocken1 => ~NO_FANOUT~
@@ -424,45 +404,45 @@ aclr0 => ~NO_FANOUT~
 aclr1 => ~NO_FANOUT~
 byteena_a[0] => ~NO_FANOUT~
 byteena_b[0] => ~NO_FANOUT~
-q_a[0] <= altsyncram_vg91:auto_generated.q_a[0]
-q_a[1] <= altsyncram_vg91:auto_generated.q_a[1]
-q_a[2] <= altsyncram_vg91:auto_generated.q_a[2]
-q_a[3] <= altsyncram_vg91:auto_generated.q_a[3]
-q_a[4] <= altsyncram_vg91:auto_generated.q_a[4]
-q_a[5] <= altsyncram_vg91:auto_generated.q_a[5]
-q_a[6] <= altsyncram_vg91:auto_generated.q_a[6]
-q_a[7] <= altsyncram_vg91:auto_generated.q_a[7]
-q_a[8] <= altsyncram_vg91:auto_generated.q_a[8]
-q_a[9] <= altsyncram_vg91:auto_generated.q_a[9]
-q_a[10] <= altsyncram_vg91:auto_generated.q_a[10]
-q_a[11] <= altsyncram_vg91:auto_generated.q_a[11]
-q_a[12] <= altsyncram_vg91:auto_generated.q_a[12]
-q_a[13] <= altsyncram_vg91:auto_generated.q_a[13]
-q_a[14] <= altsyncram_vg91:auto_generated.q_a[14]
-q_a[15] <= altsyncram_vg91:auto_generated.q_a[15]
-q_a[16] <= altsyncram_vg91:auto_generated.q_a[16]
-q_a[17] <= altsyncram_vg91:auto_generated.q_a[17]
-q_a[18] <= altsyncram_vg91:auto_generated.q_a[18]
-q_a[19] <= altsyncram_vg91:auto_generated.q_a[19]
-q_a[20] <= altsyncram_vg91:auto_generated.q_a[20]
-q_a[21] <= altsyncram_vg91:auto_generated.q_a[21]
-q_a[22] <= altsyncram_vg91:auto_generated.q_a[22]
-q_a[23] <= altsyncram_vg91:auto_generated.q_a[23]
-q_a[24] <= altsyncram_vg91:auto_generated.q_a[24]
-q_a[25] <= altsyncram_vg91:auto_generated.q_a[25]
-q_a[26] <= altsyncram_vg91:auto_generated.q_a[26]
-q_a[27] <= altsyncram_vg91:auto_generated.q_a[27]
-q_a[28] <= altsyncram_vg91:auto_generated.q_a[28]
-q_a[29] <= altsyncram_vg91:auto_generated.q_a[29]
-q_a[30] <= altsyncram_vg91:auto_generated.q_a[30]
-q_a[31] <= altsyncram_vg91:auto_generated.q_a[31]
+q_a[0] <= altsyncram_hu91:auto_generated.q_a[0]
+q_a[1] <= altsyncram_hu91:auto_generated.q_a[1]
+q_a[2] <= altsyncram_hu91:auto_generated.q_a[2]
+q_a[3] <= altsyncram_hu91:auto_generated.q_a[3]
+q_a[4] <= altsyncram_hu91:auto_generated.q_a[4]
+q_a[5] <= altsyncram_hu91:auto_generated.q_a[5]
+q_a[6] <= altsyncram_hu91:auto_generated.q_a[6]
+q_a[7] <= altsyncram_hu91:auto_generated.q_a[7]
+q_a[8] <= altsyncram_hu91:auto_generated.q_a[8]
+q_a[9] <= altsyncram_hu91:auto_generated.q_a[9]
+q_a[10] <= altsyncram_hu91:auto_generated.q_a[10]
+q_a[11] <= altsyncram_hu91:auto_generated.q_a[11]
+q_a[12] <= altsyncram_hu91:auto_generated.q_a[12]
+q_a[13] <= altsyncram_hu91:auto_generated.q_a[13]
+q_a[14] <= altsyncram_hu91:auto_generated.q_a[14]
+q_a[15] <= altsyncram_hu91:auto_generated.q_a[15]
+q_a[16] <= altsyncram_hu91:auto_generated.q_a[16]
+q_a[17] <= altsyncram_hu91:auto_generated.q_a[17]
+q_a[18] <= altsyncram_hu91:auto_generated.q_a[18]
+q_a[19] <= altsyncram_hu91:auto_generated.q_a[19]
+q_a[20] <= altsyncram_hu91:auto_generated.q_a[20]
+q_a[21] <= altsyncram_hu91:auto_generated.q_a[21]
+q_a[22] <= altsyncram_hu91:auto_generated.q_a[22]
+q_a[23] <= altsyncram_hu91:auto_generated.q_a[23]
+q_a[24] <= altsyncram_hu91:auto_generated.q_a[24]
+q_a[25] <= altsyncram_hu91:auto_generated.q_a[25]
+q_a[26] <= altsyncram_hu91:auto_generated.q_a[26]
+q_a[27] <= altsyncram_hu91:auto_generated.q_a[27]
+q_a[28] <= altsyncram_hu91:auto_generated.q_a[28]
+q_a[29] <= altsyncram_hu91:auto_generated.q_a[29]
+q_a[30] <= altsyncram_hu91:auto_generated.q_a[30]
+q_a[31] <= altsyncram_hu91:auto_generated.q_a[31]
 q_b[0] <= <GND>
 eccstatus[0] <= <GND>
 eccstatus[1] <= <GND>
 eccstatus[2] <= <GND>
 
 
-|mips_mono|instruction_memory:InstructionMemory|rom:MemoriaRom|altsyncram:altsyncram_component|altsyncram_vg91:auto_generated
+|mips_mono|instruction_memory:InstructionMemory|rom:MemoriaRom|altsyncram:altsyncram_component|altsyncram_hu91:auto_generated
 address_a[0] => ram_block1a0.PORTAADDR
 address_a[0] => ram_block1a1.PORTAADDR
 address_a[0] => ram_block1a2.PORTAADDR
@@ -1399,6 +1379,1004 @@ result[28] <= <GND>
 result[29] <= <GND>
 result[30] <= <GND>
 result[31] <= <GND>
+
+
+|mips_mono|mux_2x1_32bit:38
+S[0] <= mux_2x1_8bit:18.S[0]
+S[1] <= mux_2x1_8bit:18.S[1]
+S[2] <= mux_2x1_8bit:18.S[2]
+S[3] <= mux_2x1_8bit:18.S[3]
+S[4] <= mux_2x1_8bit:18.S[4]
+S[5] <= mux_2x1_8bit:18.S[5]
+S[6] <= mux_2x1_8bit:18.S[6]
+S[7] <= mux_2x1_8bit:18.S[7]
+S[8] <= mux_2x1_8bit:19.S[0]
+S[9] <= mux_2x1_8bit:19.S[1]
+S[10] <= mux_2x1_8bit:19.S[2]
+S[11] <= mux_2x1_8bit:19.S[3]
+S[12] <= mux_2x1_8bit:19.S[4]
+S[13] <= mux_2x1_8bit:19.S[5]
+S[14] <= mux_2x1_8bit:19.S[6]
+S[15] <= mux_2x1_8bit:19.S[7]
+S[16] <= mux_2x1_8bit:20.S[0]
+S[17] <= mux_2x1_8bit:20.S[1]
+S[18] <= mux_2x1_8bit:20.S[2]
+S[19] <= mux_2x1_8bit:20.S[3]
+S[20] <= mux_2x1_8bit:20.S[4]
+S[21] <= mux_2x1_8bit:20.S[5]
+S[22] <= mux_2x1_8bit:20.S[6]
+S[23] <= mux_2x1_8bit:20.S[7]
+S[24] <= mux_2x1_8bit:21.S[0]
+S[25] <= mux_2x1_8bit:21.S[1]
+S[26] <= mux_2x1_8bit:21.S[2]
+S[27] <= mux_2x1_8bit:21.S[3]
+S[28] <= mux_2x1_8bit:21.S[4]
+S[29] <= mux_2x1_8bit:21.S[5]
+S[30] <= mux_2x1_8bit:21.S[6]
+S[31] <= mux_2x1_8bit:21.S[7]
+sel => mux_2x1_8bit:18.sel
+sel => mux_2x1_8bit:19.sel
+sel => mux_2x1_8bit:20.sel
+sel => mux_2x1_8bit:21.sel
+A[0] => mux_2x1_8bit:18.A[0]
+A[1] => mux_2x1_8bit:18.A[1]
+A[2] => mux_2x1_8bit:18.A[2]
+A[3] => mux_2x1_8bit:18.A[3]
+A[4] => mux_2x1_8bit:18.A[4]
+A[5] => mux_2x1_8bit:18.A[5]
+A[6] => mux_2x1_8bit:18.A[6]
+A[7] => mux_2x1_8bit:18.A[7]
+A[8] => mux_2x1_8bit:19.A[0]
+A[9] => mux_2x1_8bit:19.A[1]
+A[10] => mux_2x1_8bit:19.A[2]
+A[11] => mux_2x1_8bit:19.A[3]
+A[12] => mux_2x1_8bit:19.A[4]
+A[13] => mux_2x1_8bit:19.A[5]
+A[14] => mux_2x1_8bit:19.A[6]
+A[15] => mux_2x1_8bit:19.A[7]
+A[16] => mux_2x1_8bit:20.A[0]
+A[17] => mux_2x1_8bit:20.A[1]
+A[18] => mux_2x1_8bit:20.A[2]
+A[19] => mux_2x1_8bit:20.A[3]
+A[20] => mux_2x1_8bit:20.A[4]
+A[21] => mux_2x1_8bit:20.A[5]
+A[22] => mux_2x1_8bit:20.A[6]
+A[23] => mux_2x1_8bit:20.A[7]
+A[24] => mux_2x1_8bit:21.A[0]
+A[25] => mux_2x1_8bit:21.A[1]
+A[26] => mux_2x1_8bit:21.A[2]
+A[27] => mux_2x1_8bit:21.A[3]
+A[28] => mux_2x1_8bit:21.A[4]
+A[29] => mux_2x1_8bit:21.A[5]
+A[30] => mux_2x1_8bit:21.A[6]
+A[31] => mux_2x1_8bit:21.A[7]
+B[0] => mux_2x1_8bit:18.B[0]
+B[1] => mux_2x1_8bit:18.B[1]
+B[2] => mux_2x1_8bit:18.B[2]
+B[3] => mux_2x1_8bit:18.B[3]
+B[4] => mux_2x1_8bit:18.B[4]
+B[5] => mux_2x1_8bit:18.B[5]
+B[6] => mux_2x1_8bit:18.B[6]
+B[7] => mux_2x1_8bit:18.B[7]
+B[8] => mux_2x1_8bit:19.B[0]
+B[9] => mux_2x1_8bit:19.B[1]
+B[10] => mux_2x1_8bit:19.B[2]
+B[11] => mux_2x1_8bit:19.B[3]
+B[12] => mux_2x1_8bit:19.B[4]
+B[13] => mux_2x1_8bit:19.B[5]
+B[14] => mux_2x1_8bit:19.B[6]
+B[15] => mux_2x1_8bit:19.B[7]
+B[16] => mux_2x1_8bit:20.B[0]
+B[17] => mux_2x1_8bit:20.B[1]
+B[18] => mux_2x1_8bit:20.B[2]
+B[19] => mux_2x1_8bit:20.B[3]
+B[20] => mux_2x1_8bit:20.B[4]
+B[21] => mux_2x1_8bit:20.B[5]
+B[22] => mux_2x1_8bit:20.B[6]
+B[23] => mux_2x1_8bit:20.B[7]
+B[24] => mux_2x1_8bit:21.B[0]
+B[25] => mux_2x1_8bit:21.B[1]
+B[26] => mux_2x1_8bit:21.B[2]
+B[27] => mux_2x1_8bit:21.B[3]
+B[28] => mux_2x1_8bit:21.B[4]
+B[29] => mux_2x1_8bit:21.B[5]
+B[30] => mux_2x1_8bit:21.B[6]
+B[31] => mux_2x1_8bit:21.B[7]
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:18
+S[0] <= mux_2x1_1bit:20.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:29.S
+S[5] <= mux_2x1_1bit:28.S
+S[6] <= mux_2x1_1bit:27.S
+S[7] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:29.sel
+sel => mux_2x1_1bit:20.sel
+sel => mux_2x1_1bit:28.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:27.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:26.sel
+sel => mux_2x1_1bit:25.sel
+A[0] => mux_2x1_1bit:20.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:29.A
+A[5] => mux_2x1_1bit:28.A
+A[6] => mux_2x1_1bit:27.A
+A[7] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:20.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:29.B
+B[5] => mux_2x1_1bit:28.B
+B[6] => mux_2x1_1bit:27.B
+B[7] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:18|mux_2x1_1bit:29
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:18|mux_2x1_1bit:20
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:18|mux_2x1_1bit:28
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:18|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:18|mux_2x1_1bit:27
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:18|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:18|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:18|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:19
+S[0] <= mux_2x1_1bit:20.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:29.S
+S[5] <= mux_2x1_1bit:28.S
+S[6] <= mux_2x1_1bit:27.S
+S[7] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:29.sel
+sel => mux_2x1_1bit:20.sel
+sel => mux_2x1_1bit:28.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:27.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:26.sel
+sel => mux_2x1_1bit:25.sel
+A[0] => mux_2x1_1bit:20.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:29.A
+A[5] => mux_2x1_1bit:28.A
+A[6] => mux_2x1_1bit:27.A
+A[7] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:20.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:29.B
+B[5] => mux_2x1_1bit:28.B
+B[6] => mux_2x1_1bit:27.B
+B[7] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:19|mux_2x1_1bit:29
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:19|mux_2x1_1bit:20
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:19|mux_2x1_1bit:28
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:19|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:19|mux_2x1_1bit:27
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:19|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:19|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:19|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:20
+S[0] <= mux_2x1_1bit:20.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:29.S
+S[5] <= mux_2x1_1bit:28.S
+S[6] <= mux_2x1_1bit:27.S
+S[7] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:29.sel
+sel => mux_2x1_1bit:20.sel
+sel => mux_2x1_1bit:28.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:27.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:26.sel
+sel => mux_2x1_1bit:25.sel
+A[0] => mux_2x1_1bit:20.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:29.A
+A[5] => mux_2x1_1bit:28.A
+A[6] => mux_2x1_1bit:27.A
+A[7] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:20.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:29.B
+B[5] => mux_2x1_1bit:28.B
+B[6] => mux_2x1_1bit:27.B
+B[7] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:20|mux_2x1_1bit:29
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:20|mux_2x1_1bit:20
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:20|mux_2x1_1bit:28
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:20|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:20|mux_2x1_1bit:27
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:20|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:20|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:20|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:21
+S[0] <= mux_2x1_1bit:20.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:29.S
+S[5] <= mux_2x1_1bit:28.S
+S[6] <= mux_2x1_1bit:27.S
+S[7] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:29.sel
+sel => mux_2x1_1bit:20.sel
+sel => mux_2x1_1bit:28.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:27.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:26.sel
+sel => mux_2x1_1bit:25.sel
+A[0] => mux_2x1_1bit:20.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:29.A
+A[5] => mux_2x1_1bit:28.A
+A[6] => mux_2x1_1bit:27.A
+A[7] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:20.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:29.B
+B[5] => mux_2x1_1bit:28.B
+B[6] => mux_2x1_1bit:27.B
+B[7] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:21|mux_2x1_1bit:29
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:21|mux_2x1_1bit:20
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:21|mux_2x1_1bit:28
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:21|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:21|mux_2x1_1bit:27
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:21|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:21|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:38|mux_2x1_8bit:21|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37
+S[0] <= mux_2x1_8bit:18.S[0]
+S[1] <= mux_2x1_8bit:18.S[1]
+S[2] <= mux_2x1_8bit:18.S[2]
+S[3] <= mux_2x1_8bit:18.S[3]
+S[4] <= mux_2x1_8bit:18.S[4]
+S[5] <= mux_2x1_8bit:18.S[5]
+S[6] <= mux_2x1_8bit:18.S[6]
+S[7] <= mux_2x1_8bit:18.S[7]
+S[8] <= mux_2x1_8bit:19.S[0]
+S[9] <= mux_2x1_8bit:19.S[1]
+S[10] <= mux_2x1_8bit:19.S[2]
+S[11] <= mux_2x1_8bit:19.S[3]
+S[12] <= mux_2x1_8bit:19.S[4]
+S[13] <= mux_2x1_8bit:19.S[5]
+S[14] <= mux_2x1_8bit:19.S[6]
+S[15] <= mux_2x1_8bit:19.S[7]
+S[16] <= mux_2x1_8bit:20.S[0]
+S[17] <= mux_2x1_8bit:20.S[1]
+S[18] <= mux_2x1_8bit:20.S[2]
+S[19] <= mux_2x1_8bit:20.S[3]
+S[20] <= mux_2x1_8bit:20.S[4]
+S[21] <= mux_2x1_8bit:20.S[5]
+S[22] <= mux_2x1_8bit:20.S[6]
+S[23] <= mux_2x1_8bit:20.S[7]
+S[24] <= mux_2x1_8bit:21.S[0]
+S[25] <= mux_2x1_8bit:21.S[1]
+S[26] <= mux_2x1_8bit:21.S[2]
+S[27] <= mux_2x1_8bit:21.S[3]
+S[28] <= mux_2x1_8bit:21.S[4]
+S[29] <= mux_2x1_8bit:21.S[5]
+S[30] <= mux_2x1_8bit:21.S[6]
+S[31] <= mux_2x1_8bit:21.S[7]
+sel => mux_2x1_8bit:18.sel
+sel => mux_2x1_8bit:19.sel
+sel => mux_2x1_8bit:20.sel
+sel => mux_2x1_8bit:21.sel
+A[0] => mux_2x1_8bit:18.A[0]
+A[1] => mux_2x1_8bit:18.A[1]
+A[2] => mux_2x1_8bit:18.A[2]
+A[3] => mux_2x1_8bit:18.A[3]
+A[4] => mux_2x1_8bit:18.A[4]
+A[5] => mux_2x1_8bit:18.A[5]
+A[6] => mux_2x1_8bit:18.A[6]
+A[7] => mux_2x1_8bit:18.A[7]
+A[8] => mux_2x1_8bit:19.A[0]
+A[9] => mux_2x1_8bit:19.A[1]
+A[10] => mux_2x1_8bit:19.A[2]
+A[11] => mux_2x1_8bit:19.A[3]
+A[12] => mux_2x1_8bit:19.A[4]
+A[13] => mux_2x1_8bit:19.A[5]
+A[14] => mux_2x1_8bit:19.A[6]
+A[15] => mux_2x1_8bit:19.A[7]
+A[16] => mux_2x1_8bit:20.A[0]
+A[17] => mux_2x1_8bit:20.A[1]
+A[18] => mux_2x1_8bit:20.A[2]
+A[19] => mux_2x1_8bit:20.A[3]
+A[20] => mux_2x1_8bit:20.A[4]
+A[21] => mux_2x1_8bit:20.A[5]
+A[22] => mux_2x1_8bit:20.A[6]
+A[23] => mux_2x1_8bit:20.A[7]
+A[24] => mux_2x1_8bit:21.A[0]
+A[25] => mux_2x1_8bit:21.A[1]
+A[26] => mux_2x1_8bit:21.A[2]
+A[27] => mux_2x1_8bit:21.A[3]
+A[28] => mux_2x1_8bit:21.A[4]
+A[29] => mux_2x1_8bit:21.A[5]
+A[30] => mux_2x1_8bit:21.A[6]
+A[31] => mux_2x1_8bit:21.A[7]
+B[0] => mux_2x1_8bit:18.B[0]
+B[1] => mux_2x1_8bit:18.B[1]
+B[2] => mux_2x1_8bit:18.B[2]
+B[3] => mux_2x1_8bit:18.B[3]
+B[4] => mux_2x1_8bit:18.B[4]
+B[5] => mux_2x1_8bit:18.B[5]
+B[6] => mux_2x1_8bit:18.B[6]
+B[7] => mux_2x1_8bit:18.B[7]
+B[8] => mux_2x1_8bit:19.B[0]
+B[9] => mux_2x1_8bit:19.B[1]
+B[10] => mux_2x1_8bit:19.B[2]
+B[11] => mux_2x1_8bit:19.B[3]
+B[12] => mux_2x1_8bit:19.B[4]
+B[13] => mux_2x1_8bit:19.B[5]
+B[14] => mux_2x1_8bit:19.B[6]
+B[15] => mux_2x1_8bit:19.B[7]
+B[16] => mux_2x1_8bit:20.B[0]
+B[17] => mux_2x1_8bit:20.B[1]
+B[18] => mux_2x1_8bit:20.B[2]
+B[19] => mux_2x1_8bit:20.B[3]
+B[20] => mux_2x1_8bit:20.B[4]
+B[21] => mux_2x1_8bit:20.B[5]
+B[22] => mux_2x1_8bit:20.B[6]
+B[23] => mux_2x1_8bit:20.B[7]
+B[24] => mux_2x1_8bit:21.B[0]
+B[25] => mux_2x1_8bit:21.B[1]
+B[26] => mux_2x1_8bit:21.B[2]
+B[27] => mux_2x1_8bit:21.B[3]
+B[28] => mux_2x1_8bit:21.B[4]
+B[29] => mux_2x1_8bit:21.B[5]
+B[30] => mux_2x1_8bit:21.B[6]
+B[31] => mux_2x1_8bit:21.B[7]
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:18
+S[0] <= mux_2x1_1bit:20.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:29.S
+S[5] <= mux_2x1_1bit:28.S
+S[6] <= mux_2x1_1bit:27.S
+S[7] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:29.sel
+sel => mux_2x1_1bit:20.sel
+sel => mux_2x1_1bit:28.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:27.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:26.sel
+sel => mux_2x1_1bit:25.sel
+A[0] => mux_2x1_1bit:20.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:29.A
+A[5] => mux_2x1_1bit:28.A
+A[6] => mux_2x1_1bit:27.A
+A[7] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:20.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:29.B
+B[5] => mux_2x1_1bit:28.B
+B[6] => mux_2x1_1bit:27.B
+B[7] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:18|mux_2x1_1bit:29
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:18|mux_2x1_1bit:20
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:18|mux_2x1_1bit:28
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:18|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:18|mux_2x1_1bit:27
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:18|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:18|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:18|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:19
+S[0] <= mux_2x1_1bit:20.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:29.S
+S[5] <= mux_2x1_1bit:28.S
+S[6] <= mux_2x1_1bit:27.S
+S[7] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:29.sel
+sel => mux_2x1_1bit:20.sel
+sel => mux_2x1_1bit:28.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:27.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:26.sel
+sel => mux_2x1_1bit:25.sel
+A[0] => mux_2x1_1bit:20.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:29.A
+A[5] => mux_2x1_1bit:28.A
+A[6] => mux_2x1_1bit:27.A
+A[7] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:20.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:29.B
+B[5] => mux_2x1_1bit:28.B
+B[6] => mux_2x1_1bit:27.B
+B[7] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:19|mux_2x1_1bit:29
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:19|mux_2x1_1bit:20
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:19|mux_2x1_1bit:28
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:19|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:19|mux_2x1_1bit:27
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:19|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:19|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:19|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:20
+S[0] <= mux_2x1_1bit:20.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:29.S
+S[5] <= mux_2x1_1bit:28.S
+S[6] <= mux_2x1_1bit:27.S
+S[7] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:29.sel
+sel => mux_2x1_1bit:20.sel
+sel => mux_2x1_1bit:28.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:27.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:26.sel
+sel => mux_2x1_1bit:25.sel
+A[0] => mux_2x1_1bit:20.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:29.A
+A[5] => mux_2x1_1bit:28.A
+A[6] => mux_2x1_1bit:27.A
+A[7] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:20.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:29.B
+B[5] => mux_2x1_1bit:28.B
+B[6] => mux_2x1_1bit:27.B
+B[7] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:20|mux_2x1_1bit:29
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:20|mux_2x1_1bit:20
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:20|mux_2x1_1bit:28
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:20|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:20|mux_2x1_1bit:27
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:20|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:20|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:20|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:21
+S[0] <= mux_2x1_1bit:20.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:29.S
+S[5] <= mux_2x1_1bit:28.S
+S[6] <= mux_2x1_1bit:27.S
+S[7] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:29.sel
+sel => mux_2x1_1bit:20.sel
+sel => mux_2x1_1bit:28.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:27.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:26.sel
+sel => mux_2x1_1bit:25.sel
+A[0] => mux_2x1_1bit:20.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:29.A
+A[5] => mux_2x1_1bit:28.A
+A[6] => mux_2x1_1bit:27.A
+A[7] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:20.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:29.B
+B[5] => mux_2x1_1bit:28.B
+B[6] => mux_2x1_1bit:27.B
+B[7] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:21|mux_2x1_1bit:29
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:21|mux_2x1_1bit:20
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:21|mux_2x1_1bit:28
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:21|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:21|mux_2x1_1bit:27
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:21|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:21|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:37|mux_2x1_8bit:21|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
 
 
 |mips_mono|mux_2x1_32bit:35
@@ -48451,6 +49429,140 @@ sel => 18.IN0
 B => 18.IN1
 
 
+|mips_mono|mux_2x1_5bit:52
+S[0] <= mux_2x1_1bit:22.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:22.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:25.sel
+sel => mux_2x1_1bit:26.sel
+A[0] => mux_2x1_1bit:22.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:22.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_5bit:52|mux_2x1_1bit:22
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_5bit:52|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_5bit:52|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_5bit:52|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_5bit:52|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|lpm_constant:49
+result[0] <= <VCC>
+result[1] <= <VCC>
+result[2] <= <VCC>
+result[3] <= <VCC>
+result[4] <= <VCC>
+
+
+|mips_mono|mux_2x1_5bit:51
+S[0] <= mux_2x1_1bit:22.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:22.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:25.sel
+sel => mux_2x1_1bit:26.sel
+A[0] => mux_2x1_1bit:22.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:22.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_5bit:51|mux_2x1_1bit:22
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_5bit:51|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_5bit:51|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_5bit:51|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_5bit:51|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
 |mips_mono|mux_2x1_5bit:50
 S[0] <= mux_2x1_1bit:22.S
 S[1] <= mux_2x1_1bit:23.S
@@ -48507,6 +49619,505 @@ B => 18.IN1
 
 
 |mips_mono|mux_2x1_5bit:50|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39
+S[0] <= mux_2x1_8bit:18.S[0]
+S[1] <= mux_2x1_8bit:18.S[1]
+S[2] <= mux_2x1_8bit:18.S[2]
+S[3] <= mux_2x1_8bit:18.S[3]
+S[4] <= mux_2x1_8bit:18.S[4]
+S[5] <= mux_2x1_8bit:18.S[5]
+S[6] <= mux_2x1_8bit:18.S[6]
+S[7] <= mux_2x1_8bit:18.S[7]
+S[8] <= mux_2x1_8bit:19.S[0]
+S[9] <= mux_2x1_8bit:19.S[1]
+S[10] <= mux_2x1_8bit:19.S[2]
+S[11] <= mux_2x1_8bit:19.S[3]
+S[12] <= mux_2x1_8bit:19.S[4]
+S[13] <= mux_2x1_8bit:19.S[5]
+S[14] <= mux_2x1_8bit:19.S[6]
+S[15] <= mux_2x1_8bit:19.S[7]
+S[16] <= mux_2x1_8bit:20.S[0]
+S[17] <= mux_2x1_8bit:20.S[1]
+S[18] <= mux_2x1_8bit:20.S[2]
+S[19] <= mux_2x1_8bit:20.S[3]
+S[20] <= mux_2x1_8bit:20.S[4]
+S[21] <= mux_2x1_8bit:20.S[5]
+S[22] <= mux_2x1_8bit:20.S[6]
+S[23] <= mux_2x1_8bit:20.S[7]
+S[24] <= mux_2x1_8bit:21.S[0]
+S[25] <= mux_2x1_8bit:21.S[1]
+S[26] <= mux_2x1_8bit:21.S[2]
+S[27] <= mux_2x1_8bit:21.S[3]
+S[28] <= mux_2x1_8bit:21.S[4]
+S[29] <= mux_2x1_8bit:21.S[5]
+S[30] <= mux_2x1_8bit:21.S[6]
+S[31] <= mux_2x1_8bit:21.S[7]
+sel => mux_2x1_8bit:18.sel
+sel => mux_2x1_8bit:19.sel
+sel => mux_2x1_8bit:20.sel
+sel => mux_2x1_8bit:21.sel
+A[0] => mux_2x1_8bit:18.A[0]
+A[1] => mux_2x1_8bit:18.A[1]
+A[2] => mux_2x1_8bit:18.A[2]
+A[3] => mux_2x1_8bit:18.A[3]
+A[4] => mux_2x1_8bit:18.A[4]
+A[5] => mux_2x1_8bit:18.A[5]
+A[6] => mux_2x1_8bit:18.A[6]
+A[7] => mux_2x1_8bit:18.A[7]
+A[8] => mux_2x1_8bit:19.A[0]
+A[9] => mux_2x1_8bit:19.A[1]
+A[10] => mux_2x1_8bit:19.A[2]
+A[11] => mux_2x1_8bit:19.A[3]
+A[12] => mux_2x1_8bit:19.A[4]
+A[13] => mux_2x1_8bit:19.A[5]
+A[14] => mux_2x1_8bit:19.A[6]
+A[15] => mux_2x1_8bit:19.A[7]
+A[16] => mux_2x1_8bit:20.A[0]
+A[17] => mux_2x1_8bit:20.A[1]
+A[18] => mux_2x1_8bit:20.A[2]
+A[19] => mux_2x1_8bit:20.A[3]
+A[20] => mux_2x1_8bit:20.A[4]
+A[21] => mux_2x1_8bit:20.A[5]
+A[22] => mux_2x1_8bit:20.A[6]
+A[23] => mux_2x1_8bit:20.A[7]
+A[24] => mux_2x1_8bit:21.A[0]
+A[25] => mux_2x1_8bit:21.A[1]
+A[26] => mux_2x1_8bit:21.A[2]
+A[27] => mux_2x1_8bit:21.A[3]
+A[28] => mux_2x1_8bit:21.A[4]
+A[29] => mux_2x1_8bit:21.A[5]
+A[30] => mux_2x1_8bit:21.A[6]
+A[31] => mux_2x1_8bit:21.A[7]
+B[0] => mux_2x1_8bit:18.B[0]
+B[1] => mux_2x1_8bit:18.B[1]
+B[2] => mux_2x1_8bit:18.B[2]
+B[3] => mux_2x1_8bit:18.B[3]
+B[4] => mux_2x1_8bit:18.B[4]
+B[5] => mux_2x1_8bit:18.B[5]
+B[6] => mux_2x1_8bit:18.B[6]
+B[7] => mux_2x1_8bit:18.B[7]
+B[8] => mux_2x1_8bit:19.B[0]
+B[9] => mux_2x1_8bit:19.B[1]
+B[10] => mux_2x1_8bit:19.B[2]
+B[11] => mux_2x1_8bit:19.B[3]
+B[12] => mux_2x1_8bit:19.B[4]
+B[13] => mux_2x1_8bit:19.B[5]
+B[14] => mux_2x1_8bit:19.B[6]
+B[15] => mux_2x1_8bit:19.B[7]
+B[16] => mux_2x1_8bit:20.B[0]
+B[17] => mux_2x1_8bit:20.B[1]
+B[18] => mux_2x1_8bit:20.B[2]
+B[19] => mux_2x1_8bit:20.B[3]
+B[20] => mux_2x1_8bit:20.B[4]
+B[21] => mux_2x1_8bit:20.B[5]
+B[22] => mux_2x1_8bit:20.B[6]
+B[23] => mux_2x1_8bit:20.B[7]
+B[24] => mux_2x1_8bit:21.B[0]
+B[25] => mux_2x1_8bit:21.B[1]
+B[26] => mux_2x1_8bit:21.B[2]
+B[27] => mux_2x1_8bit:21.B[3]
+B[28] => mux_2x1_8bit:21.B[4]
+B[29] => mux_2x1_8bit:21.B[5]
+B[30] => mux_2x1_8bit:21.B[6]
+B[31] => mux_2x1_8bit:21.B[7]
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:18
+S[0] <= mux_2x1_1bit:20.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:29.S
+S[5] <= mux_2x1_1bit:28.S
+S[6] <= mux_2x1_1bit:27.S
+S[7] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:29.sel
+sel => mux_2x1_1bit:20.sel
+sel => mux_2x1_1bit:28.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:27.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:26.sel
+sel => mux_2x1_1bit:25.sel
+A[0] => mux_2x1_1bit:20.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:29.A
+A[5] => mux_2x1_1bit:28.A
+A[6] => mux_2x1_1bit:27.A
+A[7] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:20.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:29.B
+B[5] => mux_2x1_1bit:28.B
+B[6] => mux_2x1_1bit:27.B
+B[7] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:18|mux_2x1_1bit:29
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:18|mux_2x1_1bit:20
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:18|mux_2x1_1bit:28
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:18|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:18|mux_2x1_1bit:27
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:18|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:18|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:18|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:19
+S[0] <= mux_2x1_1bit:20.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:29.S
+S[5] <= mux_2x1_1bit:28.S
+S[6] <= mux_2x1_1bit:27.S
+S[7] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:29.sel
+sel => mux_2x1_1bit:20.sel
+sel => mux_2x1_1bit:28.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:27.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:26.sel
+sel => mux_2x1_1bit:25.sel
+A[0] => mux_2x1_1bit:20.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:29.A
+A[5] => mux_2x1_1bit:28.A
+A[6] => mux_2x1_1bit:27.A
+A[7] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:20.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:29.B
+B[5] => mux_2x1_1bit:28.B
+B[6] => mux_2x1_1bit:27.B
+B[7] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:19|mux_2x1_1bit:29
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:19|mux_2x1_1bit:20
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:19|mux_2x1_1bit:28
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:19|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:19|mux_2x1_1bit:27
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:19|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:19|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:19|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:20
+S[0] <= mux_2x1_1bit:20.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:29.S
+S[5] <= mux_2x1_1bit:28.S
+S[6] <= mux_2x1_1bit:27.S
+S[7] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:29.sel
+sel => mux_2x1_1bit:20.sel
+sel => mux_2x1_1bit:28.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:27.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:26.sel
+sel => mux_2x1_1bit:25.sel
+A[0] => mux_2x1_1bit:20.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:29.A
+A[5] => mux_2x1_1bit:28.A
+A[6] => mux_2x1_1bit:27.A
+A[7] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:20.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:29.B
+B[5] => mux_2x1_1bit:28.B
+B[6] => mux_2x1_1bit:27.B
+B[7] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:20|mux_2x1_1bit:29
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:20|mux_2x1_1bit:20
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:20|mux_2x1_1bit:28
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:20|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:20|mux_2x1_1bit:27
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:20|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:20|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:20|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:21
+S[0] <= mux_2x1_1bit:20.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:29.S
+S[5] <= mux_2x1_1bit:28.S
+S[6] <= mux_2x1_1bit:27.S
+S[7] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:29.sel
+sel => mux_2x1_1bit:20.sel
+sel => mux_2x1_1bit:28.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:27.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:26.sel
+sel => mux_2x1_1bit:25.sel
+A[0] => mux_2x1_1bit:20.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:29.A
+A[5] => mux_2x1_1bit:28.A
+A[6] => mux_2x1_1bit:27.A
+A[7] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:20.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:29.B
+B[5] => mux_2x1_1bit:28.B
+B[6] => mux_2x1_1bit:27.B
+B[7] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:21|mux_2x1_1bit:29
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:21|mux_2x1_1bit:20
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:21|mux_2x1_1bit:28
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:21|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:21|mux_2x1_1bit:27
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:21|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:21|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:39|mux_2x1_8bit:21|mux_2x1_1bit:25
 S <= 5.DB_MAX_OUTPUT_PORT_TYPE
 A => 6.IN0
 sel => 20.IN0
@@ -49947,572 +51558,6 @@ result[30] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|mips_mono|mux_2x1_32bit:177
-S[0] <= mux_2x1_8bit:18.S[0]
-S[1] <= mux_2x1_8bit:18.S[1]
-S[2] <= mux_2x1_8bit:18.S[2]
-S[3] <= mux_2x1_8bit:18.S[3]
-S[4] <= mux_2x1_8bit:18.S[4]
-S[5] <= mux_2x1_8bit:18.S[5]
-S[6] <= mux_2x1_8bit:18.S[6]
-S[7] <= mux_2x1_8bit:18.S[7]
-S[8] <= mux_2x1_8bit:19.S[0]
-S[9] <= mux_2x1_8bit:19.S[1]
-S[10] <= mux_2x1_8bit:19.S[2]
-S[11] <= mux_2x1_8bit:19.S[3]
-S[12] <= mux_2x1_8bit:19.S[4]
-S[13] <= mux_2x1_8bit:19.S[5]
-S[14] <= mux_2x1_8bit:19.S[6]
-S[15] <= mux_2x1_8bit:19.S[7]
-S[16] <= mux_2x1_8bit:20.S[0]
-S[17] <= mux_2x1_8bit:20.S[1]
-S[18] <= mux_2x1_8bit:20.S[2]
-S[19] <= mux_2x1_8bit:20.S[3]
-S[20] <= mux_2x1_8bit:20.S[4]
-S[21] <= mux_2x1_8bit:20.S[5]
-S[22] <= mux_2x1_8bit:20.S[6]
-S[23] <= mux_2x1_8bit:20.S[7]
-S[24] <= mux_2x1_8bit:21.S[0]
-S[25] <= mux_2x1_8bit:21.S[1]
-S[26] <= mux_2x1_8bit:21.S[2]
-S[27] <= mux_2x1_8bit:21.S[3]
-S[28] <= mux_2x1_8bit:21.S[4]
-S[29] <= mux_2x1_8bit:21.S[5]
-S[30] <= mux_2x1_8bit:21.S[6]
-S[31] <= mux_2x1_8bit:21.S[7]
-sel => mux_2x1_8bit:18.sel
-sel => mux_2x1_8bit:19.sel
-sel => mux_2x1_8bit:20.sel
-sel => mux_2x1_8bit:21.sel
-A[0] => mux_2x1_8bit:18.A[0]
-A[1] => mux_2x1_8bit:18.A[1]
-A[2] => mux_2x1_8bit:18.A[2]
-A[3] => mux_2x1_8bit:18.A[3]
-A[4] => mux_2x1_8bit:18.A[4]
-A[5] => mux_2x1_8bit:18.A[5]
-A[6] => mux_2x1_8bit:18.A[6]
-A[7] => mux_2x1_8bit:18.A[7]
-A[8] => mux_2x1_8bit:19.A[0]
-A[9] => mux_2x1_8bit:19.A[1]
-A[10] => mux_2x1_8bit:19.A[2]
-A[11] => mux_2x1_8bit:19.A[3]
-A[12] => mux_2x1_8bit:19.A[4]
-A[13] => mux_2x1_8bit:19.A[5]
-A[14] => mux_2x1_8bit:19.A[6]
-A[15] => mux_2x1_8bit:19.A[7]
-A[16] => mux_2x1_8bit:20.A[0]
-A[17] => mux_2x1_8bit:20.A[1]
-A[18] => mux_2x1_8bit:20.A[2]
-A[19] => mux_2x1_8bit:20.A[3]
-A[20] => mux_2x1_8bit:20.A[4]
-A[21] => mux_2x1_8bit:20.A[5]
-A[22] => mux_2x1_8bit:20.A[6]
-A[23] => mux_2x1_8bit:20.A[7]
-A[24] => mux_2x1_8bit:21.A[0]
-A[25] => mux_2x1_8bit:21.A[1]
-A[26] => mux_2x1_8bit:21.A[2]
-A[27] => mux_2x1_8bit:21.A[3]
-A[28] => mux_2x1_8bit:21.A[4]
-A[29] => mux_2x1_8bit:21.A[5]
-A[30] => mux_2x1_8bit:21.A[6]
-A[31] => mux_2x1_8bit:21.A[7]
-B[0] => mux_2x1_8bit:18.B[0]
-B[1] => mux_2x1_8bit:18.B[1]
-B[2] => mux_2x1_8bit:18.B[2]
-B[3] => mux_2x1_8bit:18.B[3]
-B[4] => mux_2x1_8bit:18.B[4]
-B[5] => mux_2x1_8bit:18.B[5]
-B[6] => mux_2x1_8bit:18.B[6]
-B[7] => mux_2x1_8bit:18.B[7]
-B[8] => mux_2x1_8bit:19.B[0]
-B[9] => mux_2x1_8bit:19.B[1]
-B[10] => mux_2x1_8bit:19.B[2]
-B[11] => mux_2x1_8bit:19.B[3]
-B[12] => mux_2x1_8bit:19.B[4]
-B[13] => mux_2x1_8bit:19.B[5]
-B[14] => mux_2x1_8bit:19.B[6]
-B[15] => mux_2x1_8bit:19.B[7]
-B[16] => mux_2x1_8bit:20.B[0]
-B[17] => mux_2x1_8bit:20.B[1]
-B[18] => mux_2x1_8bit:20.B[2]
-B[19] => mux_2x1_8bit:20.B[3]
-B[20] => mux_2x1_8bit:20.B[4]
-B[21] => mux_2x1_8bit:20.B[5]
-B[22] => mux_2x1_8bit:20.B[6]
-B[23] => mux_2x1_8bit:20.B[7]
-B[24] => mux_2x1_8bit:21.B[0]
-B[25] => mux_2x1_8bit:21.B[1]
-B[26] => mux_2x1_8bit:21.B[2]
-B[27] => mux_2x1_8bit:21.B[3]
-B[28] => mux_2x1_8bit:21.B[4]
-B[29] => mux_2x1_8bit:21.B[5]
-B[30] => mux_2x1_8bit:21.B[6]
-B[31] => mux_2x1_8bit:21.B[7]
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18
-S[0] <= mux_2x1_1bit:20.S
-S[1] <= mux_2x1_1bit:23.S
-S[2] <= mux_2x1_1bit:24.S
-S[3] <= mux_2x1_1bit:25.S
-S[4] <= mux_2x1_1bit:29.S
-S[5] <= mux_2x1_1bit:28.S
-S[6] <= mux_2x1_1bit:27.S
-S[7] <= mux_2x1_1bit:26.S
-sel => mux_2x1_1bit:29.sel
-sel => mux_2x1_1bit:20.sel
-sel => mux_2x1_1bit:28.sel
-sel => mux_2x1_1bit:23.sel
-sel => mux_2x1_1bit:27.sel
-sel => mux_2x1_1bit:24.sel
-sel => mux_2x1_1bit:26.sel
-sel => mux_2x1_1bit:25.sel
-A[0] => mux_2x1_1bit:20.A
-A[1] => mux_2x1_1bit:23.A
-A[2] => mux_2x1_1bit:24.A
-A[3] => mux_2x1_1bit:25.A
-A[4] => mux_2x1_1bit:29.A
-A[5] => mux_2x1_1bit:28.A
-A[6] => mux_2x1_1bit:27.A
-A[7] => mux_2x1_1bit:26.A
-B[0] => mux_2x1_1bit:20.B
-B[1] => mux_2x1_1bit:23.B
-B[2] => mux_2x1_1bit:24.B
-B[3] => mux_2x1_1bit:25.B
-B[4] => mux_2x1_1bit:29.B
-B[5] => mux_2x1_1bit:28.B
-B[6] => mux_2x1_1bit:27.B
-B[7] => mux_2x1_1bit:26.B
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18|mux_2x1_1bit:29
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18|mux_2x1_1bit:20
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18|mux_2x1_1bit:28
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18|mux_2x1_1bit:23
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18|mux_2x1_1bit:27
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18|mux_2x1_1bit:24
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18|mux_2x1_1bit:26
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18|mux_2x1_1bit:25
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19
-S[0] <= mux_2x1_1bit:20.S
-S[1] <= mux_2x1_1bit:23.S
-S[2] <= mux_2x1_1bit:24.S
-S[3] <= mux_2x1_1bit:25.S
-S[4] <= mux_2x1_1bit:29.S
-S[5] <= mux_2x1_1bit:28.S
-S[6] <= mux_2x1_1bit:27.S
-S[7] <= mux_2x1_1bit:26.S
-sel => mux_2x1_1bit:29.sel
-sel => mux_2x1_1bit:20.sel
-sel => mux_2x1_1bit:28.sel
-sel => mux_2x1_1bit:23.sel
-sel => mux_2x1_1bit:27.sel
-sel => mux_2x1_1bit:24.sel
-sel => mux_2x1_1bit:26.sel
-sel => mux_2x1_1bit:25.sel
-A[0] => mux_2x1_1bit:20.A
-A[1] => mux_2x1_1bit:23.A
-A[2] => mux_2x1_1bit:24.A
-A[3] => mux_2x1_1bit:25.A
-A[4] => mux_2x1_1bit:29.A
-A[5] => mux_2x1_1bit:28.A
-A[6] => mux_2x1_1bit:27.A
-A[7] => mux_2x1_1bit:26.A
-B[0] => mux_2x1_1bit:20.B
-B[1] => mux_2x1_1bit:23.B
-B[2] => mux_2x1_1bit:24.B
-B[3] => mux_2x1_1bit:25.B
-B[4] => mux_2x1_1bit:29.B
-B[5] => mux_2x1_1bit:28.B
-B[6] => mux_2x1_1bit:27.B
-B[7] => mux_2x1_1bit:26.B
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19|mux_2x1_1bit:29
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19|mux_2x1_1bit:20
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19|mux_2x1_1bit:28
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19|mux_2x1_1bit:23
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19|mux_2x1_1bit:27
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19|mux_2x1_1bit:24
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19|mux_2x1_1bit:26
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19|mux_2x1_1bit:25
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20
-S[0] <= mux_2x1_1bit:20.S
-S[1] <= mux_2x1_1bit:23.S
-S[2] <= mux_2x1_1bit:24.S
-S[3] <= mux_2x1_1bit:25.S
-S[4] <= mux_2x1_1bit:29.S
-S[5] <= mux_2x1_1bit:28.S
-S[6] <= mux_2x1_1bit:27.S
-S[7] <= mux_2x1_1bit:26.S
-sel => mux_2x1_1bit:29.sel
-sel => mux_2x1_1bit:20.sel
-sel => mux_2x1_1bit:28.sel
-sel => mux_2x1_1bit:23.sel
-sel => mux_2x1_1bit:27.sel
-sel => mux_2x1_1bit:24.sel
-sel => mux_2x1_1bit:26.sel
-sel => mux_2x1_1bit:25.sel
-A[0] => mux_2x1_1bit:20.A
-A[1] => mux_2x1_1bit:23.A
-A[2] => mux_2x1_1bit:24.A
-A[3] => mux_2x1_1bit:25.A
-A[4] => mux_2x1_1bit:29.A
-A[5] => mux_2x1_1bit:28.A
-A[6] => mux_2x1_1bit:27.A
-A[7] => mux_2x1_1bit:26.A
-B[0] => mux_2x1_1bit:20.B
-B[1] => mux_2x1_1bit:23.B
-B[2] => mux_2x1_1bit:24.B
-B[3] => mux_2x1_1bit:25.B
-B[4] => mux_2x1_1bit:29.B
-B[5] => mux_2x1_1bit:28.B
-B[6] => mux_2x1_1bit:27.B
-B[7] => mux_2x1_1bit:26.B
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20|mux_2x1_1bit:29
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20|mux_2x1_1bit:20
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20|mux_2x1_1bit:28
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20|mux_2x1_1bit:23
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20|mux_2x1_1bit:27
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20|mux_2x1_1bit:24
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20|mux_2x1_1bit:26
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20|mux_2x1_1bit:25
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21
-S[0] <= mux_2x1_1bit:20.S
-S[1] <= mux_2x1_1bit:23.S
-S[2] <= mux_2x1_1bit:24.S
-S[3] <= mux_2x1_1bit:25.S
-S[4] <= mux_2x1_1bit:29.S
-S[5] <= mux_2x1_1bit:28.S
-S[6] <= mux_2x1_1bit:27.S
-S[7] <= mux_2x1_1bit:26.S
-sel => mux_2x1_1bit:29.sel
-sel => mux_2x1_1bit:20.sel
-sel => mux_2x1_1bit:28.sel
-sel => mux_2x1_1bit:23.sel
-sel => mux_2x1_1bit:27.sel
-sel => mux_2x1_1bit:24.sel
-sel => mux_2x1_1bit:26.sel
-sel => mux_2x1_1bit:25.sel
-A[0] => mux_2x1_1bit:20.A
-A[1] => mux_2x1_1bit:23.A
-A[2] => mux_2x1_1bit:24.A
-A[3] => mux_2x1_1bit:25.A
-A[4] => mux_2x1_1bit:29.A
-A[5] => mux_2x1_1bit:28.A
-A[6] => mux_2x1_1bit:27.A
-A[7] => mux_2x1_1bit:26.A
-B[0] => mux_2x1_1bit:20.B
-B[1] => mux_2x1_1bit:23.B
-B[2] => mux_2x1_1bit:24.B
-B[3] => mux_2x1_1bit:25.B
-B[4] => mux_2x1_1bit:29.B
-B[5] => mux_2x1_1bit:28.B
-B[6] => mux_2x1_1bit:27.B
-B[7] => mux_2x1_1bit:26.B
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21|mux_2x1_1bit:29
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21|mux_2x1_1bit:20
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21|mux_2x1_1bit:28
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21|mux_2x1_1bit:23
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21|mux_2x1_1bit:27
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21|mux_2x1_1bit:24
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21|mux_2x1_1bit:26
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21|mux_2x1_1bit:25
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|signal_ext_32bit:23
-Q[0] <= 150.DB_MAX_OUTPUT_PORT_TYPE
-Q[1] <= 151.DB_MAX_OUTPUT_PORT_TYPE
-Q[2] <= 153.DB_MAX_OUTPUT_PORT_TYPE
-Q[3] <= 156.DB_MAX_OUTPUT_PORT_TYPE
-Q[4] <= 155.DB_MAX_OUTPUT_PORT_TYPE
-Q[5] <= 154.DB_MAX_OUTPUT_PORT_TYPE
-Q[6] <= 162.DB_MAX_OUTPUT_PORT_TYPE
-Q[7] <= 161.DB_MAX_OUTPUT_PORT_TYPE
-Q[8] <= 160.DB_MAX_OUTPUT_PORT_TYPE
-Q[9] <= 159.DB_MAX_OUTPUT_PORT_TYPE
-Q[10] <= 157.DB_MAX_OUTPUT_PORT_TYPE
-Q[11] <= 158.DB_MAX_OUTPUT_PORT_TYPE
-Q[12] <= 166.DB_MAX_OUTPUT_PORT_TYPE
-Q[13] <= 167.DB_MAX_OUTPUT_PORT_TYPE
-Q[14] <= 165.DB_MAX_OUTPUT_PORT_TYPE
-Q[15] <= 164.DB_MAX_OUTPUT_PORT_TYPE
-Q[16] <= 146.DB_MAX_OUTPUT_PORT_TYPE
-Q[17] <= 147.DB_MAX_OUTPUT_PORT_TYPE
-Q[18] <= 148.DB_MAX_OUTPUT_PORT_TYPE
-Q[19] <= 149.DB_MAX_OUTPUT_PORT_TYPE
-Q[20] <= 143.DB_MAX_OUTPUT_PORT_TYPE
-Q[21] <= 142.DB_MAX_OUTPUT_PORT_TYPE
-Q[22] <= 145.DB_MAX_OUTPUT_PORT_TYPE
-Q[23] <= 144.DB_MAX_OUTPUT_PORT_TYPE
-Q[24] <= 138.DB_MAX_OUTPUT_PORT_TYPE
-Q[25] <= 139.DB_MAX_OUTPUT_PORT_TYPE
-Q[26] <= 140.DB_MAX_OUTPUT_PORT_TYPE
-Q[27] <= 141.DB_MAX_OUTPUT_PORT_TYPE
-Q[28] <= 137.DB_MAX_OUTPUT_PORT_TYPE
-Q[29] <= 136.DB_MAX_OUTPUT_PORT_TYPE
-Q[30] <= 135.DB_MAX_OUTPUT_PORT_TYPE
-Q[31] <= 134.DB_MAX_OUTPUT_PORT_TYPE
-D[0] => 150.DATAIN
-D[1] => 151.DATAIN
-D[2] => 153.DATAIN
-D[3] => 156.DATAIN
-D[4] => 155.DATAIN
-D[5] => 154.DATAIN
-D[6] => 162.DATAIN
-D[7] => 161.DATAIN
-D[8] => 160.DATAIN
-D[9] => 159.DATAIN
-D[10] => 157.DATAIN
-D[11] => 158.DATAIN
-D[12] => 166.DATAIN
-D[13] => 167.DATAIN
-D[14] => 165.DATAIN
-D[15] => 134.DATAIN
-D[15] => 136.DATAIN
-D[15] => 135.DATAIN
-D[15] => 141.DATAIN
-D[15] => 137.DATAIN
-D[15] => 139.DATAIN
-D[15] => 140.DATAIN
-D[15] => 144.DATAIN
-D[15] => 138.DATAIN
-D[15] => 142.DATAIN
-D[15] => 145.DATAIN
-D[15] => 149.DATAIN
-D[15] => 143.DATAIN
-D[15] => 147.DATAIN
-D[15] => 148.DATAIN
-D[15] => 146.DATAIN
-D[15] => 164.DATAIN
-
-
 |mips_mono|adder_32bit:18
 Resultado[0] <= full_adder:147.S
 Resultado[1] <= full_adder:148.S
@@ -51128,6 +52173,572 @@ result[28] <= <GND>
 result[29] <= <GND>
 result[30] <= <GND>
 result[31] <= <GND>
+
+
+|mips_mono|mux_2x1_32bit:177
+S[0] <= mux_2x1_8bit:18.S[0]
+S[1] <= mux_2x1_8bit:18.S[1]
+S[2] <= mux_2x1_8bit:18.S[2]
+S[3] <= mux_2x1_8bit:18.S[3]
+S[4] <= mux_2x1_8bit:18.S[4]
+S[5] <= mux_2x1_8bit:18.S[5]
+S[6] <= mux_2x1_8bit:18.S[6]
+S[7] <= mux_2x1_8bit:18.S[7]
+S[8] <= mux_2x1_8bit:19.S[0]
+S[9] <= mux_2x1_8bit:19.S[1]
+S[10] <= mux_2x1_8bit:19.S[2]
+S[11] <= mux_2x1_8bit:19.S[3]
+S[12] <= mux_2x1_8bit:19.S[4]
+S[13] <= mux_2x1_8bit:19.S[5]
+S[14] <= mux_2x1_8bit:19.S[6]
+S[15] <= mux_2x1_8bit:19.S[7]
+S[16] <= mux_2x1_8bit:20.S[0]
+S[17] <= mux_2x1_8bit:20.S[1]
+S[18] <= mux_2x1_8bit:20.S[2]
+S[19] <= mux_2x1_8bit:20.S[3]
+S[20] <= mux_2x1_8bit:20.S[4]
+S[21] <= mux_2x1_8bit:20.S[5]
+S[22] <= mux_2x1_8bit:20.S[6]
+S[23] <= mux_2x1_8bit:20.S[7]
+S[24] <= mux_2x1_8bit:21.S[0]
+S[25] <= mux_2x1_8bit:21.S[1]
+S[26] <= mux_2x1_8bit:21.S[2]
+S[27] <= mux_2x1_8bit:21.S[3]
+S[28] <= mux_2x1_8bit:21.S[4]
+S[29] <= mux_2x1_8bit:21.S[5]
+S[30] <= mux_2x1_8bit:21.S[6]
+S[31] <= mux_2x1_8bit:21.S[7]
+sel => mux_2x1_8bit:18.sel
+sel => mux_2x1_8bit:19.sel
+sel => mux_2x1_8bit:20.sel
+sel => mux_2x1_8bit:21.sel
+A[0] => mux_2x1_8bit:18.A[0]
+A[1] => mux_2x1_8bit:18.A[1]
+A[2] => mux_2x1_8bit:18.A[2]
+A[3] => mux_2x1_8bit:18.A[3]
+A[4] => mux_2x1_8bit:18.A[4]
+A[5] => mux_2x1_8bit:18.A[5]
+A[6] => mux_2x1_8bit:18.A[6]
+A[7] => mux_2x1_8bit:18.A[7]
+A[8] => mux_2x1_8bit:19.A[0]
+A[9] => mux_2x1_8bit:19.A[1]
+A[10] => mux_2x1_8bit:19.A[2]
+A[11] => mux_2x1_8bit:19.A[3]
+A[12] => mux_2x1_8bit:19.A[4]
+A[13] => mux_2x1_8bit:19.A[5]
+A[14] => mux_2x1_8bit:19.A[6]
+A[15] => mux_2x1_8bit:19.A[7]
+A[16] => mux_2x1_8bit:20.A[0]
+A[17] => mux_2x1_8bit:20.A[1]
+A[18] => mux_2x1_8bit:20.A[2]
+A[19] => mux_2x1_8bit:20.A[3]
+A[20] => mux_2x1_8bit:20.A[4]
+A[21] => mux_2x1_8bit:20.A[5]
+A[22] => mux_2x1_8bit:20.A[6]
+A[23] => mux_2x1_8bit:20.A[7]
+A[24] => mux_2x1_8bit:21.A[0]
+A[25] => mux_2x1_8bit:21.A[1]
+A[26] => mux_2x1_8bit:21.A[2]
+A[27] => mux_2x1_8bit:21.A[3]
+A[28] => mux_2x1_8bit:21.A[4]
+A[29] => mux_2x1_8bit:21.A[5]
+A[30] => mux_2x1_8bit:21.A[6]
+A[31] => mux_2x1_8bit:21.A[7]
+B[0] => mux_2x1_8bit:18.B[0]
+B[1] => mux_2x1_8bit:18.B[1]
+B[2] => mux_2x1_8bit:18.B[2]
+B[3] => mux_2x1_8bit:18.B[3]
+B[4] => mux_2x1_8bit:18.B[4]
+B[5] => mux_2x1_8bit:18.B[5]
+B[6] => mux_2x1_8bit:18.B[6]
+B[7] => mux_2x1_8bit:18.B[7]
+B[8] => mux_2x1_8bit:19.B[0]
+B[9] => mux_2x1_8bit:19.B[1]
+B[10] => mux_2x1_8bit:19.B[2]
+B[11] => mux_2x1_8bit:19.B[3]
+B[12] => mux_2x1_8bit:19.B[4]
+B[13] => mux_2x1_8bit:19.B[5]
+B[14] => mux_2x1_8bit:19.B[6]
+B[15] => mux_2x1_8bit:19.B[7]
+B[16] => mux_2x1_8bit:20.B[0]
+B[17] => mux_2x1_8bit:20.B[1]
+B[18] => mux_2x1_8bit:20.B[2]
+B[19] => mux_2x1_8bit:20.B[3]
+B[20] => mux_2x1_8bit:20.B[4]
+B[21] => mux_2x1_8bit:20.B[5]
+B[22] => mux_2x1_8bit:20.B[6]
+B[23] => mux_2x1_8bit:20.B[7]
+B[24] => mux_2x1_8bit:21.B[0]
+B[25] => mux_2x1_8bit:21.B[1]
+B[26] => mux_2x1_8bit:21.B[2]
+B[27] => mux_2x1_8bit:21.B[3]
+B[28] => mux_2x1_8bit:21.B[4]
+B[29] => mux_2x1_8bit:21.B[5]
+B[30] => mux_2x1_8bit:21.B[6]
+B[31] => mux_2x1_8bit:21.B[7]
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18
+S[0] <= mux_2x1_1bit:20.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:29.S
+S[5] <= mux_2x1_1bit:28.S
+S[6] <= mux_2x1_1bit:27.S
+S[7] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:29.sel
+sel => mux_2x1_1bit:20.sel
+sel => mux_2x1_1bit:28.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:27.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:26.sel
+sel => mux_2x1_1bit:25.sel
+A[0] => mux_2x1_1bit:20.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:29.A
+A[5] => mux_2x1_1bit:28.A
+A[6] => mux_2x1_1bit:27.A
+A[7] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:20.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:29.B
+B[5] => mux_2x1_1bit:28.B
+B[6] => mux_2x1_1bit:27.B
+B[7] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18|mux_2x1_1bit:29
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18|mux_2x1_1bit:20
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18|mux_2x1_1bit:28
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18|mux_2x1_1bit:27
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:18|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19
+S[0] <= mux_2x1_1bit:20.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:29.S
+S[5] <= mux_2x1_1bit:28.S
+S[6] <= mux_2x1_1bit:27.S
+S[7] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:29.sel
+sel => mux_2x1_1bit:20.sel
+sel => mux_2x1_1bit:28.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:27.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:26.sel
+sel => mux_2x1_1bit:25.sel
+A[0] => mux_2x1_1bit:20.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:29.A
+A[5] => mux_2x1_1bit:28.A
+A[6] => mux_2x1_1bit:27.A
+A[7] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:20.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:29.B
+B[5] => mux_2x1_1bit:28.B
+B[6] => mux_2x1_1bit:27.B
+B[7] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19|mux_2x1_1bit:29
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19|mux_2x1_1bit:20
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19|mux_2x1_1bit:28
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19|mux_2x1_1bit:27
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:19|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20
+S[0] <= mux_2x1_1bit:20.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:29.S
+S[5] <= mux_2x1_1bit:28.S
+S[6] <= mux_2x1_1bit:27.S
+S[7] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:29.sel
+sel => mux_2x1_1bit:20.sel
+sel => mux_2x1_1bit:28.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:27.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:26.sel
+sel => mux_2x1_1bit:25.sel
+A[0] => mux_2x1_1bit:20.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:29.A
+A[5] => mux_2x1_1bit:28.A
+A[6] => mux_2x1_1bit:27.A
+A[7] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:20.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:29.B
+B[5] => mux_2x1_1bit:28.B
+B[6] => mux_2x1_1bit:27.B
+B[7] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20|mux_2x1_1bit:29
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20|mux_2x1_1bit:20
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20|mux_2x1_1bit:28
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20|mux_2x1_1bit:27
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:20|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21
+S[0] <= mux_2x1_1bit:20.S
+S[1] <= mux_2x1_1bit:23.S
+S[2] <= mux_2x1_1bit:24.S
+S[3] <= mux_2x1_1bit:25.S
+S[4] <= mux_2x1_1bit:29.S
+S[5] <= mux_2x1_1bit:28.S
+S[6] <= mux_2x1_1bit:27.S
+S[7] <= mux_2x1_1bit:26.S
+sel => mux_2x1_1bit:29.sel
+sel => mux_2x1_1bit:20.sel
+sel => mux_2x1_1bit:28.sel
+sel => mux_2x1_1bit:23.sel
+sel => mux_2x1_1bit:27.sel
+sel => mux_2x1_1bit:24.sel
+sel => mux_2x1_1bit:26.sel
+sel => mux_2x1_1bit:25.sel
+A[0] => mux_2x1_1bit:20.A
+A[1] => mux_2x1_1bit:23.A
+A[2] => mux_2x1_1bit:24.A
+A[3] => mux_2x1_1bit:25.A
+A[4] => mux_2x1_1bit:29.A
+A[5] => mux_2x1_1bit:28.A
+A[6] => mux_2x1_1bit:27.A
+A[7] => mux_2x1_1bit:26.A
+B[0] => mux_2x1_1bit:20.B
+B[1] => mux_2x1_1bit:23.B
+B[2] => mux_2x1_1bit:24.B
+B[3] => mux_2x1_1bit:25.B
+B[4] => mux_2x1_1bit:29.B
+B[5] => mux_2x1_1bit:28.B
+B[6] => mux_2x1_1bit:27.B
+B[7] => mux_2x1_1bit:26.B
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21|mux_2x1_1bit:29
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21|mux_2x1_1bit:20
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21|mux_2x1_1bit:28
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21|mux_2x1_1bit:23
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21|mux_2x1_1bit:27
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21|mux_2x1_1bit:24
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21|mux_2x1_1bit:26
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|mux_2x1_32bit:177|mux_2x1_8bit:21|mux_2x1_1bit:25
+S <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+sel => 20.IN0
+sel => 18.IN0
+B => 18.IN1
+
+
+|mips_mono|signal_ext_32bit:23
+Q[0] <= 150.DB_MAX_OUTPUT_PORT_TYPE
+Q[1] <= 151.DB_MAX_OUTPUT_PORT_TYPE
+Q[2] <= 153.DB_MAX_OUTPUT_PORT_TYPE
+Q[3] <= 156.DB_MAX_OUTPUT_PORT_TYPE
+Q[4] <= 155.DB_MAX_OUTPUT_PORT_TYPE
+Q[5] <= 154.DB_MAX_OUTPUT_PORT_TYPE
+Q[6] <= 162.DB_MAX_OUTPUT_PORT_TYPE
+Q[7] <= 161.DB_MAX_OUTPUT_PORT_TYPE
+Q[8] <= 160.DB_MAX_OUTPUT_PORT_TYPE
+Q[9] <= 159.DB_MAX_OUTPUT_PORT_TYPE
+Q[10] <= 157.DB_MAX_OUTPUT_PORT_TYPE
+Q[11] <= 158.DB_MAX_OUTPUT_PORT_TYPE
+Q[12] <= 166.DB_MAX_OUTPUT_PORT_TYPE
+Q[13] <= 167.DB_MAX_OUTPUT_PORT_TYPE
+Q[14] <= 165.DB_MAX_OUTPUT_PORT_TYPE
+Q[15] <= 164.DB_MAX_OUTPUT_PORT_TYPE
+Q[16] <= 146.DB_MAX_OUTPUT_PORT_TYPE
+Q[17] <= 147.DB_MAX_OUTPUT_PORT_TYPE
+Q[18] <= 148.DB_MAX_OUTPUT_PORT_TYPE
+Q[19] <= 149.DB_MAX_OUTPUT_PORT_TYPE
+Q[20] <= 143.DB_MAX_OUTPUT_PORT_TYPE
+Q[21] <= 142.DB_MAX_OUTPUT_PORT_TYPE
+Q[22] <= 145.DB_MAX_OUTPUT_PORT_TYPE
+Q[23] <= 144.DB_MAX_OUTPUT_PORT_TYPE
+Q[24] <= 138.DB_MAX_OUTPUT_PORT_TYPE
+Q[25] <= 139.DB_MAX_OUTPUT_PORT_TYPE
+Q[26] <= 140.DB_MAX_OUTPUT_PORT_TYPE
+Q[27] <= 141.DB_MAX_OUTPUT_PORT_TYPE
+Q[28] <= 137.DB_MAX_OUTPUT_PORT_TYPE
+Q[29] <= 136.DB_MAX_OUTPUT_PORT_TYPE
+Q[30] <= 135.DB_MAX_OUTPUT_PORT_TYPE
+Q[31] <= 134.DB_MAX_OUTPUT_PORT_TYPE
+D[0] => 150.DATAIN
+D[1] => 151.DATAIN
+D[2] => 153.DATAIN
+D[3] => 156.DATAIN
+D[4] => 155.DATAIN
+D[5] => 154.DATAIN
+D[6] => 162.DATAIN
+D[7] => 161.DATAIN
+D[8] => 160.DATAIN
+D[9] => 159.DATAIN
+D[10] => 157.DATAIN
+D[11] => 158.DATAIN
+D[12] => 166.DATAIN
+D[13] => 167.DATAIN
+D[14] => 165.DATAIN
+D[15] => 134.DATAIN
+D[15] => 136.DATAIN
+D[15] => 135.DATAIN
+D[15] => 141.DATAIN
+D[15] => 137.DATAIN
+D[15] => 139.DATAIN
+D[15] => 140.DATAIN
+D[15] => 144.DATAIN
+D[15] => 138.DATAIN
+D[15] => 142.DATAIN
+D[15] => 145.DATAIN
+D[15] => 149.DATAIN
+D[15] => 143.DATAIN
+D[15] => 147.DATAIN
+D[15] => 148.DATAIN
+D[15] => 146.DATAIN
+D[15] => 164.DATAIN
 
 
 |mips_mono|adder_32bit:27

@@ -83,7 +83,7 @@ applicable agreement for further details.
 		(pt 160 56)
 		(output)
 		(text "result[31..0]" (rect 0 0 67 14)(font "Arial" (font_size 8)))
-		(text "result[31..0]" (rect 100 43 156 57)(font "Arial" (font_size 8)))
+		(text "result[31..0]" (rect 100 43 167 57)(font "Arial" (font_size 8)))
 		(line (pt 160 56)(pt 96 56)(line_width 3))
 	)
 	(drawing

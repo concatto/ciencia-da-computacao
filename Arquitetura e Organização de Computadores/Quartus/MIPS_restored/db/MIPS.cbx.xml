@@ -3,7 +3,8 @@
 	<PROJECT NAME="MIPS">
 		<CBX_INST_ENTRY INSTANCE_NAME="|mips_mono|data_memory:DataMemory|ram:MemoriaRAM|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_kje1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|mips_mono|instruction_memory:InstructionMemory|lpm_add_sub0:inst|lpm_add_sub:lpm_add_sub_component" CBX_FILE_NAME="add_sub_eqh.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|mips_mono|instruction_memory:InstructionMemory|rom:MemoriaRom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_vg91.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|mips_mono|instruction_memory:InstructionMemory|rom:MemoriaRom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_hu91.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|mips_mono|lpm_constant:49" CBX_FILE_NAME="lpm_constant_7a4.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|mips_mono|bank_reg_32x32bit:BancoRegistradores|reg_pp_32bit_null:nulo|lpm_constant:129" CBX_FILE_NAME="lpm_constant_0j4.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|mips_mono|data_memory:DataMemory|lpm_add_sub1:inst|lpm_add_sub:lpm_add_sub_component" CBX_FILE_NAME="add_sub_eqh.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|mips_mono|lpm_constant:48" CBX_FILE_NAME="lpm_constant_5j4.tdf"/>
