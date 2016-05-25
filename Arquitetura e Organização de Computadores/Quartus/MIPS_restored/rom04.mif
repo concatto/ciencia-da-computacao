@@ -1,0 +1,27 @@
+DEPTH = 256;	% Number of positions	%
+WIDTH = 32;	% Position size  	%
+
+ADDRESS_RADIX = HEX;
+DATA_RADIX    = HEX;
+
+CONTENT
+  BEGIN
+% The following addresses considers an offset that equals 0x04000020. In other
+  words, the first position (0x00000000) points to 0x04000020, an so on. %
+	00000000 : 20100001;  % addi $s0, $zero, 1  %
+	00000001 : 22100002;  % addi $s0, $s0, 2    %
+	00000002 : 08100009;  % j    loop           %
+	[00000003..0000000F] : 00000000;
+END ;	
+
+
+%------------------------------------------------------------------------------%
+% Original assembly source code:
+      .text   
+main: 
+      addi $s0, $zero, 1
+loop: addi $s0, $s0, 2
+      j    loop
+%
+
+	

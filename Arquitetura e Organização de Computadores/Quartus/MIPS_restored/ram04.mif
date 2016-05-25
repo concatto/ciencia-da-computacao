@@ -1,0 +1,12 @@
+DEPTH = 256;	% Number of positions	%
+WIDTH = 32;	% Position size  	%
+
+ADDRESS_RADIX = HEX;
+DATA_RADIX    = HEX;
+
+CONTENT
+   BEGIN
+        [00000000..000000F]	:	00000000;	
+   END ;	
+
+	
