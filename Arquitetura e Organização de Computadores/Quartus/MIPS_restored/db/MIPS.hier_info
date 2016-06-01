@@ -66,16 +66,16 @@ PC[29] <= program_counter:ProgramCounter.PC[29]
 PC[30] <= program_counter:ProgramCounter.PC[30]
 PC[31] <= program_counter:ProgramCounter.PC[31]
 reset => inst.IN0
-JumpReg <= control:inst2.JumpReg
+JumpReg <= alu_operation:135.JumpReg
+RegDst <= control:inst2.RegDst
+ALUOp[0] <= control:inst2.ALUOp0
+ALUOp[1] <= control:inst2.ALUOp1
 Jump <= control:inst2.Jump
 Operation[0] <= alu_operation:135.Operation[0]
 Operation[1] <= alu_operation:135.Operation[1]
 Operation[2] <= alu_operation:135.Operation[2]
-ALUOp[0] <= control:inst2.ALUOp0
-ALUOp[1] <= control:inst2.ALUOp1
 RegWrite <= control:inst2.RegWrite
 Link <= control:inst2.Link
-RegDst <= control:inst2.RegDst
 MemToReg <= control:inst2.MemToReg
 MemWrite <= control:inst2.MemWrite
 ALUSrc <= control:inst2.ALUSrc
@@ -186,6 +186,38 @@ shamt[7] <= instruction_memory:InstructionMemory.instruction[7]
 shamt[8] <= instruction_memory:InstructionMemory.instruction[8]
 shamt[9] <= instruction_memory:InstructionMemory.instruction[9]
 shamt[10] <= instruction_memory:InstructionMemory.instruction[10]
+WB_Data[0] <= mux_2x1_32bit:39.S[0]
+WB_Data[1] <= mux_2x1_32bit:39.S[1]
+WB_Data[2] <= mux_2x1_32bit:39.S[2]
+WB_Data[3] <= mux_2x1_32bit:39.S[3]
+WB_Data[4] <= mux_2x1_32bit:39.S[4]
+WB_Data[5] <= mux_2x1_32bit:39.S[5]
+WB_Data[6] <= mux_2x1_32bit:39.S[6]
+WB_Data[7] <= mux_2x1_32bit:39.S[7]
+WB_Data[8] <= mux_2x1_32bit:39.S[8]
+WB_Data[9] <= mux_2x1_32bit:39.S[9]
+WB_Data[10] <= mux_2x1_32bit:39.S[10]
+WB_Data[11] <= mux_2x1_32bit:39.S[11]
+WB_Data[12] <= mux_2x1_32bit:39.S[12]
+WB_Data[13] <= mux_2x1_32bit:39.S[13]
+WB_Data[14] <= mux_2x1_32bit:39.S[14]
+WB_Data[15] <= mux_2x1_32bit:39.S[15]
+WB_Data[16] <= mux_2x1_32bit:39.S[16]
+WB_Data[17] <= mux_2x1_32bit:39.S[17]
+WB_Data[18] <= mux_2x1_32bit:39.S[18]
+WB_Data[19] <= mux_2x1_32bit:39.S[19]
+WB_Data[20] <= mux_2x1_32bit:39.S[20]
+WB_Data[21] <= mux_2x1_32bit:39.S[21]
+WB_Data[22] <= mux_2x1_32bit:39.S[22]
+WB_Data[23] <= mux_2x1_32bit:39.S[23]
+WB_Data[24] <= mux_2x1_32bit:39.S[24]
+WB_Data[25] <= mux_2x1_32bit:39.S[25]
+WB_Data[26] <= mux_2x1_32bit:39.S[26]
+WB_Data[27] <= mux_2x1_32bit:39.S[27]
+WB_Data[28] <= mux_2x1_32bit:39.S[28]
+WB_Data[29] <= mux_2x1_32bit:39.S[29]
+WB_Data[30] <= mux_2x1_32bit:39.S[30]
+WB_Data[31] <= mux_2x1_32bit:39.S[31]
 
 
 |mips_mono|control:inst2
@@ -217,13 +249,6 @@ clk => 111.IN0
 MemWrite <= 116.DB_MAX_OUTPUT_PORT_TYPE
 Jump <= inst4.DB_MAX_OUTPUT_PORT_TYPE
 Link <= inst6.DB_MAX_OUTPUT_PORT_TYPE
-JumpReg <= inst11.DB_MAX_OUTPUT_PORT_TYPE
-Funct[0] => inst9.IN0
-Funct[1] => inst7.IN0
-Funct[2] => inst3.IN0
-Funct[3] => inst10.IN0
-Funct[4] => inst1.IN0
-Funct[5] => inst8.IN0
 
 
 |mips_mono|DivisorFrequencia:inst4
@@ -1878,6 +1903,28 @@ A => 6.IN0
 sel => 20.IN0
 sel => 18.IN0
 B => 18.IN1
+
+
+|mips_mono|alu_operation:135
+JumpReg <= inst.DB_MAX_OUTPUT_PORT_TYPE
+F[0] => inst9.IN0
+F[0] => 76.IN1
+F[1] => inst7.IN0
+F[1] => 74.IN1
+F[2] => inst3.IN0
+F[2] => 75.IN1
+F[3] => inst10.IN0
+F[3] => 76.IN0
+F[4] => inst1.IN0
+F[5] => inst8.IN0
+Rformat => inst.IN1
+Operation[0] <= 77.DB_MAX_OUTPUT_PORT_TYPE
+Operation[1] <= 75.DB_MAX_OUTPUT_PORT_TYPE
+Operation[2] <= 73.DB_MAX_OUTPUT_PORT_TYPE
+ALUOp[0] => 73.IN0
+ALUOp[1] => 74.IN0
+ALUOp[1] => 75.IN0
+ALUOp[1] => 77.IN0
 
 
 |mips_mono|mux_2x1_32bit:37
@@ -5157,22 +5204,6 @@ A => 6.IN0
 sel => 20.IN0
 sel => 18.IN0
 B => 18.IN1
-
-
-|mips_mono|alu_operation:135
-Operation[0] <= 77.DB_MAX_OUTPUT_PORT_TYPE
-Operation[1] <= 75.DB_MAX_OUTPUT_PORT_TYPE
-Operation[2] <= 73.DB_MAX_OUTPUT_PORT_TYPE
-ALUOp[0] => 73.IN0
-ALUOp[1] => 74.IN0
-ALUOp[1] => 75.IN0
-ALUOp[1] => 77.IN0
-F[0] => 76.IN1
-F[1] => 74.IN1
-F[2] => 75.IN1
-F[3] => 76.IN0
-F[4] => ~NO_FANOUT~
-F[5] => ~NO_FANOUT~
 
 
 |mips_mono|bank_reg_32x32bit:BancoRegistradores
@@ -49429,77 +49460,6 @@ sel => 18.IN0
 B => 18.IN1
 
 
-|mips_mono|mux_2x1_5bit:52
-S[0] <= mux_2x1_1bit:22.S
-S[1] <= mux_2x1_1bit:23.S
-S[2] <= mux_2x1_1bit:24.S
-S[3] <= mux_2x1_1bit:25.S
-S[4] <= mux_2x1_1bit:26.S
-sel => mux_2x1_1bit:22.sel
-sel => mux_2x1_1bit:23.sel
-sel => mux_2x1_1bit:24.sel
-sel => mux_2x1_1bit:25.sel
-sel => mux_2x1_1bit:26.sel
-A[0] => mux_2x1_1bit:22.A
-A[1] => mux_2x1_1bit:23.A
-A[2] => mux_2x1_1bit:24.A
-A[3] => mux_2x1_1bit:25.A
-A[4] => mux_2x1_1bit:26.A
-B[0] => mux_2x1_1bit:22.B
-B[1] => mux_2x1_1bit:23.B
-B[2] => mux_2x1_1bit:24.B
-B[3] => mux_2x1_1bit:25.B
-B[4] => mux_2x1_1bit:26.B
-
-
-|mips_mono|mux_2x1_5bit:52|mux_2x1_1bit:22
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_5bit:52|mux_2x1_1bit:23
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_5bit:52|mux_2x1_1bit:24
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_5bit:52|mux_2x1_1bit:25
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|mux_2x1_5bit:52|mux_2x1_1bit:26
-S <= 5.DB_MAX_OUTPUT_PORT_TYPE
-A => 6.IN0
-sel => 20.IN0
-sel => 18.IN0
-B => 18.IN1
-
-
-|mips_mono|lpm_constant:49
-result[0] <= <VCC>
-result[1] <= <VCC>
-result[2] <= <VCC>
-result[3] <= <VCC>
-result[4] <= <VCC>
-
-
 |mips_mono|mux_2x1_5bit:51
 S[0] <= mux_2x1_1bit:22.S
 S[1] <= mux_2x1_1bit:23.S
@@ -49624,6 +49584,14 @@ A => 6.IN0
 sel => 20.IN0
 sel => 18.IN0
 B => 18.IN1
+
+
+|mips_mono|lpm_constant:49
+result[0] <= <VCC>
+result[1] <= <VCC>
+result[2] <= <VCC>
+result[3] <= <VCC>
+result[4] <= <VCC>
 
 
 |mips_mono|mux_2x1_32bit:39

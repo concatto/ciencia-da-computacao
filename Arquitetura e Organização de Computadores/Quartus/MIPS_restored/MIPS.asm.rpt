@@ -1,6 +1,6 @@
 Assembler report for MIPS
-Wed May 25 02:09:38 2016
-Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+Tue May 31 21:54:45 2016
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
 ---------------------
@@ -10,8 +10,8 @@ Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/Users/Fernando/ciencia-da-computacao/Arquitetura e Organização de Computadores/Quartus/MIPS_restored/MIPS.sof
-  6. Assembler Device Options: C:/Users/Fernando/ciencia-da-computacao/Arquitetura e Organização de Computadores/Quartus/MIPS_restored/MIPS.pof
+  5. Assembler Device Options: C:/Users/5928036/ciencia-da-computacao/Arquitetura e Organização de Computadores/Quartus/MIPS_restored/MIPS.sof
+  6. Assembler Device Options: C:/Users/5928036/ciencia-da-computacao/Arquitetura e Organização de Computadores/Quartus/MIPS_restored/MIPS.pof
   7. Assembler Messages
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Wed May 25 02:09:38 2016 ;
+; Assembler Status      ; Successful - Tue May 31 21:54:45 2016 ;
 ; Revision Name         ; MIPS                                  ;
 ; Top-level Entity Name ; mips_mono                             ;
 ; Family                ; Cyclone II                            ;
@@ -78,53 +78,53 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+------------------------------------------------------------------------------------------------------------------+
-; Assembler Generated Files                                                                                        ;
-+------------------------------------------------------------------------------------------------------------------+
-; File Name                                                                                                        ;
-+------------------------------------------------------------------------------------------------------------------+
-; C:/Users/Fernando/ciencia-da-computacao/Arquitetura e Organização de Computadores/Quartus/MIPS_restored/MIPS.sof ;
-; C:/Users/Fernando/ciencia-da-computacao/Arquitetura e Organização de Computadores/Quartus/MIPS_restored/MIPS.pof ;
-+------------------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------+
+; Assembler Generated Files                                                                                       ;
++-----------------------------------------------------------------------------------------------------------------+
+; File Name                                                                                                       ;
++-----------------------------------------------------------------------------------------------------------------+
+; C:/Users/5928036/ciencia-da-computacao/Arquitetura e Organização de Computadores/Quartus/MIPS_restored/MIPS.sof ;
+; C:/Users/5928036/ciencia-da-computacao/Arquitetura e Organização de Computadores/Quartus/MIPS_restored/MIPS.pof ;
++-----------------------------------------------------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/Users/Fernando/ciencia-da-computacao/Arquitetura e Organização de Computadores/Quartus/MIPS_restored/MIPS.sof ;
-+----------------+---------------------------------------------------------------------------------------------------------------------------+
-; Option         ; Setting                                                                                                                   ;
-+----------------+---------------------------------------------------------------------------------------------------------------------------+
-; Device         ; EP2C35F672C6                                                                                                              ;
-; JTAG usercode  ; 0xFFFFFFFF                                                                                                                ;
-; Checksum       ; 0x004FEBFB                                                                                                                ;
-+----------------+---------------------------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/5928036/ciencia-da-computacao/Arquitetura e Organização de Computadores/Quartus/MIPS_restored/MIPS.sof ;
++----------------+--------------------------------------------------------------------------------------------------------------------------+
+; Option         ; Setting                                                                                                                  ;
++----------------+--------------------------------------------------------------------------------------------------------------------------+
+; Device         ; EP2C35F672C6                                                                                                             ;
+; JTAG usercode  ; 0xFFFFFFFF                                                                                                               ;
+; Checksum       ; 0x004F4E52                                                                                                               ;
++----------------+--------------------------------------------------------------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/Users/Fernando/ciencia-da-computacao/Arquitetura e Organização de Computadores/Quartus/MIPS_restored/MIPS.pof ;
-+--------------------+-----------------------------------------------------------------------------------------------------------------------+
-; Option             ; Setting                                                                                                               ;
-+--------------------+-----------------------------------------------------------------------------------------------------------------------+
-; Device             ; EPCS16                                                                                                                ;
-; JTAG usercode      ; 0x00000000                                                                                                            ;
-; Checksum           ; 0x1C417FC0                                                                                                            ;
-; Compression Ratio  ; 3                                                                                                                     ;
-+--------------------+-----------------------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/5928036/ciencia-da-computacao/Arquitetura e Organização de Computadores/Quartus/MIPS_restored/MIPS.pof ;
++--------------------+----------------------------------------------------------------------------------------------------------------------+
+; Option             ; Setting                                                                                                              ;
++--------------------+----------------------------------------------------------------------------------------------------------------------+
+; Device             ; EPCS16                                                                                                               ;
+; JTAG usercode      ; 0x00000000                                                                                                           ;
+; Checksum           ; 0x1C48B7BE                                                                                                           ;
+; Compression Ratio  ; 3                                                                                                                    ;
++--------------------+----------------------------------------------------------------------------------------------------------------------+
 
 
 +--------------------+
 ; Assembler Messages ;
 +--------------------+
 Info: *******************************************************************
-Info: Running Quartus II 32-bit Assembler
+Info: Running Quartus II 64-Bit Assembler
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Wed May 25 02:09:35 2016
+    Info: Processing started: Tue May 31 21:54:43 2016
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off MIPS -c MIPS
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
-Info: Quartus II 32-bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 397 megabytes
-    Info: Processing ended: Wed May 25 02:09:38 2016
-    Info: Elapsed time: 00:00:03
-    Info: Total CPU time (on all processors): 00:00:03
+Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 431 megabytes
+    Info: Processing ended: Tue May 31 21:54:45 2016
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:02
 
 

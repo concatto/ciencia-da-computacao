@@ -1,6 +1,6 @@
 Flow report for MIPS
-Wed May 25 02:09:48 2016
-Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+Tue May 31 21:54:51 2016
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
 ---------------------
@@ -40,18 +40,18 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Wed May 25 02:09:48 2016           ;
-; Quartus II 32-bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
+; Flow Status                        ; Successful - Tue May 31 21:54:51 2016           ;
+; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; MIPS                                            ;
 ; Top-level Entity Name              ; mips_mono                                       ;
 ; Family                             ; Cyclone II                                      ;
 ; Device                             ; EP2C35F672C6                                    ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 2,528 / 33,216 ( 8 % )                          ;
-;     Total combinational functions  ; 2,074 / 33,216 ( 6 % )                          ;
+; Total logic elements               ; 2,478 / 33,216 ( 7 % )                          ;
+;     Total combinational functions  ; 2,065 / 33,216 ( 6 % )                          ;
 ;     Dedicated logic registers      ; 1,027 / 33,216 ( 3 % )                          ;
 ; Total registers                    ; 1027                                            ;
-; Total pins                         ; 187 / 475 ( 39 % )                              ;
+; Total pins                         ; 219 / 475 ( 46 % )                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 16,384 / 483,840 ( 3 % )                        ;
 ; Embedded Multiplier 9-bit elements ; 0 / 70 ( 0 % )                                  ;
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 05/25/2016 02:08:14 ;
+; Start date & time ; 05/31/2016 21:53:56 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; MIPS                ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 +-------------------------------------+---------------------------------+---------------+-------------+----------------+
 ; Assignment Name                     ; Value                           ; Default Value ; Entity Name ; Section Id     ;
 +-------------------------------------+---------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 207120305348136.146415289406856 ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 128454786847823.146474243507044 ; --            ; --          ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT              ; Vhdl                            ; --            ; --          ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (VHDL)          ; <None>        ; --          ; --             ;
 ; IP_TOOL_NAME                        ; LPM_ADD_SUB                     ; --            ; --          ; --             ;
@@ -114,12 +114,12 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:24     ; 1.0                     ; 453 MB              ; 00:00:21                           ;
-; Fitter                    ; 00:00:47     ; 1.0                     ; 583 MB              ; 00:00:41                           ;
-; Assembler                 ; 00:00:03     ; 1.0                     ; 396 MB              ; 00:00:03                           ;
-; TimeQuest Timing Analyzer ; 00:00:04     ; 1.0                     ; 390 MB              ; 00:00:03                           ;
-; EDA Netlist Writer        ; 00:00:03     ; 1.0                     ; 370 MB              ; 00:00:03                           ;
-; Total                     ; 00:01:21     ; --                      ; --                  ; 00:01:11                           ;
+; Analysis & Synthesis      ; 00:00:16     ; 1.0                     ; 564 MB              ; 00:00:14                           ;
+; Fitter                    ; 00:00:26     ; 1.0                     ; 700 MB              ; 00:00:26                           ;
+; Assembler                 ; 00:00:02     ; 1.0                     ; 431 MB              ; 00:00:02                           ;
+; TimeQuest Timing Analyzer ; 00:00:02     ; 1.0                     ; 460 MB              ; 00:00:02                           ;
+; EDA Netlist Writer        ; 00:00:02     ; 1.0                     ; 431 MB              ; 00:00:02                           ;
+; Total                     ; 00:00:48     ; --                      ; --                  ; 00:00:46                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -128,11 +128,11 @@ applicable agreement for further details.
 +---------------------------+------------------+-----------+------------+----------------+
 ; Module Name               ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
 +---------------------------+------------------+-----------+------------+----------------+
-; Analysis & Synthesis      ; HQ               ; Windows 7 ; 6.2        ; x86_64         ;
-; Fitter                    ; HQ               ; Windows 7 ; 6.2        ; x86_64         ;
-; Assembler                 ; HQ               ; Windows 7 ; 6.2        ; x86_64         ;
-; TimeQuest Timing Analyzer ; HQ               ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer        ; HQ               ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; U705628          ; Windows 7 ; 6.1        ; x86_64         ;
+; Fitter                    ; U705628          ; Windows 7 ; 6.1        ; x86_64         ;
+; Assembler                 ; U705628          ; Windows 7 ; 6.1        ; x86_64         ;
+; TimeQuest Timing Analyzer ; U705628          ; Windows 7 ; 6.1        ; x86_64         ;
+; EDA Netlist Writer        ; U705628          ; Windows 7 ; 6.1        ; x86_64         ;
 +---------------------------+------------------+-----------+------------+----------------+
 
 
