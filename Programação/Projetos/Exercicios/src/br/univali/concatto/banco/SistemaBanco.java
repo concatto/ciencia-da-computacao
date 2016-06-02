@@ -6,7 +6,7 @@ import br.univali.concatto.Sistema;
 public class SistemaBanco extends Sistema {
 	private Banco banco = new Banco();
 
-	public SistemaBanco() {		
+	public SistemaBanco() {
 		super("Boas vindas ao banco!", new String[] {
 			"Criar conta",
 			"Remover conta",
@@ -98,7 +98,7 @@ public class SistemaBanco extends Sistema {
 		if (banco.excluirConta(conta)) {
 			System.out.println("Conta " + conta + " removida com sucesso.");
 		} else {
-			System.out.println("Falha na remoúúo da conta.");
+			System.out.println("Falha na remoção da conta.");
 		}
 	}
 
