@@ -90,6 +90,19 @@ public:
     int getSize() const {
         return size;
     }
+
+    void changeKey(int index, K newKey) {
+        data[index].key = newKey;
+        if (index > 0 && newKey < data[parent(index)].key) {
+            heapifyUp(index);
+        } else {
+            heapifyDown(index);
+        }
+    }
+
+    const Node* getData() const {
+        return data;
+    }
 };
 
 #endif

@@ -4,8 +4,14 @@
 int main() {
     BinaryHeap<int, int> heap(10, {4, 10, 3, 5, 2, 1, 9});
 
-    while (heap.getSize() > 0) {
-        std::cout << heap.getMinimum().key << "\n";
-        heap.removeMinimum();
+    for (int i = 0; i < heap.getSize(); i++) {
+        std::cout << heap.getData()[i].key << " ";
+    }
+
+    std::cout << "\n";
+    heap.changeKey(2, 0);
+
+    for (int i = 0; i < heap.getSize(); i++) {
+        std::cout << heap.getData()[i].key << " ";
     }
 }
