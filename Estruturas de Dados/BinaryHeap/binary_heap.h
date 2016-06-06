@@ -36,8 +36,8 @@ private:
         int j = leftChild(index);
         if (j > size) return;
 
-        //If the right child has the lower key
-        if (j < size && (data[j].key > data[j + 1].key)) {
+        //If the right child exists and has the lower key
+        if ((j + 1) < size && (data[j].key > data[j + 1].key)) {
             j++;
         }
 
