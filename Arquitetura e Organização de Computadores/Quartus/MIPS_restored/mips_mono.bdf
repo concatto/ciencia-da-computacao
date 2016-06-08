@@ -424,7 +424,7 @@ applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 1472 800 1648 816)
+	(rect 1496 800 1672 816)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "WB_Data[31..0]" (rect 90 0 169 12)(font "Arial" ))
 	(pt 0 8)
@@ -1151,7 +1151,7 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 968 768 1080 816)
+	(rect 968 760 1080 808)
 	(text "LPM_CONSTANT" (rect 4 0 125 16)(font "Arial" (font_size 10)))
 	(text "49" (rect 3 37 14 49)(font "Arial" ))
 	(port
@@ -1179,7 +1179,7 @@ applicable agreement for further details.
 		(line (pt 64 40)(pt 64 24))
 		(line (pt 16 40)(pt 16 24))
 	)
-	(annotation_block (parameter)(rect 968 832 1112 874))
+	(annotation_block (parameter)(rect 968 824 1112 866))
 )
 (symbol
 	(rect 1264 680 1424 760)
@@ -2025,11 +2025,6 @@ applicable agreement for further details.
 	(pt 768 208)
 )
 (connector
-	(pt 1472 648)
-	(pt 1480 648)
-	(bus)
-)
-(connector
 	(pt 1736 456)
 	(pt 1736 848)
 	(bus)
@@ -2125,16 +2120,6 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 1472 648)
-	(pt 1472 808)
-	(bus)
-)
-(connector
-	(pt 1472 808)
-	(pt 1464 808)
-	(bus)
-)
-(connector
 	(text "Link" (rect 1250 776 1270 788)(font "Arial" ))
 	(pt 1224 792)
 	(pt 1288 792)
@@ -2185,16 +2170,6 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 1184 736)
-	(pt 1184 800)
-	(bus)
-)
-(connector
-	(pt 1184 800)
-	(pt 1080 800)
-	(bus)
-)
-(connector
 	(text "Instruction[20..16]" (rect 1394 600 1483 612)(font "Arial" ))
 	(pt 1480 616)
 	(pt 1360 616)
@@ -2237,6 +2212,36 @@ applicable agreement for further details.
 	(pt 1104 600)
 	(bus)
 )
+(connector
+	(pt 1184 736)
+	(pt 1184 792)
+	(bus)
+)
+(connector
+	(pt 1184 792)
+	(pt 1080 792)
+	(bus)
+)
+(connector
+	(pt 1480 648)
+	(pt 1472 648)
+	(bus)
+)
+(connector
+	(pt 1472 808)
+	(pt 1472 648)
+	(bus)
+)
+(connector
+	(pt 1464 808)
+	(pt 1472 808)
+	(bus)
+)
+(connector
+	(pt 1472 808)
+	(pt 1496 808)
+	(bus)
+)
 (junction (pt 496 664))
 (junction (pt 1776 704))
 (junction (pt 904 720))
@@ -2260,19 +2265,20 @@ applicable agreement for further details.
 (junction (pt 1360 600))
 (junction (pt 1104 384))
 (junction (pt 1104 600))
+(junction (pt 1472 808))
 (text "PC[31..0]" (rect 536 610 586 624)(font "Arial" (font_size 8)))
-(text "OUTPUTS" (rect 936 34 1051 56)(font "Arial" (font_size 14)))
-(text "INPUTS" (rect 128 66 217 88)(font "Arial" (font_size 14)))
+(text "OUTPUTS" (rect 936 34 1043 56)(font "Arial" (font_size 14)))
+(text "INPUTS" (rect 128 66 210 88)(font "Arial" (font_size 14)))
 (text "PC+4" (rect 1256 808 1285 822)(font "Arial" (font_size 8)))
 (text "31 ($ra)" (rect 1216 720 1262 734)(font "Arial" (font_size 8)))
 (title_block
 	(rect 3416 2320 3784 2440)
 	(section (rect 0 0 368 24)(text "TITLE" (rect 2 0 30 12)(font "Arial" ))(text "alu_32bit" (rect 56 2 131 20)(font "Arial" (font_size 12)))(border))
-	(section (rect 0 24 368 48)(text "COMPANY" (rect 2 0 57 12)(font "Arial" ))(text "UNIVALI-CTTMar-CSED" (rect 56 2 276 20)(font "Arial" (font_size 12)))(border))
-	(section (rect 0 48 368 72)(text "DESIGNER" (rect 2 0 59 12)(font "Arial" ))(text "Prof. Cesar A. Zeferino" (rect 56 2 249 20)(font "Arial" (font_size 12)))(border))
+	(section (rect 0 24 368 48)(text "COMPANY" (rect 2 0 57 12)(font "Arial" ))(text "UNIVALI-CTTMar-CSED" (rect 56 2 258 20)(font "Arial" (font_size 12)))(border))
+	(section (rect 0 48 368 72)(text "DESIGNER" (rect 2 0 59 12)(font "Arial" ))(text "Prof. Cesar A. Zeferino" (rect 56 2 244 20)(font "Arial" (font_size 12)))(border))
 	(section (rect 0 72 280 96)(text "NUMBER" (rect 2 0 49 12)(font "Arial" ))(text "1.00" (rect 56 1 85 17)(font "Arial" (font_size 10)))(border))
 	(section (rect 280 72 368 96)(text "REV" (rect 2 1 25 13)(font "Arial" ))(text "A" (rect 43 1 53 17)(font "Arial" (font_size 10)))(border))
-	(section (rect 0 96 240 120)(text "DATE" (rect 2 0 30 12)(font "Arial" ))(text "Tue Jun 07 01:58:22 2016" (rect 56 3 231 19)(font "Arial" (font_size 10)))(date)(border))
+	(section (rect 0 96 240 120)(text "DATE" (rect 2 0 30 12)(font "Arial" ))(text "Tue Jun 07 19:05:15 2016" (rect 56 3 231 19)(font "Arial" (font_size 10)))(date)(border))
 	(section (rect 240 96 310 120)(text "SHEET" (rect 2 0 37 12)(font "Arial" ))(text "1" (rect 55 5 63 21)(font "Arial" (font_size 10))))
 	(section (rect 310 96 368 120)(text "OF" (rect 10 0 25 12)(font "Arial" ))(text "1" (rect 34 4 42 20)(font "Arial" (font_size 10))))
 	(drawing
