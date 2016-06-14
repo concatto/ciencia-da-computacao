@@ -55,7 +55,7 @@ applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 3200 416 3376 432)
+	(rect 3208 448 3384 464)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "nextPC[31..0]" (rect 90 0 158 12)(font "Arial" ))
 	(pt 0 8)
@@ -422,22 +422,6 @@ applicable agreement for further details.
 		(line (pt 78 12)(pt 82 8))
 	)
 )
-(pin
-	(output)
-	(rect 1496 800 1672 816)
-	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "WB_Data[31..0]" (rect 90 0 169 12)(font "Arial" ))
-	(pt 0 8)
-	(drawing
-		(line (pt 0 8)(pt 52 8))
-		(line (pt 52 4)(pt 78 4))
-		(line (pt 52 12)(pt 78 12))
-		(line (pt 52 12)(pt 52 4))
-		(line (pt 78 4)(pt 82 8))
-		(line (pt 82 8)(pt 78 12))
-		(line (pt 78 12)(pt 82 8))
-	)
-)
 (symbol
 	(rect 744 416 928 504)
 	(text "adder_32bit" (rect 43 -1 146 15)(font "Courier New" (font_size 10)(bold)))
@@ -581,7 +565,7 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 2448 384 2624 464)
+	(rect 2440 416 2616 496)
 	(text "mux_2x1_32bit" (rect 25 -1 147 15)(font "Courier New" (font_size 10)(bold)))
 	(text "35" (rect 3 68 12 78)(font "Arial" (font_size 6)))
 	(port
@@ -620,7 +604,7 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 1016 896 1192 944)
+	(rect 1016 904 1192 952)
 	(text "signal_ext_32bit" (rect 10 -1 161 15)(font "Courier New" (font_size 10)(bold)))
 	(text "23" (rect 3 36 12 46)(font "Arial" (font_size 6)))
 	(port
@@ -794,7 +778,7 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 536 640 768 736)
+	(rect 536 632 768 728)
 	(text "instruction_memory" (rect 5 0 115 14)(font "Arial" (font_size 8)))
 	(text "InstructionMemory" (rect 8 80 100 92)(font "Arial" ))
 	(port
@@ -1083,7 +1067,7 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 1800 336 1960 432)
+	(rect 2448 312 2608 408)
 	(text "concat" (rect 5 0 43 14)(font "Arial" (font_size 8)))
 	(text "inst3" (rect 8 80 31 92)(font "Arial" ))
 	(port
@@ -1112,7 +1096,7 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 2720 384 2896 464)
+	(rect 2696 416 2872 496)
 	(text "mux_2x1_32bit" (rect 25 -1 147 15)(font "Courier New" (font_size 10)(bold)))
 	(text "37" (rect 3 68 14 80)(font "Arial" ))
 	(port
@@ -1151,7 +1135,7 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 968 760 1080 808)
+	(rect 1032 784 1144 832)
 	(text "LPM_CONSTANT" (rect 4 0 125 16)(font "Arial" (font_size 10)))
 	(text "49" (rect 3 37 14 49)(font "Arial" ))
 	(port
@@ -1179,7 +1163,7 @@ applicable agreement for further details.
 		(line (pt 64 40)(pt 64 24))
 		(line (pt 16 40)(pt 16 24))
 	)
-	(annotation_block (parameter)(rect 968 824 1112 866))
+	(annotation_block (parameter)(rect 1032 840 1176 882))
 )
 (symbol
 	(rect 1264 680 1424 760)
@@ -1221,7 +1205,7 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 2968 384 3144 464)
+	(rect 2968 416 3144 496)
 	(text "mux_2x1_32bit" (rect 25 -1 147 15)(font "Courier New" (font_size 10)(bold)))
 	(text "38" (rect 3 68 14 80)(font "Arial" ))
 	(port
@@ -1395,7 +1379,7 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 1288 768 1464 848)
+	(rect 1256 768 1432 848)
 	(text "mux_2x1_32bit" (rect 25 -1 147 15)(font "Courier New" (font_size 10)(bold)))
 	(text "39" (rect 3 68 14 80)(font "Arial" ))
 	(port
@@ -1434,15 +1418,6 @@ applicable agreement for further details.
 	)
 )
 (connector
-	(pt 2432 408)
-	(pt 2448 408)
-)
-(connector
-	(pt 2320 440)
-	(pt 2448 440)
-	(bus)
-)
-(connector
 	(text "Branch" (rect 2304 488 2345 502)(font "Arial" (font_size 8)))
 	(pt 2304 504)
 	(pt 2368 504)
@@ -1450,12 +1425,6 @@ applicable agreement for further details.
 (connector
 	(pt 648 560)
 	(pt 728 560)
-	(bus)
-)
-(connector
-	(text "PC[31..0]" (rect 408 648 458 662)(font "Arial" (font_size 8)))
-	(pt 384 664)
-	(pt 496 664)
 	(bus)
 )
 (connector
@@ -1473,35 +1442,6 @@ applicable agreement for further details.
 	(text "Instruction[15..11]" (rect 912 720 1013 734)(font "Arial" (font_size 8)))
 	(pt 904 736)
 	(pt 1016 736)
-	(bus)
-)
-(connector
-	(pt 2032 424)
-	(pt 2448 424)
-	(bus)
-)
-(connector
-	(pt 2272 472)
-	(pt 2320 472)
-	(bus)
-)
-(connector
-	(pt 2032 456)
-	(pt 2088 456)
-	(bus)
-)
-(connector
-	(pt 2432 512)
-	(pt 2432 408)
-)
-(connector
-	(pt 2320 472)
-	(pt 2320 440)
-	(bus)
-)
-(connector
-	(pt 2032 456)
-	(pt 2032 424)
 	(bus)
 )
 (connector
@@ -1668,30 +1608,9 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(text "Instruction[31..0]" (rect 808 656 902 670)(font "Arial" (font_size 8)))
-	(pt 904 672)
-	(pt 768 672)
-	(bus)
-)
-(connector
-	(pt 496 672)
-	(pt 536 672)
-	(bus)
-)
-(connector
-	(text "clkMem" (rect 496 672 533 684)(font "Arial" ))
-	(pt 488 688)
-	(pt 536 688)
-)
-(connector
 	(text "Instruction[25..0]" (rect 1130 176 1213 188)(font "Arial" ))
 	(pt 1224 192)
 	(pt 1104 192)
-	(bus)
-)
-(connector
-	(pt 136 680)
-	(pt 136 312)
 	(bus)
 )
 (connector
@@ -1712,11 +1631,6 @@ applicable agreement for further details.
 (connector
 	(pt 496 440)
 	(pt 496 664)
-	(bus)
-)
-(connector
-	(pt 496 664)
-	(pt 496 672)
 	(bus)
 )
 (connector
@@ -1750,16 +1664,6 @@ applicable agreement for further details.
 	(pt 1480 584)
 )
 (connector
-	(pt 1424 632)
-	(pt 1480 632)
-	(bus)
-)
-(connector
-	(pt 1424 632)
-	(pt 1424 720)
-	(bus)
-)
-(connector
 	(pt 1176 720)
 	(pt 1264 720)
 	(bus)
@@ -1777,87 +1681,6 @@ applicable agreement for further details.
 (connector
 	(pt 1728 568)
 	(pt 1800 568)
-	(bus)
-)
-(connector
-	(pt 1960 368)
-	(pt 2648 368)
-	(bus)
-)
-(connector
-	(pt 2624 424)
-	(pt 2720 424)
-	(bus)
-)
-(connector
-	(text "Jump" (rect 2674 392 2701 404)(font "Arial" ))
-	(pt 2720 408)
-	(pt 2664 408)
-)
-(connector
-	(pt 2648 440)
-	(pt 2720 440)
-	(bus)
-)
-(connector
-	(pt 2648 368)
-	(pt 2648 440)
-	(bus)
-)
-(connector
-	(pt 136 312)
-	(pt 3176 312)
-	(bus)
-)
-(connector
-	(pt 3176 424)
-	(pt 3176 312)
-	(bus)
-)
-(connector
-	(pt 3144 424)
-	(pt 3176 424)
-	(bus)
-)
-(connector
-	(pt 3176 424)
-	(pt 3200 424)
-	(bus)
-)
-(connector
-	(pt 2896 424)
-	(pt 2968 424)
-	(bus)
-)
-(connector
-	(text "JumpReg" (rect 2922 392 2969 404)(font "Arial" ))
-	(pt 2912 408)
-	(pt 2968 408)
-)
-(connector
-	(pt 1752 456)
-	(pt 1752 368)
-	(bus)
-)
-(connector
-	(text "PC_plus_4[31..28]" (rect 1720 352 1810 364)(font "Arial" ))
-	(pt 1800 368)
-	(pt 1752 368)
-	(bus)
-)
-(connector
-	(pt 1752 456)
-	(pt 2032 456)
-	(bus)
-)
-(connector
-	(pt 2968 440)
-	(pt 2912 440)
-	(bus)
-)
-(connector
-	(pt 3128 704)
-	(pt 3120 704)
 	(bus)
 )
 (connector
@@ -1948,11 +1771,6 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 2912 440)
-	(pt 2912 552)
-	(bus)
-)
-(connector
 	(pt 1728 552)
 	(pt 1832 552)
 	(bus)
@@ -2025,35 +1843,8 @@ applicable agreement for further details.
 	(pt 768 208)
 )
 (connector
-	(pt 1736 456)
-	(pt 1736 848)
-	(bus)
-)
-(connector
-	(text "PC_plus_4[31..0]" (rect 928 440 1023 454)(font "Arial" (font_size 8)))
-	(pt 928 456)
-	(pt 1736 456)
-	(bus)
-)
-(connector
-	(pt 1736 456)
-	(pt 1752 456)
-	(bus)
-)
-(connector
 	(pt 1808 496)
 	(pt 1776 496)
-	(bus)
-)
-(connector
-	(pt 1192 920)
-	(pt 1776 920)
-	(bus)
-)
-(connector
-	(text "Instruction[15..0]" (rect 912 904 1006 918)(font "Arial" (font_size 8)))
-	(pt 904 920)
-	(pt 1016 920)
 	(bus)
 )
 (connector
@@ -2080,78 +1871,8 @@ applicable agreement for further details.
 	(pt 1768 984)
 )
 (connector
-	(pt 904 600)
-	(pt 904 672)
-	(bus)
-)
-(connector
-	(pt 904 672)
-	(pt 904 720)
-	(bus)
-)
-(connector
 	(pt 904 720)
 	(pt 904 736)
-	(bus)
-)
-(connector
-	(pt 1776 496)
-	(pt 1776 704)
-	(bus)
-)
-(connector
-	(pt 1776 704)
-	(pt 1776 920)
-	(bus)
-)
-(connector
-	(pt 904 736)
-	(pt 904 920)
-	(bus)
-)
-(connector
-	(pt 904 920)
-	(pt 904 984)
-	(bus)
-)
-(connector
-	(pt 1736 848)
-	(pt 1224 848)
-	(bus)
-)
-(connector
-	(text "Link" (rect 1250 776 1270 788)(font "Arial" ))
-	(pt 1224 792)
-	(pt 1288 792)
-)
-(connector
-	(pt 1200 808)
-	(pt 1288 808)
-	(bus)
-)
-(connector
-	(pt 1224 848)
-	(pt 1224 824)
-	(bus)
-)
-(connector
-	(pt 1224 824)
-	(pt 1288 824)
-	(bus)
-)
-(connector
-	(pt 3128 704)
-	(pt 3128 872)
-	(bus)
-)
-(connector
-	(pt 3128 872)
-	(pt 1200 872)
-	(bus)
-)
-(connector
-	(pt 1200 808)
-	(pt 1200 872)
 	(bus)
 )
 (connector
@@ -2162,11 +1883,6 @@ applicable agreement for further details.
 (connector
 	(pt 2336 608)
 	(pt 2504 608)
-	(bus)
-)
-(connector
-	(pt 1264 736)
-	(pt 1184 736)
 	(bus)
 )
 (connector
@@ -2187,12 +1903,6 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(text "Instruction[25..0]" (rect 1546 368 1629 380)(font "Arial" ))
-	(pt 1104 384)
-	(pt 1800 384)
-	(bus)
-)
-(connector
 	(pt 904 600)
 	(pt 1104 600)
 	(bus)
@@ -2203,51 +1913,275 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 1104 192)
-	(pt 1104 384)
+	(pt 2432 440)
+	(pt 2440 440)
+)
+(connector
+	(pt 2432 512)
+	(pt 2432 440)
+)
+(connector
+	(pt 2272 472)
+	(pt 2440 472)
 	(bus)
 )
 (connector
-	(pt 1104 384)
+	(pt 2648 472)
+	(pt 2696 472)
+	(bus)
+)
+(connector
+	(text "Jump" (rect 2666 424 2693 436)(font "Arial" ))
+	(pt 2656 440)
+	(pt 2696 440)
+)
+(connector
+	(pt 2616 456)
+	(pt 2696 456)
+	(bus)
+)
+(connector
+	(text "JumpReg" (rect 2922 424 2969 436)(font "Arial" ))
+	(pt 2912 440)
+	(pt 2968 440)
+)
+(connector
+	(pt 2912 472)
+	(pt 2968 472)
+	(bus)
+)
+(connector
+	(pt 2912 552)
+	(pt 2912 472)
+	(bus)
+)
+(connector
+	(pt 2872 456)
+	(pt 2968 456)
+	(bus)
+)
+(connector
+	(pt 136 680)
+	(pt 136 304)
+	(bus)
+)
+(connector
+	(pt 136 304)
+	(pt 3176 304)
+	(bus)
+)
+(connector
+	(pt 3176 456)
+	(pt 3176 304)
+	(bus)
+)
+(connector
+	(pt 3144 456)
+	(pt 3176 456)
+	(bus)
+)
+(connector
+	(pt 3176 456)
+	(pt 3208 456)
+	(bus)
+)
+(connector
+	(pt 1104 192)
 	(pt 1104 600)
 	(bus)
 )
 (connector
-	(pt 1184 736)
-	(pt 1184 792)
+	(pt 2648 344)
+	(pt 2608 344)
 	(bus)
 )
 (connector
-	(pt 1184 792)
-	(pt 1080 792)
+	(pt 2648 472)
+	(pt 2648 344)
+	(bus)
+)
+(connector
+	(text "PC_plus_4[31..28]" (rect 2368 328 2458 340)(font "Arial" ))
+	(pt 2352 344)
+	(pt 2448 344)
+	(bus)
+)
+(connector
+	(text "Instruction[25..0]" (rect 2370 344 2453 356)(font "Arial" ))
+	(pt 2352 360)
+	(pt 2448 360)
+	(bus)
+)
+(connector
+	(text "PC_plus_4[31..0]" (rect 2346 440 2430 452)(font "Arial" ))
+	(pt 2320 456)
+	(pt 2440 456)
+	(bus)
+)
+(connector
+	(text "Instruction[31..0]" (rect 808 648 902 662)(font "Arial" (font_size 8)))
+	(pt 904 664)
+	(pt 768 664)
+	(bus)
+)
+(connector
+	(text "clkMem" (rect 496 664 533 676)(font "Arial" ))
+	(pt 488 680)
+	(pt 536 680)
+)
+(connector
+	(pt 904 600)
+	(pt 904 664)
+	(bus)
+)
+(connector
+	(pt 904 664)
+	(pt 904 720)
+	(bus)
+)
+(connector
+	(text "PC[31..0]" (rect 408 648 458 662)(font "Arial" (font_size 8)))
+	(pt 384 664)
+	(pt 496 664)
+	(bus)
+)
+(connector
+	(pt 496 664)
+	(pt 536 664)
+	(bus)
+)
+(connector
+	(pt 1256 824)
+	(pt 1232 824)
+	(bus)
+)
+(connector
+	(pt 1256 808)
+	(pt 1216 808)
+	(bus)
+)
+(connector
+	(pt 3120 704)
+	(pt 3144 704)
+	(bus)
+)
+(connector
+	(pt 1216 808)
+	(pt 1216 888)
+	(bus)
+)
+(connector
+	(pt 3144 704)
+	(pt 3144 888)
+	(bus)
+)
+(connector
+	(pt 1216 888)
+	(pt 3144 888)
+	(bus)
+)
+(connector
+	(pt 1232 824)
+	(pt 1232 872)
+	(bus)
+)
+(connector
+	(text "PC_plus_4[31..0]" (rect 928 440 1023 454)(font "Arial" (font_size 8)))
+	(pt 928 456)
+	(pt 2088 456)
+	(bus)
+)
+(connector
+	(text "PC_plus_4[31..0]" (rect 1242 856 1326 868)(font "Arial" ))
+	(pt 1232 872)
+	(pt 1328 872)
+	(bus)
+)
+(connector
+	(pt 1264 736)
+	(pt 1192 736)
+	(bus)
+)
+(connector
+	(pt 1192 736)
+	(pt 1192 816)
+	(bus)
+)
+(connector
+	(pt 1192 816)
+	(pt 1144 816)
+	(bus)
+)
+(connector
+	(text "Link" (rect 1234 776 1254 788)(font "Arial" ))
+	(pt 1216 792)
+	(pt 1256 792)
+)
+(connector
+	(pt 1776 928)
+	(pt 1192 928)
+	(bus)
+)
+(connector
+	(text "Instruction[15..0]" (rect 912 912 1006 926)(font "Arial" (font_size 8)))
+	(pt 904 928)
+	(pt 1016 928)
+	(bus)
+)
+(connector
+	(pt 904 736)
+	(pt 904 928)
+	(bus)
+)
+(connector
+	(pt 904 928)
+	(pt 904 984)
+	(bus)
+)
+(connector
+	(pt 1776 496)
+	(pt 1776 704)
+	(bus)
+)
+(connector
+	(pt 1776 704)
+	(pt 1776 928)
 	(bus)
 )
 (connector
 	(pt 1480 648)
-	(pt 1472 648)
-	(bus)
-)
-(connector
-	(pt 1472 808)
-	(pt 1472 648)
+	(pt 1464 648)
 	(bus)
 )
 (connector
 	(pt 1464 808)
-	(pt 1472 808)
+	(pt 1464 648)
 	(bus)
 )
 (connector
-	(pt 1472 808)
-	(pt 1496 808)
+	(pt 1432 808)
+	(pt 1464 808)
+	(bus)
+)
+(connector
+	(pt 1480 632)
+	(pt 1440 632)
+	(bus)
+)
+(connector
+	(pt 1424 720)
+	(pt 1440 720)
+	(bus)
+)
+(connector
+	(pt 1440 720)
+	(pt 1440 632)
 	(bus)
 )
 (junction (pt 496 664))
 (junction (pt 1776 704))
 (junction (pt 904 720))
 (junction (pt 904 736))
-(junction (pt 2032 456))
-(junction (pt 904 672))
 (junction (pt 1104 96))
 (junction (pt 1104 112))
 (junction (pt 1104 128))
@@ -2256,29 +2190,26 @@ applicable agreement for further details.
 (junction (pt 1104 176))
 (junction (pt 1832 688))
 (junction (pt 1104 192))
-(junction (pt 1736 456))
-(junction (pt 3176 424))
-(junction (pt 1752 456))
 (junction (pt 1832 552))
 (junction (pt 2504 608))
-(junction (pt 904 920))
 (junction (pt 1360 600))
-(junction (pt 1104 384))
 (junction (pt 1104 600))
-(junction (pt 1472 808))
+(junction (pt 3176 456))
+(junction (pt 904 664))
+(junction (pt 904 928))
 (text "PC[31..0]" (rect 536 610 586 624)(font "Arial" (font_size 8)))
-(text "OUTPUTS" (rect 936 34 1043 56)(font "Arial" (font_size 14)))
-(text "INPUTS" (rect 128 66 210 88)(font "Arial" (font_size 14)))
+(text "OUTPUTS" (rect 936 34 1051 56)(font "Arial" (font_size 14)))
+(text "INPUTS" (rect 128 66 217 88)(font "Arial" (font_size 14)))
 (text "PC+4" (rect 1256 808 1285 822)(font "Arial" (font_size 8)))
 (text "31 ($ra)" (rect 1216 720 1262 734)(font "Arial" (font_size 8)))
 (title_block
 	(rect 3416 2320 3784 2440)
 	(section (rect 0 0 368 24)(text "TITLE" (rect 2 0 30 12)(font "Arial" ))(text "alu_32bit" (rect 56 2 131 20)(font "Arial" (font_size 12)))(border))
-	(section (rect 0 24 368 48)(text "COMPANY" (rect 2 0 57 12)(font "Arial" ))(text "UNIVALI-CTTMar-CSED" (rect 56 2 258 20)(font "Arial" (font_size 12)))(border))
-	(section (rect 0 48 368 72)(text "DESIGNER" (rect 2 0 59 12)(font "Arial" ))(text "Prof. Cesar A. Zeferino" (rect 56 2 244 20)(font "Arial" (font_size 12)))(border))
+	(section (rect 0 24 368 48)(text "COMPANY" (rect 2 0 57 12)(font "Arial" ))(text "UNIVALI-CTTMar-CSED" (rect 56 2 276 20)(font "Arial" (font_size 12)))(border))
+	(section (rect 0 48 368 72)(text "DESIGNER" (rect 2 0 59 12)(font "Arial" ))(text "Prof. Cesar A. Zeferino" (rect 56 2 249 20)(font "Arial" (font_size 12)))(border))
 	(section (rect 0 72 280 96)(text "NUMBER" (rect 2 0 49 12)(font "Arial" ))(text "1.00" (rect 56 1 85 17)(font "Arial" (font_size 10)))(border))
 	(section (rect 280 72 368 96)(text "REV" (rect 2 1 25 13)(font "Arial" ))(text "A" (rect 43 1 53 17)(font "Arial" (font_size 10)))(border))
-	(section (rect 0 96 240 120)(text "DATE" (rect 2 0 30 12)(font "Arial" ))(text "Tue Jun 07 19:05:15 2016" (rect 56 3 231 19)(font "Arial" (font_size 10)))(date)(border))
+	(section (rect 0 96 240 120)(text "DATE" (rect 2 0 30 12)(font "Arial" ))(text "Sat Jun 11 19:37:58 2016" (rect 56 3 230 19)(font "Arial" (font_size 10)))(date)(border))
 	(section (rect 240 96 310 120)(text "SHEET" (rect 2 0 37 12)(font "Arial" ))(text "1" (rect 55 5 63 21)(font "Arial" (font_size 10))))
 	(section (rect 310 96 368 120)(text "OF" (rect 10 0 25 12)(font "Arial" ))(text "1" (rect 34 4 42 20)(font "Arial" (font_size 10))))
 	(drawing

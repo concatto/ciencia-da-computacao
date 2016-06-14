@@ -8,30 +8,33 @@ CONTENT
   BEGIN
 % The following addresses considers an offset that equals 0x04000020. In other
   words, the first position (0x00000000) points to 0x04000020, an so on. %
-	00000000 : 08100005;  % addi $s1, $zero, 4 %
-	00000001 : 00854020;  % addi $s2, $zero, 3 %
-	00000002 : 00C74820;  % addi $s3, $zero, 2 %
-	00000003 : 01091022;  % addi $s4, $zero, 1 %
-	00000004 : 03E00008;  % add $t0, $s1, $s2  %
-	00000005 : 20040004;  % add $t1, $s3, $s4  %
-	00000006 : 20050003;  % sub $s0, $t0, $t1  %
-	00000007 : 20060002;  % sub $s0, $t0, $t1  %
-	00000008 : 20070001;  % sub $s0, $t0, $t1  %
-	00000009 : 0C100001;  % sub $s0, $t0, $t1  %
+	00000000 : 08100005;  % j main 				%
+	00000001 : 00854020;  % add $t0, $a0, $a1 	%
+	00000002 : 00C74820;  % add $t1, $a2, $a3	%
+	00000003 : 01091022;  % sub $v0, $t0, $t1	%
+	00000004 : 03E00008;  % jr $ra				%
+	00000005 : 20040004;  % addi $a0, $zero, 4  %
+	00000006 : 20050003;  % addi $a1, $zero, 3  %
+	00000007 : 20060002;  % addi $a2, $zero, 2  %
+	00000008 : 20070001;  % addi $a3, $zero, 1  %
+	00000009 : 0C100001;  % jal leaf_example	%
 	[0000000A..000000FF] : 00000000;
 END ;	
 
 
 %------------------------------------------------------------------------------%
 % Original assembly source code:
-      .text   
-main:   
-       addi $s1, $zero, 4 
-       addi $s2, $zero, 3 
-       addi $s3, $zero, 2 
-       addi $s4, $zero, 1 
-
-       add $t0, $s1, $s2     
-       add $t1, $s3, $s4     
-       sub $s0, $t0, $t1
+	.text 						# segmento de código (programa)
+		j	main
+leaf_example:
+		add 	$t0, $a0, $a1 	# $t0 = a + b
+		add 	$t1, $a2, $a3 	# $t1 = i + j
+		sub 	$v0, $t0, $t1 	# f = $t0 - $t1
+		jr 	$ra					# retorna do procedimento
+main:
+		addi 	$a0, $zero, 4 	# inicializa lº parâmetro (g)
+		addi 	$a1, $zero, 3 	# inicializa 2º parâmetro (h)
+		addi 	$a2, $zero, 2 	# inicializa 3º parâmetro (i)
+		addi 	$a3, $zero, 1 	# inicializa 4º parâmetro (j)
+		jal 	leaf_example	# chama o procedimento
 %
