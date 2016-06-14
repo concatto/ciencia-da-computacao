@@ -1,0 +1,30 @@
+DEPTH = 256;	% Number of positions	%
+WIDTH = 32;	% Position size  	%
+
+ADDRESS_RADIX = HEX;
+DATA_RADIX    = HEX;
+
+CONTENT
+  BEGIN
+% The following addresses considers an offset that equals 0x04000020. In other
+  words, the first position (0x00000000) points to 0x04000020, an so on. %
+	00000000 : 3C131001;  % la   $s3, Array_A  %
+	00000001 : 8E680020;  % lw   $t0, 32($s3)  %
+	00000002 : 02484020;  % add  $t0, $s2, $t0 %
+	00000003 : AE680030;  % sw   $t0, 48($s3)  %
+	[00000004..0000000FF] : 00000000;
+   END ;	
+
+%------------------------------------------------------------------------------%
+% Original assembly source code:
+
+     .data    
+Array_A: .word 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150
+
+     .text
+main:    
+        la   $s3, Array_A     
+	lw   $t0, 32($s3)     # $t0 = A[8]
+        add  $t0, $s2, $t0    # $t0 = $t0 + h
+        sw   $t0, 48($s3)     # A[12] = $t0
+%

@@ -1,0 +1,177 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 1991-2010 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus II
+# Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+# Date created = 16:19:45  August 17, 2012
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		MIPS_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus II software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+
+# Project-Wide Assignments
+# ========================
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION "9.1 SP2"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "15:21:32  AUGUST 17, 2012"
+set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
+
+# Classic Timing Assignments
+# ==========================
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+
+# Analysis & Synthesis Assignments
+# ================================
+set_global_assignment -name FAMILY "Cyclone II"
+set_global_assignment -name TOP_LEVEL_ENTITY mips_mono
+
+# Fitter Assignments
+# ==================
+set_global_assignment -name DEVICE EP2C35F672C6
+
+# start EDA_TOOL_SETTINGS(eda_blast_fpga)
+# ---------------------------------------
+
+	# Analysis & Synthesis Assignments
+	# ================================
+set_global_assignment -name USE_GENERATED_PHYSICAL_CONSTRAINTS OFF -section_id eda_blast_fpga
+
+# end EDA_TOOL_SETTINGS(eda_blast_fpga)
+# -------------------------------------
+
+# ------------------
+# start ENTITY(MIPS)
+
+	# start LOGICLOCK_REGION(Root Region)
+	# -----------------------------------
+
+		# LogicLock Region Assignments
+		# ============================
+
+	# end LOGICLOCK_REGION(Root Region)
+	# ---------------------------------
+
+# end ENTITY(MIPS)
+# ----------------
+
+# -----------------------
+# start ENTITY(mips_mono)
+
+	# start LOGICLOCK_REGION(Root Region)
+	# -----------------------------------
+
+		# LogicLock Region Assignments
+		# ============================
+
+	# end LOGICLOCK_REGION(Root Region)
+	# ---------------------------------
+
+	# start DESIGN_PARTITION(Top)
+	# ---------------------------
+
+		# Incremental Compilation Assignments
+		# ===================================
+
+	# end DESIGN_PARTITION(Top)
+	# -------------------------
+
+# end ENTITY(mips_mono)
+# ---------------------
+set_global_assignment -name VECTOR_COMPARE_TRIGGER_MODE INPUT_EDGE
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
+set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
+set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name VECTOR_OUTPUT_FORMAT VWF
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_location_assignment PIN_AE23 -to PC[0]
+set_location_assignment PIN_AF23 -to PC[1]
+set_location_assignment PIN_AB21 -to PC[2]
+set_location_assignment PIN_AE13 -to PC[15]
+set_location_assignment PIN_AF13 -to PC[14]
+set_location_assignment PIN_AE15 -to PC[13]
+set_location_assignment PIN_AD15 -to PC[12]
+set_location_assignment PIN_AC14 -to PC[11]
+set_location_assignment PIN_AA13 -to PC[10]
+set_location_assignment PIN_Y13 -to PC[9]
+set_location_assignment PIN_AA14 -to PC[8]
+set_location_assignment PIN_AC21 -to PC[7]
+set_location_assignment PIN_AD21 -to PC[6]
+set_location_assignment PIN_AD23 -to PC[5]
+set_location_assignment PIN_AD22 -to PC[4]
+set_location_assignment PIN_AC22 -to PC[3]
+set_location_assignment PIN_W26 -to clock
+set_location_assignment PIN_G26 -to reset
+set_global_assignment -name SIMULATION_MODE TIMING
+set_global_assignment -name MISC_FILE MIPS.dpf
+set_global_assignment -name GDF_FILE 2bit_left_shifter_32bit.gdf
+set_global_assignment -name GDF_FILE adder_32bit.gdf
+set_global_assignment -name GDF_FILE alu_1bit.gdf
+set_global_assignment -name GDF_FILE alu_1bit_msb.gdf
+set_global_assignment -name GDF_FILE alu_32bit.gdf
+set_global_assignment -name GDF_FILE alu_operation.gdf
+set_global_assignment -name GDF_FILE bank_reg_32x32bit.gdf
+set_global_assignment -name GDF_FILE bank_reg_32x32bit_ram_based.gdf
+set_global_assignment -name GDF_FILE control.gdf
+set_global_assignment -name GDF_FILE decoder_2x4.gdf
+set_global_assignment -name GDF_FILE decoder_3x8.gdf
+set_global_assignment -name GDF_FILE decoder_5x32.gdf
+set_global_assignment -name GDF_FILE ext_sinal_32bit.gdf
+set_global_assignment -name GDF_FILE full_adder.gdf
+set_global_assignment -name GDF_FILE instruction_memory_4x8.gdf
+set_global_assignment -name GDF_FILE mux_16x1_32bit.gdf
+set_global_assignment -name GDF_FILE mux_2x1_1bit.gdf
+set_global_assignment -name GDF_FILE mux_2x1_32bit.gdf
+set_global_assignment -name GDF_FILE mux_2x1_5bit.gdf
+set_global_assignment -name GDF_FILE mux_2x1_8bit.gdf
+set_global_assignment -name GDF_FILE mux_32x1_32bit.gdf
+set_global_assignment -name GDF_FILE mux_3x1_1bit.gdf
+set_global_assignment -name GDF_FILE mux_4x1_1bit.gdf
+set_global_assignment -name GDF_FILE mux_4x1_32bit.gdf
+set_global_assignment -name GDF_FILE program_counter.gdf
+set_global_assignment -name GDF_FILE reg_pp_32bit.gdf
+set_global_assignment -name GDF_FILE reg_pp_32bit_null.gdf
+set_global_assignment -name GDF_FILE signal_ext_32bit.gdf
+set_global_assignment -name BDF_FILE instruction_memory.bdf
+set_global_assignment -name BDF_FILE mips_mono.bdf
+set_global_assignment -name BDF_FILE data_memory.bdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE Simulacao.vwf
+set_global_assignment -name BDF_FILE DivisorFrequencia.bdf
+set_global_assignment -name QIP_FILE lpm_add_sub0.qip
+set_global_assignment -name QIP_FILE rom.qip
+set_global_assignment -name QIP_FILE lpm_add_sub1.qip
+set_global_assignment -name QIP_FILE ram.qip
+set_global_assignment -name BDF_FILE concat.bdf
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE "C:/Users/Fernando/ciencia-da-computacao/Arquitetura e Organização de Computadores/Quartus/MIPS_restored/Simulacao.vwf"
