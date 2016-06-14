@@ -22,7 +22,7 @@ bool testBrackets(std::string expression) {
     Stack<char> stack;
     for (int i = 0; i < expression.length(); i++) {
         char c = expression[i];
-        
+
         if (isOpeningBracket(c)) {
             stack.push(c);
         } else if (isClosingBracket(c)) {
@@ -30,7 +30,7 @@ bool testBrackets(std::string expression) {
                 std::cout << "Expressao invalida: nao existem caracteres a serem fechados\n";
                 return false;
             }
-            
+
             char lastOpening = stack.pop();
             if (!bracketMatches(lastOpening, c)) {
                 std::cout << "Expressao invalida: " << c << " tentou fechar " << lastOpening << "\n";
@@ -38,12 +38,12 @@ bool testBrackets(std::string expression) {
             }
         }
     }
-    
+
     if (stack.getSize() > 0) {
         std::cout << "Expressao invalida: caractere nao fechado (\"" << stack.pop() << "\")\n";
         return false;
     }
-    
+
     std::cout << "Expressao valida!\n";
     return true;
 }
