@@ -4,7 +4,7 @@ var http = require("http");
 var io = require("socket.io");
 
 var app = express();
-var server = http.Server(app);
+var server = http.createServer(app);
 var socketServer = io(server);
 
 app.get("/", function(req, res) {
