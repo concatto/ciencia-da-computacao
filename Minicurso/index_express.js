@@ -5,7 +5,7 @@ var app = express();
 var server = http.createServer(app);
 
 app.get("/", function(req, res) {
-  res.sendFile(__dirname + "/index_socket.html");
+  res.sendFile(__dirname + "/index_basic.html");
 });
 
 server.listen(4000);
