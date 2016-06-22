@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title>Projeto</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      socket.on("luz", function(dados) {
+	var n = dados.valor;
+        document.querySelector("#bloco").style.backgroundColor = "rgb(" + n + "," + n + "," + n + ")";
+      });
+    </script>
+  </head>
+  <body>
+    <div id="bloco" style="height: 200px; width:200px;"></div>
+  </body>
+</html>

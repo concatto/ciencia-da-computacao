@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>Projeto</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      socket.on("cm", function(dados) {
+        document.querySelector("#bloco").style.width = (dados.valor / 100.0) * 100.0 + "%";
+        document.querySelector("#texto").textContent = dados.valor + " cm";
+      });
+    </script>
+  </head>
+  <body>
+    <div id="bloco" style="height: 20px; background-color: black;"></div>
+    <p id="texto"></p>
+  </body>
+</html>
