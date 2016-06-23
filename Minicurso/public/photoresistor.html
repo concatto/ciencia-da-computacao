@@ -5,7 +5,7 @@
     <script>
       var socket = io();
       socket.on("luz", function(dados) {
-	var n = dados.valor;
+	    var n = dados.valor;
         document.querySelector("#bloco").style.backgroundColor = "rgb(" + n + "," + n + "," + n + ")";
       });
     </script>

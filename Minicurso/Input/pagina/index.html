@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<script src="/socket.io/socket.io.js"></script>
+		<title>Hello world</title>
+		<script>
+			var socket = io();
+			
+			document.addEventListener("DOMContentLoaded", function() {
+				var entrada = document.querySelector("#entrada");
+				
+				entrada.addEventListener("keydown", function(event) {
+					if (event.keyCode == 13) {
+						socket.emit("mensagem", entrada.value);
+						entrada.value = "";
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<input type="text" id="entrada"/>
+	</body>
+</html>
