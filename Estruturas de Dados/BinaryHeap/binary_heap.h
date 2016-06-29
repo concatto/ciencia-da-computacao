@@ -48,11 +48,11 @@ private:
     }
 
     int parent(int index) {
-        return ((index + 1) / 2) - 1;
+        return ((index - 1) / 2);
     }
 
     int leftChild(int index) {
-        return ((index + 1) * 2) - 1;
+        return (2 * index) + 1;
     }
 
     int rightChild(int index) {
@@ -83,7 +83,7 @@ public:
         return false;
     }
 
-    const Node& getMinimum() const {
+    Node getMinimum() const {
         return data[0];
     }
 
@@ -100,7 +100,25 @@ public:
         }
     }
 
-    const Node* getData() const {
+    int search(const K& key) {
+        for (int i = 0; i < size; i++) {
+            if (data[i].key == key) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    int searchByValue(const V& value) {
+        for (int i = 0; i < size; i++) {
+            if (data[i].value == value) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    Node* getData() const {
         return data;
     }
 };
