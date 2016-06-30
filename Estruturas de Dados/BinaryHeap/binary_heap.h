@@ -33,17 +33,18 @@ private:
     }
 
     void heapifyDown(int index) {
-        int j = leftChild(index);
-        if (j > size) return;
+        int target = leftChild(index);
+        if (target > size) return; //If it's a leaf node
 
+        int right = rightChild(index);
         //If the right child exists and has the lower key
-        if ((j + 1) < size && (data[j].key > data[j + 1].key)) {
-            j++;
+        if (right < size && (data[target].key > data[right].key)) {
+            target = right;
         }
 
-        if (data[j].key < data[index].key) {
-            std::swap(data[index], data[j]);
-            heapifyDown(j);
+        if (data[target].key < data[index].key) {
+            std::swap(data[index], data[target]);
+            heapifyDown(target);
         }
     }
 
@@ -94,8 +95,10 @@ public:
     void changeKey(int index, K newKey) {
         data[index].key = newKey;
         if (index > 0 && newKey < data[parent(index)].key) {
+            //If the node's new key is lower than its parent
             heapifyUp(index);
         } else {
+            //If higher or the root, heapify down
             heapifyDown(index);
         }
     }
