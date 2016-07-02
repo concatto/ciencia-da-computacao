@@ -1,0 +1,4 @@
+Divide-and-conquer
+Dynamic programming
+Greedy algorithm
+Local search
