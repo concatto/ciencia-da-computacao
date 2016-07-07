@@ -17,29 +17,29 @@ import java.util.TreeMap;
  * @author 1978233
  */
 public class Locadora {
-    SortedMap<String, Veiculo> veiculos;
-    Map<String, Cliente> clientes;
-    List<Locacao> locacoes;
-    List<Marca> marcas;
-    List<Modelo> modelos;
+    private SortedMap<String, Veiculo> veiculos;
+    private Map<String, Cliente> clientes;
+    private List<Locacao> locacoes;
+    private List<Marca> marcas;
+    private List<Modelo> modelos;
 
     public Locadora() {
         this.marcas = new ArrayList<>();
-        this.marcas.add(new Marca("Fiat"));
-        this.marcas.add(new Marca("Volkswagen"));
-        this.marcas.add(new Marca("BMW"));
-        this.marcas.add(new Marca("Citroën"));
+        adicionarMarca(new Marca("Fiat"));
+        adicionarMarca(new Marca("Volkswagen"));
+        adicionarMarca(new Marca("BMW"));
+        adicionarMarca(new Marca("Citroën"));
         
         this.modelos = new ArrayList<>();
-        this.modelos.add(new Modelo("Aircross", this.marcas.get(3)));
-        this.modelos.add(new Modelo("C4 Grand Picasso", this.marcas.get(3)));
-        this.modelos.add(new Modelo("147", this.marcas.get(0)));
-        this.modelos.add(new Modelo("Fusca", this.marcas.get(1)));
-        this.modelos.add(new Modelo("Uno", this.marcas.get(0)));
-        this.modelos.add(new Modelo("M3", this.marcas.get(2)));
-        this.modelos.add(new Modelo("X2", this.marcas.get(2)));
-        this.modelos.add(new Modelo("Brasília", this.marcas.get(1)));
-        this.modelos.add(new Modelo("C3", this.marcas.get(3)));
+        adicionarModelo(new Modelo("Aircross", this.marcas.get(3)));
+        adicionarModelo(new Modelo("C4 Grand Picasso", this.marcas.get(3)));
+        adicionarModelo(new Modelo("147", this.marcas.get(0)));
+        adicionarModelo(new Modelo("Fusca", this.marcas.get(1)));
+        adicionarModelo(new Modelo("Uno", this.marcas.get(0)));
+        adicionarModelo(new Modelo("M3", this.marcas.get(2)));
+        adicionarModelo(new Modelo("X2", this.marcas.get(2)));
+        adicionarModelo(new Modelo("Brasília", this.marcas.get(1)));
+        adicionarModelo(new Modelo("C3", this.marcas.get(3)));
         
         this.veiculos = new TreeMap<>();
         this.clientes = new HashMap<>();
@@ -54,19 +54,28 @@ public class Locadora {
         this.veiculos.put(veiculo.getPlaca(), veiculo);
     }
     
+    public void adicionarMarca(Marca marca) {
+    	this.marcas.add(marca);
+    }
+    
+    public void adicionarModelo(Modelo modelo) {
+    	this.modelos.add(modelo);
+    }
+    
     public Locacao alugarVeiculo(Veiculo veiculo, Cliente cliente) {
         Locacao locacao = new Locacao(cliente, veiculo);
         this.locacoes.add(locacao);
         return locacao;
     }
     
-    public void finalizarLocacao(Veiculo veiculo, int kmAtual) {
+    public Locacao finalizarLocacao(Veiculo veiculo, int kmAtual) {
         for (Locacao locacao : locacoes) {
             if (locacao != null && locacao.getVeiculo().equals(veiculo) && locacao.estaAtiva()) {
                 locacao.finalizar(kmAtual);
-                break;
+                return locacao;
             }
         }
+        return null;
     }
     
     public void finalizarLocacao(String placa, int kmAtual) {
@@ -91,5 +100,13 @@ public class Locadora {
     
     public Map<String, Cliente> getClientes() {
 		return clientes;
+	}
+    
+    public List<Locacao> getLocacoes() {
+		return locacoes;
+	}
+    
+    public List<Marca> getMarcas() {
+		return marcas;
 	}
 }

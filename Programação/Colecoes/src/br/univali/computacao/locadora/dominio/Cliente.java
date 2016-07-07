@@ -10,15 +10,15 @@ package br.univali.computacao.locadora.dominio;
  * @author 1978233
  */
 public class Cliente {
+	private String nome;
 	private String cpf;
-    private String nome;
 
     public Cliente() {
     }
 
-    public Cliente(String cpf, String nome) {
-        this.cpf = cpf;
+    public Cliente(String nome, String cpf) {
 		this.nome = nome;
+		this.cpf = cpf;
     }
 
     public String getCpf() {
@@ -33,5 +33,8 @@ public class Cliente {
         this.nome = nome;
     }
   
-    
+    @Override
+    public String toString() {
+    	return nome + " (" + cpf + ")";
+    }
 }

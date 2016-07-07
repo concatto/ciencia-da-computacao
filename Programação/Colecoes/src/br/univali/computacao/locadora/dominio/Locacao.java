@@ -10,7 +10,6 @@ package br.univali.computacao.locadora.dominio;
  * @author 1978233
  */
 public class Locacao {
-    
     private Cliente cliente;
     private Veiculo veiculo;
     private int kmInicial;
@@ -27,17 +26,17 @@ public class Locacao {
         this.ativa = true;
     }
     
-    public void finalizar(int kmAtual){
+    public void finalizar(int kmAtual) {
         this.getVeiculo().setKm(kmAtual);
         this.kmFinal = kmAtual;
         this.ativa = false;
     }
     
-    public double valorTotal(){
-        return (this.kmFinal-this.kmInicial)*this.valorKm;
+    public double valorTotal() {
+        return (this.kmFinal - this.kmInicial) * this.valorKm;
     }
     
-    public boolean estaAtiva(){
+    public boolean estaAtiva() {
         return this.ativa;
     }
 
@@ -69,7 +68,9 @@ public class Locacao {
         this.veiculo = veiculo;
     }
     
-    
-    
+    @Override
+    public String toString() {
+    	return String.format("Veículo %s alugado para %s. %s.", veiculo.getPlaca(), cliente.getNome(), ativa ? "Ativa" : "Terminada");
+    } 
     
 }

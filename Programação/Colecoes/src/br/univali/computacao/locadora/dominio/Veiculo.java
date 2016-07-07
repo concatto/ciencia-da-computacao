@@ -98,4 +98,9 @@ public class Veiculo {
     public void setValorKm(double valorKm) {
         this.valorKm = valorKm;
     }
+    
+    @Override
+    public String toString() {
+    	return placa + ": " + modelo + " ano " + ano;
+    }
 }

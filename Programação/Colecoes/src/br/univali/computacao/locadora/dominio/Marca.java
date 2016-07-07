@@ -34,4 +34,8 @@ public class Marca {
     }
     
     
+    @Override
+    public String toString() {
+    	return nome;
+    }    
 }
