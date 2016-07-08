@@ -5,6 +5,9 @@
  */
 package br.univali.computacao.locadora.dominio;
 
+import br.univali.computacao.excecoes.ClienteInexistenteException;
+import br.univali.computacao.excecoes.VeiculoInexistenteException;
+
 /**
  *
  * @author 1978233
@@ -17,7 +20,10 @@ public class Locacao {
     private int kmFinal;
     private boolean ativa;
 
-    public Locacao(Cliente cliente, Veiculo veiculo) {
+    public Locacao(Cliente cliente, Veiculo veiculo) throws VeiculoInexistenteException, ClienteInexistenteException {
+    	if (veiculo == null) throw new VeiculoInexistenteException();
+    	if (cliente == null) throw new ClienteInexistenteException();
+    	
         this.cliente = cliente;
         this.veiculo = veiculo;
         this.kmInicial = veiculo.getKm();

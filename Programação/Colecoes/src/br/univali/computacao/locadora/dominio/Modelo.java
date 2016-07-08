@@ -5,6 +5,8 @@
  */
 package br.univali.computacao.locadora.dominio;
 
+import br.univali.computacao.excecoes.MarcaInexistenteException;
+
 /**
  *
  * @author 1978233
@@ -16,7 +18,9 @@ public class Modelo {
     public Modelo() {
     }
 
-    public Modelo(String nome, Marca marca) {
+    public Modelo(String nome, Marca marca) throws MarcaInexistenteException {
+    	if (marca == null) throw new MarcaInexistenteException();
+    	
         this.nome = nome;
         this.marca = marca;
     }

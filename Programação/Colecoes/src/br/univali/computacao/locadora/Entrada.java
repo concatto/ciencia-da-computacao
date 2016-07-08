@@ -1,5 +1,6 @@
 package br.univali.computacao.locadora;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,6 +37,17 @@ public class Entrada {
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	public static void aguardarEntrada(String mensagem) {
+		System.out.println(mensagem);
+		try {
+			System.in.read();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			scanner.nextLine();
 		}
 	}
 }

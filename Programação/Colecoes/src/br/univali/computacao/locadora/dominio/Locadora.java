@@ -12,6 +12,14 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import br.univali.computacao.excecoes.ClienteInexistenteException;
+import br.univali.computacao.excecoes.ClienteJaExisteException;
+import br.univali.computacao.excecoes.LocacaoInexistenteException;
+import br.univali.computacao.excecoes.MarcaInexistenteException;
+import br.univali.computacao.excecoes.ModeloInexistenteException;
+import br.univali.computacao.excecoes.VeiculoInexistenteException;
+import br.univali.computacao.excecoes.VeiculoJaExisteException;
+
 /**
  *
  * @author 1978233
@@ -31,26 +39,39 @@ public class Locadora {
         adicionarMarca(new Marca("Citroën"));
         
         this.modelos = new ArrayList<>();
-        adicionarModelo(new Modelo("Aircross", this.marcas.get(3)));
-        adicionarModelo(new Modelo("C4 Grand Picasso", this.marcas.get(3)));
-        adicionarModelo(new Modelo("147", this.marcas.get(0)));
-        adicionarModelo(new Modelo("Fusca", this.marcas.get(1)));
-        adicionarModelo(new Modelo("Uno", this.marcas.get(0)));
-        adicionarModelo(new Modelo("M3", this.marcas.get(2)));
-        adicionarModelo(new Modelo("X2", this.marcas.get(2)));
-        adicionarModelo(new Modelo("Brasília", this.marcas.get(1)));
-        adicionarModelo(new Modelo("C3", this.marcas.get(3)));
+        
+        try {
+	        adicionarModelo(new Modelo("Aircross", this.marcas.get(3)));
+	        adicionarModelo(new Modelo("C4 Grand Picasso", this.marcas.get(3)));
+	        adicionarModelo(new Modelo("147", this.marcas.get(0)));
+	        adicionarModelo(new Modelo("Fusca", this.marcas.get(1)));
+	        adicionarModelo(new Modelo("Uno", this.marcas.get(0)));
+	        adicionarModelo(new Modelo("M3", this.marcas.get(2)));
+	        adicionarModelo(new Modelo("X2", this.marcas.get(2)));
+	        adicionarModelo(new Modelo("Brasília", this.marcas.get(1)));
+	        adicionarModelo(new Modelo("C3", this.marcas.get(3)));
+        } catch (MarcaInexistenteException ex) {
+        	//Ambiente controlado!
+        }
         
         this.veiculos = new TreeMap<>();
         this.clientes = new HashMap<>();
         this.locacoes = new ArrayList<>();
     }
     
-    public void adicionarCliente(Cliente cliente) {
+    public void adicionarCliente(Cliente cliente) throws ClienteJaExisteException {
+    	if (clientes.containsKey(cliente.getCpf())) {
+    		throw new ClienteJaExisteException();
+    	}
+    	
         this.clientes.put(cliente.getCpf(), cliente);
     }
 
-    public void adicionarVeiculo(Veiculo veiculo) {
+    public void adicionarVeiculo(Veiculo veiculo) throws VeiculoJaExisteException {
+    	if (veiculos.containsKey(veiculo.getPlaca())) {
+    		throw new VeiculoJaExisteException();
+    	}
+    	
         this.veiculos.put(veiculo.getPlaca(), veiculo);
     }
     
@@ -62,24 +83,25 @@ public class Locadora {
     	this.modelos.add(modelo);
     }
     
-    public Locacao alugarVeiculo(Veiculo veiculo, Cliente cliente) {
+    public Locacao alugarVeiculo(Veiculo veiculo, Cliente cliente) throws VeiculoInexistenteException, ClienteInexistenteException {    	
         Locacao locacao = new Locacao(cliente, veiculo);
         this.locacoes.add(locacao);
         return locacao;
     }
     
-    public Locacao finalizarLocacao(Veiculo veiculo, int kmAtual) {
+    public Locacao finalizarLocacao(Veiculo veiculo, int kmAtual) throws LocacaoInexistenteException {
         for (Locacao locacao : locacoes) {
             if (locacao != null && locacao.getVeiculo().equals(veiculo) && locacao.estaAtiva()) {
                 locacao.finalizar(kmAtual);
                 return locacao;
             }
         }
-        return null;
+        
+        throw new LocacaoInexistenteException();
     }
     
-    public void finalizarLocacao(String placa, int kmAtual) {
-    	finalizarLocacao(veiculos.get(placa), kmAtual);
+    public Locacao finalizarLocacao(String placa, int kmAtual) throws LocacaoInexistenteException {
+    	return finalizarLocacao(veiculos.get(placa), kmAtual);
     }
 
     public List<Modelo> getModelos() {
@@ -90,12 +112,18 @@ public class Locadora {
 		return veiculos;
 	}
      
-    public Cliente buscarCliente(String cpf) {
-    	return clientes.get(cpf);
+    public Cliente buscarCliente(String cpf) throws ClienteInexistenteException {
+    	Cliente c = clientes.get(cpf);
+    	if (c == null) throw new ClienteInexistenteException();
+    	
+		return c;
     }
     
-    public Veiculo buscarVeiculo(String placa) {
-    	return veiculos.get(placa);
+    public Veiculo buscarVeiculo(String placa) throws VeiculoInexistenteException {
+    	Veiculo v = veiculos.get(placa);
+    	if (v == null) throw new VeiculoInexistenteException();
+    	
+    	return v;
     }
     
     public Map<String, Cliente> getClientes() {
@@ -108,5 +136,10 @@ public class Locadora {
     
     public List<Marca> getMarcas() {
 		return marcas;
+	}
+
+	public Modelo getModelo(int modelo) throws ModeloInexistenteException {
+		if (modelo > modelos.size()) throw new ModeloInexistenteException();
+		return modelos.get(modelo);
 	}
 }
