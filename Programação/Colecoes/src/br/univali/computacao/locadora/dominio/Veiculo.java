@@ -5,6 +5,8 @@
  */
 package br.univali.computacao.locadora.dominio;
 
+import br.univali.computacao.locadora.excecoes.QuilometragemIncorretaException;
+
 /**
  *
  * @author 1978233
@@ -19,7 +21,11 @@ public class Veiculo {
     public Veiculo() {
     }
 
-    public Veiculo(Modelo modelo, int km, int ano, String placa, double valorKm) {
+    public Veiculo(Modelo modelo, int km, int ano, String placa, double valorKm) throws QuilometragemIncorretaException {
+    	if (km <= 0) {
+    		throw new QuilometragemIncorretaException("A quilometragem não pode ser menor ou igual a 0");
+    	}
+    	
         this.modelo = modelo;
         this.km = km;
         this.ano = ano;

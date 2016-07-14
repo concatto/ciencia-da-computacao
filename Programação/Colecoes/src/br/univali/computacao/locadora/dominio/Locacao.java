@@ -5,8 +5,8 @@
  */
 package br.univali.computacao.locadora.dominio;
 
-import br.univali.computacao.excecoes.ClienteInexistenteException;
-import br.univali.computacao.excecoes.VeiculoInexistenteException;
+import br.univali.computacao.locadora.excecoes.ItemInexistenteException;
+import br.univali.computacao.locadora.excecoes.QuilometragemIncorretaException;
 
 /**
  *
@@ -20,9 +20,9 @@ public class Locacao {
     private int kmFinal;
     private boolean ativa;
 
-    public Locacao(Cliente cliente, Veiculo veiculo) throws VeiculoInexistenteException, ClienteInexistenteException {
-    	if (veiculo == null) throw new VeiculoInexistenteException();
-    	if (cliente == null) throw new ClienteInexistenteException();
+    public Locacao(Cliente cliente, Veiculo veiculo) throws ItemInexistenteException {
+    	if (veiculo == null) throw new ItemInexistenteException("O veículo não existe.");
+    	if (cliente == null) throw new ItemInexistenteException("O cliente não existe.");
     	
         this.cliente = cliente;
         this.veiculo = veiculo;
@@ -32,8 +32,12 @@ public class Locacao {
         this.ativa = true;
     }
     
-    public void finalizar(int kmAtual) {
-        this.getVeiculo().setKm(kmAtual);
+    public void finalizar(int kmAtual) throws QuilometragemIncorretaException {
+    	if (kmAtual < veiculo.getKm()) {
+    		throw new QuilometragemIncorretaException("A quilometragem final é menor do que a inicial.");
+    	}
+    	
+        this.veiculo.setKm(kmAtual);
         this.kmFinal = kmAtual;
         this.ativa = false;
     }

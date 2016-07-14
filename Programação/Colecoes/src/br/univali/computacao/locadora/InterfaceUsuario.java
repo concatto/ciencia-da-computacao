@@ -2,19 +2,17 @@ package br.univali.computacao.locadora;
 
 import java.util.List;
 
-import br.univali.computacao.excecoes.ClienteInexistenteException;
-import br.univali.computacao.excecoes.ClienteJaExisteException;
-import br.univali.computacao.excecoes.LocacaoInexistenteException;
-import br.univali.computacao.excecoes.MarcaInexistenteException;
-import br.univali.computacao.excecoes.ModeloInexistenteException;
-import br.univali.computacao.excecoes.VeiculoInexistenteException;
-import br.univali.computacao.excecoes.VeiculoJaExisteException;
 import br.univali.computacao.locadora.dominio.Cliente;
 import br.univali.computacao.locadora.dominio.Locacao;
 import br.univali.computacao.locadora.dominio.Locadora;
 import br.univali.computacao.locadora.dominio.Marca;
 import br.univali.computacao.locadora.dominio.Modelo;
 import br.univali.computacao.locadora.dominio.Veiculo;
+import br.univali.computacao.locadora.excecoes.ItemInexistenteException;
+import br.univali.computacao.locadora.excecoes.ItemJaExisteException;
+import br.univali.computacao.locadora.excecoes.NomeNuloException;
+import br.univali.computacao.locadora.excecoes.QuilometragemIncorretaException;
+import br.univali.computacao.locadora.excecoes.VeiculoAlugadoException;
 
 public class InterfaceUsuario {
 	private Locadora locadora;
@@ -51,8 +49,8 @@ public class InterfaceUsuario {
 			Modelo modelo = new Modelo(nome, locadora.getMarca(marca));
 			locadora.adicionarModelo(modelo);
 			System.out.println("Modelo " + modelo + " registrado.");
-		} catch (MarcaInexistenteException ex) {
-			System.out.println("Impossível cadastrar o modelo. A marca não existe.");
+		} catch (ItemInexistenteException ex) {
+			System.out.println("Impossível cadastrar o modelo. Motivo: " + ex.getMessage());
 		}
 	}
 
@@ -91,10 +89,8 @@ public class InterfaceUsuario {
 		try {
 			Locacao l = locadora.finalizarLocacao(placa, kmFinal);
 			System.out.printf("Locação do veículo de placa %s finalizada. Custo: R$%.2f\n", placa, l.valorTotal());
-		} catch (LocacaoInexistenteException e) {
-			System.out.println("Impossível finalizar a locação. A locação não foi encontrada.");
-		} catch (VeiculoInexistenteException e) {
-			System.out.println("Impossível finalizar a locação. O veículo solicitado não existe.");
+		} catch (ItemInexistenteException | QuilometragemIncorretaException e) {
+			System.out.println("Impossível finalizar a locação. Motivo: " + e.getMessage());
 		}
 	}
 
@@ -105,10 +101,8 @@ public class InterfaceUsuario {
 		try {
 			locadora.alugarVeiculo(locadora.buscarVeiculo(placa), locadora.buscarCliente(cpf));
 			System.out.println("Locação registrada.");
-		} catch (VeiculoInexistenteException e) {
-			System.out.println("Impossível registrar a locação. O veículo não existe.");
-		} catch (ClienteInexistenteException e) {
-			System.out.println("Impossível registrar a locação. O cliente não existe.");
+		} catch (VeiculoAlugadoException | ItemInexistenteException e) {
+			System.out.println("Impossível realizar a locação. Motivo: " + e.getMessage());
 		}
 	}
 
@@ -119,8 +113,8 @@ public class InterfaceUsuario {
 		try {
 			locadora.adicionarCliente(new Cliente(nome, cpf));
 			System.out.println("Cliente " + nome + " cadastrado!");
-		} catch (ClienteJaExisteException e) {
-			System.out.println("Impossível cadastrar o cliente. Já existe um cliente com este CPF.");
+		} catch (ItemJaExisteException | NomeNuloException e) {
+			System.out.println("Impossível cadastrar o cliente. Motivo: " + e.getMessage());
 		}
 	}
 
@@ -134,10 +128,8 @@ public class InterfaceUsuario {
 		try {
 			locadora.adicionarVeiculo(new Veiculo(locadora.getModelo(modelo), quilometragem, ano, placa, valorPorKm));
 			System.out.println("Veículo cadastrado!");
-		} catch (ModeloInexistenteException e) {
-			System.out.println("Impossível cadastrar o veículo. O modelo não existe.");
-		} catch (VeiculoJaExisteException e) {
-			System.out.println("Impossível cadastrar o veículo. Já existe um veículo com esta placa.");
+		} catch (ItemJaExisteException | QuilometragemIncorretaException | ItemInexistenteException e) {
+			System.out.println("Impossível cadastrar o veículo. Motivo: " + e.getMessage());
 		}
 	}
 }

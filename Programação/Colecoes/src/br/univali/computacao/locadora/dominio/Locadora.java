@@ -12,13 +12,10 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import br.univali.computacao.excecoes.ClienteInexistenteException;
-import br.univali.computacao.excecoes.ClienteJaExisteException;
-import br.univali.computacao.excecoes.LocacaoInexistenteException;
-import br.univali.computacao.excecoes.MarcaInexistenteException;
-import br.univali.computacao.excecoes.ModeloInexistenteException;
-import br.univali.computacao.excecoes.VeiculoInexistenteException;
-import br.univali.computacao.excecoes.VeiculoJaExisteException;
+import br.univali.computacao.locadora.excecoes.ItemInexistenteException;
+import br.univali.computacao.locadora.excecoes.ItemJaExisteException;
+import br.univali.computacao.locadora.excecoes.QuilometragemIncorretaException;
+import br.univali.computacao.locadora.excecoes.VeiculoAlugadoException;
 
 /**
  *
@@ -50,8 +47,8 @@ public class Locadora {
 	        adicionarModelo(new Modelo("X2", this.marcas.get(2)));
 	        adicionarModelo(new Modelo("Brasília", this.marcas.get(1)));
 	        adicionarModelo(new Modelo("C3", this.marcas.get(3)));
-        } catch (MarcaInexistenteException ex) {
-        	//Ambiente controlado!
+        } catch (ItemInexistenteException ex) {
+        	//Ambiente controlado
         }
         
         this.veiculos = new TreeMap<>();
@@ -59,17 +56,17 @@ public class Locadora {
         this.locacoes = new ArrayList<>();
     }
     
-    public void adicionarCliente(Cliente cliente) throws ClienteJaExisteException {
+    public void adicionarCliente(Cliente cliente) throws ItemJaExisteException {
     	if (clientes.containsKey(cliente.getCpf())) {
-    		throw new ClienteJaExisteException();
+    		throw new ItemJaExisteException("Já existe um cliente com este CPF.");
     	}
     	
         this.clientes.put(cliente.getCpf(), cliente);
     }
 
-    public void adicionarVeiculo(Veiculo veiculo) throws VeiculoJaExisteException {
+    public void adicionarVeiculo(Veiculo veiculo) throws ItemJaExisteException {
     	if (veiculos.containsKey(veiculo.getPlaca())) {
-    		throw new VeiculoJaExisteException();
+    		throw new ItemJaExisteException("Já existe um veículo com esta placa.");
     	}
     	
         this.veiculos.put(veiculo.getPlaca(), veiculo);
@@ -83,24 +80,33 @@ public class Locadora {
     	this.modelos.add(modelo);
     }
     
-    public Locacao alugarVeiculo(Veiculo veiculo, Cliente cliente) throws VeiculoInexistenteException, ClienteInexistenteException {    	
+    public Locacao alugarVeiculo(Veiculo veiculo, Cliente cliente) throws ItemInexistenteException, VeiculoAlugadoException {
+    	for (Locacao l : locacoes) {
+    		if (l.estaAtiva() && l.getVeiculo().getPlaca().equals(veiculo.getPlaca())) {
+    			throw new VeiculoAlugadoException("O veículo já está alugado.");
+    		}
+    	}
         Locacao locacao = new Locacao(cliente, veiculo);
         this.locacoes.add(locacao);
         return locacao;
     }
     
-    public Locacao finalizarLocacao(Veiculo veiculo, int kmAtual) throws LocacaoInexistenteException {
+    public Locacao finalizarLocacao(Veiculo veiculo, int kmAtual) throws ItemInexistenteException, QuilometragemIncorretaException {
+    	if (!veiculos.containsKey(veiculo.getPlaca())) {
+    		throw new ItemInexistenteException("O veículo não existe.");
+    	}
+    	
         for (Locacao locacao : locacoes) {
-            if (locacao != null && locacao.getVeiculo().equals(veiculo) && locacao.estaAtiva()) {
+            if (locacao != null && locacao.getVeiculo().getPlaca().equals(veiculo.getPlaca()) && locacao.estaAtiva()) {
                 locacao.finalizar(kmAtual);
                 return locacao;
             }
         }
         
-        throw new LocacaoInexistenteException();
+        throw new ItemInexistenteException("O veículo não está alugado.");
     }
     
-    public Locacao finalizarLocacao(String placa, int kmAtual) throws LocacaoInexistenteException, VeiculoInexistenteException {
+    public Locacao finalizarLocacao(String placa, int kmAtual) throws ItemInexistenteException, QuilometragemIncorretaException {
     	return finalizarLocacao(buscarVeiculo(placa), kmAtual);
     }
 
@@ -112,16 +118,16 @@ public class Locadora {
 		return veiculos;
 	}
      
-    public Cliente buscarCliente(String cpf) throws ClienteInexistenteException {
+    public Cliente buscarCliente(String cpf) throws ItemInexistenteException {
     	Cliente c = clientes.get(cpf);
-    	if (c == null) throw new ClienteInexistenteException();
+    	if (c == null) throw new ItemInexistenteException("O cliente não existe.");
     	
 		return c;
     }
     
-    public Veiculo buscarVeiculo(String placa) throws VeiculoInexistenteException {
+    public Veiculo buscarVeiculo(String placa) throws ItemInexistenteException {
     	Veiculo v = veiculos.get(placa);
-    	if (v == null) throw new VeiculoInexistenteException();
+    	if (v == null) throw new ItemInexistenteException("O veículo não existe.");
     	
     	return v;
     }
@@ -138,13 +144,13 @@ public class Locadora {
 		return marcas;
 	}
 
-	public Modelo getModelo(int modelo) throws ModeloInexistenteException {
-		if (modelo < 0 || modelo > modelos.size()) throw new ModeloInexistenteException();
+	public Modelo getModelo(int modelo) throws ItemInexistenteException {
+		if (modelo < 0 || modelo > modelos.size()) throw new ItemInexistenteException("O modelo não existe");
 		return modelos.get(modelo);
 	}
 	
-	public Marca getMarca(int marca) throws MarcaInexistenteException {
-		if (marca < 0 || marca > marcas.size()) throw new MarcaInexistenteException();
+	public Marca getMarca(int marca) throws ItemInexistenteException {
+		if (marca < 0 || marca > marcas.size()) throw new ItemInexistenteException("A marca não existe.");
 		return marcas.get(marca);
 	}
 }

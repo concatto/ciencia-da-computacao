@@ -5,6 +5,8 @@
  */
 package br.univali.computacao.locadora.dominio;
 
+import br.univali.computacao.locadora.excecoes.NomeNuloException;
+
 /**
  *
  * @author 1978233
@@ -16,7 +18,8 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String nome, String cpf) {
+    public Cliente(String nome, String cpf) throws NomeNuloException {
+    	if (nome == null) throw new NomeNuloException("O nome do cliente não pode ser nulo.");
 		this.nome = nome;
 		this.cpf = cpf;
     }
