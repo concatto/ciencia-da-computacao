@@ -48,7 +48,7 @@ public class InterfaceUsuario {
 		int marca = Entrada.lerInt("Digite o número da marca: ");
 		
 		try {
-			Modelo modelo = new Modelo(nome, locadora.getMarcas().get(marca));
+			Modelo modelo = new Modelo(nome, locadora.getMarca(marca));
 			locadora.adicionarModelo(modelo);
 			System.out.println("Modelo " + modelo + " registrado.");
 		} catch (MarcaInexistenteException ex) {
@@ -89,7 +89,7 @@ public class InterfaceUsuario {
 		int kmFinal = Entrada.lerInt("Digite a quilometragem final: ");
 		
 		try {
-			Locacao l = locadora.finalizarLocacao(locadora.buscarVeiculo(placa), kmFinal);
+			Locacao l = locadora.finalizarLocacao(placa, kmFinal);
 			System.out.printf("Locação do veículo de placa %s finalizada. Custo: R$%.2f\n", placa, l.valorTotal());
 		} catch (LocacaoInexistenteException e) {
 			System.out.println("Impossível finalizar a locação. A locação não foi encontrada.");

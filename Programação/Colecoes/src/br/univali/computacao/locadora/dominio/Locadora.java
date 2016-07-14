@@ -100,8 +100,8 @@ public class Locadora {
         throw new LocacaoInexistenteException();
     }
     
-    public Locacao finalizarLocacao(String placa, int kmAtual) throws LocacaoInexistenteException {
-    	return finalizarLocacao(veiculos.get(placa), kmAtual);
+    public Locacao finalizarLocacao(String placa, int kmAtual) throws LocacaoInexistenteException, VeiculoInexistenteException {
+    	return finalizarLocacao(buscarVeiculo(placa), kmAtual);
     }
 
     public List<Modelo> getModelos() {
@@ -139,7 +139,12 @@ public class Locadora {
 	}
 
 	public Modelo getModelo(int modelo) throws ModeloInexistenteException {
-		if (modelo > modelos.size()) throw new ModeloInexistenteException();
+		if (modelo < 0 || modelo > modelos.size()) throw new ModeloInexistenteException();
 		return modelos.get(modelo);
+	}
+	
+	public Marca getMarca(int marca) throws MarcaInexistenteException {
+		if (marca < 0 || marca > marcas.size()) throw new MarcaInexistenteException();
+		return marcas.get(marca);
 	}
 }
