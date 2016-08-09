@@ -1,12 +1,14 @@
 #include <iostream>
 #include <functional>
 #include <utility>
-#include <algorithm>
+#include <cmath>
+
+double f(double x) {
+    return std::pow(x + 1, 2) * std::exp(x * x - 2) - 1;
+}
 
 int main()
 {
-    std::function<double(double)> f = [](double x) { return x * x + 2 * x - 9; };
-
     double a;
     double b;
     double x;
@@ -21,7 +23,8 @@ int main()
         double ya = f(a);
         double yb = f(b);
 
-        std::cout << "a = " << ya << "\nb = " << yb << "\n";
+        std::cout << "f(a) = " << ya << "\n";
+        std::cout << "f(b) = " << yb << "\n";
 
         if (ya * yb < 0) {
             root = true;
@@ -29,6 +32,8 @@ int main()
             std::cout << "Try again.\n";
         }
     } while (!root);
+
+    std::cout << "\nStarting the bisection algorithm...\n\n";
 
     double epsilon;
     double prevX = 0;
@@ -46,7 +51,12 @@ int main()
         epsilon = std::abs((x - prevX) / x);
         prevX = x;
 
-        std::cout << "f(x) = " << y << " eps " << epsilon << "\n";
+        std::cout << "a = " << a << "\n";
+        std::cout << "b = " << b << "\n";
+        std::cout << "x = " << x << "\n";
+        std::cout << "f(x) = " << y << "\n";
+        std::cout << "epsilon = " << epsilon << "\n";
+        std::cout << "\n";
     } while (epsilon > 0.0001);
 }
 
