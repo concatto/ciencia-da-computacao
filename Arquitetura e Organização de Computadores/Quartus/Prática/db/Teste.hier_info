@@ -1,8 +1,0 @@
-|Teste
-S <= inst3.DB_MAX_OUTPUT_PORT_TYPE
-B => inst1.IN0
-Sel => inst2.IN0
-Sel => inst.IN1
-A => inst.IN0
-
-
