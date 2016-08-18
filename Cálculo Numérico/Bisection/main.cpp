@@ -3,23 +3,27 @@
 #include <utility>
 #include <cmath>
 
-enum Method {Bisection, FalsePosition};
+enum Method {Bisection, FalsePosition, Newton, Cosecant};
+
+double fd(double x) {
+    return 0;
+}
 
 double f(double x) {
     return 4 * std::cos(x) - std::exp(2 * x);
-    //return (x / 2.0) - std::tan(x);
 }
 
-double findRoot(double a, double b, double precision, Method m) {
+double bisection(double a, double b, double precision, bool falsePosition) {
+    unsigned int k = 1;
     double x;
     double y;
     double epsilon;
     double prevX = 0;
     do {
-        if (m == Method::Bisection) {
-            x = (a + b) / 2.0;
-        } else if (m == Method::FalsePosition) {
+        if (falsePosition) {
             x = (a * f(b) - b * f(a)) / (f(b) - f(a));
+        } else {
+            x = (a + b) / 2.0;
         }
 
         y = f(x);
@@ -38,15 +42,39 @@ double findRoot(double a, double b, double precision, Method m) {
         }
         prevX = x;
 
+        std::cout << "k = " << k << "\n";
         std::cout << "a = " << a << "\n";
         std::cout << "b = " << b << "\n";
         std::cout << "x = " << x << "\n";
         std::cout << "f(x) = " << y << "\n";
         std::cout << "epsilon = " << epsilon << "\n";
         std::cout << "\n";
+        k++;
     } while (epsilon > precision);
 
     return x;
+}
+
+double newton() {
+    return 0;
+}
+
+double cosecant() {
+    return 0;
+}
+
+double findRoot(double a, double b, double precision, Method m) {
+    switch (m) {
+        case Bisection:
+        case FalsePosition:
+            return bisection(a, b, precision, m == Method::FalsePosition);
+        case Newton:
+            return newton();
+        case Cosecant:
+            return cosecant();
+    }
+
+    return 0;
 }
 
 template <class T>
@@ -90,7 +118,7 @@ int main()
         }
     } while (!root);
 
-    std::cout << "\nStarting the bisection algorithm with a = " << a << " and b = " << b << "...\n\n";
+    std::cout << "\nStarting the algorithm with a = " << a << " and b = " << b << "...\n\n";
     findRoot(a, b, std::pow(10, -10), Method::Bisection);
 
     return 0;
