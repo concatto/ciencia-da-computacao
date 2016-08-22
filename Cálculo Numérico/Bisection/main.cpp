@@ -14,16 +14,8 @@ using DerivativeProblem = std::tuple<Function, Function, double>;
 
 const double Precision = 0.0000000001;
 
-double derivative(Function function, double x, double prevX) {
+double approximateDerivative(Function function, double x, double prevX) {
     return (function(x) - function(prevX)) / (x - prevX);
-}
-
-double fd(double x) {
-    return 0;
-}
-
-double f(double x) {
-    return 4 * std::cos(x) - std::exp(2 * x);
 }
 
 double error(double x, double prevX) {
@@ -74,35 +66,74 @@ double bisection(std::ostream& out, Function func, double a, double b, bool fals
     return x;
 }
 
-double newton() {
-    return 0;
+double falsePosition(std::ostream& out, Function func, double a, double b) {
+    return bisection(out, func, a, b, true);
 }
 
-double secant() {
-    return 0;
+double newton(std::ostream& out, Function func, Function derivative, double x) {
+    unsigned int k = 0;
+    double y;
+    double yDerivative;
+    double epsilon;
+    double prevX = 0;
+    out << "k,xk,f(xk),fd(xk),epsilon\n";
+    do {
+        y = func(x);
+        yDerivative = derivative(x);
+        epsilon = error(x, prevX);
+
+        out << k << "," << x << "," << y << "," << yDerivative << ",";
+        if (k == 0) {
+            out << "-";
+        } else {
+            out << epsilon;
+        }
+        out << "\n";
+
+        prevX = x;
+        x = x - (y / yDerivative);
+        k++;
+    } while (epsilon > Precision && y != 0);
+
+    return x;
+}
+
+double secant(std::ostream& out, Function func, double x, double prevX) {
+    unsigned int k = 1;
+    double y;
+    double yDerivative;
+    double epsilon;
+    out << "k,xk,f(xk),fd(xk),epsilon\n";
+    out << "0," << prevX << "," << func(prevX) << ",-,-\n";
+    do {
+        y = func(x);
+        yDerivative = approximateDerivative(func, x, prevX);
+        epsilon = error(x, prevX);
+
+        out << k << "," << x << "," << y << "," << yDerivative << ",";
+        if (k == 1) {
+            out << "-";
+        } else {
+            out << epsilon;
+        }
+        out << "\n";
+
+        prevX = x;
+        x = x - (y / yDerivative);
+        k++;
+    } while (epsilon > Precision && y != 0);
+
+    return x;
 }
 
 template <class T>
-void solve(const std::vector<T>& problems, const std::string& folder, Method m) {
+void solve(std::vector<T>& problems, const std::string& folder, std::function<void(std::ostream&,T&)> solver) {
     for (unsigned int i = 0; i < problems.size(); i++) {
         std::ostringstream ss;
         ss << folder << "/" << (i + 1) << ".csv";
         std::ofstream file(ss.str(), std::ios_base::trunc);
 
-        const T& problem = problems[i];
-
-        switch (m) {
-        case Bisection:
-        case FalsePosition:
-            bisection(file, std::get<0>(problem), std::get<1>(problem), std::get<2>(problem), m == Method::FalsePosition);
-            break;
-        case Newton:
-            newton();
-            break;
-        case Secant:
-            secant();
-            break;
-        }
+        solver(file, problems[i]);
 
         std::cout << "Solved " << ss.str() << "\n";
     }
@@ -124,12 +155,12 @@ int main()
         [](double x) { return 2 * x - std::tan(x); },
         [](double x) { return std::sin(x) - std::exp(x); },
         //Secant
-        [](double x) { return x - std::log(x); },
+        [](double x) { return x - 3 * std::log(x); },
         [](double x) { return std::log(x) - std::cos(x); },
         [](double x) { return std::exp(-x) - std::log(x); },
         //Derivatives
         [](double x) { return 15 * std::pow(x, 2) + 2 * x - 12; },
-        [](double x) { return 0; /* TODO */ },
+        [](double x) { return 2 - std::pow(1.0 / std::cos(x), 2); },
         [](double x) { return std::cos(x) - std::exp(x); },
     };
 
@@ -151,7 +182,38 @@ int main()
         Problem(functions[5], -7, -6)
     };
 
-    solve(problems1, "1", Method::Bisection);
-    solve(problems2, "2", Method::FalsePosition);
+    std::vector<DerivativeProblem> problems3 {
+        DerivativeProblem(functions[6], functions[12], -2),
+        DerivativeProblem(functions[6], functions[12], 0.5),
+        DerivativeProblem(functions[6], functions[12], 1.5),
+        DerivativeProblem(functions[7], functions[13], 1),
+        DerivativeProblem(functions[7], functions[13], 4),
+        DerivativeProblem(functions[8], functions[14], -6),
+        DerivativeProblem(functions[8], functions[14], -3)
+    };
+
+    std::vector<Problem> problems4 {
+        Problem(functions[9], 1, 1.5),
+        Problem(functions[9], 3.5, 4),
+        Problem(functions[10], 0, 1),
+        Problem(functions[11], 0.5, 1)
+    };
+
+
+    solve<Problem>(problems1, "1", [](std::ostream& out, Problem& problem) {
+        bisection(out, std::get<0>(problem), std::get<1>(problem), std::get<2>(problem));
+    });
+
+    solve<Problem>(problems2, "2", [](std::ostream& out, Problem& problem) {
+        falsePosition(out, std::get<0>(problem), std::get<1>(problem), std::get<2>(problem));
+    });
+
+    solve<DerivativeProblem>(problems3, "3", [](std::ostream& out, DerivativeProblem& problem) {
+        newton(out, std::get<0>(problem), std::get<1>(problem), std::get<2>(problem));
+    });
+
+    solve<Problem>(problems4, "4", [](std::ostream& out, Problem& problem) {
+        secant(out, std::get<0>(problem), std::get<1>(problem), std::get<2>(problem));
+    });
 }
 
