@@ -1,0 +1,4 @@
+k,xk,f(xk),fd(xk),epsilon
+0,1,-0.540302,-,-
+1,0,-inf,inf,-
+2,nan,nan,nan,nan

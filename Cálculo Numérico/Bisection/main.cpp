@@ -200,7 +200,7 @@ int main()
     };
 
 
-    solve<Problem>(problems1, "1", [](std::ostream& out, Problem& problem) {
+    /*solve<Problem>(problems1, "1", [](std::ostream& out, Problem& problem) {
         bisection(out, std::get<0>(problem), std::get<1>(problem), std::get<2>(problem));
     });
 
@@ -214,6 +214,9 @@ int main()
 
     solve<Problem>(problems4, "4", [](std::ostream& out, Problem& problem) {
         secant(out, std::get<0>(problem), std::get<1>(problem), std::get<2>(problem));
-    });
+    });*/
+
+    //secant(std::cout, [](double x) { return 3 * x * x + 10 * x; }, -3, -2);
+    falsePosition(std::cout, [](double x) { return x * x - std::sin(x); }, 0.5, 1.5);
 }
 
