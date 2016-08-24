@@ -187,7 +187,7 @@ int main()
         DerivativeProblem(functions[6], functions[12], 0.5),
         DerivativeProblem(functions[6], functions[12], 1.5),
         DerivativeProblem(functions[7], functions[13], 1),
-        DerivativeProblem(functions[7], functions[13], 4),
+        DerivativeProblem(functions[7], functions[13], 4.7),
         DerivativeProblem(functions[8], functions[14], -6),
         DerivativeProblem(functions[8], functions[14], -3)
     };
@@ -195,7 +195,7 @@ int main()
     std::vector<Problem> problems4 {
         Problem(functions[9], 1, 1.5),
         Problem(functions[9], 3.5, 4),
-        Problem(functions[10], 0, 1),
+        Problem(functions[10], 0.5, 1),
         Problem(functions[11], 0.5, 1)
     };
 
@@ -217,6 +217,7 @@ int main()
     });*/
 
     //secant(std::cout, [](double x) { return 3 * x * x + 10 * x; }, -3, -2);
-    falsePosition(std::cout, [](double x) { return x * x - std::sin(x); }, 0.5, 1.5);
+    //falsePosition(std::cout, [](double x) { return x * x - std::sin(x); }, 0.5, 1.5);
+    bisection(std::cout, functions[1], 0.6, 1.2);
 }
 
