@@ -6,6 +6,7 @@
 #include <functional>
 #include <tuple>
 #include <vector>
+#include <iomanip>
 
 using Function = std::function<double(double)>;
 using Problem = std::tuple<Function, double, double>;
@@ -50,6 +51,7 @@ namespace RootFinder {
             y = func(x);
             epsilon = error(x, prevX);
 
+            if (epsilon < 0.0001) out << std::setprecision(12);
             out << k << "," << a << "," << b << "," << x << "," << y << "," << (k == 0 ? "-" : toString(epsilon)) << "\n";
 
             if (func(a) * y < 0) {
@@ -85,6 +87,7 @@ namespace RootFinder {
             yDerivative = derivative(x);
             epsilon = error(x, prevX);
 
+            if (epsilon < 0.0001) out << std::setprecision(12);
             out << k << "," << x << "," << y << "," << yDerivative << "," << (k == 0 ? "-" : toString(epsilon)) << "\n";
 
             prevX = x;
@@ -107,6 +110,7 @@ namespace RootFinder {
             yDerivative = approximateDerivative(func, x, prevX);
             epsilon = error(x, prevX);
 
+            if (epsilon < 0.0001) out << std::setprecision(12);
             out << k << "," << x << "," << y << "," << yDerivative << "," << (k == 1 ? "-" : toString(epsilon)) << "\n";
 
             prevX = x;
@@ -124,6 +128,8 @@ void solve(std::vector<T>& problems, const std::string& folder, Func solver) {
         std::ostringstream ss;
         ss << folder << "/" << (i + 1) << ".csv";
         std::ofstream file(ss.str(), std::ios_base::trunc);
+
+        std::cout << "Starting... ";
 
         solver(file, std::get<0>(problems[i]), std::get<1>(problems[i]), std::get<2>(problems[i]));
 
