@@ -1,0 +1,2 @@
+Para gravar corretamente os resultados em arquivos, é necessário alterar a opção "Working Directory" do Qt Creator, encontrada na seção "Projects" na aba "Run".
+O caminho correto é a pasta onde este arquivo e o arquivo main.cpp são encontrados. A pasta contém as subpastas Bisection, False Position, Newton e Secant, necessárias para a execução do programa.
