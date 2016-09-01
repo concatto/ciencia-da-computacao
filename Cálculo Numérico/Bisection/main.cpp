@@ -129,11 +129,13 @@ void solve(std::vector<T>& problems, const std::string& folder, Func solver) {
         ss << folder << "/" << (i + 1) << ".csv";
         std::ofstream file(ss.str(), std::ios_base::trunc);
 
-        std::cout << "Starting... ";
-
-        solver(file, std::get<0>(problems[i]), std::get<1>(problems[i]), std::get<2>(problems[i]));
-
-        std::cout << "Solved " << ss.str() << "\n";
+        if (file.is_open()) {
+            std::cout << "Starting... ";
+            solver(file, std::get<0>(problems[i]), std::get<1>(problems[i]), std::get<2>(problems[i]));
+            std::cout << "Solved " << ss.str() << "\n";
+        } else {
+            std::cout << "Failed to create file " << ss.str() << ".\n";
+        }
     }
 }
 
@@ -197,10 +199,12 @@ int main()
         Problem(functions[11], 1, 0.5)
     };
 
-    solve(problems1, "Bisection", RootFinder::bisection);
-    solve(problems2, "False Position", RootFinder::falsePosition);
-    solve(problems3, "Newton", RootFinder::newton);
-    solve(problems4, "Secant", RootFinder::secant);
+    //solve(problems1, "Bisection", RootFinder::bisection);
+    //solve(problems2, "False Position", RootFinder::falsePosition);
+    //solve(problems3, "Newton", RootFinder::newton);
+    //solve(problems4, "Secant", RootFinder::secant);
+
+    RootFinder::bisection(std::cout << "Result", functions[1], -1, 0.2);
 
     //secant(std::cout, [](double x) { return 3 * x * x + 10 * x; }, -3, -2);
     //falsePosition(std::cout, [](double x) { return x * x - std::sin(x); }, 0.5, 1.5);
