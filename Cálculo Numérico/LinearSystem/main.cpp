@@ -1,158 +1,5 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
-#include <limits>
-#include <algorithm>
-
-using Row = std::vector<double>;
-using Matrix = std::vector<Row>;
-using uint = unsigned int;
-const double Minimum = 1E-15; //1E-15
-
-void printRow(const Row& row, std::ostream& out = std::cout) {
-    for (const double d : row) {
-        out << d << "    ";
-    }
-    out << "\n";
-}
-
-void printMatrix(const Matrix& m, std::ostream& out = std::cout) {
-    for (const Row& row : m) {
-        printRow(row, out);
-    }
-}
-
-bool nearZero(double value) {
-    return value < Minimum && value > (0 - Minimum);
-}
-
-void partialPivot(Matrix& m, uint rowIndex) {
-    uint highestRow = rowIndex;
-    double highestValue = m[rowIndex][rowIndex];
-    for (uint i = rowIndex + 1; i < m.size(); i++) {
-        if (std::abs(m[i][rowIndex]) > std::abs(highestValue)) {
-            highestRow = i;
-            highestValue = m[i][rowIndex];
-        }
-    }
-
-    if (rowIndex != highestRow) {
-        std::swap(m[rowIndex], m[highestRow]);
-    }
-}
-
-Matrix gaussianElimination(Matrix m, bool usePartialPivot) {
-    for (uint i = 0; i < m.size() - 1; i++) {
-        if (usePartialPivot) {
-            partialPivot(m, i);
-        }
-
-        double pivot = m[i][i];
-
-        for (uint j = i + 1; j < m.size(); j++) {
-            double multiplier = -m[j][i] / pivot;
-
-            for (uint k = 0; k < m[j].size(); k++) {
-                m[j][k] = m[j][k] + (multiplier * m[i][k]);
-
-                if (nearZero(m[j][k])) {
-                    m[j][k] = 0;
-                }
-            }
-        }
-    }
-
-    return m;
-}
-
-Row solveSystem(const Matrix& problem, bool usePartialPivot = false) {
-    Matrix matrix = gaussianElimination(problem, usePartialPivot);
-    Row solution(matrix.size(), 0);
-
-    for (int i = solution.size() - 1; i >= 0; i--) {
-        double b = matrix[i].back();
-
-        double sum = 0;
-        for (uint j = i + 1; j < solution.size(); j++) { //Will not execute when i = |solution|
-            sum += matrix[i][j] * solution[j];
-        }
-
-        solution[i] = (b - sum) / matrix[i][i];
-    }
-
-    return solution;
-}
-
-double errorFunction(const Row& currentSolution, const Row& previousSolution) {
-    double numerator = std::numeric_limits<double>::min();
-    double denominator = std::numeric_limits<double>::min();
-
-    for (uint i = 0; i < currentSolution.size(); i++) {
-        double value = std::abs(currentSolution[i] - previousSolution[i]);
-        if (value > numerator) {
-            numerator = value;
-        }
-
-        value = std::abs(currentSolution[i]);
-        if (value > denominator) {
-           denominator = value;
-        }
-    }
-
-    return numerator / denominator;
-}
-
-Row solveSystemIteratively(const Matrix& matrix, Row previousSolution, double precision, bool improvedMode) {
-    Row solution(matrix.size(), 0);
-
-    double error;
-    do {
-        for (uint i = 0; i < solution.size(); i++) {
-            solution[i] = (1 / matrix[i][i]);
-
-            double m = matrix[i].back();
-
-            for (uint j = 0; j < matrix[i].size() - 1; j++) {
-                if (j == i) continue;
-
-                if (improvedMode) {
-                    m -= matrix[i][j] * (i < j ? previousSolution[j] : solution[j]);
-                } else {
-                    m -= matrix[i][j] * previousSolution[j];
-                }
-            }
-
-            solution[i] *= m;
-        }
-
-        error = errorFunction(solution, previousSolution);
-        std::cout << "Error: " << error << "\n";
-        previousSolution = solution;
-        printRow(solution);
-    } while (error > precision);
-
-    return solution;
-}
-
-bool hasSolution(const Matrix& matrix) {
-    for (uint i = 0; i < matrix.size(); i++) {
-        double sumRow = 0;
-        double sumColumn = 0;
-        for (uint j = 0; j < matrix[i].size(); j++) {
-            if (i == j) continue;
-            if (j >= matrix.size()) break;
-
-            sumRow += matrix[i][j];
-            sumColumn += matrix[j][i];
-        }
-
-        if ((sumRow / matrix[i][i] >= 1) && (sumColumn / matrix[i][i] >= 1)) {
-            return false;
-        }
-    }
-
-    return true;
-}
+#include "linearsystem.h"
+#include "interpolation.h"
 
 int main()
 {
@@ -219,12 +66,43 @@ int main()
         {0, 0, 0, 0, 0, 0, 0, 0, -1, 4, -65}
     };
 
-    Row solution = solveSystemIteratively(m7, {0, 0, 0}, 1E-5, false);
-    printRow(solution);
+    Matrix m9 = {
+        {4, -1, 3, 8, 43},
+        {1, 6, 2, -3, 7},
+        {5, 5, 1, 0, 18},
+        {2, 4, -2, 1, 8}
+    };
 
-    //Matrix result = gaussianElimination(m8, true);
-    //printRow(solveSystem(result));
+    Matrix m10 = {
+        {3, -2, 5, 1, 7},
+        {-6, 4, -8, 1, -9},
+        {4, -6, 19, 1, 23},
+        {6, -4, -6, 15, 11}
+    };
 
-    //hasSolution(m6);
+    Matrix m11 = {
+        {0.252, 0.36, 0.12, 7},
+        {0.112, 0.16, 0.24, 8},
+        {0.147, 0.21, 0.25, 9}
+    };
+
+    Matrix m12 = {
+        {10, 1, 1, 12},
+        {1, 10, 1, 12},
+        {1, 1, 10, 12}
+    };
+
+    Matrix m13 = {
+        {4, -1, 0, 0, 1},
+        {-1, 4, -1, 0, 1},
+        {0, -1, 4, -1, 1},
+        {0, 0, -1, 4, 1}
+    };
+
+    Solution s = polynomialInterpolation({{1, 1}, {2, 9}, {3, 28}}, [&](const Matrix& matrix) {
+        return solveSystem(matrix, true);
+    });
+
+    std::cout << toFunctionString({9, 2, 0, 4}) << "\n";
 }
 
