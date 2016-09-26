@@ -49,3 +49,12 @@ std::string toFunctionString(Solution solution) {
 
     return oss.str();
 }
+
+Solution linearInterpolation(const Point &a, const Point &b) {
+    double c = (b.y - a.y) / (b.x - a.x);
+    Solution s(2);
+    s[0] = -a.x * c + a.y;
+    s[1] = c;
+
+    return s;
+}

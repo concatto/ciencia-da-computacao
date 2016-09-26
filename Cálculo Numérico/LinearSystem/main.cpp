@@ -99,10 +99,13 @@ int main()
         {0, 0, -1, 4, 1}
     };
 
+    /*
     Solution s = polynomialInterpolation({{1, 1}, {2, 9}, {3, 28}}, [&](const Matrix& matrix) {
         return solveSystem(matrix, true);
     });
 
-    std::cout << toFunctionString({9, 2, 0, 4}) << "\n";
+    std::cout << toFunctionString({9, 2, 0, 4}) << "\n";*/
+
+    std::cout << toFunctionString(linearInterpolation(Point(0.74, 0.98), Point(0.99, 0.001))) << "\n";
 }
 
