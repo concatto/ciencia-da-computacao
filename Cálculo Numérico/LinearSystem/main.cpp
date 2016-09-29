@@ -1,5 +1,6 @@
 #include "linearsystem.h"
 #include "interpolation.h"
+#include <fstream>
 
 int main()
 {
@@ -106,6 +107,34 @@ int main()
 
     std::cout << toFunctionString({9, 2, 0, 4}) << "\n";*/
 
-    std::cout << toFunctionString(linearInterpolation(Point(0.74, 0.98), Point(0.99, 0.001))) << "\n";
+    //std::cout << toFunctionString(linearInterpolation(Point(0.74, 0.98), Point(0.99, 0.001))) << "\n";
+
+    //std::cout << lagrange({{0.1, 1.221}, {0.6, 3.320}, {0.8, 4.953}}, 0.2) << "\n";
+    std::vector<Point> data{
+        {183, 79}, {173, 69}, {168, 70}, {188, 81},
+        {158, 61}, {163, 63}, {178, 73}
+    };
+
+    sortPoints(data);
+    //std::cout << lagrange(data2, 82) << "\n";
+
+
+    std::vector<Point> data2 = reshapePoints(data);
+
+    sortPoints(data2);
+    //std::cout << lagrange(data2, 82) << "\n";
+
+    //std::ofstream file("abcde.txt");
+    Solution s = polynomialInterpolation(data, [&](const Matrix& matrix) {
+        printMatrix(matrix);
+
+        Matrix m = gaussianElimination(matrix, true);
+        printMatrix(m);
+        return solveSystem(matrix, false);
+    });
+
+    printRow(s);
+    //std::ofstream file("abc.txt");
+    //file << "\n" << toFunctionString(s) << "\n";
 }
 

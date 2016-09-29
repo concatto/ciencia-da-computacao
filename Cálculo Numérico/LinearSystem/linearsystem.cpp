@@ -4,7 +4,7 @@
 #include <limits>
 #include <algorithm>
 
-const double Minimum = 1E-15; //1E-15
+const double Minimum = 1E-11;
 
 void printRow(const Row& row, std::ostream& out) {
     for (const double d : row) {
