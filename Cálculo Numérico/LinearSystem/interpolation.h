@@ -23,5 +23,10 @@ double lagrange(const std::vector<Point>& points, double x);
 std::string toFunctionString(Solution solution);
 std::vector<Point> reshapePoints(const std::vector<Point>& points);
 void sortPoints(std::vector<Point> &points, Axis axis = Axis::X, bool crescent = true);
+Matrix rotateMatrixLeft(const Matrix& original);
+Matrix dividedDifferences(const std::vector<Point>& points);
+Solution newtonPolynomial(const std::vector<Point>& points);
+Row constructSimplePolynomial(const std::vector<double>& coefficients);
+double applyFunction(const Solution& solution, double x);
 
 #endif // INTERPOLATION_H

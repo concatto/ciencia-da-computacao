@@ -17,7 +17,7 @@ SystemType classifySystem(const Matrix& matrix);
 Matrix gaussianElimination(Matrix m, bool usePartialPivot);
 Solution solveSystem(const Matrix& problem, bool usePartialPivot = false);
 double errorFunction(const Solution& currentSolution, const Solution& previousSolution);
-Solution solveSystemIteratively(const Matrix& matrix, double precision, bool improvedMode, Solution previousSolution = Solution(0));
+Solution solveSystemIteratively(const Matrix& matrix, double precision, IterativeMode mode, Solution previousSolution = Solution(0));
 bool testSassenfeldCriterion(const Matrix& matrix);
 bool testRowsColumnsCriterion(const Matrix& matrix);
 bool hasSolution(const Matrix& matrix);

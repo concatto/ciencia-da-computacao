@@ -67,6 +67,11 @@ Matrix gaussianElimination(Matrix m, bool usePartialPivot) {
 
         double pivot = m[i][i];
 
+        if (pivot == 0) {
+            std::cout << "Pivot is zero. Stopping...\n";
+            return Matrix(m.size(), Row(m.front().size(), NAN));
+        }
+
         for (uint j = i + 1; j < m.size(); j++) {
             double multiplier = -m[j][i] / pivot;
 
@@ -127,7 +132,7 @@ double errorFunction(const Solution &currentSolution, const Solution &previousSo
     return numerator / denominator;
 }
 
-Solution solveSystemIteratively(const Matrix& matrix, double precision, bool improvedMode, Solution previousSolution) {
+Solution solveSystemIteratively(const Matrix& matrix, double precision, IterativeMode mode, Solution previousSolution) {
     if (previousSolution.empty()) {
         previousSolution = Row(matrix.size(), 0);
     }
@@ -144,9 +149,9 @@ Solution solveSystemIteratively(const Matrix& matrix, double precision, bool imp
             for (uint j = 0; j < matrix[i].size() - 1; j++) {
                 if (j == i) continue;
 
-                if (improvedMode) {
+                if (mode == IterativeMode::GaussSeidel) {
                     m -= matrix[i][j] * (i < j ? previousSolution[j] : solution[j]);
-                } else {
+                } else if (mode == IterativeMode::GaussJacobi) {
                     m -= matrix[i][j] * previousSolution[j];
                 }
             }
@@ -212,6 +217,9 @@ void verifySolution(const Solution &solution, const Matrix& matrix, std::ostream
             sum += matrix[i][j] * solution[j];
         }
 
+        out << "Output: " << sum << "\n";
+        out << "Target: " << matrix[i].back() << "\n";
         out << "Delta: " << (sum - matrix[i].back()) << "\n";
+        out << "\n";
     }
 }
