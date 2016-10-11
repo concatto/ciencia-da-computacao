@@ -35,6 +35,7 @@ void problem2() {
         {0, 0, 0, 0, 0, 0, 0, 0, -1, 4, -65}
     };
 
+    testSassenfeldCriterion(m);
     Solution sol = solveSystemIteratively(m, 1E-10, IterativeMode::GaussJacobi);
     printRow(sol);
     verifySolution(sol, m);
@@ -78,13 +79,56 @@ void problem3() {
     verifySolution(solC, c);
 }
 
+void problem4() {
+    /*Matrix a = {
+        {10, 1, 1, 12},
+        {1, 10, 1, 12},
+        {1, 1, 10, 12}
+    };
+
+    testSassenfeldCriterion(a);
+    Solution sol = solveSystemIteratively(a, 1E-10, IterativeMode::GaussSeidel);
+    printRow(sol);
+    verifySolution(sol, a);
+    */
+
+    /*Matrix b = {
+        {4, -1, 0, 0, 1},
+        {-1, 4, -1, 0, 1},
+        {0, -1, 4, -1, 1},
+        {0, 0, -1, 4, 1},
+    };
+
+    testSassenfeldCriterion(b);
+    Solution solB = solveSystemIteratively(b, 1E-10, IterativeMode::GaussSeidel);
+    printRow(solB);
+    verifySolution(solB, b);
+    */
+
+    Matrix c = {
+        {1, 1, -1, 2, -1, 2},
+        {2, 0, 0, 0, 0, 2},
+        {0, 2, 0, 0, 0, 2},
+        {4, 0, 0, 16, 0, 20},
+        {0, 0, 4, 0, 0, 4}
+    };
+
+    testSassenfeldCriterion(c);
+    Solution solC = solveSystem(c, true);
+    //Solution solC = solveSystemIteratively(c, 1E-10, IterativeMode::GaussSeidel);
+    printRow(solC);
+    verifySolution(solC, c);
+}
+
 void problem5() {
     std::vector<Point> points{
         {2, 7.38}, {2.2, 9.02}, {2.4, 11.02}, {2.6, 13.46}, {2.8, 16.44},
         {3, 20.08}, {3.2, 24.53}, {3.4, 29.96}, {3.6, 36.59}, {3.8, 44.7}
     };
 
-    std::cout << toFunctionString(polynomialInterpolation(points, [&](const Matrix& m) { return solveSystem(m, true); })) << "\n";
+    Solution sol = polynomialInterpolation(points, [&](const Matrix& m) { return solveSystem(m, true); });
+    std::cout << toFunctionString(sol) << "\n";
+    std::cout << applyFunction(sol, 5);
 }
 
 void problem6() {
@@ -97,7 +141,7 @@ void problem6() {
 int main()
 {
     //problem3();
-    problem5();
+    problem4();
 
 
 

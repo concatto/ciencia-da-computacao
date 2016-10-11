@@ -41,19 +41,15 @@ void partialPivot(Matrix& m, uint rowIndex) {
 SystemType classifySystem(const Matrix& matrix) {
     const Row& lastRow = matrix.back();
 
-    //TODO: Testar NaN
+    //TODO: Sistema possível indeterminado
 
     double lastRowSum = 0;
     for (uint i = 0; i < lastRow.size() - 1; i++) {
         lastRowSum += lastRow[i];
     }
 
-    if (lastRowSum == 0) {
-        return lastRow.back() == 0 ? SystemType::Indeterminate : SystemType::Impossible;
-    } else {
-        if (lastRow.back() == lastRow[lastRow.size() - 2]) {
-            return SystemType::Indeterminate;
-        }
+    if (lastRowSum == 0 && matrix.back().back() != 0) {
+        return SystemType::Impossible;
     }
 
     return SystemType::Possible;
@@ -90,7 +86,7 @@ Matrix gaussianElimination(Matrix m, bool usePartialPivot) {
 
 Solution solveSystem(const Matrix& problem, bool usePartialPivot) {
     Matrix matrix = gaussianElimination(problem, usePartialPivot);
-
+    printMatrix(matrix);
     SystemType type = classifySystem(matrix);
     if (type != SystemType::Possible) {
         std::cout << (type == SystemType::Impossible ? "Impossível" : "Indeterminado") << "\n";
@@ -183,7 +179,12 @@ bool testSassenfeldCriterion(const Matrix& matrix) {
         std::cout << "beta " << i << " = " << sum << " / " << matrix[i][i] << "\n";
     }
 
-    return std::all_of(beta.begin(), beta.end(), [](double v) { return v < 1; });
+    if (std::all_of(beta.begin(), beta.end(), [](double v) { return v < 1; })) {
+        std::cout << "Passed Sassenfeld\n";
+        return true;
+    }
+    std::cout << "Didn't pass Sassenfeld\n";
+    return false;
 }
 
 bool testRowsColumnsCriterion(const Matrix& matrix) {
