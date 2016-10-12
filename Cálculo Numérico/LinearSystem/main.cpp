@@ -1,6 +1,7 @@
+#include "definitions.h"
 #include "linearsystem.h"
 #include "interpolation.h"
-#include <fstream>
+#include "utils.h"
 
 void problem1() {
     Matrix m = {
@@ -42,7 +43,7 @@ void problem2() {
 }
 
 void problem3() {
-/*
+
     Matrix a = {
         {2, 3, 1, 1, 7},
         {1, -1, 2, -1, 1},
@@ -53,9 +54,8 @@ void problem3() {
     Solution solA = solveSystem(a, true);
     printRow(solA);
     verifySolution(solA, a);
-*/
 
-/*
+
     Matrix b = {
         {3, -2, 5, 1, 7},
         {-6, 4, -8, 1, -9},
@@ -66,7 +66,7 @@ void problem3() {
     Solution solB = solveSystem(b, true);
     printRow(solB);
     verifySolution(solB, b);
-*/
+
 
     Matrix c = {
         {0.252, 0.36, 0.12, 7},
@@ -79,32 +79,44 @@ void problem3() {
     verifySolution(solC, c);
 }
 
+void subproblem4(Matrix m) {
+    std::vector<std::vector<uint>> p = permutations(m.size());
+    for (const std::vector<uint>& k : p) {
+        Matrix mod;
+        for (uint i : k) {
+            mod.push_back(m[i]);
+        }
+
+        if (testSassenfeldCriterion(mod)) {
+            m = mod;
+            break;
+        }
+    }
+
+    Solution sol = solveSystemIteratively(m, 1E-10, IterativeMode::GaussSeidel);
+    printRow(sol);
+    verifySolution(sol, m);
+}
+
 void problem4() {
-    /*Matrix a = {
+    /*
+    Matrix a = {
         {10, 1, 1, 12},
         {1, 10, 1, 12},
         {1, 1, 10, 12}
     };
 
-    testSassenfeldCriterion(a);
-    Solution sol = solveSystemIteratively(a, 1E-10, IterativeMode::GaussSeidel);
-    printRow(sol);
-    verifySolution(sol, a);
-    */
+    subproblem4(a);
 
-    /*Matrix b = {
+    Matrix b = {
         {4, -1, 0, 0, 1},
         {-1, 4, -1, 0, 1},
         {0, -1, 4, -1, 1},
         {0, 0, -1, 4, 1},
     };
 
-    testSassenfeldCriterion(b);
-    Solution solB = solveSystemIteratively(b, 1E-10, IterativeMode::GaussSeidel);
-    printRow(solB);
-    verifySolution(solB, b);
+    subproblem4(b);
     */
-
     Matrix c = {
         {1, 1, -1, 2, -1, 2},
         {2, 0, 0, 0, 0, 2},
@@ -113,11 +125,7 @@ void problem4() {
         {0, 0, 4, 0, 0, 4}
     };
 
-    testSassenfeldCriterion(c);
-    Solution solC = solveSystem(c, true);
-    //Solution solC = solveSystemIteratively(c, 1E-10, IterativeMode::GaussSeidel);
-    printRow(solC);
-    verifySolution(solC, c);
+    subproblem4(c);
 }
 
 void problem5() {
@@ -133,15 +141,14 @@ void problem5() {
 
 void problem6() {
     std::vector<Point> points = {{0, -2.78}, {0.5, -2.241}, {1, -1.65}, {1.5, -0.594}, {2, 1.34}, {2.5, 4.564}};
-    //std::vector<Point> points = {{0.2, 0.16}, {0.34, 0.22}, {0.4, 0.27}, {0.52, 0.29}, {0.6, 0.32}, {0.72, 0.37}};
     Solution sol = newtonPolynomial(points);
     std::cout << toFunctionString(sol) << "\n";
 }
 
 int main()
 {
-    //problem3();
-    problem4();
+    problem3();
+    //problem4();
 
 
 

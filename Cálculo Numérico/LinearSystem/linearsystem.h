@@ -9,15 +9,14 @@ enum SystemType {
     Possible, Impossible, Indeterminate
 };
 
-void printRow(const Row& row, std::ostream& out = std::cout);
-void printMatrix(const Matrix& m, std::ostream& out = std::cout);
-bool nearZero(double value);
+
 void partialPivot(Matrix& m, uint rowIndex);
-SystemType classifySystem(const Matrix& matrix);
 Matrix gaussianElimination(Matrix m, bool usePartialPivot);
 Solution solveSystem(const Matrix& problem, bool usePartialPivot = false);
-double errorFunction(const Solution& currentSolution, const Solution& previousSolution);
 Solution solveSystemIteratively(const Matrix& matrix, double precision, IterativeMode mode, Solution previousSolution = Solution(0));
+
+SystemType classifySystem(const Matrix& matrix);
+double errorFunction(const Solution& currentSolution, const Solution& previousSolution);
 bool testSassenfeldCriterion(const Matrix& matrix);
 bool testRowsColumnsCriterion(const Matrix& matrix);
 bool hasSolution(const Matrix& matrix);

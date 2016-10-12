@@ -4,13 +4,14 @@
 #include <sstream>
 #include <algorithm>
 #include <iomanip>
+#include "linearsystem.h"
+#include "utils.h"
 
-Row operator*(const Row& row, double c) {
-    Row r;
-    for (double v : row) {
-        r.push_back(v * c);
-    }
-    return r;
+Solution polynomialInterpolation(std::vector<Point> points) {
+    return polynomialInterpolation(points, [](const Matrix& m) {
+        //By default, solve using Gaussian Elimination with partial pivoting.
+        return solveSystem(m, true);
+    });
 }
 
 Solution polynomialInterpolation(std::vector<Point> points, std::function<Solution(const Matrix&)> solver) {
@@ -20,45 +21,15 @@ Solution polynomialInterpolation(std::vector<Point> points, std::function<Soluti
         Row row;
 
         for (uint j = 0; j < points.size(); j++) {
+            //x^0, x^1, x^2, ...
             row.push_back(std::pow(points[i].x, j));
         }
 
         row.push_back(points[i].y);
-
         matrix.push_back(row);
     }
 
-
     return solver(matrix);
-}
-
-
-std::string toFunctionString(Solution solution) {
-    std::ostringstream oss;
-    oss << std::fixed;
-
-    uint exponent = solution.size() - 1;
-    for (Solution::reverse_iterator it = solution.rbegin(); it != solution.rend(); ++it) {
-        double value = *it;
-
-        if (value != 0) {
-            if (value < 0) {
-                oss << "- ";
-            } else if (exponent < solution.size() - 1) {
-                oss << "+ ";
-            }
-            if (value != 1) oss << std::abs(value);
-            if (exponent > 0) oss << "x";
-            if (exponent > 1) {
-                oss << "^" << exponent;
-            }
-            oss << " ";
-        }
-
-        exponent--;
-    }
-
-    return oss.str();
 }
 
 Solution linearInterpolation(const Point &a, const Point &b) {
@@ -103,25 +74,7 @@ double lagrange(const std::vector<Point>& points, double x) {
     return sum * multiplier;
 }
 
-Matrix rotateMatrixLeft(const Matrix& original) {
-    Matrix m(original.front().size());
-
-    for (uint i = 0; i < m.size(); i++) {
-        Row row(original.size());
-
-        for (uint j = 0; j < row.size(); j++) {
-            std::cout << j << ", " << i << ", " << original.size() << ", " << original[j].size() << "\n";
-            row[j] = original[j][i];
-
-        }
-
-        m[i] = row;
-    }
-
-    return m;
-}
-
-Matrix dividedDifferences(const std::vector<Point>& points) {
+Matrix computeDividedDifferencesTable(const std::vector<Point>& points) {
     Matrix m(points.size(), Row(points.size() + 1));
 
     for (uint i = 0; i < points.size(); i++) {
@@ -133,6 +86,7 @@ Matrix dividedDifferences(const std::vector<Point>& points) {
         uint order = j - 1;
 
         for (uint i = 0; i < m.size() - order; i++) {
+            //Main divided differences division
             m[i][j] = (m[i + 1][j - 1] - m[i][j - 1]) / (m[i + order][0] - m[i][0]);
         }
     }
@@ -141,37 +95,9 @@ Matrix dividedDifferences(const std::vector<Point>& points) {
     return m;
 }
 
-Row constructSimplePolynomial(const std::vector<double>& coefficients) {
-    Row result(coefficients.size() + 1, 0);
-    result[0] = coefficients[0];
-    result[1] = 1;
-
-    for (uint i = 1; i < coefficients.size(); i++) {
-        for (int j = i; j >= 0; j--) {
-            result[j + 1] = result[j];
-        }
-
-        result[0] = 0;
-
-        for (uint j = 0; j < i + 1; j++) {
-            result[j] += result[j + 1] * coefficients[i];
-        }
-    }
-
-    return result;
-}
-
-double applyFunction(const Solution& solution, double x) {
-    double result = 0;
-    for (uint i = 0; i < solution.size(); i++) {
-        result += solution[i] * std::pow(x, i);
-    }
-    return result;
-}
 
 Solution newtonPolynomial(const std::vector<Point>& points) {
-    Matrix m = dividedDifferences(points);
-    printMatrix(m);
+    Matrix m = computeDividedDifferencesTable(points);
 
     Solution solution(points.size());
     solution[0] = points[0].y;
@@ -192,23 +118,4 @@ Solution newtonPolynomial(const std::vector<Point>& points) {
     }
 
     return solution;
-}
-
-std::vector<Point> reshapePoints(const std::vector<Point>& points) {
-    std::vector<Point> r;
-    for (const Point& p : points) {
-        r.push_back(Point(p.y, p.x));
-    }
-
-    return r;
-}
-
-void sortPoints(std::vector<Point>& points, Axis axis, bool crescent) {
-    std::sort(points.begin(), points.end(), [&](const Point& a, const Point& b) {
-        if (axis == Axis::X) {
-            return crescent ? a.x < b.x : a.x > b.x;
-        } else {
-            return crescent ? a.y < b.y : a.y > b.y;
-        }
-    });
 }
