@@ -2,6 +2,7 @@
 #include "linearsystem.h"
 #include "interpolation.h"
 #include "utils.h"
+#include <fstream>
 
 void problem1() {
     Matrix m = {
@@ -93,13 +94,14 @@ void subproblem4(Matrix m) {
         }
     }
 
-    Solution sol = solveSystemIteratively(m, 1E-10, IterativeMode::GaussSeidel);
+    printMatrix(m);
+
+    Solution sol = solveSystemIteratively(m, 1E-10, IterativeMode::GaussJacobi);
     printRow(sol);
     verifySolution(sol, m);
 }
 
 void problem4() {
-    /*
     Matrix a = {
         {10, 1, 1, 12},
         {1, 10, 1, 12},
@@ -116,7 +118,7 @@ void problem4() {
     };
 
     subproblem4(b);
-    */
+
     Matrix c = {
         {1, 1, -1, 2, -1, 2},
         {2, 0, 0, 0, 0, 2},
@@ -134,9 +136,11 @@ void problem5() {
         {3, 20.08}, {3.2, 24.53}, {3.4, 29.96}, {3.6, 36.59}, {3.8, 44.7}
     };
 
+    std::ofstream file("problema5.txt");
     Solution sol = polynomialInterpolation(points, [&](const Matrix& m) { return solveSystem(m, true); });
-    std::cout << toFunctionString(sol) << "\n";
-    std::cout << applyFunction(sol, 5);
+    printRow(sol, file);
+    file << toFunctionString(sol) << "\n";
+    file << applyFunction(sol, 5);
 }
 
 void problem6() {
@@ -147,7 +151,7 @@ void problem6() {
 
 int main()
 {
-    problem3();
+    problem5();
     //problem4();
 
 

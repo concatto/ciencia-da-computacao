@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <algorithm>
+#include <fstream>
 #include "utils.h"
 
 void partialPivot(Matrix& m, uint rowIndex) {
@@ -91,9 +92,14 @@ Matrix gaussianElimination(Matrix m, bool usePartialPivot) {
     return m;
 }
 
+int GLOBAL_INDEX = 4;
 Solution solveSystem(const Matrix& problem, bool usePartialPivot) {
     Matrix matrix = gaussianElimination(problem, usePartialPivot);
-    printMatrix(matrix);
+
+
+    std::ofstream file("questao" + std::to_string(GLOBAL_INDEX++) + ".txt");
+    printMatrix(matrix, file);
+    file.close();
 
     SystemType type = classifySystem(matrix);
     if (type != SystemType::Possible) {
@@ -143,6 +149,8 @@ Solution solveSystemIteratively(const Matrix& matrix, double precision, Iterativ
 
     Solution solution(matrix.size(), 0);
 
+    std::ofstream file("seidel" + std::to_string(GLOBAL_INDEX++) + ".txt");
+    uint k = 1;
     double error;
     do {
         for (uint i = 0; i < solution.size(); i++) {
@@ -163,12 +171,15 @@ Solution solveSystemIteratively(const Matrix& matrix, double precision, Iterativ
             solution[i] *= m;
         }
 
-        std::cout << "Current iteration -> ";
-        printRow(solution);
+        std::cout << "Current iteration (" << k << ") -> ";
 
         error = errorFunction(solution, previousSolution);
+        printRow(solution, file);
+        file << error << "\n";
         std::cout << "Error: " << error << "\n";
+
         previousSolution = solution;
+        k++;
     } while (error > precision);
 
     return solution;
@@ -185,14 +196,14 @@ bool testSassenfeldCriterion(const Matrix& matrix) {
             sum += std::abs(matrix[i][j]) * beta[j];
         }
 
+        std::cout << "Beta " << i << " = " << sum << " / " << matrix[i][i] << " = ";
         if (matrix[i][i] == 0) {
             std::cout << "Division by zero! Can't test Sassenfeld!\n";
             return false;
         }
 
         beta[i] = sum / matrix[i][i];
-
-        std::cout << "Beta " << i << " = " << sum << " / " << matrix[i][i] << " = " << beta[i] << "\n";
+        std::cout << beta[i] << "\n";
     }
 
     if (std::all_of(beta.begin(), beta.end(), [](double v) { return v < 1; })) {

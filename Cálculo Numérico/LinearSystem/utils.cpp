@@ -5,7 +5,7 @@
 
 void printRow(const Row& row, std::ostream& out) {
     for (double d : row) {
-        out << d << "    ";
+        out << d << " ";
     }
     out << "\n";
 }
