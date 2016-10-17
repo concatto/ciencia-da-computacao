@@ -1,27 +1,9 @@
 #include "linearsystem.h"
 
 #include <cmath>
-#include <limits>
 #include <algorithm>
-
-const double Minimum = 1E-11;
-
-void printRow(const Row& row, std::ostream& out) {
-    for (const double d : row) {
-        out << d << "    ";
-    }
-    out << "\n";
-}
-
-void printMatrix(const Matrix& m, std::ostream& out) {
-    for (const Row& row : m) {
-        printRow(row, out);
-    }
-}
-
-bool nearZero(double value) {
-    return value < Minimum && value > (0 - Minimum);
-}
+#include <fstream>
+#include "utils.h"
 
 void partialPivot(Matrix& m, uint rowIndex) {
     uint highestRow = rowIndex;
@@ -38,22 +20,40 @@ void partialPivot(Matrix& m, uint rowIndex) {
     }
 }
 
+//Matrix must be in row echelon form
 SystemType classifySystem(const Matrix& matrix) {
-    const Row& lastRow = matrix.back();
+    for (Matrix::const_reverse_iterator it = matrix.rbegin(); it != matrix.rend(); ++it) {
+        const Row& row = *it;
+        bool nonZeroRow = std::any_of(row.begin(), row.end(), [](double v) { return v != 0; });
 
-    //TODO: Testar NaN
+        if (nonZeroRow) {
+            //Only nonzero value is in the B vector
+            if (std::all_of(row.begin(), row.end() - 1, [](double v) { return v == 0; })) {
+                return SystemType::Impossible;
+            }
 
-    double lastRowSum = 0;
-    for (uint i = 0; i < lastRow.size() - 1; i++) {
-        lastRowSum += lastRow[i];
+            break;
+        }
     }
 
-    if (lastRowSum == 0) {
-        return lastRow.back() == 0 ? SystemType::Indeterminate : SystemType::Impossible;
-    } else {
-        if (lastRow.back() == lastRow[lastRow.size() - 2]) {
+    uint prevZeros = 0;
+    for (const Row& row : matrix) {
+        uint zeros = 0;
+
+        for (double v : row) {
+            if (v == 0) {
+                zeros++;
+            } else {
+                break;
+            }
+        }
+
+        //Not perfectly triangular
+        if (std::abs(zeros - prevZeros) > 1) {
             return SystemType::Indeterminate;
         }
+
+        prevZeros = zeros;
     }
 
     return SystemType::Possible;
@@ -68,8 +68,12 @@ Matrix gaussianElimination(Matrix m, bool usePartialPivot) {
         double pivot = m[i][i];
 
         if (pivot == 0) {
-            std::cout << "Pivot is zero. Stopping...\n";
-            return Matrix(m.size(), Row(m.front().size(), NAN));
+            if (usePartialPivot) {
+                continue;
+            } else {
+                std::cout << "Pivot is zero! Stopping...\n";
+                return Matrix(m.size(), Row(m.front().size(), NAN));
+            }
         }
 
         for (uint j = i + 1; j < m.size(); j++) {
@@ -88,12 +92,18 @@ Matrix gaussianElimination(Matrix m, bool usePartialPivot) {
     return m;
 }
 
+int GLOBAL_INDEX = 4;
 Solution solveSystem(const Matrix& problem, bool usePartialPivot) {
     Matrix matrix = gaussianElimination(problem, usePartialPivot);
 
+
+    std::ofstream file("questao" + std::to_string(GLOBAL_INDEX++) + ".txt");
+    printMatrix(matrix, file);
+    file.close();
+
     SystemType type = classifySystem(matrix);
     if (type != SystemType::Possible) {
-        std::cout << (type == SystemType::Impossible ? "Impossível" : "Indeterminado") << "\n";
+        std::cout << (type == SystemType::Impossible ? "Impossivel" : "Possivel indeterminado") << "\n";
         return Row(matrix.size(), NAN);
     }
 
@@ -103,7 +113,7 @@ Solution solveSystem(const Matrix& problem, bool usePartialPivot) {
         double b = matrix[i].back();
 
         double sum = 0;
-        for (uint j = i + 1; j < solution.size(); j++) { //Will not execute when i = |solution|
+        for (uint j = i + 1; j < solution.size(); j++) {
             sum += matrix[i][j] * solution[j];
         }
 
@@ -114,10 +124,10 @@ Solution solveSystem(const Matrix& problem, bool usePartialPivot) {
 }
 
 double errorFunction(const Solution &currentSolution, const Solution &previousSolution) {
-    double numerator = std::numeric_limits<double>::min();
-    double denominator = std::numeric_limits<double>::min();
+    double numerator = std::abs(currentSolution[0] - previousSolution[0]);
+    double denominator = std::abs(currentSolution[0]);
 
-    for (uint i = 0; i < currentSolution.size(); i++) {
+    for (uint i = 1; i < currentSolution.size(); i++) {
         double value = std::abs(currentSolution[i] - previousSolution[i]);
         if (value > numerator) {
             numerator = value;
@@ -139,6 +149,8 @@ Solution solveSystemIteratively(const Matrix& matrix, double precision, Iterativ
 
     Solution solution(matrix.size(), 0);
 
+    std::ofstream file("seidel" + std::to_string(GLOBAL_INDEX++) + ".txt");
+    uint k = 1;
     double error;
     do {
         for (uint i = 0; i < solution.size(); i++) {
@@ -159,10 +171,15 @@ Solution solveSystemIteratively(const Matrix& matrix, double precision, Iterativ
             solution[i] *= m;
         }
 
+        std::cout << "Current iteration (" << k << ") -> ";
+
         error = errorFunction(solution, previousSolution);
+        printRow(solution, file);
+        file << error << "\n";
         std::cout << "Error: " << error << "\n";
+
         previousSolution = solution;
-        printRow(solution);
+        k++;
     } while (error > precision);
 
     return solution;
@@ -170,6 +187,7 @@ Solution solveSystemIteratively(const Matrix& matrix, double precision, Iterativ
 
 bool testSassenfeldCriterion(const Matrix& matrix) {
     std::vector<double> beta(matrix.size(), 1);
+
     for (uint i = 0; i < beta.size(); i++) {
         double sum = 0;
         for (uint j = 0; j < matrix[i].size() - 1; j++) {
@@ -178,12 +196,22 @@ bool testSassenfeldCriterion(const Matrix& matrix) {
             sum += std::abs(matrix[i][j]) * beta[j];
         }
 
-        beta[i] = sum / matrix[i][i];
+        std::cout << "Beta " << i << " = " << sum << " / " << matrix[i][i] << " = ";
+        if (matrix[i][i] == 0) {
+            std::cout << "Division by zero! Can't test Sassenfeld!\n";
+            return false;
+        }
 
-        std::cout << "beta " << i << " = " << sum << " / " << matrix[i][i] << "\n";
+        beta[i] = sum / matrix[i][i];
+        std::cout << beta[i] << "\n";
     }
 
-    return std::all_of(beta.begin(), beta.end(), [](double v) { return v < 1; });
+    if (std::all_of(beta.begin(), beta.end(), [](double v) { return v < 1; })) {
+        std::cout << "Passed Sassenfeld\n";
+        return true;
+    }
+    std::cout << "Didn't pass Sassenfeld\n";
+    return false;
 }
 
 bool testRowsColumnsCriterion(const Matrix& matrix) {
@@ -194,7 +222,7 @@ bool testRowsColumnsCriterion(const Matrix& matrix) {
             if (i == j) continue;
             if (j >= matrix.size()) break;
 
-            sumRow += matrix[i][j];
+            sumRow  += matrix[i][j];
             sumColumn += matrix[j][i];
         }
 
@@ -211,6 +239,11 @@ bool hasSolution(const Matrix& matrix) {
 }
 
 void verifySolution(const Solution &solution, const Matrix& matrix, std::ostream& out) {
+    if (std::any_of(solution.begin(), solution.end(), [](double v) { return std::isnan(v); })) {
+        std::cout << "Solution contains NaN! Stopping...\n";
+        return;
+    }
+
     for (uint i = 0; i < matrix.size(); i++) {
         double sum = 0;
         for (uint j = 0; j < matrix[i].size() - 1; j++) {
