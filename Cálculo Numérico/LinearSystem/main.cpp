@@ -96,8 +96,10 @@ void problem6() {
 
 int main()
 {
+    printRow(linearInterpolation(Point(1, -1), Point(0, 1)));
+
     //problem3();
-    problem5();
+    //problem5();
 
 
 

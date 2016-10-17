@@ -7,31 +7,37 @@ import static org.lwjgl.system.MemoryUtil.*;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
+import br.univali.game.graphics.GraphicsAPI;
+import br.univali.game.window.GLWindow;
+import br.univali.game.window.GameWindow;
+
 public class Application {
 	public Application() {
-		GLFWErrorCallback.createPrint(System.err).set();
+		GameWindow window = new GLWindow(640, 480);
+		BellumController b = new BellumController(window);
+		
+		while (true) {
+			b.drawGame();
+		}
+		
+		/*
 		glfwInit();
 		long window = glfwCreateWindow(640, 480, "Teste", NULL, NULL);
 		glfwMakeContextCurrent(window);
 		glfwShowWindow(window);
-		
-		
 		GL.createCapabilities();
-		glClearColor(0, 0, 0, 1);
-		float red = 0;
+		
 		while (true) {
+			glClearColor(0, 0, 0, 1);
+			glColor3f(1, 1, 1);
 			glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 			
-			glColor3f(1, 1, 1);
+			glClearColor(0, 0, 0, 1);
+			glColor3f(1, 1, 1);			
 			glRectf(0, 0, 1, 1);
-			
-			glClearColor(red, 0, 0, 1);
-			
-			red += 0.0001;
-			if (red > 1) red = 0;
-			
+						
 			glfwSwapBuffers(window);
-		}
+		}*/
 	}
 	
 	

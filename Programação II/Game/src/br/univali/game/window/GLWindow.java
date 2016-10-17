@@ -15,16 +15,16 @@ public class GLWindow extends GameWindow {
 		
 		glfwInit();
 		window = glfwCreateWindow(width, height, "", NULL, NULL);
-		graphics = new GLGraphics(window);
+		graphics = new GLGraphics(window, width, height);
 		
 		glfwMakeContextCurrent(window);
+		glfwShowWindow(window);
 		GL.createCapabilities();
 	}
 
 	@Override
-	void draw() {
-		// TODO Auto-generated method stub
-		
+	public void draw() {
+		glfwSwapBuffers(window);
 	}
 
 }

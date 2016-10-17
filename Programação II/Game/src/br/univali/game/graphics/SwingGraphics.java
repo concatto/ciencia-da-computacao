@@ -4,31 +4,22 @@ import javax.swing.JFrame;
 
 public class SwingGraphics implements GraphicsAPI {
 	private JFrame window;
+	private int width;
+	private int height;
 	
-	public SwingGraphics(JFrame window) {
+	public SwingGraphics(JFrame window, int width, int height) {
 		this.window = window;
-	}
-	
-	@Override
-	public void initialize() {
-		// TODO Auto-generated method stub
-		
+		this.width = width;
+		this.height = height;
 	}
 
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
-	public void setColor(int red, int green, int blue) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setColor(float red, float green, float blue) {
+	public void setColor(double red, double green, double blue) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -57,4 +48,14 @@ public class SwingGraphics implements GraphicsAPI {
 		
 	}
 
+	@Override
+	public long loadImage(String path) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void drawImage(long image, int x, int y) {
+		// TODO Auto-generated method stub	
+	}
 }
