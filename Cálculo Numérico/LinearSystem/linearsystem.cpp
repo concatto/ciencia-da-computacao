@@ -5,13 +5,13 @@
 #include <fstream>
 #include "utils.h"
 
-void partialPivot(Matrix& m, uint rowIndex) {
+void partialPivot(Matrix& m, uint rowIndex, uint columnIndex) {
     uint highestRow = rowIndex;
-    double highestValue = m[rowIndex][rowIndex];
+    double highestValue = m[rowIndex][columnIndex];
     for (uint i = rowIndex + 1; i < m.size(); i++) {
-        if (std::abs(m[i][rowIndex]) > std::abs(highestValue)) {
+        if (std::abs(m[i][columnIndex]) > std::abs(highestValue)) {
             highestRow = i;
-            highestValue = m[i][rowIndex];
+            highestValue = m[i][columnIndex];
         }
     }
 
@@ -20,15 +20,54 @@ void partialPivot(Matrix& m, uint rowIndex) {
     }
 }
 
-//Matrix must be in row echelon form
+void partialPivot(Matrix &m, uint rowIndex) {
+    partialPivot(m, rowIndex, rowIndex);
+}
+
+Matrix gaussianEliminationClassification(Matrix m) {
+    for (uint i = 0; i < m.size() - 1; i++) {
+        uint col = i;
+        for (uint j = i; j < m[i].size(); j++) {
+            if (m[i][j] != 0) {
+                col = j;
+                break;
+            }
+        }
+
+        partialPivot(m, i, col);
+        double pivot = m[i][col];
+
+        if (pivot == 0) {
+            continue;
+        }
+
+        for (uint j = i + 1; j < m.size(); j++) {
+            double multiplier = -m[j][col] / pivot;
+
+            for (uint k = 0; k < m[j].size(); k++) {
+                m[j][k] = m[j][k] + (multiplier * m[i][k]);
+
+                if (nearZero(m[j][k])) {
+                    m[j][k] = 0;
+                }
+            }
+        }
+    }
+
+    return m;
+}
+
 SystemType classifySystem(const Matrix& matrix) {
-    for (Matrix::const_reverse_iterator it = matrix.rbegin(); it != matrix.rend(); ++it) {
+    Matrix echelon = gaussianEliminationClassification(matrix);
+
+    for (Matrix::const_reverse_iterator it = echelon.rbegin(); it != echelon.rend(); ++it) {
         const Row& row = *it;
         bool nonZeroRow = std::any_of(row.begin(), row.end(), [](double v) { return v != 0; });
 
         if (nonZeroRow) {
             //Only nonzero value is in the B vector
             if (std::all_of(row.begin(), row.end() - 1, [](double v) { return v == 0; })) {
+                printMatrix(echelon);
                 return SystemType::Impossible;
             }
 
@@ -37,7 +76,7 @@ SystemType classifySystem(const Matrix& matrix) {
     }
 
     uint prevZeros = 0;
-    for (const Row& row : matrix) {
+    for (const Row& row : echelon) {
         uint zeros = 0;
 
         for (double v : row) {
@@ -50,6 +89,7 @@ SystemType classifySystem(const Matrix& matrix) {
 
         //Not perfectly triangular
         if (std::abs(zeros - prevZeros) > 1) {
+            printMatrix(echelon);
             return SystemType::Indeterminate;
         }
 
@@ -93,15 +133,17 @@ Matrix gaussianElimination(Matrix m, bool usePartialPivot) {
 }
 
 Solution solveSystem(const Matrix& problem, bool usePartialPivot) {
-    Matrix matrix = gaussianElimination(problem, usePartialPivot);
+    SystemType type = classifySystem(problem);
 
-    printMatrix(matrix);
-
-    SystemType type = classifySystem(matrix);
     if (type != SystemType::Possible) {
         std::cout << (type == SystemType::Impossible ? "Impossivel" : "Possivel indeterminado") << "\n";
-        return Row(matrix.size(), NAN);
+        return Row(problem.size(), NAN);
+    } else {
+        std::cout << "Possivel\n";
     }
+
+    Matrix matrix = gaussianElimination(problem, usePartialPivot);
+    printMatrix(matrix);    
 
     Solution solution(matrix.size(), 0);
 

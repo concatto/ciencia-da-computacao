@@ -46,7 +46,7 @@ void problem2() {
 void problem3() {
 
     Matrix a = {
-        {2, 3, 1, 1, 7},
+        {2, 2, 1, 1, 7},
         {1, -1, 2, -1, 1},
         {3, 2, -3, -2, 4},
         {4, 3, 2, 1, 12},
@@ -72,7 +72,7 @@ void problem3() {
     Matrix c = {
         {0.252, 0.36, 0.12, 7},
         {0.112, 0.16, 0.24, 8},
-        {0.147, 0.12, 0.25, 9}
+        {0.147, 0.21, 0.25, 9}
     };
 
     Solution solC = solveSystem(c, true);
@@ -160,24 +160,5 @@ int main()
     //problem4();
     //problem5();
     //problem6();
-
-
-    /*
-    std::vector<Point> data{{183, 79}, {173, 69}, {168, 70}, {188, 81}, {158, 61}, {163, 63}, {178, 73}};
-    sortPoints(data);
-
-    std::vector<Point> data2 = reshapePoints(data);
-    sortPoints(data2);
-
-    Solution s = polynomialInterpolation(data, [&](const Matrix& matrix) {
-        printMatrix(matrix);
-
-        Matrix m = gaussianElimination(matrix, true);
-        printMatrix(m);
-        return solveSystem(matrix, false);
-    });
-
-    printRow(s);
-    */
 }
 

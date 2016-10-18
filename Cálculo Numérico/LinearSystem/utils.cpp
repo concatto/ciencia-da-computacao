@@ -129,7 +129,8 @@ Row operator*(const Matrix& matrix, const Row& row) {
 
     for (uint i = 0; i < matrix.front().size() - 1; i++) {
         for (uint j = 0; j < row.size(); j++) {
-            result[j] += row[j] * matrix[i][j];
+            result[i] += row[j] * matrix[i][j];
+            //std::cout << "R" << j << " += " << row[j] << "*" << matrix[i][j] << " = " << result[j] << "\n";
         }
     }
 

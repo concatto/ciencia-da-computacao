@@ -10,11 +10,13 @@ enum SystemType {
 };
 
 
-void partialPivot(Matrix& m, uint rowIndex);
+void partialPivot(Matrix& m, uint rowIndex, uint columnIndex);
+void partialPivot(Matrix &m, uint rowIndex);
 Matrix gaussianElimination(Matrix m, bool usePartialPivot);
 Solution solveSystem(const Matrix& problem, bool usePartialPivot = false);
 Solution solveSystemIteratively(const Matrix& matrix, double precision, IterativeMode mode, Solution previousSolution = Solution(0));
 
+Matrix gaussianEliminationClassification(Matrix m);
 SystemType classifySystem(const Matrix& matrix);
 double errorFunction(const Solution& currentSolution, const Solution& previousSolution);
 bool testSassenfeldCriterion(const Matrix& matrix);
