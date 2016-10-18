@@ -119,3 +119,20 @@ Solution newtonPolynomial(const std::vector<Point>& points) {
 
     return solution;
 }
+
+void verifySolution(const Solution& solution, const std::vector<Point>& points, std::ostream& out) {
+    if (std::any_of(solution.begin(), solution.end(), [](double v) { return std::isnan(v); })) {
+        std::cout << "Solution contains NaN! Stopping...\n";
+        return;
+    }
+
+    for (uint i = 0; i < points.size(); i++) {
+        double value = applyFunction(solution, points[i].x);
+
+        out << "Output: " << value << "\n";
+        out << "Target: " << points[i].y << "\n";
+        out << "Delta: " << (value - points[i].y) << "\n";
+        out << "\n";
+    }
+}
+

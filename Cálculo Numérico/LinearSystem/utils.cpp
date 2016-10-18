@@ -123,3 +123,15 @@ std::vector<std::vector<uint>> permutations(uint quantity) {
 
     return container;
 }
+
+Row operator*(const Matrix& matrix, const Row& row) {
+    Row result(row.size(), 0);
+
+    for (uint i = 0; i < matrix.front().size() - 1; i++) {
+        for (uint j = 0; j < row.size(); j++) {
+            result[j] += row[j] * matrix[i][j];
+        }
+    }
+
+    return result;
+}

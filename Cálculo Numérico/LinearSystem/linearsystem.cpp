@@ -92,14 +92,10 @@ Matrix gaussianElimination(Matrix m, bool usePartialPivot) {
     return m;
 }
 
-int GLOBAL_INDEX = 4;
 Solution solveSystem(const Matrix& problem, bool usePartialPivot) {
     Matrix matrix = gaussianElimination(problem, usePartialPivot);
 
-
-    std::ofstream file("questao" + std::to_string(GLOBAL_INDEX++) + ".txt");
-    printMatrix(matrix, file);
-    file.close();
+    printMatrix(matrix);
 
     SystemType type = classifySystem(matrix);
     if (type != SystemType::Possible) {
@@ -149,7 +145,6 @@ Solution solveSystemIteratively(const Matrix& matrix, double precision, Iterativ
 
     Solution solution(matrix.size(), 0);
 
-    std::ofstream file("seidel" + std::to_string(GLOBAL_INDEX++) + ".txt");
     uint k = 1;
     double error;
     do {
@@ -172,10 +167,9 @@ Solution solveSystemIteratively(const Matrix& matrix, double precision, Iterativ
         }
 
         std::cout << "Current iteration (" << k << ") -> ";
+        printRow(solution);
 
         error = errorFunction(solution, previousSolution);
-        printRow(solution, file);
-        file << error << "\n";
         std::cout << "Error: " << error << "\n";
 
         previousSolution = solution;
@@ -244,15 +238,12 @@ void verifySolution(const Solution &solution, const Matrix& matrix, std::ostream
         return;
     }
 
-    for (uint i = 0; i < matrix.size(); i++) {
-        double sum = 0;
-        for (uint j = 0; j < matrix[i].size() - 1; j++) {
-            sum += matrix[i][j] * solution[j];
-        }
+    Row result = matrix * solution;
 
-        out << "Output: " << sum << "\n";
+    for (uint i = 0; i < result.size(); i++) {
+        out << "Output: " << result[i] << "\n";
         out << "Target: " << matrix[i].back() << "\n";
-        out << "Delta: " << (sum - matrix[i].back()) << "\n";
+        out << "Delta: " << (result[i] - matrix[i].back()) << "\n";
         out << "\n";
     }
 }

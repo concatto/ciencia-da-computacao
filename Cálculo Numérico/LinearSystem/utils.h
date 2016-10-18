@@ -14,5 +14,6 @@ std::vector<Point> reshapePoints(const std::vector<Point>& points);
 void sortPoints(std::vector<Point> &points, Axis axis = Axis::X, bool crescent = true);
 Solution constructSimplePolynomial(const std::vector<double>& coefficients);
 std::vector<std::vector<uint>> permutations(uint quantity);
+Row operator*(const Matrix& matrix, const Row& row);
 
 #endif // UTILS_H

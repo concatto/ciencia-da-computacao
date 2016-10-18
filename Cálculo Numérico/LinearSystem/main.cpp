@@ -38,7 +38,7 @@ void problem2() {
     };
 
     testSassenfeldCriterion(m);
-    Solution sol = solveSystemIteratively(m, 1E-10, IterativeMode::GaussJacobi);
+    Solution sol = solveSystemIteratively(m, 1E-10, IterativeMode::GaussSeidel);
     printRow(sol);
     verifySolution(sol, m);
 }
@@ -96,7 +96,7 @@ void subproblem4(Matrix m) {
 
     printMatrix(m);
 
-    Solution sol = solveSystemIteratively(m, 1E-10, IterativeMode::GaussJacobi);
+    Solution sol = solveSystemIteratively(m, 1E-10, IterativeMode::GaussSeidel);
     printRow(sol);
     verifySolution(sol, m);
 }
@@ -136,43 +136,29 @@ void problem5() {
         {3, 20.08}, {3.2, 24.53}, {3.4, 29.96}, {3.6, 36.59}, {3.8, 44.7}
     };
 
-    std::ofstream file("problema5.txt");
     Solution sol = polynomialInterpolation(points, [&](const Matrix& m) { return solveSystem(m, true); });
-    printRow(sol, file);
-    file << toFunctionString(sol) << "\n";
-    file << applyFunction(sol, 5);
+    printRow(sol);
+    std::cout << toFunctionString(sol) << "\n";
+    std::cout << "e^5 = " << applyFunction(sol, 5) << "\n";
+    verifySolution(sol, points);
 }
 
 void problem6() {
     std::vector<Point> points = {{0, -2.78}, {0.5, -2.241}, {1, -1.65}, {1.5, -0.594}, {2, 1.34}, {2.5, 4.564}};
     Solution sol = newtonPolynomial(points);
+    printRow(sol);
+
     std::cout << toFunctionString(sol) << "\n";
+    verifySolution(sol, points);
 }
 
 int main()
 {
-    problem5();
+    problem1();
+    //problem2();
+    //problem3();
     //problem4();
-
-
-
-
-    /*
-    std::vector<Point> data{{183, 79}, {173, 69}, {168, 70}, {188, 81}, {158, 61}, {163, 63}, {178, 73}};
-    sortPoints(data);
-
-    std::vector<Point> data2 = reshapePoints(data);
-    sortPoints(data2);
-
-    Solution s = polynomialInterpolation(data, [&](const Matrix& matrix) {
-        printMatrix(matrix);
-
-        Matrix m = gaussianElimination(matrix, true);
-        printMatrix(m);
-        return solveSystem(matrix, false);
-    });
-
-    printRow(s);
-    */
+    //problem5();
+    //problem6();
 }
 
