@@ -12,11 +12,11 @@ public class SwingWindow extends GameWindow {
 		
 		window = new JFrame();
 		window.setSize(width, height);
-		graphics = new SwingGraphics(window);
+		graphics = new SwingGraphics(window, width, height);
 	}
 
 	@Override
-	void draw() {
+	public void draw() {
 		// TODO Auto-generated method stub
 		
 	}

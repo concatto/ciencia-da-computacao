@@ -160,5 +160,24 @@ int main()
     //problem4();
     //problem5();
     //problem6();
+
+
+    /*
+    std::vector<Point> data{{183, 79}, {173, 69}, {168, 70}, {188, 81}, {158, 61}, {163, 63}, {178, 73}};
+    sortPoints(data);
+
+    std::vector<Point> data2 = reshapePoints(data);
+    sortPoints(data2);
+
+    Solution s = polynomialInterpolation(data, [&](const Matrix& matrix) {
+        printMatrix(matrix);
+
+        Matrix m = gaussianElimination(matrix, true);
+        printMatrix(m);
+        return solveSystem(matrix, false);
+    });
+
+    printRow(s);
+    */
 }
 

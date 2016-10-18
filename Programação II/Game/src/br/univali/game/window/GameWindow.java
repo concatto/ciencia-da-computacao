@@ -12,5 +12,17 @@ public abstract class GameWindow {
 		this.height = height;
 	}
 	
-	abstract void draw();
+	public abstract void draw();
+	
+	public GraphicsAPI getGraphics() {
+		return graphics;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
 }
