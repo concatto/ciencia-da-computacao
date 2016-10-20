@@ -238,7 +238,7 @@ bool testSassenfeldCriterion(const Matrix& matrix) {
             return false;
         }
 
-        beta[i] = sum / matrix[i][i];
+        beta[i] = sum / std::abs(matrix[i][i]);
         std::cout << beta[i] << "\n";
     }
 
@@ -258,11 +258,11 @@ bool testRowsColumnsCriterion(const Matrix& matrix) {
             if (i == j) continue;
             if (j >= matrix.size()) break;
 
-            sumRow  += matrix[i][j];
-            sumColumn += matrix[j][i];
+            sumRow += std::abs(matrix[i][j]);
+            sumColumn += std::abs(matrix[j][i]);
         }
 
-        if ((sumRow / matrix[i][i] >= 1) && (sumColumn / matrix[i][i] >= 1)) {
+        if ((sumRow / std::abs(matrix[i][i]) >= 1) && (sumColumn / std::abs(matrix[i][i]) >= 1)) {
             return false;
         }
     }
