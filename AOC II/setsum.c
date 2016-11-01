@@ -74,7 +74,6 @@ void* find_zero_subset(void* data) {
   unsigned long int i;
   for (i = p->start; i < p->end; i++) {
     int size;
-	printf("i = %lu\n", i);
     int* subset = generate_subset(p->set, i, &size);
     
     long int sum = calculate_set_sum(subset, size);
@@ -85,6 +84,8 @@ void* find_zero_subset(void* data) {
 
       return ((void*) sol);
     }
+	
+	free(subset);
   }
 
   return NULL;
