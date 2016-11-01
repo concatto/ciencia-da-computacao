@@ -177,6 +177,7 @@ double errorFunction(const Solution &currentSolution, const Solution &previousSo
         }
     }
 
+    std::cout << "Epsilon = " << numerator << " / " << denominator << "\n";
     return numerator / denominator;
 }
 
@@ -189,6 +190,7 @@ Solution solveSystemIteratively(const Matrix& matrix, double precision, Iterativ
 
     uint k = 1;
     double error;
+    std::cout.precision(10);
     do {
         for (uint i = 0; i < solution.size(); i++) {
             solution[i] = (1 / matrix[i][i]);
@@ -196,7 +198,7 @@ Solution solveSystemIteratively(const Matrix& matrix, double precision, Iterativ
             double m = matrix[i].back();
 
             for (uint j = 0; j < matrix[i].size() - 1; j++) {
-                if (j == i) continue;
+                if (j == i || matrix[i][j] == 0) continue;
 
                 if (mode == IterativeMode::GaussSeidel) {
                     m -= matrix[i][j] * (i < j ? previousSolution[j] : solution[j]);
@@ -214,6 +216,7 @@ Solution solveSystemIteratively(const Matrix& matrix, double precision, Iterativ
         error = errorFunction(solution, previousSolution);
         std::cout << "Error: " << error << "\n";
 
+        verifySolution(solution, matrix);
         previousSolution = solution;
         k++;
     } while (error > precision);

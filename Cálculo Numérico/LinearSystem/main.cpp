@@ -154,6 +154,18 @@ void problem6() {
 
 int main()
 {
+    Matrix m = {
+        {2, -1, 0, 0, 2},
+        {-1, 2, -1, 0, 1},
+        {0, -1, 2, -1, 9},
+        {0, 0, -1, 2, 11}
+    };
+
+    testSassenfeldCriterion(m);
+    solveSystemIteratively(m, 1E-2, IterativeMode::GaussSeidel);
+
+
+    return 0;
     problem1();
     //problem2();
     //problem3();
