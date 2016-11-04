@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex sbc-template"] 1478237399 "sbc-template.aux" "sbc-template.bbl" "sbc-template" 1478237589
+["bibtex sbc-template"] 1478100651 "sbc-template.aux" "sbc-template.bbl" "sbc-template" 1478100955
   "./sbc.bst" 1412946846 21864 a668496cca21cfdd211f7fb5f0d57565 ""
-  "sbc-template.aux" 1478237588 1960 058a08eb00ece2986a182707d1863262 ""
+  "sbc-template.aux" 1478100954 1811 ba03a4b4cd9ea76278976091f2210845 ""
   "sbc-template.bcf" 0 -1 0 ""
-  "sbc-template.bib" 1478236348 6076 3231757fd68a80629ca0e8290536f89c ""
+  "sbc-template.bib" 1478100431 3941 1d799f5b0296eea7be2f69558ce71787 ""
   (generated)
   "sbc-template.blg"
   "sbc-template.bbl"
-["pdflatex"] 1478237588 "sbc-template.tex" "sbc-template.pdf" "sbc-template" 1478237589
+["pdflatex"] 1478100953 "sbc-template.tex" "sbc-template.pdf" "sbc-template" 1478100955
   "c:/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc" 1477485838 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "c:/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1477486030 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "c:/texlive/2016/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1477485728 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -32,7 +32,6 @@
   "c:/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1477485407 1124 6c73e740cf17375f03eec0ee63599741 ""
   "c:/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1477485407 1116 933a60c408fc0a863a92debe84b2d294 ""
   "c:/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1477485407 1120 8b7d695260f3cff42e636090a8002094 ""
-  "c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1477485064 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1477485064 32726 39f0f9e62e84beb801509898a605dbd5 ""
   "c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1477485064 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1477485064 32626 5abc8bb2f28aa647d4c70f8ea38cc0d3 ""
@@ -93,10 +92,10 @@
   "caption2.sty" 1412946846 15190 35c3352faab63b28086162350d49d218 ""
   "fig1.jpg" 1412946846 39933 e1bbe31b6df35507bbaf99995585d636 ""
   "fig2.jpg" 1412946846 22945 a28e60c395d91384d9e32be051b6cd94 ""
-  "sbc-template.aux" 1478237588 1960 058a08eb00ece2986a182707d1863262 ""
-  "sbc-template.bbl" 1478237399 1402 1459225b0d88c5348b021e2cf03a9a80 "bibtex sbc-template"
+  "sbc-template.aux" 1478100954 1811 ba03a4b4cd9ea76278976091f2210845 ""
+  "sbc-template.bbl" 1478100651 1120 a40d8ddd9cf1ae88d1b2990cda43762a "bibtex sbc-template"
   "sbc-template.sty" 1412946846 5285 fb8f2a32de10fa23e40f15acd9749a09 ""
-  "sbc-template.tex" 1478237584 8678 cdad0a967db1272b28338a0c8282e1f2 ""
+  "sbc-template.tex" 1478100950 6714 e6157e9834b8e3707d35d81be5b4bee8 ""
   (generated)
   "sbc-template.pdf"
   "sbc-template.log"

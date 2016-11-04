@@ -3,7 +3,7 @@
 \bibitem[Arora and Barak 2009]{Arora2009}
 Arora, S. and Barak, B. (2009).
 \newblock {Computational Complexity: A Modern Approach}.
-\newblock {\em Annals of Physics}, (January).
+\newblock {\em Annals of Physics}, (January):579.
 
 \bibitem[Boulic and Renault 1991]{boulic:91}
 Boulic, R. and Renault, O. (1991).
@@ -17,19 +17,10 @@ Garey, M.~R. and Johnson, D.~S. (1979).
   NP-Completeness (Series of Books in the Mathematical Sciences)}.
 \newblock {\em Computers and Intractability}, page 340.
 
-\bibitem[Karp 1972]{Karp1972}
-Karp, R.~M. (1972).
-\newblock {\em Reducibility among Combinatorial Problems}, pages 85--103.
-\newblock Springer US, Boston, MA.
-
 \bibitem[Knuth 1984]{knuth:84}
 Knuth, D.~E. (1984).
 \newblock {\em The {\TeX} Book}.
 \newblock Addison-Wesley, 15th edition.
-
-\bibitem[Sipser 1996]{Sipser1996}
-Sipser, M. (1996).
-\newblock {\em {Introduction to the Theory of Computation}}, volume~27.
 
 \bibitem[Smith and Jones 1999]{smith:99}
 Smith, A. and Jones, B. (1999).
