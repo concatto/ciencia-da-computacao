@@ -1,0 +1,7 @@
+> data <- aggregate(time~chunk+threads, out_multi_seeded_final, mean)
+
+> data2 <- transform(data,chunk = as.character(chunk))
+> data2 <- transform(data2,threads = as.character(threads))
+
+> ggplot(data=data2, aes(x=threads, y=time, fill=chunk)) +
+     geom_bar(stat="identity", position=position_dodge()) + scale_x_discrete(name="Threads") + scale_y_continuous(name="Média de tempo (ms)") + scale_fill_discrete(name="Trabalho")
