@@ -50,7 +50,7 @@ Entre os problemas pertencentes à classe NP-completo está o Problema da Soma d
 
 O Problema da Soma da Soma dos Subconjuntos, como especificado por \cite{Garey1979} a partir de uma transformação do problema ``Knapsack'' de Richard Karp, é definido da seguinte forma: dado um conjunto $A = \left\{a \mid a \in \mathbb{Z}^{+}\right\}$ e um número inteiro $b$, existe um subconjunto $A' \subseteq A$ onde a soma de todos os elementos de $A'$ é exatamente $b$?
 
-No escopo deste trabalho, o problema será ligeiramente simplificado com a intenção de facilitar sua análise no contexto de processamento paralelo. O parâmetro $b$ será tratado como 0, e consequentemente, os valores do conjunto $A$ pertencerão a $\mathbb{Z}$ (isto é, poderão ser negativos ou zero) e $\left | A \right | > 0$ (ou seja, o conjunto não poderá ser vazio). Desta forma, o Problema da Soma dos Subconjuntos será tratado da seguinte forma:
+No escopo deste trabalho, o problema será ligeiramente simplificado com a intenção de facilitar sua análise no contexto de processamento paralelo. O parâmetro $b$ será tratado como 0, e consequentemente, os valores do conjunto $A$ pertencerão a $\mathbb{Z}$ (isto é, poderão ser negativos ou zero) e $\left | A' \right | > 0$ (ou seja, o subconjunto não poderá ser vazio). Desta forma, o Problema da Soma dos Subconjuntos será tratado da seguinte forma:
 
 \begin{equation} \label{eq:subsetsum}
     \sum_{i = 1}^{n} a_{i} x_{i} = 0
@@ -212,6 +212,8 @@ Efetuando a média aritmética dos valores encontrados, é possível estabelecer
 As análises descritas neste trabalho foram realizadas com a intenção de investigar a melhora de desempenho proporcionada por processamento paralelo, utilizando o Problema da Soma dos Subconjuntos como contexto para os testes. Através do estudo dos dados experimentais coletados, foi possível observar um ganho de performance ligeiramente menor, porém não muito distante do resultado esperado, quando o algoritmo é executado paralelamente.
 
 Utilizando duas threads, a melhora no desempenho foi bastante significativa, até mesmo ultrapassando o resultado esperado para o maior tamanho de conjunto testado (52). Entretanto, para quatro threads, esperava-se observar uma melhora de quatro vezes no tempo consumido pelo algoritmo, porém o resultado obtido permaneceu em torno de três. É bastante provável que essa diferença seja causada pelo \textit{overhead} produzido pelo processador para gerenciar a execução de múltiplas de threads, especialmente porque todos os quatro núcleos do processador empregado nos testes estavam operando em utilização máxima.
+
+Por fim, foi possível também observar claramente a dificuldade computacional de um problema NP-completo. Mesmo com a utilização de quatro threads, conjuntos de 52 elementos já demandavam tempo de execução bastante elevado, em torno de 36 segundos. Além disso, visualizando o gráfico da figura \ref{fig:performance}, o crescimento exponencial de tempo necessário para resolver o problema fica bastante evidente. Desta forma, conclui-se que apesar de fornecer um ganho de desempenho considerável, o processamento paralelo não é páreo para a complexidade de problemas NP-completos.
 
 \bibliographystyle{sbc}
 \bibliography{sbc-template}
