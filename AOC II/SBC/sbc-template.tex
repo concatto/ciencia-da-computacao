@@ -30,7 +30,7 @@
 \maketitle
 
 \begin{resumo}
-  O Problema da Soma dos Subconjuntos é um problema computacionalmente difícil, demandando tempo exponencial para ser resolvido. Este trabalho buscou aplicar técnicas de processamento paralelo na busca de soluções para o problema, com a intenção de identificar o ganho de desempenho por thread utilizada. Através da análise dos dados experimentais, foi possível constatar que duas threads ofereceram um desempenho aproximadamente X vezes melhor, enquanto quatro threads ofereceram um ganho de Y vezes.
+  O Problema da Soma dos Subconjuntos é um problema computacionalmente difícil, demandando tempo exponencial para ser resolvido. Este trabalho buscou aplicar técnicas de processamento paralelo na busca de soluções para o problema, com a intenção de identificar o ganho de desempenho por thread utilizada em comparação com um algoritmo sequencial. Através da análise dos dados experimentais, foi possível constatar que duas threads ofereceram um desempenho aproximadamente duas vezes melhor, enquanto quatro threads ofereceram um desempenho três vezes melhor.
 \end{resumo}
 
 
@@ -42,7 +42,7 @@ Algoritmos são procedimentos passo-a-passo que resolvem problemas. Dado um prob
 
 Uma das principais classes de problemas identificadas pela Teoria da Complexidade é a classe NP-completo, um subconjunto da classe NP, que significa \textit{polinomial não determinístico}. A classe NP contém todos os problemas cujas soluções podem ser verificadas em tempo polinomial, enquanto a classe NP-completo é composta por problemas onde todos os problemas em NP podem ser reduzidos para eles em tempo polinomial \cite{Garey1979}. Redução, nesse contexto, significa transformar um problema em outro de forma com que uma solução para o segundo problema também possa ser utilizada para resolver o primeiro \cite{Sipser1996}. Uma classe adicional de problemas estabelecida pela Teoria da Complexidade é a classe P, de \textit{polinomial}; esta classe contém problemas que podem ser solucionados em tempo polinomial ou inferior. P é um subconjunto de NP.
 
-Apesar de que as soluções para problemas NP-completos podem ser verificadas em tempo polinomial, nenhum algoritmo para resolver um problema NP-completo em tempo polinomial foi encontrado até hoje; todos demandam tempo exponencial ou superior. Apesar disso, não há nenhuma prova de que não existe um algoritmo eficiente para resolver problemas NP-completo. Esta condição é um dos principais pontos da questão ``P $=$ NP?'', um dos maiores problemas abertos no campo da Ciência da Computação \cite{Sipser1996}.
+Apesar de que as soluções para problemas NP-completos podem ser verificadas em tempo polinomial, nenhum algoritmo para resolver um problema NP-completo em tempo polinomial foi encontrado até hoje; todos demandam tempo exponencial ou superior. Apesar disso, não há nenhuma prova de que não existe um algoritmo eficiente para resolver problemas NP-completos. Esta condição é um dos principais pontos da questão ``P $=$ NP?'', um dos maiores problemas abertos no campo da Ciência da Computação \cite{Sipser1996}.
 
 Entre os problemas pertencentes à classe NP-completo está o Problema da Soma dos Subconjuntos. Sua NP-completude foi comprovada por Richard Karp, juntamente com diversos outros problemas, em seu artigo de 1972, intitulado ``Reducibility Among Combinatorial Problems'' \cite{Karp1972}. Por ser um problema NP-completo, não se conhece um algoritmo capaz de resolvê-lo em tempo polinomial. Este trabalho se propôs a analisar este problema aplicando técnicas de processamento paralelo, com a intenção de acelerar a velocidade de busca pela solução do problema utilizando um algoritmo de força bruta, que demanda tempo exponencial, e analisar o ganho de desempenho obtido em função da quantidade de unidades de processamento executando simultaneamente.
 
@@ -56,7 +56,7 @@ No escopo deste trabalho, o problema será ligeiramente simplificado com a inten
     \sum_{i = 1}^{n} a_{i} x_{i} = 0
 \end{equation}
 
-Onde $a_{i} \in A$, $x_{i} \in \left\{0, 1\right\}$ e $\sum x_{i} > 0$. Um algoritmo que resolve este problema deve determinar se existe uma sequência de valores de $x$ que soluciona a equação \ref{eq:subsetsum}. Esta formulação é equivalente a encontrar um subconjunto não-vazio de $A$ cuja soma é igual a zero. Utilizando técnicas de análise combinatória, é possível estabelecer que a quantidade de possíveis sequências de $x$ é igual a $2^{n} - 1$, onde $n$ representa a quantidade de elementos no conjunto. Este valor é equivalente à quantidade de subconjuntos não-vazios de um conjunto qualquer, definida por:
+Onde $a_{i} \in A$, $x_{i} \in \left\{0, 1\right\}$ e $\sum x_{i} > 0$. Um algoritmo que resolve este problema deve determinar se existe uma sequência de valores de $x$ que soluciona a equação \ref{eq:subsetsum}. Esta formulação é equivalente a encontrar um subconjunto não-vazio de $A$ cuja soma é igual a zero. Utilizando técnicas de análise combinatória, é possível estabelecer que a quantidade de possíveis sequências de $x$ é igual a $2^{n} - 1$, onde $n = \left | A \right |$. Este valor é equivalente à quantidade de subconjuntos não-vazios de um conjunto qualquer, definida por:
 
 \begin{equation} \label{eq:subsetcount}
     \sum_{k = 1}^{n} \binom{n}{k} = 2^{n} - 1
@@ -77,7 +77,7 @@ Para a realização dos experimentos, foi escrito um programa  na linguagem C ut
 \begin{itemize}
     \item Quantidade de threads, com valores 1, 2 e 4;
     \item Tamanho do conjunto ($n$), variando de 4 a 52 com incrementos de 4;
-    \item Quantidade de bits utilizados para representar os valores no conjunto, dada pela expressão $2^{0.5n}$.
+    \item Quantidade de bits dos valores no conjunto, dada pela expressão $2^{0.5n}$.
 \end{itemize}
 
 Para os experimentos envolvendo múltiplas threads, um parâmetro adicional foi estabelecido para definir a quantidade de subconjuntos que cada thread deve testar ininterruptamente. Este parâmetro foi chamado de \textit{tamanho do trabalho}, e recebeu como valores 10, 100 e 1000.
@@ -106,6 +106,7 @@ O algoritmo utilizado na realização dos experimentos em paralelo é descrito a
             $inicio \leftarrow obterTrabalho(trabalho)$ \;
             \For{i = inicio \emph{\KwTo} inicio + trabalho} {
                 \If{i $\geq 2^{n} - 1$}{
+                    \tcp{subconjuntos esgotados}
                     $finalizarThread(thread, \emptyset)$ \;
                 }
                 $subconjunto \leftarrow gerarSubconjunto(conjunto, i)$ \;
@@ -137,62 +138,80 @@ O algoritmo utilizado na realização dos experimentos em paralelo é descrito a
   \Return{$\{solucao, duracao\}$} \;
 \end{algorithm}
 
-Cada thread permanece em um \textit{loop} que executa até que todos os subconjuntos sejam testados ou até que alguma thread encontre uma solução, realizando as operações detalhadas a seguir. O ponto de partida do trabalho é gerado pela função \textit{obterTrabalho}, que mantém o estado atual do trabalho, partindo do número 1 e sendo incrementado pelo parâmetro \textit{trabalho} (o estado deve ser protegido por uma \textit{mutex}, pois será acessado por várias threads \cite{Lewis1996}). Em seguida, um loop é iniciado partindo do ponto gerado pela função descrita anteriormente e executando \textit{trabalho} vezes. Para cada iteração, um subconjunto é gerado a partir da representação em binário do estado atual (por exemplo, para 3$_{10}$ = 111$_{2}$, apenas os três primeiros elementos do conjunto original serão inclusos). Caso o valor do estado atual ultrapasse a quantidade de subconjuntos, a thread é finalizada com resultado vazio. Caso contrário, a soma dos elementos do subconjunto é computada e, caso seja zero, todas as threads serão sinalizadas para interromperem sua execução e a thread atual será finalizada com o subconjunto atual como resultado. Por fim, caso todos os subconjuntos tenham sido testados, a thread é finalizada com resultado vazio.
+Cada thread permanece em um \textit{loop} que executa até que todos os subconjuntos sejam testados ou até que alguma thread encontre uma solução, realizando as operações detalhadas a seguir. O ponto de partida do trabalho é gerado pela função \textit{obterTrabalho}, que mantém o estado atual do trabalho, partindo do número 1 e sendo incrementado pelo parâmetro \textit{trabalho}. O estado deve ser protegido por uma \textit{mutex}, pois será acessado por várias threads; caso contrário, uma condição de corrida poderia ocorrer, causando anomalias no valor do estado \cite{Lewis1996}.
 
-Enquanto as threads buscam a solução para o problema, o programa principal declara a solução do problema, inicialmente vazia, e fica aguardando o término das mesmas. Cada uma dessas threads conterá um resultado, indicado pelas chamadas da função \textit{finalizarThread}. Caso o resultado de uma thread seja vazio, a solução fica inalterada; caso contrário, a solução recebe o subconjunto que a thread encontrou. Quando todas as threads forem finalizadas, o algoritmo é terminado e retorna a solução encontrada (ou o conjunto vazio se não houver solução) e a duração do procedimento, que é calculada a partir da diferença entre o tempo atual e o tempo inicial.
+Em seguida, um loop é iniciado partindo do ponto gerado pela função descrita anteriormente e executando \textit{trabalho} vezes. Para cada iteração, um subconjunto é gerado a partir da representação em binário do estado atual (por exemplo, para 7$_{10}$ = 111$_{2}$, apenas os três primeiros elementos do conjunto original serão inclusos). Caso o valor do estado atual ultrapasse a quantidade de subconjuntos, a thread é finalizada com o conjunto vazio como resultado. Caso contrário, a soma dos elementos do subconjunto é computada e, caso seja zero, todas as threads serão sinalizadas para interromperem sua execução e a thread atual será finalizada com o subconjunto atual como resultado. Por fim, se todos os subconjuntos forem testados, a thread termina com o conjunto vazio como resultado.
+
+Enquanto as threads buscam a solução para o problema, o programa principal declara a solução final, inicialmente vazia, e fica aguardando o término das threads. Cada uma delas conterá um resultado, indicado pelas chamadas da função \textit{finalizarThread}. Caso o resultado de uma thread seja o conjunto vazio, a solução fica inalterada; caso contrário, a solução recebe o subconjunto que a thread encontrou. Quando todas as threads forem finalizadas, o algoritmo é terminado e retorna a solução encontrada (ou o conjunto vazio se não houver solução) e a duração do procedimento, que é calculada a partir da diferença entre o tempo atual e o tempo inicial.
 
 A versão sequencial do algoritmo é bastante similar à versão paralela, exceto pela ausência das threads. Desta forma, não é necessário criar identificadores, separar o trabalho em blocos, nem iniciar, sincronizar e aguardar o término das threads. O valor cuja representação em binário indica o subconjunto a ser gerado é simplesmente inicializado em 1 e incrementado cada vez que a solução não é encontrada, até atingir $2^{n} - 1$.
 
-Os experimentos foram realizados em um computador com processador Intel Core i3-3240 com clock de 3.4 GHz e 4 núcleos e com o sistema operacional Windows 10 Pro 64 bits. O programa foi compilado utilizando GCC versão 4.8.1 no ambiente MinGW. Um aspecto importante para melhorar a qualidade dos dados foi estabelecer a mesma \textit{seed} para o gerador de números aleatórios para diferentes testes. Cada teste foi composto por 30 execuções do algoritmo para cada tamanho de conjunto.
+Os experimentos foram realizados em um computador com processador Intel Core i3-3240 com clock de 3.4 GHz e 4 núcleos e com o sistema operacional Windows 10 Pro 64 bits. O programa foi compilado utilizando GCC versão 4.8.1 no ambiente MinGW. Um aspecto importante para melhorar a confiabilidade dos dados foi estabelecer a mesma \textit{seed} para o gerador de números aleatórios nos diferentes testes, fazendo com que as sequências de valores gerados para os conjuntos sejam idênticas. Cada teste foi composto por 30 execuções do algoritmo para cada tamanho de conjunto.
 
 \section{Análise dos resultados} \label{sec:results}
 
-O primeiro passo tomado para analisar os resultados obtidos foi investigar as diferenças entre os diferentes tamanho de trabalho para 2 e 4 threads, observando qual tamanho de trabalho oferece o melhor desempenho, medido pela média de tempo entre todos os tamanhos de conjunto. Através do gráfico da figura \ref{fig:chunks} foi possível perceber que a diferença de desempenho é bastante pequena, mas o tamanho de trabalho 1000 se mostrou superior aos outros em ambos os casos.
+O primeiro passo tomado para analisar os resultados obtidos foi investigar as diferenças entre os diferentes tamanho de trabalho para duas e quatro threads, observando qual tamanho de trabalho oferece o melhor desempenho, medido pela média de tempo entre todos os tamanhos de conjunto.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.5\textwidth]{trabalho.png}
+    \includegraphics[width=10.5cm]{chunks}
     \caption{Média de tempo para diferentes tamanhos de trabalho}
     \label{fig:chunks}
 \end{figure}
 
-Com isso, o tamanho de trabalho 1000 será utilizado nas análises a seguir. O próximo passo efetuado foi a realização da principal proposta deste trabalho: análisar o ganho de desempenho em função da quantidade de threads utilizadas. O gráfico da figura \ref{fig:performance} apresenta as médias de tempo que o algoritmo demandou para solucionar o problema em função do tamanho do conjunto, para 1, 2 e 4 threads. É possível perceber um ganho significativo de performance, especialmente quando $n \geq 44?$.
+Através do gráfico da figura \ref{fig:chunks} foi possível perceber que a diferença de desempenho é bastante pequena, mas o tamanho de trabalho 1000 se mostrou superior aos outros para quatro threads e ligeiramente inferior a 100 para duas threads. Um aspecto interessante deste resultado é a tendência a uma performance melhor com 4 threads enquanto o tamanho do trabalho aumenta. Um trabalho futuro poderia investigar a efetividade de tamanhos de trabalho ainda maiores.
+
+Com isso, o tamanho de trabalho 1000 será utilizado nas análises a seguir. O próximo passo efetuado foi a realização da principal proposta deste trabalho: analisar o ganho de desempenho em função da quantidade de threads utilizadas. O gráfico da figura \ref{fig:performance} apresenta as médias de tempo que o algoritmo demandou para solucionar o problema em função do tamanho do conjunto, para 1, 2 e 4 threads. É possível perceber um ganho significativo de performance, especialmente quando $n > 40$.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.3\textwidth]{fig2.jpg}
-    \caption{This figure is not good at all}
+    \includegraphics[width=12cm]{performance}
+    \caption{Média de tempo em função do tamanho do conjunto (n) para diferentes quantidades de threads}
     \label{fig:performance}
 \end{figure}
-%figura do gráfico de linhas
 
 Para visualizar detalhadamente o ganho de performance, os dados foram dispostos de forma tabular na tabela \ref{tab:speedtable}. As durações apresentadas foram calculadas a partir da média de duração de todas as 30 iterações.
 
 \begin{table}[ht]
     \centering
-    \caption{Variables to be considered on the evaluation of interaction
-      techniques}
+    \caption{Tempo médio consumido pelo algoritmo, em segundos}
     \label{tab:speedtable}
     \smallskip
-    \begin{tabular}{|l|c|c|}
+
+    \begingroup
+    \renewcommand*{\arraystretch}{1.2}
+
+    \begin{tabular}{|c|r|r|r|}
         \hline
-        & Value 1 & Value 2\\[0.5ex]
+        \textbf{Tamanho do conjunto} & \textbf{Sequencial} & \textbf{2 threads} & \textbf{4 threads} \\
         \hline
-        &&\\[-2ex]
-        Case 1 & 1.0 $\pm$ 0.1 & 1.75$\times$10$^{-5}$ $\pm$ 5$\times$10$^{-7}$\\[0.5ex]
+        44 & 15.051 & 8.413 & 5.559 \\
         \hline
-        &&\\[-2ex]
-        Case 2 & 0.003(1) & 100.0\\[0.5ex]
+        48 & 16.152 & 8.943 & 6.333 \\
+        \hline
+        52 & 118.415 & 55.673 & 36.352 \\
         \hline
     \end{tabular}
-\end{table}
-%tabela com valores (tamanho do conjunto, tempo 1, tempo 2, tempo 4)
 
-Através da tabela \ref{tab:speedtable} é possível observar uma melhora de 10 vezes para duas threads e 20 vezes para quatro threads quando $n = 44$, 11 vezes para duas e 22 vezes para quatro quando $n = 48$ e por fim 12 vezes para duas e 23 vezes para quatro quando $n = 52$. Portanto, em média, o tempo de execução para duas threads 11 vezes mais veloz, enquanto para quatro threads a melhora é de 22 vezes.
+    \endgroup
+
+\end{table}
+
+Através da tabela \ref{tab:speedtable} é possível observar uma melhora significativa nos tempos de execução do algoritmo. Realizando o cálculo de ganho de desempenho, os seguintes valores foram descobertos:
+
+\begin{itemize}
+    \item Melhora de 1.79 vezes para duas threads e 2.71 vezes para quatro threads, quando $n = 44$;
+    \item Melhora de 1.81 vezes para duas threads e 2.55 vezes para quatro threads, quando $n = 48$;
+    \item Melhora de 2.13 vezes para duas threads e 3.26 vezes para quatro threads quando $n = 52$.
+\end{itemize}
+
+Efetuando a média aritmética dos valores encontrados, é possível estabelecer que o tempo de execução para duas threads foi 1.91 vezes mais veloz, enquanto para quatro threads a melhora é de 2.84 vezes.
 
 \section{Conclusões} \label{sec:conclusions}
 
-Concluímos que threads são boas.
+As análises descritas neste trabalho foram realizadas com a intenção de investigar a melhora de desempenho proporcionada por processamento paralelo, utilizando o Problema da Soma dos Subconjuntos como contexto para os testes. Através do estudo dos dados experimentais coletados, foi possível observar um ganho de performance ligeiramente menor, porém não muito distante do resultado esperado, quando o algoritmo é executado paralelamente.
+
+Utilizando duas threads, a melhora no desempenho foi bastante significativa, até mesmo ultrapassando o resultado esperado para o maior tamanho de conjunto testado (52). Entretanto, para quatro threads, esperava-se observar uma melhora de quatro vezes no tempo consumido pelo algoritmo, porém o resultado obtido permaneceu em torno de três. É bastante provável que essa diferença seja causada pelo \textit{overhead} produzido pelo processador para gerenciar a execução de múltiplas de threads, especialmente porque todos os quatro núcleos do processador empregado nos testes estavam operando em utilização máxima.
 
 \bibliographystyle{sbc}
 \bibliography{sbc-template}

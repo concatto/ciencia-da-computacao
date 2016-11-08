@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex sbc-template"] 1478497407 "sbc-template.aux" "sbc-template.bbl" "sbc-template" 1478497633
+["bibtex sbc-template"] 1478583855 "sbc-template.aux" "sbc-template.bbl" "sbc-template" 1478583866
   "./sbc.bst" 1412946846 21864 a668496cca21cfdd211f7fb5f0d57565 ""
-  "sbc-template.aux" 1478497632 2040 5ee867b09f59daedf2d5807c3375bafa ""
+  "sbc-template.aux" 1478583866 2116 d49d6a07518ecc5395229aeb7aad8e1b ""
   "sbc-template.bcf" 0 -1 0 ""
   "sbc-template.bib" 1478412292 2703 1d5e9afabc46c80a874ab37a7ea7cc32 ""
   (generated)
   "sbc-template.bbl"
   "sbc-template.blg"
-["pdflatex"] 1478497632 "sbc-template.tex" "sbc-template.pdf" "sbc-template" 1478497633
+["pdflatex"] 1478583865 "sbc-template.tex" "sbc-template.pdf" "sbc-template" 1478583866
   "c:/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc" 1477485838 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "c:/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1477486030 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "c:/texlive/2016/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1477485728 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -120,13 +120,13 @@
   "c:/texlive/2016/texmf-var/web2c/pdftex/pdflatex.fmt" 1477487649 3171697 fd273574748175f00c55d5183951ba10 ""
   "c:/texlive/2016/texmf.cnf" 1477487571 673 4ae7b2f49cee444c5343a45b5d0f169c ""
   "caption2.sty" 1412946846 15190 35c3352faab63b28086162350d49d218 ""
-  "fig2.jpg" 1412946846 22945 a28e60c395d91384d9e32be051b6cd94 ""
-  "sbc-template.aux" 1478497632 2040 5ee867b09f59daedf2d5807c3375bafa ""
-  "sbc-template.bbl" 1478497408 956 dcf61f47cce329a158612b805b59d890 "bibtex sbc-template"
+  "chunks.pdf" 1478570958 18175 d95d30872e20a4ebe1144eca212f876b ""
+  "performance.pdf" 1478574484 20785 20a8b2528315a5257fee2678eb6fc541 ""
+  "sbc-template.aux" 1478583866 2116 d49d6a07518ecc5395229aeb7aad8e1b ""
+  "sbc-template.bbl" 1478583855 956 dcf61f47cce329a158612b805b59d890 "bibtex sbc-template"
   "sbc-template.sty" 1412946846 5285 fb8f2a32de10fa23e40f15acd9749a09 ""
-  "sbc-template.tex" 1478497627 17463 7b6865742aca66c26f3a667abce3675f ""
-  "trabalho.png" 1478494553 3636 c26b4341e8be8b772172d57d4862c5e8 ""
+  "sbc-template.tex" 1478583863 19426 fcff268dcf452c70d40d6b925793674e ""
   (generated)
-  "sbc-template.pdf"
-  "sbc-template.aux"
   "sbc-template.log"
+  "sbc-template.aux"
+  "sbc-template.pdf"

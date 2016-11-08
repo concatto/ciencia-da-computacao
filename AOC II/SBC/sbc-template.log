@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.10.26)  7 NOV 2016 03:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.10.26)  8 NOV 2016 03:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -728,39 +728,38 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [4]
-<trabalho.png, id=30, 429.10312pt x 312.41719pt>
-File: trabalho.png Graphic file (type png)
- <use trabalho.png>
-Package pdftex.def Info: trabalho.png used on input line 154.
-(pdftex.def)             Requested size: 213.39568pt x 155.36919pt.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 155.
+<chunks.pdf, id=30, 433.62pt x 289.08pt>
+File: chunks.pdf Graphic file (type pdf)
+ <use chunks.pdf>
+Package pdftex.def Info: chunks.pdf used on input line 157.
+(pdftex.def)             Requested size: 298.75394pt x 199.1787pt.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 158.
 
 
 (c:/texlive/2016/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 155.
-
-<fig2.jpg, id=31, 205.7286pt x 234.1548pt>
-File: fig2.jpg Graphic file (type jpg)
- <use fig2.jpg>
-Package pdftex.def Info: fig2.jpg used on input line 163.
-(pdftex.def)             Requested size: 128.0387pt x 145.73541pt.
- [5 <./trabalho.png>]
-(./sbc-template.bbl) [6 <./fig2.jpg>] (./sbc-template.aux) )
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 158.
+ [5 <./chunks.pdf>]
+<performance.pdf, id=44, 433.62pt x 289.08pt>
+File: performance.pdf Graphic file (type pdf)
+ <use performance.pdf>
+Package pdftex.def Info: performance.pdf used on input line 168.
+(pdftex.def)             Requested size: 341.43306pt x 227.63405pt.
+ [6 <./performance.pdf>] (./sbc-template.bbl) [7] (./sbc-template.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 5317 strings out of 494171
- 73160 string characters out of 6158514
- 176188 words of memory out of 5000000
- 8559 multiletter control sequences out of 15000+600000
- 29933 words of font info for 66 fonts, out of 8000000 for 9000
+ 5318 strings out of 494171
+ 73204 string characters out of 6158514
+ 175188 words of memory out of 5000000
+ 8560 multiletter control sequences out of 15000+600000
+ 30448 words of font info for 68 fonts, out of 8000000 for 9000
  400 hyphenation exceptions out of 8191
- 43i,23n,45p,1337b,3488s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,23n,45p,909b,3501s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/tex
 live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2016
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2016/texmf-di
@@ -776,10 +775,10 @@ ype1/urw/helvetic/uhvb8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/times/
 utmb8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/te
 xlive/2016/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2016/texmf-d
 ist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on sbc-template.pdf (6 pages, 199419 bytes).
+Output written on sbc-template.pdf (7 pages, 211655 bytes).
 PDF statistics:
- 91 PDF objects out of 1000 (max. 8388607)
- 63 compressed objects within 1 object stream
+ 113 PDF objects out of 1000 (max. 8388607)
+ 81 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
