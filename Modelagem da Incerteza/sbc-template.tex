@@ -1,15 +1,9 @@
 \documentclass[12pt]{article}
-
 \usepackage{sbc-template}
-
 \usepackage{graphicx,url}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
 
-\usepackage[brazil]{babel}   
-%\usepackage[latin1]{inputenc}  
-\usepackage[utf8]{inputenc}  
-% UTF-8 encoding is recommended by ShareLaTex
-
-     
 \sloppy
 
 \title{Otimização Matemática Através de Algoritmos Genéticos}
@@ -21,30 +15,24 @@
   \email{fernandoconcatto@edu.univali.br}
 }
 
-\begin{document} 
+\begin{document}
 
 \maketitle
 
 \begin{abstract}
-  Problems involving mathematical optimization are ubiquitous in many fields of science. Due to their elevated? computational complexity, several approximation methods have been developed to solve such problems. This paper describes the notion of genetic algorithms, which employs concepts of evolution and natural selection to approximate the highest or lowest value of a function, improving solutions with the passing of generations.
+  Problems involving mathematical optimization are ubiquitous in many fields of science. Due to their elevated computational complexity, several approximation methods have been developed to solve such problems. This paper describes the notion of genetic algorithms, which employs concepts of evolution and natural selection to approximate the highest or lowest value of a function, improving candidate solutions with the passing of generations.
 \end{abstract}
-     
-\begin{resumo} 
-  Problemas envolvendo otimização matemática !se mostram ubíquos em diversas áreas da ciência. Por apresentarem uma dificuldade computacional muito elevada, diversos métodos aproximados para resolver tais problemas foram desenvolvidos. Este trabalho descreve os algoritmos genéticos, que aplicam conceitos de evolução e seleção natural para aproximar o ponto máximo ou mínimo de uma função, aprimorando soluções com o decorrer das gerações.
+
+\begin{resumo}
+  Problemas envolvendo otimização matemática !se mostram ubíquos em diversas áreas da ciência. Por apresentarem uma dificuldade computacional muito elevada, diversos métodos aproximados para resolver tais problemas foram desenvolvidos. Este trabalho descreve os algoritmos genéticos, que aplicam conceitos de evolução e seleção natural para aproximar o ponto máximo ou mínimo de uma função, aprimorando soluções candidatas com o decorrer das gerações.
 \end{resumo}
 
 
-\section{General Information}
+\section{Introdução} \label{sec:intro}
 
-All full papers and posters (short papers) submitted to some SBC conference,
-including any supporting documents, should be written in English or in
-Portuguese. The format paper should be A4 with single column, 3.5 cm for upper
-margin, 2.5 cm for bottom margin and 3.0 cm for lateral margins, without
-headers or footers. The main font must be Times, 12 point nominal size, with 6
-points of space before each paragraph. Page numbers must be suppressed.
+O estudo de problemas e suas soluções compõe o cerne do campo da Ciência da Computação. Para efetuar a solução dos problemas, uma sequência finita de operações deve ser desenvolvida; tais sequências são conhecidas como \textit{algoritmos}. Problemas abordados por cientistas da computação possuem uma enorme gama de formulações e dificuldades, alguns tão complexos que demandam mais do que o tempo de vida um ser humano para serem resolvidos. Um exemplo de problema com esta característica é o Problema do Caixeiro Viajante, definido da seguinte forma: dado um conjunto de $n$ cidades e as distâncias entre elas, qual a rota mais curta que parte de uma cidade, passa por todas as outras e retorna para a cidade inicial? Como existem $(n-1)!/2$ rotas possíveis, descobrir a menor rota entre 30 cidades através de um algoritmo exato requer muito mais do que um milhão de anos \cite{MacGregor2011}. 
 
-Full papers must respect the page limits defined by the conference.
-Conferences that publish just abstracts ask for \textbf{one}-page texts.
+Para tratar de problemas com esse nível de complexidade, métodos \textit{heurísticos}
 
 \section{First Page} \label{sec:firstpage}
 
@@ -139,7 +127,7 @@ excepting for the papers that will be electronically available (on CD-ROMs,
 internet, etc.). The image resolution on paper should be about 600 dpi for
 black-and-white images, and 150-300 dpi for grayscale images.  Do not include
 images with excessive resolution, as they may take hours to print, without any
-visible difference in the result. 
+visible difference in the result.
 
 \section{References}
 

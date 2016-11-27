@@ -1,0 +1,26 @@
+\begin{thebibliography}{}
+
+\bibitem[Christofides 1976]{Christofides1976}
+Christofides, N. (1976).
+\newblock Worst-case analysis of a new heuristic for the travelling salesman
+  problem.
+\newblock Technical Report 388, Graduate School of Industrial Administration,
+  Carnegie Mellon University.
+
+\bibitem[Kernighan and Lin 1970]{Kernighan1970}
+Kernighan, B.~W. and Lin, S. (1970).
+\newblock An efficient heuristic procedure for partitioning graphs.
+\newblock {\em The Bell System Technical Journal}, 49(2):291--307.
+
+\bibitem[Kokash 2005]{Kokash2005}
+Kokash, N. (2005).
+\newblock {An introduction to heuristic algorithms}.
+\newblock {\em Department of Informatics and Telecommunications}, (August).
+
+\bibitem[MacGregor and Chu 2011]{MacGregor2011}
+MacGregor, J.~N. and Chu, Y. (2011).
+\newblock Human performance on the traveling salesman and related problems: A
+  review.
+\newblock {\em The Journal of Problem Solving}, 3(2).
+
+\end{thebibliography}

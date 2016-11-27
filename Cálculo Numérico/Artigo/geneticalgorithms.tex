@@ -1,0 +1,151 @@
+\documentclass[12pt]{article}
+\usepackage{sbc-template}
+\usepackage{graphicx,url}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\sloppy
+
+\title{Otimização Matemática Através de Algoritmos Genéticos}
+
+\author{Fernando Concatto\inst{1}}
+
+\address{Bacharelado em Ciência da Computação -- Universidade do Vale do Itajaí (UNIVALI) \\
+  Caixa Postal 360 -- CEP 88302-202 -- Itajaí -- SC -- Brasil
+  \email{fernandoconcatto@edu.univali.br}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  Problems involving mathematical optimization are ubiquitous in many fields of science. Due to their elevated computational complexity, several approximation methods have been developed to solve such problems. This paper describes the notion of genetic algorithms, which employs concepts of evolution and natural selection to approximate the highest or lowest value of a function, improving candidate solutions with the passing of generations.
+\end{abstract}
+
+\begin{resumo}
+  Problemas envolvendo otimização matemática !se mostram ubíquos em diversas áreas da ciência. Por apresentarem uma dificuldade computacional muito elevada, diversos métodos aproximados para resolver tais problemas foram desenvolvidos. Este trabalho descreve os algoritmos genéticos, que aplicam conceitos de evolução e seleção natural para aproximar o ponto máximo ou mínimo de uma função, aprimorando soluções candidatas com o decorrer das gerações.
+\end{resumo}
+
+
+\section{Introdução} \label{sec:intro}
+
+O estudo de problemas e suas soluções compõe o cerne do campo da Ciência da Computação. Para efetuar a solução dos problemas, uma sequência finita de operações deve ser desenvolvida; tais sequências são conhecidas como \textit{algoritmos}. Problemas abordados por cientistas da computação possuem uma enorme gama de formulações e dificuldades, alguns tão complexos que demandam mais do que o tempo de vida um ser humano para serem resolvidos. Um exemplo de problema com esta característica é o Problema do Caixeiro Viajante, definido da seguinte forma: dado um conjunto de $n$ cidades e as distâncias entre elas, qual a rota mais curta que parte de uma cidade, passa por todas as outras e retorna para a cidade inicial? Como existem $(n-1)!/2$ rotas possíveis, descobrir a menor rota entre 30 cidades através de um algoritmo exato requer muito mais do que um milhão de anos de processamento \cite{MacGregor2011}.
+
+Para tratar de problemas com esse nível de complexidade, métodos \textit{heurísticos} são usualmente aplicados. Algoritmos heurísticos são potencialmente capazes de resolver problemas complexos em pouquíssimo tempo, porém não garantem que a solução exata seja encontrada, fornecendo apenas aproximações, que geralmente são suficientes para grande parte dos problemas reais \cite{Kokash2005}. Exemplos de algoritmos heurísticos para problemas específicos incluem o algoritmo de Christofides para o problema do Caixeiro Viajante \cite{Christofides1976}, mencionado anteriormente, e o algoritmo de Kernighan-Lin para particionamento de grafos \cite{Kernighan1970}.
+
+Entretanto, a categoria de algoritmos heurísticos que mais recebeu atenção da comunidade científica é a que envolve a resolução de \textit{problemas de otimização}, caracterizada pela busca por um valor $x \in X$ que maximiza ou minimiza uma função $f: X \rightarrow \mathbb{R}$, geralmente chamada de \textbf{função objetivo}. Grande parte dos problemas? podem ser formulados como problemas de otimização, incluindo o Problema do Caixeiro Viajante, onde a função objetivo pode ser descrita por:
+
+\begin{equation} \label{eq:tsp}
+    \mathop{\boldsymbol\min} f(x) = \sum_{i = 1}^{n - 1} d(x_{i}, x_{i + 1}) + d(x_{n}, x_{1})
+\end{equation}
+
+\noindent onde $x$ é o conjunto que descreve a rota candidata e $d(x_{i}, x_{j})$ é a distância entre as cidades $x_{i}$ e $x_{j}$. Desta forma, um algoritmo pode mover-se iterativamente pelo \textit{espaço de busca}, que contém todas as rotas possíveis, buscando um conjunto $x$ que minimize a função $f(x)$. Porém, este espaço de busca (e de vários outros problemas) apresenta uma quantidade excessivamente grande de elementos, exigindo então a aplicação de métodos heurísticos.
+
+\section{First Page} \label{sec:firstpage}
+
+The first page must display the paper title, the name and address of the
+authors, the abstract in English and ``resumo'' in Portuguese (``resumos'' are
+required only for papers written in Portuguese). The title must be centered
+over the whole page, in 16 point boldface font and with 12 points of space
+before itself. Author names must be centered in 12 point font, bold, all of
+them disposed in the same line, separated by commas and with 12 points of
+space after the title. Addresses must be centered in 12 point font, also with
+12 points of space after the authors' names. E-mail addresses should be
+written using font Courier New, 10 point nominal size, with 6 points of space
+before and 6 points of space after.
+
+The abstract and ``resumo'' (if is the case) must be in 12 point Times font,
+indented 0.8cm on both sides. The word \textbf{Abstract} and \textbf{Resumo},
+should be written in boldface and must precede the text.
+
+\section{CD-ROMs and Printed Proceedings}
+
+In some conferences, the papers are published on CD-ROM while only the
+abstract is published in the printed Proceedings. In this case, authors are
+invited to prepare two final versions of the paper. One, complete, to be
+published on the CD and the other, containing only the first page, with
+abstract and ``resumo'' (for papers in Portuguese).
+
+\section{Sections and Paragraphs}
+
+Section titles must be in boldface, 13pt, flush left. There should be an extra
+12 pt of space before each title. Section numbering is optional. The first
+paragraph of each section should not be indented, while the first lines of
+subsequent paragraphs should be indented by 1.27 cm.
+
+\subsection{Subsections}
+
+The subsection titles must be in boldface, 12pt, flush left.
+
+\section{Figures and Captions}\label{sec:figs}
+
+
+Figure and table captions should be centered if less than one line
+(Figure~\ref{fig:exampleFig1}), otherwise justified and indented by 0.8cm on
+both margins, as shown in Figure~\ref{fig:exampleFig2}. The caption font must
+be Helvetica, 10 point, boldface, with 6 points of space before and after each
+caption.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.5\textwidth]{fig1.jpg}
+\caption{A typical figure}
+\label{fig:exampleFig1}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.3\textwidth]{fig2.jpg}
+\caption{This figure is an example of a figure caption taking more than one
+  line and justified considering margins mentioned in Section~\ref{sec:figs}.}
+\label{fig:exampleFig2}
+\end{figure}
+
+In tables, try to avoid the use of colored or shaded backgrounds, and avoid
+thick, doubled, or unnecessary framing lines. When reporting empirical data,
+do not use more decimal digits than warranted by their precision and
+reproducibility. Table caption must be placed before the table (see Table 1)
+and the font used must also be Helvetica, 10 point, boldface, with 6 points of
+space before and after each caption.
+
+\begin{table}[ht]
+\centering
+\caption{Variables to be considered on the evaluation of interaction
+  techniques}
+\label{tab:exTable1}
+\smallskip
+\begin{tabular}{|l|c|c|}
+\hline
+& Value 1 & Value 2\\[0.5ex]
+\hline
+&&\\[-2ex]
+Case 1 & 1.0 $\pm$ 0.1 & 1.75$\times$10$^{-5}$ $\pm$ 5$\times$10$^{-7}$\\[0.5ex]
+\hline
+&&\\[-2ex]
+Case 2 & 0.003(1) & 100.0\\[0.5ex]
+\hline
+\end{tabular}
+\end{table}
+
+\section{Images}
+
+All images and illustrations should be in black-and-white, or gray tones,
+excepting for the papers that will be electronically available (on CD-ROMs,
+internet, etc.). The image resolution on paper should be about 600 dpi for
+black-and-white images, and 150-300 dpi for grayscale images.  Do not include
+images with excessive resolution, as they may take hours to print, without any
+visible difference in the result.
+
+\section{References}
+
+The references must be listed using 12 point font size, with 6 points of space
+before each reference. The first line of each reference should not be
+indented, while the subsequent should be indented by 0.5 cm.
+
+\bibliographystyle{sbc}
+\bibliography{bibliography}
+
+\end{document}
