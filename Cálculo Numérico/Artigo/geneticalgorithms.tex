@@ -44,106 +44,25 @@ Entretanto, a categoria de algoritmos heurísticos que mais recebeu atenção da
 
 \noindent onde $x$ é o conjunto que descreve a rota candidata e $d(x_{i}, x_{j})$ é a distância entre as cidades $x_{i}$ e $x_{j}$. Desta forma, um algoritmo pode mover-se iterativamente pelo \textit{espaço de busca}, que contém todas as rotas possíveis, buscando um conjunto $x$ que minimize a função $f(x)$. Porém, este espaço de busca (e de vários outros problemas) apresenta uma quantidade excessivamente grande de elementos, exigindo então a aplicação de métodos heurísticos.
 
-\section{First Page} \label{sec:firstpage}
+Problemas de otimização envolvem várias disciplinas, como pesquisa operacional, economia e as ciências naturais. A análise numérica é um dos campos com maior influência no estudo dos problemas de otimização, devido ao foco em métodos iterativos e aproximados, como o Método de Newton, através do qual é possível encontrar máximos ou mínimos locais se for aplicado à primeira derivada de uma função. Outro método capaz de encontrar pontos críticos é o Método dos Gradientes, que guia uma solução candidata para um ponto mínimo ou máximo a partir do gradiente de uma função. Este método é frequentemente aplicado em Redes Neurais Artificiais para guiar a aprendizagem da rede \cite{Haykin1998}.
 
-The first page must display the paper title, the name and address of the
-authors, the abstract in English and ``resumo'' in Portuguese (``resumos'' are
-required only for papers written in Portuguese). The title must be centered
-over the whole page, in 16 point boldface font and with 12 points of space
-before itself. Author names must be centered in 12 point font, bold, all of
-them disposed in the same line, separated by commas and with 12 points of
-space after the title. Addresses must be centered in 12 point font, also with
-12 points of space after the authors' names. E-mail addresses should be
-written using font Courier New, 10 point nominal size, with 6 points of space
-before and 6 points of space after.
+Este trabalho busca descrever o método heurístico conhecido como Algoritmo Genético, que utiliza conceitos da biologia evolucionária para otimizar uma função objetivo. Para este fim, a seção \ref{sec:evolution} introduz alguns conceitos relativos à evolução por seleção natural; por sua vez, a seção \ref{sec:algorithm} apresenta a construção do Algoritmo Genético, descrevendo sua estrutura fundamental; já a seção \ref{sec:operators} define os operadores genéticos de seleção, mutação e reprodução; por fim, a seção \ref{sec:conclusions} apresenta uma breve discussão sobre o método, concluindo o trabalho.
 
-The abstract and ``resumo'' (if is the case) must be in 12 point Times font,
-indented 0.8cm on both sides. The word \textbf{Abstract} and \textbf{Resumo},
-should be written in boldface and must precede the text.
+\section{O processo evolucionário} \label{sec:evolution}
 
-\section{CD-ROMs and Printed Proceedings}
+O conceito de evolução de organismos é bastante antigo, datando da época dos filósofos gregos pré-socráticos \cite{Hull1967}. A noção de seleção natural  foi desenvolvida por Charles Darwin, com a publicação de seu livro ``A Origem das Espécies'', de 1859. Nele, Darwin 
 
-In some conferences, the papers are published on CD-ROM while only the
-abstract is published in the printed Proceedings. In this case, authors are
-invited to prepare two final versions of the paper. One, complete, to be
-published on the CD and the other, containing only the first page, with
-abstract and ``resumo'' (for papers in Portuguese).
+\section{O algoritmo genético} \label{sec:algorithm}
 
-\section{Sections and Paragraphs}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-Section titles must be in boldface, 13pt, flush left. There should be an extra
-12 pt of space before each title. Section numbering is optional. The first
-paragraph of each section should not be indented, while the first lines of
-subsequent paragraphs should be indented by 1.27 cm.
+\section{Operadores genéticos} \label{sec:operators}
 
-\subsection{Subsections}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-The subsection titles must be in boldface, 12pt, flush left.
+\section{Discussão e conclusões} \label{sec:conclusions}
 
-\section{Figures and Captions}\label{sec:figs}
-
-
-Figure and table captions should be centered if less than one line
-(Figure~\ref{fig:exampleFig1}), otherwise justified and indented by 0.8cm on
-both margins, as shown in Figure~\ref{fig:exampleFig2}. The caption font must
-be Helvetica, 10 point, boldface, with 6 points of space before and after each
-caption.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.5\textwidth]{fig1.jpg}
-\caption{A typical figure}
-\label{fig:exampleFig1}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.3\textwidth]{fig2.jpg}
-\caption{This figure is an example of a figure caption taking more than one
-  line and justified considering margins mentioned in Section~\ref{sec:figs}.}
-\label{fig:exampleFig2}
-\end{figure}
-
-In tables, try to avoid the use of colored or shaded backgrounds, and avoid
-thick, doubled, or unnecessary framing lines. When reporting empirical data,
-do not use more decimal digits than warranted by their precision and
-reproducibility. Table caption must be placed before the table (see Table 1)
-and the font used must also be Helvetica, 10 point, boldface, with 6 points of
-space before and after each caption.
-
-\begin{table}[ht]
-\centering
-\caption{Variables to be considered on the evaluation of interaction
-  techniques}
-\label{tab:exTable1}
-\smallskip
-\begin{tabular}{|l|c|c|}
-\hline
-& Value 1 & Value 2\\[0.5ex]
-\hline
-&&\\[-2ex]
-Case 1 & 1.0 $\pm$ 0.1 & 1.75$\times$10$^{-5}$ $\pm$ 5$\times$10$^{-7}$\\[0.5ex]
-\hline
-&&\\[-2ex]
-Case 2 & 0.003(1) & 100.0\\[0.5ex]
-\hline
-\end{tabular}
-\end{table}
-
-\section{Images}
-
-All images and illustrations should be in black-and-white, or gray tones,
-excepting for the papers that will be electronically available (on CD-ROMs,
-internet, etc.). The image resolution on paper should be about 600 dpi for
-black-and-white images, and 150-300 dpi for grayscale images.  Do not include
-images with excessive resolution, as they may take hours to print, without any
-visible difference in the result.
-
-\section{References}
-
-The references must be listed using 12 point font size, with 6 points of space
-before each reference. The first line of each reference should not be
-indented, while the subsequent should be indented by 0.5 cm.
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 \bibliographystyle{sbc}
 \bibliography{bibliography}

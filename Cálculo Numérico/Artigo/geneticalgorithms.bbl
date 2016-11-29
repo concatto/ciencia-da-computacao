@@ -7,6 +7,16 @@ Christofides, N. (1976).
 \newblock Technical Report 388, Graduate School of Industrial Administration,
   Carnegie Mellon University.
 
+\bibitem[Haykin 1998]{Haykin1998}
+Haykin, S. (1998).
+\newblock {\em Neural Networks: A Comprehensive Foundation}.
+\newblock Prentice Hall PTR, Upper Saddle River, NJ, USA, 2nd edition.
+
+\bibitem[Hull 1967]{Hull1967}
+Hull, D.~L. (1967).
+\newblock The metaphysics of evolution.
+\newblock {\em The British Journal for the History of Science}, 3(4):309--337.
+
 \bibitem[Kernighan and Lin 1970]{Kernighan1970}
 Kernighan, B.~W. and Lin, S. (1970).
 \newblock An efficient heuristic procedure for partitioning graphs.

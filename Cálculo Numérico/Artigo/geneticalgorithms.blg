@@ -4,45 +4,45 @@ The top-level auxiliary file: geneticalgorithms.aux
 The style file: sbc.bst
 Database file #1: bibliography.bib
 Warning--there's a number but no volume in Kokash2005
-You've used 4 entries,
+You've used 6 entries,
             1935 wiz_defined-function locations,
-            499 strings with 4372 characters,
-and the built_in function-call counts, 1284 in all, are:
-= -- 124
-> -- 40
-< -- 5
-+ -- 14
-- -- 12
-* -- 103
-:= -- 239
-add.period$ -- 12
-call.type$ -- 4
-change.case$ -- 26
-chr.to.int$ -- 4
-cite$ -- 5
-duplicate$ -- 52
-empty$ -- 91
-format.name$ -- 20
-if$ -- 244
+            516 strings with 4652 characters,
+and the built_in function-call counts, 1928 in all, are:
+= -- 187
+> -- 54
+< -- 7
++ -- 20
+- -- 16
+* -- 153
+:= -- 353
+add.period$ -- 18
+call.type$ -- 6
+change.case$ -- 38
+chr.to.int$ -- 6
+cite$ -- 7
+duplicate$ -- 80
+empty$ -- 144
+format.name$ -- 26
+if$ -- 372
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 3
-newline$ -- 23
-num.names$ -- 12
-pop$ -- 16
+missing$ -- 6
+newline$ -- 33
+num.names$ -- 18
+pop$ -- 25
 preamble$ -- 1
-purify$ -- 26
+purify$ -- 38
 quote$ -- 0
-skip$ -- 43
+skip$ -- 64
 stack$ -- 0
-substring$ -- 71
-swap$ -- 4
+substring$ -- 118
+swap$ -- 6
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 24
+type$ -- 34
 warning$ -- 1
-while$ -- 9
+while$ -- 14
 width$ -- 0
-write$ -- 54
+write$ -- 81
 (There was 1 warning)
