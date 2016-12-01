@@ -10,4 +10,10 @@ Zadeh, L. (1965).
 \newblock Fuzzy sets.
 \newblock {\em Information and Control}, 8(3):338 -- 353.
 
+\bibitem[Zadeh 1975]{Zadeh1975}
+Zadeh, L.~A. (1975).
+\newblock {The concept of a linguistic variable and its application to
+  approximate reasoning—I}.
+\newblock {\em Information Sciences}, 8(3):199--249.
+
 \end{thebibliography}

@@ -22,28 +22,38 @@
 \maketitle
 
 \begin{abstract}
-  Abc
+  Traditional mathematical sets display profoundly binary characteristics, a property that rarely accomodates real situations that involve imprecision and uncertainty. In this context, the Fuzzy Logic model was developed, which allows elements to exhibit partial membership to a set. This work intended to identify the fundamental concepts of Fuzzy Logic, describing the particularities of this novel notion of sets, and also to present practical applications of this model of logic.
 \end{abstract}
 
 \begin{resumo}
-  Conjuntos matemáticos tradicionais apresentam características fortemente? binárias, uma propriedade que raramente acomoda situações reais que envolvem imprecisão e incerteza. Nesse contexto, o modelo de Lógica Difusa foi desenvolvido, que permite pertinência parcial de objetos a um conjunto. Este trabalho buscou identificar? os fundamentos da Lógica Difusa, descrevendo as particularidades deste novo tipo de conjunto e as operações entre eles, além de apresentar aplicações práticas deste modelo lógico.
+  Conjuntos matemáticos tradicionais apresentam características profundamente binárias, uma propriedade que raramente acomoda situações reais que envolvem imprecisão e incerteza. Nesse contexto, o modelo de Lógica Difusa foi desenvolvido, que permite pertinência parcial de objetos a um conjunto. Este trabalho buscou identificar os conceitos fundamentais da Lógica Difusa, descrevendo as particularidades desta nova noção de conjuntos e as operações entre eles, além de apresentar aplicações práticas deste modelo de lógica.
 \end{resumo}
 
 \section{Introdução} \label{sec:intro}
 
 A lógica tradicional, desenvolvida inicialmente pelo filósofo grego Aristóteles, é marcada por conceitos fortemente binários. Um princípio que evidencia essa noção é a Lei do Terceiro Excluído, uma das clássicas leis do pensamento, que estabelece que toda proposição é verdadeira ou sua negação é verdadeira; não há nenhum estado intermediário. Entretanto, devido à frequência com que a incerteza e a imprecisão se fazem presentes no estudo de sistemas complexos, foi identificada a carência de um modelo lógico que lide com essas características \cite{Ross2010}.
 
-A noção de imprecisão é inerente ao raciocínio humano. Muito frequentemente, quando uma decisão casual deve ser tomada, aproximações são empregadas ao invés de medidas exatas. Um exemplo dessa situação é a decisão de quantos gramas de café e quantos litros de água serão utilizados na preparação de uma garrafa de café; geralmente, medidas aproximadas como três colheres ou dois copos são empregadas nessas situações. Categorias exibem esse mesmo fenômeno: ``música de rock'', por exemplo, não possui uma definição exata, mas indivíduos geralmente conseguem decidir facilmente se uma música pertence ou não ao gênero.
+A noção de imprecisão é inerente ao raciocínio humano. Muito frequentemente, quando uma decisão casual deve ser tomada, aproximações são empregadas ao invés de medidas exatas. Um exemplo dessa situação é a decisão de quantos gramas de café e quantos litros de água serão utilizados na preparação de uma garrafa de café; geralmente, medidas aproximadas como três colheres ou dois copos são empregadas nessas circunstâncias. Categorias exibem esse mesmo fenômeno: ``música de rock'', por exemplo, não possui uma definição exata, mas indivíduos geralmente conseguem decidir facilmente se uma música pertence ou não ao gênero.
 
 Perante estas circunstâncias, o cientista azerbaijano Lofti Zadeh propôs em 1965 o sistema de Lógica Difusa, onde elementos podem pertencer parcialmente a um conjunto, ao invés de apenas pertencerem ou não pertencerem. Este trabalho visa investigar o sistema de Lógica Difusa, apresentando seus fundamentos e analisando suas aplicações nos diversos campos da ciência e engenharia.
 
 \section{Fundamentos da Lógica Difusa} \label{sec:fundaments}
 
-A noção de \textit{conjuntos difusos} é essencial para a Lógica Difusa. Zadeh os descreve como conjuntos onde objetos podem pertencer aproximadamente ao conjunto, ao contrário de conjuntos clássicos, que possuem uma definição formal e absolutamente precisa. O conceito tradicional de conjuntos estabelece que um objeto está ou não está no conjunto, necessariamente desconsiderando qualquer posição intermediária. Desta forma, é impossível propôr que um objeto esteja ``fortemente'' ou ``fracamente'' presente em um determinado conjunto; o objeto simplesmente percente ou não.
+A Lógica Difusa é composta por diversos conceitos fundamentais. Um dos conceitos que mais se fazem presentes na proposição de Zadeh é ideia de conjuntos difusos, que permitem pertinência parcial de elementos, ao invés de apenas inclusão ou exclusão. Associadas a estes conjuntos estão as variáveis linguísticas, que descrevem valores de maneira textual ao invés de estritamente numérica. Esta seção descreve detalhadamente estes conceitos, apresentando noções relacionadas e exemplos de utilização.
 
-A contraposição a essa característica dos conjuntos clássicos é o ponto chave da Lógica Difusa. Conjuntos difusos apresentam \textit{níveis de pertinência}, definidos a partir de valores no intervalo $[0, 1]$. Desta maneira, é possível descrever quão fortemente um objeto percente a um conjunto, com valores próximos a 0 representando elementos que possuem uma presença fraca no conjunto e valores próximos a 1 indicando elementos que pertencem de forma significativa ao conjunto. Os valores 0 e 1 equivalem aos conjuntos clássicos, denotando que o objeto não pertence ou percente ao conjunto, respectivamente. A função que descreve esse nível de pertinência é chamada de \textbf{função de pertinência}, do inglês \textit{membership function} \cite{Zadeh1965}.
+\subsection{Conjuntos difusos}
 
-\section{O algoritmo genético} \label{sec:algorithm}
+A noção de \textit{conjuntos difusos} é essencial para a Lógica Difusa. Zadeh os descreve como conjuntos onde objetos podem pertencer parcialmente ao conjunto, ao contrário de conjuntos clássicos, que possuem uma definição formal e absolutamente precisa. O conceito tradicional de conjuntos estabelece que um objeto está ou não está no conjunto, necessariamente desconsiderando qualquer posição intermediária. Desta forma, é impossível propôr que um objeto esteja ``fortemente'' ou ``fracamente'' presente em um determinado conjunto; o objeto simplesmente percente ou não.
+
+A contraposição a essa característica dos conjuntos clássicos é o ponto chave da Lógica Difusa. Conjuntos difusos apresentam níveis de pertinência, definidos a partir de valores no intervalo $[0, 1]$. Desta maneira, é possível descrever quão fortemente um objeto percente a um conjunto, com valores próximos a 0 representando elementos que possuem uma presença fraca no conjunto e valores próximos a 1 indicando elementos que pertencem de forma significativa ao conjunto. Os valores 0 e 1 equivalem aos conjuntos clássicos, denotando que o objeto não pertence ou percente ao conjunto, respectivamente. A função que descreve esse nível de pertinência é chamada de \textbf{função de pertinência}, do inglês \textit{membership function} \cite{Zadeh1965}.
+
+\subsection{Variáveis linguísticas}
+
+Um conceito adicional crucial para a Lógica Difusa é o de \textit{variáveis linguísticas}. Introduzidas por Zadeh em 1975, variáveis linguísticas possuem um propósito bastante similar às variáveis numéricas convencionais, com a diferença primordial de que seus valores são representados por palavras ao invés de números. Desta maneira, para uma variável ``idade'', o conceito clássico de variáveis poderia exibir números de 1 a 100, enquanto a noção linguística apresentaria valores como \textit{jovem}, \textit{velho} ou \textit{muito velho}, entre outras denominações \cite{Zadeh1975}.
+
+Para atribuir sentido aos valores de uma variável linguística, \textit{funções de compatibilidade} são utilizadas, que mapeiam o grau de verdade de um valor linguístico a um valor numérico no intervalo $[0, 1]$, a partir de um argumento contável. Por exemplo, para o valor linguístico \textit{velho} da variável ``idade'', o argumento 50 anos poderia apresentar um grau de verdade de $0.5$; já para uma variável de nome ``clima'', uma temperatura de 35 $^{\circ}$C para o valor linguístico \textit{quente} poderia exibir um grau de verdade de $0.9$.
+
+\section{Operações entre conjuntos difusos} \label{sec:operations}
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
