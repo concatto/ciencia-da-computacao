@@ -45,23 +45,52 @@ A Lógica Difusa é composta por diversos conceitos fundamentais. Um dos conceit
 
 A noção de \textit{conjuntos difusos} é essencial para a Lógica Difusa. Zadeh os descreve como conjuntos onde objetos podem pertencer parcialmente ao conjunto, ao contrário de conjuntos clássicos, que possuem uma definição formal e absolutamente precisa. O conceito tradicional de conjuntos estabelece que um objeto está ou não está no conjunto, necessariamente desconsiderando qualquer posição intermediária. Desta forma, é impossível propôr que um objeto esteja ``fortemente'' ou ``fracamente'' presente em um determinado conjunto; o objeto simplesmente percente ou não.
 
-A contraposição a essa característica dos conjuntos clássicos é o ponto chave da Lógica Difusa. Conjuntos difusos apresentam níveis de pertinência, definidos a partir de valores no intervalo $[0, 1]$. Desta maneira, é possível descrever quão fortemente um objeto pertence a um conjunto, com valores próximos a 0 representando elementos que possuem uma presença fraca no conjunto e valores próximos a 1 indicando elementos que pertencem de forma significativa ao conjunto. Os valores 0 e 1 equivalem aos conjuntos clássicos, denotando que o objeto não pertence ou percente ao conjunto, respectivamente. A função que descreve esse nível de pertinência é chamada de \textbf{função de pertinência}, do inglês \textit{membership function} \cite{Zadeh1965}.
+A contraposição a essa característica dos conjuntos clássicos é o ponto chave da Lógica Difusa. Conjuntos difusos apresentam níveis de pertinência, definidos a partir de valores no intervalo $[0, 1]$. Desta maneira, é possível descrever quão fortemente um objeto pertence a um conjunto, com valores próximos a 0 representando elementos que possuem uma presença fraca no conjunto e valores próximos a 1 indicando elementos que pertencem de forma significativa ao conjunto. Os valores 0 e 1 equivalem aos conjuntos clássicos, denotando que o objeto não pertence ou percente ao conjunto, respectivamente. A função que descreve esse nível de pertinência é chamada de \textbf{função de pertinência}, do inglês \textit{membership function} \cite{Zadeh1965}. Um exemplo de função de pertinência de forma triangular é apresentada na figura \ref{fig:membership}; outras formas típicas para a função de pertinência são a trapezoide e a gaussiana.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=8cm]{membership.png}
+    \caption{Função de pertinência triangular m(x).}
+    \label{fig:membership}
+\end{figure}
 
 \subsection{Variáveis linguísticas e Fuzzificação}
 
-Um conceito adicional crucial para a Lógica Difusa é o de \textit{variáveis linguísticas}. Introduzidas por Zadeh em 1975, variáveis linguísticas possuem um propósito bastante similar às variáveis numéricas convencionais, com a diferença primordial de que seus valores são representados por palavras ao invés de números. Desta maneira, para uma variável ``idade'', o conceito clássico de variáveis poderia exibir números de 1 a 100, enquanto a noção linguística apresentaria valores como \textit{jovem}, \textit{velho} ou \textit{muito velho}, entre outras denominações \cite{Zadeh1975}.
+Um conceito adicional crucial para a Lógica Difusa, relacionado com os conjuntos difusos, é o de \textit{variáveis linguísticas}. Introduzidas por Zadeh em 1975, variáveis linguísticas possuem um propósito bastante similar às variáveis numéricas convencionais, com a diferença primordial de que seus valores são representados por palavras ao invés de números. Desta maneira, para uma variável ``idade'', o conceito clássico de variáveis poderia exibir números de 1 a 100, enquanto a noção linguística apresentaria valores como \textit{jovem}, \textit{velho} ou \textit{muito velho}, entre outras denominações \cite{Zadeh1975}.
 
-Para atribuir sentido aos valores de uma variável linguística, \textit{funções de compatibilidade} são utilizadas, que mapeiam o grau de verdade de um valor linguístico a um valor numérico no intervalo $[0, 1]$, a partir de um argumento contável. Por exemplo, para o valor linguístico \textit{velho} da variável ``idade'', o argumento 50 anos poderia apresentar um grau de verdade de $0.5$; já para uma variável de nome ``clima'', uma temperatura de 35 $^{\circ}$C para o valor linguístico \textit{quente} poderia exibir um grau de verdade de $0.9$. Este processo é chamado de \textbf{fuzzificação}, do inglês \textit{fuzzification}, e compõe o primeiro passo de um sistema de inferência baseado em Lógica Difusa, detalhado na seção \ref{sec:inference}.
+Valores de uma variável linguística são tratados como conjuntos difusos, e portanto possuem uma função de pertinência que determina o grau de verdade (no intervalo $[0, 1]$) de um argumento contável. Por exemplo, para o valor linguístico \textit{velho} da variável ``idade'', o argumento 50 anos poderia apresentar um grau de verdade de $0.5$; já para uma variável de nome ``clima'', uma temperatura de 35 $^{\circ}$C para o valor linguístico \textit{quente} poderia exibir um grau de verdade de $0.9$. Este processo de conversão de um valor de entrada para o nível de pertinência a um conjunto difuso é chamado de \textbf{fuzzificação}, do inglês \textit{fuzzification}, e compõe o primeiro passo da execução de um sistema de inferência baseado em Lógica Difusa, detalhado na seção \ref{sec:inference}.
 
 \section{Operações entre conjuntos difusos} \label{sec:operations}
 
-Da mesma forma que conjuntos clássicos possuem operadores bem definidos, conjuntos difusos também apresentam essa característica. Conjuntos clássicos apresentam os operadores de união, definido pela junção dos elementos de dois conjuntos sem repetição; de interseção, definido  
+Conjuntos clássicos apresentam três operadores fundamentais: união, intersecção e complemento, sendo a união e a interseção operadores binários e o complemento um operador unário. A \textbf{união} entre dois conjuntos A e B é composta pelos elementos que estão em A ou em B, sem repetições. A \textbf{intersecção} entre dois conjuntos A e B é constituída pelos elementos que estão tanto em A quanto em B. O \textbf{complemento} de um conjunto A é composto por todos os elementos que \textit{não} estão em A \cite{Houston2009}.
+
+Conjuntos difusos também apresentam estes operadores, porém com formulações diferentes, para acomodar as particularidades da Lógica Difusa. Como a noção de pertinência em conjuntos difusos é estabelecida por valores no intervalo $[0, 1]$, os operadores são definidos em termos da função de pertinência $m(x)$ do conjunto. A união entre dois conjuntos difusos A e B é definida pelo maior valor entre as duas funções de pertinência $m_{A}(x)$ e $m_{B}(x)$, enquanto que a intersecção é definida pelo menor valor entre elas. O complemento de um conjunto difuso A é definido por $1 - m_{A}(x)$ \cite{Zadeh1965}.
+
+Estas definições se mostram bastante condizentes com as características dos operadores em conjuntos clássicos. No caso da união, a função de pertinência do conjunto difuso resultante apresentará um formato ``maior'', que \textit{contém} as funções dos conjuntos que foram unidos. Para a intersecção, o formato será pequeno, representando apenas as áreas onde as duas funções estão sobrepostas. As figuras \ref{fig:union} e \ref{fig:intersection} demonstram essas características, evidenciando uma forte similaridade com os diagramas de Venn.
+
+\begin{figure}
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1.1\textwidth]{union.png}
+        \caption{União.}
+        \label{fig:union}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1.1\textwidth]{intersection.png}
+        \caption{Intersecção.}
+        \label{fig:intersection}
+    \end{minipage}
+\end{figure}
 
 \section{Sistemas de inferência} \label{sec:inference}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Sistemas de inferência utilizando Lógica Difusa foram inicialmente propostos por Mamdani, em 1975, em uma tentativa de implementar um sistema de controle linguístico para motores a vapor em uma fábrica. Estes sistemas utilizam uma base de regras, definidas através de cláusulas \textbf{se-então} sobre variáveis linguísticas para tomar decisões a partir de dados de entrada numéricos \cite{Mamdani1975}. O principal atrativo destes sistemas é a capacidade de lidar com situações imprecisas de forma conveniente, devido à utilização dos conceitos de Lógica Difusa.
 
-\section{Discussão e conclusões} \label{sec:conclusions}
+Crucialmente, as regras de um sistema de inferência são especificadas em termos linguísticos. Por exemplo, para um sistema de controle de ar condicionado, uma das regras poderia assumir a seguinte forma: \textbf{se} temperatura está quente \textbf{então} aumente a potência do ar condicionado. Neste caso, quente é um dos valores da variável linguística temperatura. É possível também utilizar os operadores lógicos \textit{ou}, \textit{e} e \textit{não}, que são implementados através dos operadores de união, intersecção e complemento, respectivamente.
+
+\section{Aplicações da Lógica Difusa} \label{sec:applications}
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 

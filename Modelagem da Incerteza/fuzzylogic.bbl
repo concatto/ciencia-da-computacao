@@ -1,5 +1,16 @@
 \begin{thebibliography}{}
 
+\bibitem[Houston 2009]{Houston2009}
+Houston, K. (2009).
+\newblock {\em How to Think Like a Mathematician: A Companion to Undergraduate
+  Mathematics}.
+\newblock Cambridge University Press.
+
+\bibitem[Mamdani and Assilian 1975]{Mamdani1975}
+Mamdani, E. and Assilian, S. (1975).
+\newblock An experiment in linguistic synthesis with a fuzzy logic controller.
+\newblock {\em International Journal of Man-Machine Studies}, 7(1):1 -- 13.
+
 \bibitem[Ross 2010]{Ross2010}
 Ross, T.~J. (2010).
 \newblock {\em Fuzzy Logic with Engineering Applications}.
