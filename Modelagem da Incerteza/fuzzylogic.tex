@@ -5,6 +5,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{relsize}
+\usepackage{subfigure}
 
 \sloppy
 
@@ -33,7 +35,7 @@
 
 A lógica tradicional, desenvolvida inicialmente pelo filósofo grego Aristóteles, é marcada por conceitos fortemente binários. Um princípio que evidencia essa noção é a Lei do Terceiro Excluído, uma das clássicas leis do pensamento, que estabelece que toda proposição é verdadeira ou sua negação é verdadeira; não há nenhum estado intermediário. Entretanto, devido à frequência com que a incerteza e a imprecisão se fazem presentes no estudo de sistemas complexos, foi identificada a carência de um modelo lógico que lide com essas características \cite{Ross2010}.
 
-A noção de imprecisão é inerente ao raciocínio humano. Muito frequentemente, quando uma decisão casual deve ser tomada, aproximações são empregadas ao invés de medidas exatas. Um exemplo dessa situação é a decisão de quantos gramas de café e quantos litros de água serão utilizados na preparação de uma garrafa de café; geralmente, medidas aproximadas como três colheres ou dois copos são empregadas nessas circunstâncias. Categorias exibem esse mesmo fenômeno: ``música de rock'', por exemplo, não possui uma definição exata, mas indivíduos geralmente conseguem decidir facilmente se uma música pertence ou não ao gênero.
+A noção de imprecisão é inerente ao raciocínio humano. Muito frequentemente, quando uma decisão casual deve ser tomada, aproximações são empregadas ao invés de medidas exatas. Um exemplo dessa situação é a decisão de quantos gramas de café e quantos litros de água serão utilizados na preparação de uma garrafa de café; geralmente, medidas aproximadas como três colheres ou dois copos são empregadas nessas circunstâncias. Categorias exibem esse mesmo fenômeno: ``música de rock'', por exemplo, não possui uma definição exata, mas indivíduos geralmente conseguem decidir facilmente se uma música pertence ou não ao gênero, algumas mais claramente do que outras.
 
 Perante estas circunstâncias, o cientista azerbaijano Lofti Zadeh propôs em 1965 o sistema de Lógica Difusa, onde elementos podem pertencer parcialmente a um conjunto, ao invés de apenas pertencerem ou não pertencerem. Este trabalho visa investigar o sistema de Lógica Difusa, apresentando seus fundamentos e analisando suas aplicações nos diversos campos da ciência e engenharia.
 
@@ -45,7 +47,7 @@ A Lógica Difusa é composta por diversos conceitos fundamentais. Um dos conceit
 
 A noção de \textit{conjuntos difusos} é essencial para a Lógica Difusa. Zadeh os descreve como conjuntos onde objetos podem pertencer parcialmente ao conjunto, ao contrário de conjuntos clássicos, que possuem uma definição formal e absolutamente precisa. O conceito tradicional de conjuntos estabelece que um objeto está ou não está no conjunto, necessariamente desconsiderando qualquer posição intermediária. Desta forma, é impossível propôr que um objeto esteja ``fortemente'' ou ``fracamente'' presente em um determinado conjunto; o objeto simplesmente percente ou não.
 
-A contraposição a essa característica dos conjuntos clássicos é o ponto chave da Lógica Difusa. Conjuntos difusos apresentam níveis de pertinência, definidos a partir de valores no intervalo $[0, 1]$. Desta maneira, é possível descrever quão fortemente um objeto pertence a um conjunto, com valores próximos a 0 representando elementos que possuem uma presença fraca no conjunto e valores próximos a 1 indicando elementos que pertencem de forma significativa ao conjunto. Os valores 0 e 1 equivalem aos conjuntos clássicos, denotando que o objeto não pertence ou percente ao conjunto, respectivamente. A função que descreve esse nível de pertinência é chamada de \textbf{função de pertinência}, do inglês \textit{membership function} \cite{Zadeh1965}. Um exemplo de função de pertinência de forma triangular é apresentada na figura \ref{fig:membership}; outras formas típicas para a função de pertinência são a trapezoide e a gaussiana.
+A contraposição a essa característica dos conjuntos clássicos é o ponto chave da Lógica Difusa. Conjuntos difusos apresentam níveis de pertinência, definidos a partir de valores no intervalo $[0, 1]$. Desta maneira, é possível descrever quão fortemente um objeto pertence a um conjunto, com valores próximos a 0 representando elementos que possuem uma presença fraca no conjunto e valores próximos a 1 indicando elementos que pertencem de forma significativa ao conjunto. Os valores 0 e 1 equivalem aos conjuntos clássicos, denotando que o objeto não pertence ou pertence completamente ao conjunto, respectivamente. A função que descreve esse nível de pertinência é chamada de \textbf{função de pertinência}, do inglês \textit{membership function} \cite{Zadeh1965}. Um exemplo de função de pertinência de forma triangular é apresentada na figura \ref{fig:membership}; outras formas típicas para a função de pertinência são a trapezoide e a gaussiana.
 
 \begin{figure}[ht]
     \centering
@@ -56,11 +58,11 @@ A contraposição a essa característica dos conjuntos clássicos é o ponto cha
 
 \subsection{Variáveis linguísticas e Fuzzificação} \label{sec:linguisticvars}
 
-Um conceito adicional crucial para a Lógica Difusa, relacionado com os conjuntos difusos, é o de \textit{variáveis linguísticas}. Introduzidas por Zadeh em 1975, variáveis linguísticas possuem um propósito bastante similar às variáveis numéricas convencionais, com a diferença primordial de que seus valores são representados por palavras ao invés de números. Desta maneira, para uma variável ``idade'', o conceito clássico de variáveis poderia exibir números de 1 a 100, enquanto a noção linguística apresentaria valores como \textit{jovem}, \textit{velho} ou \textit{muito velho}, entre outras denominações \cite{Zadeh1975}.
+Um conceito adicional crucial para a Lógica Difusa, relacionado com os conjuntos difusos, é o de \textit{variáveis linguísticas}. Introduzidas por Zadeh em 1975, variáveis linguísticas possuem um propósito similar às variáveis numéricas convencionais, com a diferença primordial de que seus valores são representados por palavras ao invés de números. Desta maneira, para uma variável ``idade'', o conceito clássico de variáveis poderia exibir números de 1 a 100, enquanto a noção linguística apresentaria valores como \textit{jovem}, \textit{velho} ou \textit{muito velho}, entre outras denominações \cite{Zadeh1975}.
 
-Valores de uma variável linguística são tratados como conjuntos difusos, e portanto possuem uma função de pertinência que determina o grau de verdade (no intervalo $[0, 1]$) de um argumento contável. Por exemplo, para o valor linguístico \textit{velho} da variável ``idade'', o argumento 50 anos poderia apresentar um grau de verdade de $0.5$; já para uma variável de nome ``clima'', uma temperatura de 35 $^{\circ}$C para o valor linguístico \textit{quente} poderia exibir um grau de verdade de $0.9$. Este processo de conversão de um valor de entrada para o nível de pertinência a um conjunto difuso é chamado de \textbf{fuzzificação}, do inglês \textit{fuzzification}, e compõe o primeiro passo da execução de um sistema de inferência baseado em Lógica Difusa, detalhado na seção \ref{sec:inference}.
+Valores de uma variável linguística são tratados como conjuntos difusos, e portanto possuem uma função de pertinência que determina o grau de verdade (no intervalo $[0, 1]$) de um argumento contável. Por exemplo, para o valor linguístico \textit{velho} da variável ``idade'', o argumento 50 anos poderia apresentar um grau de verdade de $0.6$; já para uma variável de nome ``clima'', uma temperatura de 35 $^{\circ}$C para o valor linguístico \textit{quente} poderia exibir um grau de verdade de $0.9$. Este processo de conversão de um valor de entrada para o nível de pertinência a um conjunto difuso é chamado de \textbf{fuzzificação}, do inglês \textit{fuzzification}, e compõe o primeiro passo da execução de um sistema de inferência baseado em Lógica Difusa, detalhados na seção \ref{sec:systems}.
 
-\section{Operações entre conjuntos difusos} \label{sec:operations}
+\section{Operações entre conjuntos difusos} \label{sec:fuzzyoperations}
 
 Conjuntos clássicos apresentam três operadores fundamentais: união, intersecção e complemento, sendo a união e a interseção operadores binários e o complemento um operador unário. A \textbf{união} entre dois conjuntos A e B é composta pelos elementos que estão em A ou em B, sem repetições. A \textbf{intersecção} entre dois conjuntos A e B é constituída pelos elementos que estão tanto em A quanto em B. O \textbf{complemento} de um conjunto A é composto por todos os elementos que \textit{não} estão em A \cite{Houston2009}.
 
@@ -90,17 +92,17 @@ Sistemas de inferência utilizando Lógica Difusa foram inicialmente propostos p
 
 Crucialmente, as regras de um sistema de inferência são especificadas em termos linguísticos, facilitando a sua especificação por um especialista no domínio do problema. Por exemplo, para um sistema de controle de ar condicionado, uma das regras poderia assumir a seguinte forma: \textbf{se} temperatura está quente \textbf{então} aumente a potência do ar condicionado. Neste caso, quente é um dos valores da variável linguística temperatura. É possível também utilizar os operadores lógicos \textit{e}, \textit{ou} e \textit{não}, que são implementados através dos operadores de intersecção, união e complemento, respectivamente.
 
-Adicionalmente, para todos os valores das variáveis linguísticas (representados por conjuntos difusos), uma função de pertinência deve ser especificada. Essa função mapeará valores contáveis para níveis de pertinência ao conjunto, como exemplificado na seção \ref{sec:linguisticvars}. As regras do sistema de inferência são aplicadas sobre esses níveis de pertinência.
+Adicionalmente, como os valores das variáveis linguísticas são representados por conjuntos difusos, uma função de pertinência deve ser especificada para cada um deles. Essa função mapeará valores contáveis para níveis de pertinência ao conjunto, como exemplificado na seção \ref{sec:linguisticvars}. A ``força'' das regras do sistema de inferência serão determinadas a partir desses níveis de pertinência.
 
 \subsection{Fuzzificação} \label{sec:fuzzification}
 
-A operação de transformação de valores numéricos para conjuntos difusos é denominada \textbf{fuzzificação}, e compõe o primeiro passo de um sistema de inferência. Este processo avalia a pertinência de um valor de entrada $x$ a um conjunto difuso $A$ através da função de pertinência $m_{A}(x)$. O sistema pode conter mais de um valor de entrada; neste caso, todos os níveis de pertinência são computados. Então?, o conjunto a qual o valor de entrada pertence e o nível de pertinência são passados para estágio de inferência, descrito adiante.
+A operação de transformação de valores numéricos para conjuntos difusos é denominada \textbf{fuzzificação}, e compõe o primeiro passo de um sistema de inferência. Este processo avalia a pertinência de um valor de entrada $x$ a um conjunto difuso $A$ através da função de pertinência $m_{A}(x)$. O sistema pode conter mais de um valor de entrada; neste caso, todos os níveis de pertinência são computados. Então, o conjunto a qual o valor de entrada pertence e o respectivo nível de pertinência são passados para estágio de inferência, descrito adiante.
 
 \subsection{Inferência} \label{sec:inference}
 
-A inferência compõe o segundo estágio de um sistema de controle por Lógica Difusa. Este passo utiliza a base de regras do sistema para transformar os dados de entrada em alguma ação concreta. Existem diversos métodos para efetuar esse processo, como o de Mamdani \cite{Mamdani1975} e de Sugeno \cite{Sugeno1988}, cada um com algumas variações específicas. O método de Mamdani é descrito a seguir.
+A inferência propriamente dita compõe o segundo estágio de um sistema de controle por Lógica Difusa. Este passo utiliza a base de regras do sistema para refinar os dados de entrada, para que alguma ação concreta possa ser tomada. Existem diversos métodos para efetuar esse processo, como o de Mamdani \cite{Mamdani1975} e de Sugeno \cite{Sugeno1988}, cada um com algumas variações específicas. O método de Mamdani é descrito a seguir.
 
-Para cada regra aplicável aos dados recebidos do estágio de fuzzificação, a \textit{força} ou \textit{aceitação} da regra é calculada. Este valor é calculado primeiramente limitando (truncando) as funções de pertinência de cada conjunto aplicável (definidos pela porção \textbf{se} da regra) ao nível de pertinência do valor de entrada. Na sequência, caso a regra especifique operações lógicas entre os conjuntos de entrada, os mesmos são combinados utilizando as técnicas descritas na seção \ref{sec:operations}. O valor resultante é a força de regra, no intervalo $[0, 1]$.
+Para cada regra aplicável aos dados recebidos do estágio de fuzzificação (com pertinência acima de 0), a \textit{força} ou \textit{aceitação} da regra é calculada. Este valor é calculado primeiramente limitando (truncando) as funções de pertinência de cada conjunto aplicável (definidos pela porção \textbf{se} da regra) ao nível de pertinência do valor de entrada. Na sequência, caso a regra especifique operações lógicas entre os conjuntos de entrada, os mesmos são combinados utilizando as técnicas descritas na seção \ref{sec:fuzzyoperations}. O valor resultante é a força de regra, no intervalo $[0, 1]$.
 
 %Imagens!!!
 
@@ -108,25 +110,68 @@ Em seguida, a função de pertinência do conjunto de saída (porção \textbf{e
 
 \subsection{Defuzzificação} \label{sec:defuzzification}
 
-O processo de \textbf{defuzzificação}, do inglês \textit{defuzzification}, envolve a conversão do conjunto difuso gerados pelo estágio de inferência de volta para um valor numérico, para que possa ser aplicado no contexto do sistema sendo controlado. Diversos métodos foram desenvolvidos para realizar a defuzzificação de conjuntos difusos; os mais utilizados entre eles são o \textit{método da média dos máximos} e \textit{método do centroide} \cite{Ross2010}.
+O processo de \textbf{defuzzificação}, do inglês \textit{defuzzification}, envolve a conversão do conjunto difuso gerado pelo estágio de inferência de volta para um valor numérico, para que possa ser aplicado no contexto do sistema sendo controlado. Diversos métodos foram desenvolvidos para realizar a defuzzificação de conjuntos difusos; os mais utilizados entre eles são o \textit{método da média dos máximos} e \textit{método do centroide} \cite{Ross2010}.
 
-O método da média dos máximos é uma técnica computacionalmente simples, que envolve o cálculo da média entre os pontos $a$ e $b$ que representam o início e o término da região onde a função de pertinência apresenta o valor máximo. O valor resultante $z$ é calculado pela expressão \ref{eq:mom}.
+O método da média dos máximos é uma técnica computacionalmente simples, que envolve o cálculo da média entre os pontos $a$ e $b$ que representam o início e o término da região onde a função de pertinência apresenta o valor máximo. O valor resultante $z$ é calculado pela equação \ref{eq:mom}.
 
 \begin{equation}
   \label{eq:mom}
   z = \frac{a + b}{2}
 \end{equation}
 
-O método do centroide se trata de uma técnica muito mais sofisticada, porém custosa. Envolve o cálculo do ponto central da área representada pela função de pertinência $m_{S}(x)$ do conjunto difuso $S$, utilizando integração algébrica. Este ponto é calculado através da expressão .
+O método do centroide se trata de uma técnica muito mais sofisticada, porém custosa. Envolve o cálculo do ponto central da área representada pela função de pertinência $m_{S}(x)$ do conjunto difuso $S$, utilizando integração algébrica. Este ponto é calculado através da equação \ref{eq:centroid}.
 
 \begin{equation}
   \label{eq:centroid}
-  z = \frac{\int m_{S}(x) \cdot x \; dx}{\int m_{S}(x) \; dx}
+  z = \frac{\displaystyle\int x \; m_{S}(x) \; dx}{\displaystyle\int m_{S}(x)  \; dx}
 \end{equation}
 
 \section{Aplicações da Lógica Difusa} \label{sec:applications}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+A Lógica Difusa pode ser aplicada em uma enorme gama de situações, especialmente naquelas que envolvem incerteza e imprecisão. A área de sistemas de controle, em particular, recebeu uma grande quantidade de pesquisa, com aplicações envolvendo controle de robôs, purificação de água, controle de vôo de aeronaves, reatores nucleares, controle de elevadores, entre outros \cite{Lee1990}.
+
+Para exemplificar um sistema de controle que utiliza Lógica Difusa, uma máquina de lavar roupas será considerada. Neste sistema, existem duas variáveis de entrada: ``quantidade de roupas'', com valores \textit{pouca}, \textit{média} e \textit{muita}, e ``sujeira'', com valores \textit{pouca} e \textit{muita}. A variável de saída desse sistema é o ``duração da lavagem'', com valores \textit{curta}, \textit{média}, \textit{longa} e \textit{muito longa}. A quantidade de roupas é definida em quilogramas, com valores de 0 a 10, e a sujeira é estabelecida pelas impurezas da água, com valores de 0 a 100 (ambas medidas por sensores na máquina de lavar). A duração da lavagem é medida em minutos, de 30 a 120.
+
+As funções de pertinência das duas variáveis de entrada são especificadas pela figura \ref{fig:varmembership}, juntamente com os valores atribuídos durante o processo de fuzzificação, enquanto as funções de pertinência da variável de saída são apresentadas na figura \ref{fig:defuzzification}, durante os estágios mais avançados do sistema.
+
+\begin{figure}
+\centering
+\subfigure[]{\includegraphics[width=6cm]{cloth.png}}
+\hspace{0.8cm}
+\subfigure[]{\includegraphics[width=6cm]{dirt.png}}
+\caption{Funções de pertinência das variáveis (a) quantidade de roupas e (b) sujeira.}
+\label{fig:varmembership}
+\end{figure}
+
+Para o processo de fuzzificação, a quantidade de roupas é definida como 2.7 kg, resultando em níveis de pertinência de 0.75 para \textit{pouca} e 0.19 para \textit{média}, e a sujeira é definida como 80, resultando em um nível de pertinência de 1 para \textit{muita}. Para os outros conjuntos, o nível de pertinência se mantém em zero.
+
+O sistema de inferência deste exemplo possui seis regras, uma para cada combinação das variáveis de entrada. As regras foram estebelecidas da seguinte forma:
+
+\begin{enumerate}
+    \item Se \textbf{roupa} é \textit{pouca} e \textbf{sujeira} é \textit{pouca}, então \textbf{duração} é \textit{curta};
+    \item Se \textbf{roupa} é \textit{pouca} e \textbf{sujeira} é \textit{muita}, então \textbf{duração} é \textit{média};
+    \item Se \textbf{roupa} é \textit{média} e \textbf{sujeira} é \textit{pouca}, então \textbf{duração} é \textit{média};
+    \item Se \textbf{roupa} é \textit{média} e \textbf{sujeira} é \textit{muita}, então \textbf{duração} é \textit{longa};
+    \item Se \textbf{roupa} é \textit{muita} e \textbf{sujeira} é \textit{pouca}, então \textbf{duração} é \textit{longa};
+    \item Se \textbf{roupa} é \textit{muita} e \textbf{sujeira} é \textit{muita}, então \textbf{duração} é \textit{muito longa}.
+\end{enumerate}
+
+\noindent desta maneira, as regras aplicáveis são as regras 2 e 4. Para a regra 2, o valor mínimo (devido ao operador \textit{e}) entre 0.75 e 1 é calculado, resultando em uma força de 0.75 para a regra. O mesmo processo acontece para a regra 4, desta vez entre 0.19 e 1, resultando em uma força de 0.19. Sendo assim, o conjunto difuso  resultante da inferência é composto pela união da função de pertinência do conjunto \textit{média}, limitada em 0.75, com a função de pertinência do conjunto \textit{longa}, limitada em 0.19. Este conjunto é então passado adiante para a última fase do sistema.
+
+O estágio final do sistema envolve a defuzzificação do conjunto difuso construído pelo processo de inferência. O método da média dos máximos será utilizado neste exemplo. Realizando algumas medições, o ponto inicial do valor máximo da função foi identificado como 54 minutos, e o ponto final como 68 minutos. Através da fórmula da média, dada pela equação \ref{eq:mom}, a saída numérica deste sistema é calculada, sendo igual a \textbf{61} minutos. Este resultado é apresentado graficamente na figura \ref{fig:defuzzification}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=8cm]{defuzzification.png}
+    \caption{Resultado do processo de defuzzificação pelo método da média dos máximos.}
+    \label{fig:defuzzification}
+\end{figure}
+
+\section{Conclusões}
+
+Neste trabalho, a Lógica Difusa foi explorada através de pesquisas bibliográficas e exemplificações. Os conceitos de conjuntos difusos, variáveis linguísticas, operações entre conjuntos e os processos de fuzzificação, inferência e defuzzificação foram apresentados. Para evidenciar a funcionalidade de um sistema de controle que utiliza a Lógica Difusa, uma situação envolvendo uma máquina de lavar roupas foi examinada.
+
+Por meio destes estudos, foi possível constatar claramente o potencial da Lógica Difusa em circunstâncias onde é desejável que sistemas computacionais utilizem uma técnica de raciocínio similar à humana, que lida principalmente com incertezas e aproximações. Propostas para trabalhos futuros incluem a implementação concreta de um sistema de controle envolvendo Lógica Difusa, para validar o conhecimento obtido através deste trabalho, e pesquisas adicionais quanto ao tema, particularmente sobre as articulações entre Redes Neurais Artificiais e a Lógica Difusa.
 
 \bibliographystyle{sbc}
 \bibliography{bibliography}

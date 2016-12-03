@@ -1,13 +1,16 @@
 \begin{thebibliography}{}
 
-\bibitem[Sug ]{Sugeno1988}
-
-
 \bibitem[Houston 2009]{Houston2009}
 Houston, K. (2009).
 \newblock {\em How to Think Like a Mathematician: A Companion to Undergraduate
   Mathematics}.
 \newblock Cambridge University Press.
+
+\bibitem[Lee 1990]{Lee1990}
+Lee, C.~C. (1990).
+\newblock Fuzzy logic in control systems: fuzzy logic controller. ii.
+\newblock {\em IEEE Transactions on Systems, Man, and Cybernetics},
+  20(2):419--435.
 
 \bibitem[Mamdani and Assilian 1975]{Mamdani1975}
 Mamdani, E. and Assilian, S. (1975).
@@ -18,6 +21,11 @@ Mamdani, E. and Assilian, S. (1975).
 Ross, T.~J. (2010).
 \newblock {\em Fuzzy Logic with Engineering Applications}.
 \newblock Wiley-Blackwell.
+
+\bibitem[Sugeno and Kang 1988]{Sugeno1988}
+Sugeno, M. and Kang, G.~T. (1988).
+\newblock Structure identification of fuzzy model.
+\newblock {\em Fuzzy Sets Syst.}, 28(1):15--33.
 
 \bibitem[Zadeh 1965]{Zadeh1965}
 Zadeh, L. (1965).
