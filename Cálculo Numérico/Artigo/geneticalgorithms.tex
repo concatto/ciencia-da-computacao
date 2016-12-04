@@ -5,6 +5,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{comment}
+\usepackage[linesnumbered,ruled,vlined,portuguese]{algorithm2e}
 
 \sloppy
 
@@ -46,19 +48,87 @@ Entretanto, a categoria de algoritmos heurísticos que mais recebeu atenção da
 
 Problemas de otimização envolvem várias disciplinas, como pesquisa operacional, economia e as ciências naturais. A análise numérica é um dos campos com maior influência no estudo dos problemas de otimização, devido ao foco em métodos iterativos e aproximados, como o Método de Newton, através do qual é possível encontrar máximos ou mínimos locais se for aplicado à primeira derivada de uma função. Outro método capaz de encontrar pontos críticos é o Método dos Gradientes, que guia uma solução candidata para um ponto mínimo ou máximo a partir do gradiente de uma função. Este método é frequentemente aplicado em Redes Neurais Artificiais para guiar a aprendizagem da rede \cite{Haykin1998}.
 
-Este trabalho busca descrever o método heurístico conhecido como Algoritmo Genético, que utiliza conceitos da biologia evolucionária para otimizar uma função objetivo. Para este fim, a seção \ref{sec:evolution} introduz alguns conceitos relativos à evolução por seleção natural; por sua vez, a seção \ref{sec:algorithm} apresenta a construção do Algoritmo Genético, descrevendo sua estrutura fundamental; já a seção \ref{sec:operators} define os operadores genéticos de seleção, mutação e reprodução; por fim, a seção \ref{sec:conclusions} apresenta uma breve discussão sobre o método, concluindo o trabalho.
+Este trabalho busca descrever o método heurístico conhecido como Algoritmo Genético, que utiliza conceitos da biologia evolucionária para otimizar uma função objetivo. Para este fim, a seção \ref{sec:introevolution} introduz alguns conceitos relativos à evolução por seleção natural; por sua vez, a seção \ref{sec:algorithm} apresenta a construção do Algoritmo Genético, descrevendo sua estrutura fundamental; já a seção \ref{sec:geneticoperators} define os operadores genéticos de seleção, mutação e reprodução; por fim, a seção \ref{sec:conclusions} apresenta uma breve discussão sobre o método, concluindo o trabalho.
 
-\section{O processo evolucionário} \label{sec:evolution}
+\section{O processo evolucionário} \label{sec:introevolution}
 
-O conceito de evolução de organismos é bastante antigo, datando da época dos filósofos gregos pré-socráticos \cite{Hull1967}. A noção de seleção natural  foi desenvolvida por Charles Darwin, com a publicação de seu livro ``A Origem das Espécies'', de 1859. Nele, Darwin 
+O conceito de evolução de organismos é bastante antigo, datando da época dos filósofos gregos pré-socráticos \cite{Hull1967}. A noção de seleção natural  foi desenvolvida por Charles Darwin, com a publicação de seu livro ``A Origem das Espécies'', de 1859. Nele, Darwin propõe que populações evoluem ao longo de gerações através de um processo de seleção que favorece organismos com aptidão alta, medida através do sucesso reprodutivo. Indivíduos aptos produzem descendentes, que herdam boa parte de suas características (genes), e portanto também tendem a possuir elevado sucesso reprodutivo.
 
-\section{O algoritmo genético} \label{sec:algorithm}
+Desta maneira, a cada geração, os melhores indivíduos da população são escolhidos naturalmente para reprodução, passando adiante suas características, enquanto os indivíduos menos aptos tendem a desaparecer. Assim, a próxima geração será composta tanto pelos indivíduos aptos sobreviventes quanto por seus descendentes, ambos possuindo uma aptidão média superior à geração passada. Algoritmos genéticos buscam simular esse processo, modelando os mecanismos da natureza de forma computacional, com o intuito de otimizar uma função objetivo.
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\section{Os algoritmos genéticos} \label{sec:algorithm}
 
-\section{Operadores genéticos} \label{sec:operators}
+Algoritmos genéticos são classificados como meta-heurísticas, ou seja, são independentes do problema sendo resolvido. Qualquer problema que possa ser formulado por uma função objetivo pode ser solucionado por um algoritmo genético. Adicionalmente, algoritmos genéticos não possuem uma definição absolutamente rigorosa quanto aos detalhes dos procedimentos realizados; ao invés disso, são caracterizados pela existência de alguns elementos fundamentais \cite{Mitchell1998}, vistos adiante.
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\subsection{Modelagem de cromossomos} \label{sec:chromosomes}
+
+O primeiro destes elementos é a especificação dos \textbf{cromossomos}, que caracterizarão os indivíduos população?. Cromossomos representam as soluções do problema, e a maneira como eles são codificados é um dos principais fatores envolvidos no desenvolvimento de um algoritmo genético bem sucedido.
+
+Historicamente, o método mais utilizado para modelar cromossomos foi a codificação por cadeias de bits, porém outros métodos podem ser empregados, especialmente para problemas mais complexos \cite{Mitchell1998}. Por exemplo, para o Problema do Caixeiro Viajante, apresentado na introdução deste trabalho, um cromossomo pode ser caracterizado pela sequência de cidades que especifica a rota a ser tomada.
+
+\subsection{Função de aptidão} \label{sec:fitnessfunction}
+
+O segundo elemento fundamental de um algoritmo genético é a função objetivo propriamente dita, denominada \textbf{função de aptidão} nesse contexto. A função de aptidão é responsável por avaliar a qualidade dos indivíduos, e é utilizada para selecioná-los para reprodução. Geralmente, devido ao caráter biológico, a função de aptidão é maximizada; caso a intenção seja a minimizar a função, é possível utilizar o inverso multiplicativo da função, definido como $1 / f(x)$.
+
+\subsection{Operadores genéticos} \label{sec:operatorsbrief}
+
+Por fim, os elementos que concluem a base dos algoritmos genéticos são os \textbf{operadores genéticos}. Os principais operadores são a \textbf{seleção}, que utiliza a função de aptidão para selecionar indivíduos; a \textbf{reprodução}, que combina dois indivíduos para produzir um descendente; e a \textbf{mutação}, que aleatoriamente altera um ou mais genes do cromossomo. Estes operadores e as técnicas utilizadas para implementá-los são detalhados na seção \ref{sec:geneticoperators}.
+
+\subsection{Evolução} \label{sec:evolution}
+
+Com todos estes elementos definidos, resta especificar o procedimento de evolução propriamente dito. Este é um dos segmentos mais flexíveis de um algoritmo genético. Muitas variações existem para a implementação deste processo, algumas extremamente complexas e outras razoavelmente simples. Um exemplo básico, porém bastante eficiente para grande parte dos problemas, é apresentado adiante.
+
+Inicialmente, uma população de $n$ indivíduos é estabelecida, com seus cromossomos construídos aleatoriamente ou através de outros métodos.
+Como a otimização por algoritmos genéticos é um processo iterativo, os seguintes passos são repetidos até que uma solução satisfatória seja encontrada. A primeira etapa consiste no cálculo da aptidão de cada indivíduo $x$ da população, através da função de aptidão $f(x)$. Na sequência, uma nova geração de indivíduos é produzida a partir da aplicação dos operadores genéticos.
+
+Dois indivíduos são selecionados através do operador de seleção, que favorece indivíduos mais aptos. Então, um ou mais filhos são concebidos pelo operador de reprodução, herdando as características de seus pais. Cada filho passa pelo operador de mutação, possivelmente sofrendo alterações genéticas em seu cromossomo. Este procedimento é repetido até que uma quantidade suficiente de filhos seja gerada.
+
+Por fim, a população de indivíduos que foram selecionados para reprodução é unida com a população de filhos concebidos, formando uma nova população de tamanho $n$. Este processo é repetido até que alguma determinada condição de término seja atingida. O algoritmo \ref{alg:geneticalgorithm} formaliza essa sequência de passos por meio de uma representação em pseudocódigo.
+
+\begin{algorithm}[ht]
+  \small
+  \DontPrintSemicolon
+  \caption{Algoritmo genético básico}
+  \label{alg:geneticalgorithm}
+  \SetKwInOut{Input}{Entrada}
+  \SetKwInOut{Output}{Saída}
+  \Input{Tamanho da população ($n$), chance de mutação ($m$)}
+  \Output{Indivíduos evoluídos}
+  \BlankLine
+  $populacao \leftarrow gerarPopulacaoInicial(n)$ \;
+  \BlankLine
+  \Repeat{condição de parada não for atingida}{
+      \ForEach{individuo $\in$ populacao}{
+        $individuo.aptidao \leftarrow calcularAptidao(individuo)$ \;
+      }
+      \BlankLine
+      $filhos \leftarrow \emptyset$ \;
+      \BlankLine
+      \While{quantidade de filhos for insuficiente}{
+        $pais \leftarrow selecionar(populacao)$ \;
+        $filho \leftarrow reproduzir(pais)$ \;
+        \BlankLine
+        \If{aleatorio() $<$ m}{
+            $aplicarMutacao(filho)$ \;
+        }
+        \BlankLine
+        $filhos \leftarrow filhos \cup \{filho\}$ \;
+      }
+      $populacao \leftarrow combinar(populacao, filhos)$ \;
+  }
+  \BlankLine
+  \Return{populacao}
+\end{algorithm}
+
+Ao término deste algoritmo, caso não haja nenhuma falha na definição dos cromossomos, da função de aptidão e dos operadores genéticos, a população final possuirá uma qualidade consideravelmente superior à inicial, dependendo da topologia do espaço de busca do problema e da quantidade de gerações decorridas.
+
+\section{Operadores genéticos} \label{sec:geneticoperators}
+
+Falar sobre operadores genéticos!
+
+\section{Aplicações dos algoritmos genéticos} \label{sec:applications}
+
+Falar sobre as aplicações
 
 \section{Discussão e conclusões} \label{sec:conclusions}
 

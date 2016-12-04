@@ -33,4 +33,9 @@ MacGregor, J.~N. and Chu, Y. (2011).
   review.
 \newblock {\em The Journal of Problem Solving}, 3(2).
 
+\bibitem[Mitchell 1998]{Mitchell1998}
+Mitchell, M. (1998).
+\newblock {\em An Introduction to Genetic Algorithms}.
+\newblock MIT Press, Cambridge, MA, USA.
+
 \end{thebibliography}
