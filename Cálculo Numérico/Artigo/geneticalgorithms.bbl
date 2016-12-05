@@ -38,4 +38,26 @@ Mitchell, M. (1998).
 \newblock {\em An Introduction to Genetic Algorithms}.
 \newblock MIT Press, Cambridge, MA, USA.
 
+\bibitem[Newman and Girvan 2004]{Newman2004}
+Newman, M. E.~J. and Girvan, M. (2004).
+\newblock Finding and evaluating community structure in networks.
+\newblock {\em Phys. Rev. E}, 69(2):026113.
+
+\bibitem[Pizzuti 2008]{Pizzuti2008}
+Pizzuti, C. (2008).
+\newblock {GA}-net: A genetic algorithm for community detection in social
+  networks.
+\newblock In {\em Parallel Problem Solving from Nature {\textendash} {PPSN} X},
+  pages 1081--1090. Springer Nature.
+
+\bibitem[Ross and Corne 1994]{Ross1994}
+Ross, P. and Corne, D. (1994).
+\newblock Applications of genetic algorithms.
+\newblock {\em AISB Quaterly on Evolutionary Computation}, 89:23--30.
+
+\bibitem[Tasgin et~al. 2007]{Tasgin2007}
+Tasgin, M., Herdagdelen, A., and Bingol, H. (2007).
+\newblock Community detection in complex networks using genetic algorithms.
+\newblock {\em arXiv preprint arXiv:0711.0491}.
+
 \end{thebibliography}

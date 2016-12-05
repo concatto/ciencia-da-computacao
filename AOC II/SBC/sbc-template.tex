@@ -15,7 +15,7 @@
 
 \sloppy
 
-\title{Aplicação de Processamento Paralelo na Solução do Problema da Soma dos Subconjuntos}
+\title{Aplicação de Paralelismo na Resolução do Problema da Soma dos Subconjuntos}
 
 \author{Fernando Concatto\inst{1}}
 
@@ -41,6 +41,8 @@ Um problema computacional pode ser interpretado como uma questão a ser respondi
 Algoritmos são procedimentos passo-a-passo que resolvem problemas. Dado um problema, um algoritmo \textit{resolve} tal problema se ele sempre produz uma solução para qualquer uma de suas instâncias. Um objetivo bastante comum na busca de soluções para um problema é o desenvolvimento de um algoritmo eficiente, que resolve o problema no menor tempo possível. O campo da Teoria da Complexidade Computacional busca estudar e classificar os algoritmos, identificando a quantidade de recursos computacionais necessária para executar um algoritmo. Geralmente, a eficiência de um algoritmo é definida pela quantidade de operações básicas que o mesmo demanda para resolver o problema. Esta quantidade é usualmente estabelecida em termos do tamanho da instância do problema, denotado pelo símbolo \textit{n} \cite{Arora2009,Garey1979}.
 
 Uma das principais classes de problemas identificadas pela Teoria da Complexidade é a classe NP-completo, um subconjunto da classe NP, que significa \textit{polinomial não determinístico}. A classe NP contém todos os problemas cujas soluções podem ser verificadas em tempo polinomial, enquanto a classe NP-completo é composta por problemas onde todos os problemas em NP podem ser reduzidos para eles em tempo polinomial \cite{Garey1979}. Redução, nesse contexto, significa transformar um problema em outro de forma com que uma solução para o segundo problema também possa ser utilizada para resolver o primeiro \cite{Sipser1996}. Uma classe adicional de problemas estabelecida pela Teoria da Complexidade é a classe P, de \textit{polinomial}; esta classe contém problemas que podem ser solucionados em tempo polinomial ou inferior. P é um subconjunto de NP.
+
+O conceito de tempo polinomial é fundamental para compreender a importância das diferentes classes de problemas. 
 
 Apesar de que as soluções para problemas NP-completos podem ser verificadas em tempo polinomial, nenhum algoritmo para resolver um problema NP-completo em tempo polinomial foi encontrado até hoje; todos demandam tempo exponencial ou superior. Apesar disso, não há nenhuma prova de que não existe um algoritmo eficiente para resolver problemas NP-completos. Esta condição é um dos principais pontos da questão ``P $=$ NP?'', um dos maiores problemas abertos no campo da Ciência da Computação \cite{Sipser1996}.
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.10.26)  4 DEC 2016 04:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.10.26)  5 DEC 2016 03:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -569,22 +569,42 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \c@algocf=\count108
 \algocf@algoframe=\box35
 \algocf@algobox=\box36
-) (./geneticalgorithms.aux)
+) (c:/texlive/2016/texmf-dist/tex/latex/subfigure/subfigure.sty
+Package: subfigure 2002/03/15 v2.1.5 subfigure package
+\subfigtopskip=\skip66
+\subfigcapskip=\skip67
+\subfigcaptopadj=\dimen138
+\subfigbottomskip=\skip68
+\subfigcapmargin=\dimen139
+\subfiglabelskip=\skip69
+\c@subfigure=\count109
+\c@lofdepth=\count110
+\c@subtable=\count111
+\c@lotdepth=\count112
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+(c:/texlive/2016/texmf-dist/tex/latex/subfigure/subfigure.cfg)
+\subfig@top=\skip70
+\subfig@bottom=\skip71
+)
+(./geneticalgorithms.aux)
 \openout1 = `geneticalgorithms.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 22.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 23.
 
 (c:/texlive/2016/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
@@ -625,16 +645,16 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 
 (c:/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count109
-\scratchdimen=\dimen138
+\scratchcounter=\count113
+\scratchdimen=\dimen140
 \scratchbox=\box37
-\nofMPsegments=\count110
-\nofMParguments=\count111
+\nofMPsegments=\count114
+\nofMParguments=\count115
 \everyMPshowfont=\toks25
-\MPscratchCnt=\count112
-\MPscratchDim=\dimen139
-\MPnumerator=\count113
-\makeMPintoPDFobject=\count114
+\MPscratchCnt=\count116
+\MPscratchDim=\dimen141
+\MPnumerator=\count117
+\makeMPintoPDFobject=\count118
 \everyMPtoPDFconversion=\toks26
 ) (c:/texlive/2016/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2016/05/21 v0.22 Utility functions of pdfTeX for LuaTeX (HO
@@ -683,58 +703,85 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <16> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 24.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 25.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 24.
-LaTeX Font Info:    Try loading font information for U+msa on input line 24.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 25.
+LaTeX Font Info:    Try loading font information for U+msa on input line 25.
 
 (c:/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 24.
+LaTeX Font Info:    Try loading font information for U+msb on input line 25.
 
 (c:/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 24.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 25.
 
 (c:/texlive/2016/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Overfull \hbox (2.0829pt too wide) in paragraph at lines 24--24
+Overfull \hbox (2.0829pt too wide) in paragraph at lines 25--25
  [][] 
  []
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 26.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 27.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <13> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 35.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 36.
 [1
 
 {c:/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Underfull \hbox (badness 1009) in paragraph at lines 67--68
+Underfull \hbox (badness 1009) in paragraph at lines 68--69
 []\OT1/ptm/m/n/12 Historicamente, o m[]etodo mais uti-li-zado para mo-de-lar cr
 o-mos-so-mos foi a
  []
 
 [3]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 93.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 94.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 98.
- [4] (./geneticalgorithms.bbl) [5] (./geneticalgorithms.aux) )
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 99.
+ [4] [5] <single.png, id=34, 213.79875pt x 151.56625pt>
+File: single.png Graphic file (type png)
+ <use single.png>
+Package pdftex.def Info: single.png used on input line 156.
+(pdftex.def)             Requested size: 113.81102pt x 80.68126pt.
+
+<multiple.png, id=35, 213.79875pt x 151.56625pt>
+File: multiple.png Graphic file (type png)
+ <use multiple.png>
+Package pdftex.def Info: multiple.png used on input line 158.
+(pdftex.def)             Requested size: 113.81102pt x 80.68126pt.
+
+<uniform.png, id=36, 213.79875pt x 151.56625pt>
+File: uniform.png Graphic file (type png)
+ <use uniform.png>
+Package pdftex.def Info: uniform.png used on input line 160.
+(pdftex.def)             Requested size: 113.81102pt x 80.68126pt.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 161.
+
+
+(c:/texlive/2016/texmf-dist/tex/latex/psnfss/ot1phv.fd
+File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
+)
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 161.
+ [6 <./single.png> <./multiple.png> <./uniform.png>] (./geneticalgorithms.bbl [
+7]) [8]
+(./geneticalgorithms.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 5459 strings out of 494171
- 74281 string characters out of 6158514
- 171711 words of memory out of 5000000
- 8700 multiletter control sequences out of 15000+600000
- 30935 words of font info for 72 fonts, out of 8000000 for 9000
+ 5672 strings out of 494171
+ 77326 string characters out of 6158514
+ 173761 words of memory out of 5000000
+ 8896 multiletter control sequences out of 15000+600000
+ 34858 words of font info for 77 fonts, out of 8000000 for 9000
  400 hyphenation exceptions out of 8191
- 40i,17n,34p,978b,2486s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 40i,17n,34p,978b,2676s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/tex
 live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2016
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2016/texmf-di
@@ -747,13 +794,14 @@ exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/20
 16/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2016/texmf-d
 ist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2016/texmf-dist/
 fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/
-times/utmb8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb>
-<c:/texlive/2016/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2016/t
-exmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on geneticalgorithms.pdf (5 pages, 166488 bytes).
+helvetic/uhvb8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/times/utmb8a.pf
+b><c:/texlive/2016/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/201
+6/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2016/texmf-dist/fonts
+/type1/urw/times/utmri8a.pfb>
+Output written on geneticalgorithms.pdf (8 pages, 190879 bytes).
 PDF statistics:
- 85 PDF objects out of 1000 (max. 8388607)
- 61 compressed objects within 1 object stream
+ 103 PDF objects out of 1000 (max. 8388607)
+ 72 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -7,6 +7,7 @@
 \usepackage{amsmath}
 \usepackage{comment}
 \usepackage[linesnumbered,ruled,vlined,portuguese]{algorithm2e}
+\usepackage{subfigure}
 
 \sloppy
 
@@ -62,9 +63,9 @@ Algoritmos genéticos são classificados como meta-heurísticas, ou seja, são i
 
 \subsection{Modelagem de cromossomos} \label{sec:chromosomes}
 
-O primeiro destes elementos é a especificação dos \textbf{cromossomos}, que caracterizarão os indivíduos população?. Cromossomos representam as soluções do problema, e a maneira como eles são codificados é um dos principais fatores envolvidos no desenvolvimento de um algoritmo genético bem sucedido.
+O primeiro destes elementos é a especificação dos \textbf{cromossomos}, que caracterizarão os indivíduos da população. Cromossomos representam as soluções do problema, e a maneira como eles são codificados é um dos principais fatores envolvidos no desenvolvimento de um algoritmo genético bem sucedido.
 
-Historicamente, o método mais utilizado para modelar cromossomos foi a codificação por cadeias de bits, porém outros métodos podem ser empregados, especialmente para problemas mais complexos \cite{Mitchell1998}. Por exemplo, para o Problema do Caixeiro Viajante, apresentado na introdução deste trabalho, um cromossomo pode ser caracterizado pela sequência de cidades que especifica a rota a ser tomada.
+Historicamente, o método mais utilizado para modelar cromossomos foi a codificação por cadeias de bits, porém outros métodos podem ser empregados, especialmente para problemas mais complexos \cite{Mitchell1998}. Por exemplo, para o Problema do Caixeiro Viajante, apresentado na introdução deste trabalho, um cromossomo pode ser constituído pela sequência de cidades que especifica a rota a ser tomada.
 
 \subsection{Função de aptidão} \label{sec:fitnessfunction}
 
@@ -72,7 +73,7 @@ O segundo elemento fundamental de um algoritmo genético é a função objetivo 
 
 \subsection{Operadores genéticos} \label{sec:operatorsbrief}
 
-Por fim, os elementos que concluem a base dos algoritmos genéticos são os \textbf{operadores genéticos}. Os principais operadores são a \textbf{seleção}, que utiliza a função de aptidão para selecionar indivíduos; a \textbf{reprodução}, que combina dois indivíduos para produzir um descendente; e a \textbf{mutação}, que aleatoriamente altera um ou mais genes do cromossomo. Estes operadores e as técnicas utilizadas para implementá-los são detalhados na seção \ref{sec:geneticoperators}.
+Por fim, os elementos que concluem a base dos algoritmos genéticos são os \textbf{operadores genéticos}. Os principais operadores são a \textbf{seleção}, que utiliza a função de aptidão para selecionar indivíduos; a \textbf{reprodução} (ou cruzamento), que combina dois indivíduos para produzir um descendente; e a \textbf{mutação}, que aleatoriamente altera um ou mais genes do cromossomo. Estes operadores e as técnicas utilizadas para implementá-los são detalhados na seção \ref{sec:geneticoperators}.
 
 \subsection{Evolução} \label{sec:evolution}
 
@@ -101,7 +102,6 @@ Por fim, a população de indivíduos que foram selecionados para reprodução �
       \ForEach{individuo $\in$ populacao}{
         $individuo.aptidao \leftarrow calcularAptidao(individuo)$ \;
       }
-      \BlankLine
       $filhos \leftarrow \emptyset$ \;
       \BlankLine
       \While{quantidade de filhos for insuficiente}{
@@ -111,7 +111,6 @@ Por fim, a população de indivíduos que foram selecionados para reprodução �
         \If{aleatorio() $<$ m}{
             $aplicarMutacao(filho)$ \;
         }
-        \BlankLine
         $filhos \leftarrow filhos \cup \{filho\}$ \;
       }
       $populacao \leftarrow combinar(populacao, filhos)$ \;
@@ -120,19 +119,69 @@ Por fim, a população de indivíduos que foram selecionados para reprodução �
   \Return{populacao}
 \end{algorithm}
 
-Ao término deste algoritmo, caso não haja nenhuma falha na definição dos cromossomos, da função de aptidão e dos operadores genéticos, a população final possuirá uma qualidade consideravelmente superior à inicial, dependendo da topologia do espaço de busca do problema e da quantidade de gerações decorridas.
+Ao término deste algoritmo, caso não haja nenhuma falha na definição dos cromossomos, função de aptidão ou operadores genéticos, a população final possuirá uma qualidade consideravelmente superior à inicial, dependendo da topologia do espaço de busca do problema e da quantidade de gerações decorridas. Entretanto, por se tratar de um algoritmo heurístico, não há garantia de que soluções ótimas serão encontradas, mesmo com uma grande quantidade de gerações.
 
 \section{Operadores genéticos} \label{sec:geneticoperators}
 
-Falar sobre operadores genéticos!
+Os operadores genéticos constituem as técnicas utilizadas para guiar as soluções candidatas (indivíduos) em direção a estados! cada vez mais próximos da solução ótima. Uma breve introdução aos operadores de seleção, reprodução e mutação foi realizada na seção \ref{sec:operatorsbrief}; esta seção é dedicada a apresentar com detalhes as particularidades de cada operador.
+
+\subsection{Operador de seleção}
+
+O operador de seleção é responsável por escolher indivíduos para reprodução. O método de seleção deve enfatizar indivíduos aptos, para que seus descendentes também sejam aptos. Entretanto, também deve haver uma baixa chance de selecionar indivíduos com pouca aptidão -- caso contrário, haverá pouca diversidade genética na população, dificultando ou até mesmo impedindo a evolução das soluções para um estado melhor \cite{Mitchell1998}.
+
+Diversos métodos de seleção foram propostos por pesquisadores no campo. A seguir, as técnicas conhecidas como \textit{seleção por roleta} e \textit{seleção por torneio}, por serem amplamente utilizadas e razoavelmente simples.
+
+\subsubsection{Seleção por roleta} \label{sec:roulette}
+
+O método de seleção por roleta envolve a atribuição de uma chance de seleção para cada indivíduo proporcional à sua aptidão. Conceitualmente, este método constrói uma roleta onde cada casa corresponde indivíduo, com casas maiores para indivíduos mais aptos. Esta técnica é uma das mais antigas, datada das primeiras pesquisas sobre algoritmos genéticos, e ainda é frequentemente utilizada hoje em dia.
+
+Para efetuar a seleção por roleta, o primeiro passo a ser realizado é somar a aptidão de todos os indivíduos da população. Na sequência, um número aleatório $r$ é escolhido, no intervalo de 0 até a soma calculada. Então, a sequência de indivíduos da população é percorrida, acumulando a aptidão de cada indivíduo visitado até que esse valor ultrapasse o número aleatório $r$. O último indivíduo visitado é escolhido para reprodução \cite{Mitchell1998}.
+
+\subsubsection{Seleção por torneio} \label{sec:tournament}
+
+A seleção por torneio foi desenvolvida um pouco depois da seleção por roleta, e apresenta uma complexidade computacional significativamente melhor. O método da roleta requer o somatório da aptidão dos indivíduos da população, que demanda uma quantidade de operações proporcional ao tamanho da população.
+
+Na técnica da seleção por torneio, dois indivíduos são escolhidos da população de forma completamente aleatória. Então, um número é escolhido aleatoriamente no intervalo de 0 a 1. Se esse número for inferior a um parâmetro $k$ previamente definido, o indivíduo mais apto entre eles será escolhido para reprodução; caso contrário, o indivíduo menos apto é selecionado \cite{Mitchell1998}. Geralmente, valores próximos de 0.75 são escolhidos para o parâmetro $k$.
+
+\subsection{Operador de reprodução} \label{sec:crossover}
+
+O operador de reprodução é um dos aspectos mais marcantes dos algoritmos genéticos. Este operador é responsável por combinar os cromossomos dos indivíduos, produzindo filhos com características similares às dos seus pais. Na maior parte das vezes, um filho possuirá aptidão superior à de seus pais, mas também existe a possibilidade da criação de um filho com aptidão muito inferior. A probabilidade de conceber um filho mais apto que seus pais depende de diversos fatores, como a modelagem dos cromossomos, a complexidade do problema e do próprio operador de reprodução.
+
+A técnica mais básica para efetuar a reprodução é o \textbf{cruzamento de ponto único}. Neste método, os genes de um dos pais são copiados para o cromossomo do filho até que um ponto previamente especificado (fixo ou aleatório) seja atingido. A partir desse ponto, os genes do outro pai passam a ser copiados, até que o cromossomo do filho esteja totalmente formado.
+
+Entretanto, para cromossomos mais complexos com quantidade elevada de genes, a técnica de cruzamento de ponto único se mostra insuficiente; nestes casos, a maioria dos filhos apresenta aptidão inferior à de seus pais. Desta forma, outros métodos de reprodução foram desenvolvidos, como o \textbf{cruzamento de múltiplos pontos}, que é equivalente ao cruzamento de ponto único, porém com mais pontos de troca (geralmente dois); e o \textbf{cruzamento uniforme paramétrico}, onde a troca acontece a cada gene copiado, com chance igual a um parâmetro $p$ \cite{Mitchell1998}. A figura \ref{fig:crossover} apresenta uma demonstração gráfica destes três métodos.
+
+\begin{figure}
+    \centering
+    \subfigure[Ponto único]{\includegraphics[width=4cm]{single.png}}
+    \hspace{0.8cm}
+    \subfigure[Múltiplos pontos]{\includegraphics[width=4cm]{multiple.png}}
+    \hspace{0.8cm}
+    \subfigure[Uniforme]{\includegraphics[width=4cm]{uniform.png}}
+    \caption{Métodos de reprodução entre dois pais A e B, produzindo um filho Z.}
+    \label{fig:crossover}
+\end{figure}
+
+\subsection{Operador de mutação} \label{sec:mutation}
+
+O último dos operadores de um algoritmo genético é o operador de mutação. Sua tarefa consiste em elevar a variação genética da população, impedindo que genes fiquem fixados em valores distantes do ótimo; este fenômeno é conhecido como \textbf{ótimo local} no contexto da otimização matemática. Encontrar a solução ótima global evitando a fixação em ótimos locais é um problema extraordinariamente difícil, e o operador de mutação é uma das principais ferramentas utilizadas pelos algoritmos genéticos na resolução desse problema, juntamente com o operador de reprodução \cite{Mitchell1998}.
+
+O operador de mutação deve gerar alguma perturbação no cromossomo de um indivíduo. Esta perturbação pode tomar diversas formas, sendo que as mais comuns envolvem a alteração de um ou mais genes do cromossomo para um valor diferente do atual. Para o caso de cadeias de bits, o gene escolhido para mutação pode ter seu bit invertido; para o caso de valores reais, um número aleatório pode ser somado ou subtraído ao valor do gene, ou o valor pode ser substituído por um número aleatório.
 
 \section{Aplicações dos algoritmos genéticos} \label{sec:applications}
 
-Falar sobre as aplicações
+Por ser uma meta-heurística, o método de otimização por algoritmos genéticos encontra utilização em uma enorme gama de problemas. Pelo mesmo motivo, entretanto, os algoritmos genéticos não garantem que a solução ótima será encontrada, e portanto devem ser utilizados somente em problemas onde soluções aproximadas são admissíveis. Geralmente, problemas com essa característica apresentam espaços de busca extremamente extensos, como o Problema do Caixeiro Viajante, apresentado na seção \ref{sec:intro}. Alguns exemplos práticos são descritos adiante.
+
+Um caso recente de aplicação de algoritmos genéticos ocorreu durante o evento Opção Profissional por Área (OPA) de 2016, organizado pela Universidade do Vale do Itajaí. O evento tem como público-alvo jovens que se encontram no processo de escolha de um curso superior. Para apresentar o curso de Ciência da Computação, os integrantes do Laboratório de Inteligência Aplicada desenvolveram um algoritmo genético que evolui imagens compostas por pixels aleatórios em direção a uma imagem real, desafiando os espectadores a descobrir qual era a imagem enquanto introduziam conceitos de inteligência artificial e complexidade computacional.
+
+Outra aplicação de algoritmos genéticos, desta vez no cenário da análise de redes complexas, foi na detecção de comunidades, caracterizadas por grupos de indivíduos (também conhecidos como nodos) fortemente conectados entre si. Neste contexto, os cromossomos representam possíveis divisões da rede em comunidades, e a função de aptidão calcula a qualidade da divisão, através de função de modularidade proposta por \cite{Newman2004} ou alguma variação da mesma. Por meio de experimentos, a eficiência dos algoritmos genéticos na detecção de comunidades foi evidenciada, superando diversos métodos similares tanto em qualidade quanto em desempenho \cite{Tasgin2007,Pizzuti2008}.
+
+Algoritmos genéticos foram aplicados em muitos outros problemas com sucesso considerável. O trabalho de \cite{Ross1994} apresenta uma visão geral sobre esses problemas, incluindo a otimização de planejamento \textit{scheduling problem}, que consiste na organização de uma agenda, evitando conflitos espaciais e temporais, e também apresenta algumas aplicações no campo da engenharia, como no desenvolvimento de circuitos integrados, rotores de helicópteros, controle de braços robóticos, entre outras aplicações.
 
 \section{Discussão e conclusões} \label{sec:conclusions}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Neste trabalho, a técnica de otimização matemática por algoritmos genéticos foi examinada. As características fundamentais de um algoritmo genético foram apresentadas, juntamente com os conceitos de problemas de otimização, funções objetivo e espaços de busca. Adicionamente, a construção de um algoritmo genético básico foi exibida.
+A natureza heurística dos algoritmos genéticos 
 
 \bibliographystyle{sbc}
 \bibliography{bibliography}
