@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex sbc-template"] 1480914988 "sbc-template.aux" "sbc-template.bbl" "sbc-template" 1480914990
+["bibtex sbc-template"] 1481004821 "sbc-template.aux" "sbc-template.bbl" "sbc-template" 1481004823
   "./sbc.bst" 1412946846 21864 a668496cca21cfdd211f7fb5f0d57565 ""
-  "sbc-template.aux" 1480914989 2116 c9fb3050d7d7ecdbba0734ac816c513c ""
+  "sbc-template.aux" 1481004822 2710 9d7f1ed8e70e8a11b050294fcd576f99 ""
   "sbc-template.bcf" 0 -1 0 ""
-  "sbc-template.bib" 1478412292 2703 1d5e9afabc46c80a874ab37a7ea7cc32 ""
+  "sbc-template.bib" 1481002598 3542 8f2a542a5465c03d26fbb13f5c9a3435 ""
   (generated)
   "sbc-template.blg"
   "sbc-template.bbl"
-["pdflatex"] 1480914988 "sbc-template.tex" "sbc-template.pdf" "sbc-template" 1480914990
+["pdflatex"] 1481004822 "sbc-template.tex" "sbc-template.pdf" "sbc-template" 1481004823
   "c:/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc" 1477485838 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "c:/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1477486030 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "c:/texlive/2016/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1477485728 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -121,12 +121,13 @@
   "c:/texlive/2016/texmf.cnf" 1477487571 673 4ae7b2f49cee444c5343a45b5d0f169c ""
   "caption2.sty" 1412946846 15190 35c3352faab63b28086162350d49d218 ""
   "chunks.pdf" 1478570958 18175 d95d30872e20a4ebe1144eca212f876b ""
+  "complexity.png" 1481000989 31518 23774797d7f0236ff5abdac19b17b1c5 ""
   "performance.pdf" 1478574484 20785 20a8b2528315a5257fee2678eb6fc541 ""
-  "sbc-template.aux" 1480914989 2116 c9fb3050d7d7ecdbba0734ac816c513c ""
-  "sbc-template.bbl" 1480914988 956 dcf61f47cce329a158612b805b59d890 "bibtex sbc-template"
+  "sbc-template.aux" 1481004822 2710 9d7f1ed8e70e8a11b050294fcd576f99 ""
+  "sbc-template.bbl" 1481004822 1504 bd029d46481c5e6463b2838894c9bca1 "bibtex sbc-template"
   "sbc-template.sty" 1412946846 5285 fb8f2a32de10fa23e40f15acd9749a09 ""
-  "sbc-template.tex" 1480914983 20136 0411d48138c7ce19d91c11fafe2f47cf ""
+  "sbc-template.tex" 1481004804 22793 45faf71c225ac4ac798d5d330cc6266d ""
   (generated)
-  "sbc-template.pdf"
-  "sbc-template.log"
   "sbc-template.aux"
+  "sbc-template.log"
+  "sbc-template.pdf"

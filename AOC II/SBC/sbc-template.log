@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.10.26)  5 DEC 2016 03:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.10.26)  6 DEC 2016 04:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -708,57 +708,66 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <13> not available
 [1
 
 {c:/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 7486) in paragraph at lines 53--54
-\OT1/ptm/m/n/12 O Pro-blema da Soma da Soma dos Sub-con-jun-tos, como es-pe-ci-
-fi-cado por
- []
-
-[2]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 80.
- (c:/texlive/2016/texmf-dist/tex/latex/psnfss/omsptm.fd
-File: omsptm.fd 
-)
-LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 80.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 94.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 101.
- [3] [4]
-<chunks.pdf, id=30, 433.62pt x 289.08pt>
-File: chunks.pdf Graphic file (type pdf)
- <use chunks.pdf>
-Package pdftex.def Info: chunks.pdf used on input line 159.
-(pdftex.def)             Requested size: 298.75394pt x 199.1787pt.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 160.
-
+<complexity.png, id=13, 589.4522pt x 341.77687pt>
+File: complexity.png Graphic file (type png)
+ <use complexity.png>
+Package pdftex.def Info: complexity.png used on input line 49.
+(pdftex.def)             Requested size: 398.33858pt x 230.96582pt.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 50.
 
 (c:/texlive/2016/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 160.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 50.
+ [2 <./complexity.png>]
+Underfull \hbox (badness 7486) in paragraph at lines 60--61
+\OT1/ptm/m/n/12 O Pro-blema da Soma da Soma dos Sub-con-jun-tos, como es-pe-ci-
+fi-cado por
+ []
 
-<performance.pdf, id=31, 433.62pt x 289.08pt>
+[3]
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 95.
+ (c:/texlive/2016/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 95.
+ [4]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 109.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 116.
+ [5]
+<chunks.pdf, id=35, 433.62pt x 289.08pt>
+File: chunks.pdf Graphic file (type pdf)
+ <use chunks.pdf>
+Package pdftex.def Info: chunks.pdf used on input line 174.
+(pdftex.def)             Requested size: 298.75394pt x 199.1787pt.
+
+<performance.pdf, id=36, 433.62pt x 289.08pt>
 File: performance.pdf Graphic file (type pdf)
  <use performance.pdf>
-Package pdftex.def Info: performance.pdf used on input line 170.
+Package pdftex.def Info: performance.pdf used on input line 185.
 (pdftex.def)             Requested size: 341.43306pt x 227.63405pt.
- [5]
-[6 <./chunks.pdf>] (./sbc-template.bbl [7 <./performance.pdf>]) [8]
-(./sbc-template.aux) )
+ [6]
+[7 <./chunks.pdf> <./performance.pdf
+
+pdfTeX warning: pdflatex.exe (file ./performance.pdf): PDF inclusion: multiple 
+pdfs with page group included in a single page
+>] (./sbc-template.bbl [8]) [9] (./sbc-template.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 5318 strings out of 494171
- 73204 string characters out of 6158514
- 175179 words of memory out of 5000000
- 8560 multiletter control sequences out of 15000+600000
+ 5328 strings out of 494171
+ 73367 string characters out of 6158514
+ 171277 words of memory out of 5000000
+ 8569 multiletter control sequences out of 15000+600000
  30448 words of font info for 68 fonts, out of 8000000 for 9000
  400 hyphenation exceptions out of 8191
- 43i,23n,45p,909b,3501s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,23n,45p,909b,3505s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/tex
 live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2016
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2016/texmf-di
@@ -774,10 +783,10 @@ ype1/urw/helvetic/uhvb8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/times/
 utmb8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/te
 xlive/2016/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2016/texmf-d
 ist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on sbc-template.pdf (8 pages, 212547 bytes).
+Output written on sbc-template.pdf (9 pages, 234996 bytes).
 PDF statistics:
- 116 PDF objects out of 1000 (max. 8388607)
- 83 compressed objects within 1 object stream
+ 119 PDF objects out of 1000 (max. 8388607)
+ 84 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

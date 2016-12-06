@@ -16,9 +16,23 @@ Karp, R.~M. (1972).
 \newblock {\em Reducibility among Combinatorial Problems}, pages 85--103.
 \newblock Springer US, Boston, MA.
 
+\bibitem[Kleinberg and Tardos 2005]{Kleinberg2005}
+Kleinberg, J. and Tardos, {\'{E}}. (2005).
+\newblock {\em {Algorithm Design}}, volume~1.
+
+\bibitem[Lagarias and Odlyzko 1985]{Lagarias1985}
+Lagarias, J.~C. and Odlyzko, A.~M. (1985).
+\newblock Solving low-density subset sum problems.
+\newblock {\em J. ACM}, 32(1):229--246.
+
 \bibitem[Lewis and Berg 1996]{Lewis1996}
 Lewis, B. and Berg, D. (1996).
 \newblock {\em {Threads Primer: A Guide to Multithreaded Programming}}.
+
+\bibitem[Merkle and Hellman 1978]{Merkle1978}
+Merkle, R. and Hellman, M. (1978).
+\newblock Hiding information and signatures in trapdoor knapsacks.
+\newblock {\em IEEE Transactions on Information Theory}, 24(5):525--530.
 
 \bibitem[Sipser 1996]{Sipser1996}
 Sipser, M. (1996).

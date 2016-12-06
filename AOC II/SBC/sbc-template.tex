@@ -38,11 +38,18 @@
 
 Um problema computacional pode ser interpretado como uma questão a ser respondida, geralmente possuindo \textit{parâmetros}, ou \textit{variáveis}. O problema deve ser definido a partir da descrição de todos os seus parâmetros e do estabelecimento de quais propriedades a resposta ou \textit{solução} deve ser composta para ser considerada uma resposta válida para o problema. Uma \textit{instância} do problema é obtida ao atribuir valores a todos os seus parâmetros \cite{Garey1979}.
 
-Algoritmos são procedimentos passo-a-passo que resolvem problemas. Dado um problema, um algoritmo \textit{resolve} tal problema se ele sempre produz uma solução para qualquer uma de suas instâncias. Um objetivo bastante comum na busca de soluções para um problema é o desenvolvimento de um algoritmo eficiente, que resolve o problema no menor tempo possível. O campo da Teoria da Complexidade Computacional busca estudar e classificar os algoritmos, identificando a quantidade de recursos computacionais necessária para executar um algoritmo. Geralmente, a eficiência de um algoritmo é definida pela quantidade de operações básicas que o mesmo demanda para resolver o problema. Esta quantidade é usualmente estabelecida em termos do tamanho da instância do problema, denotado pelo símbolo \textit{n} \cite{Arora2009,Garey1979}.
+Algoritmos são procedimentos passo-a-passo que resolvem problemas. Dado um problema, um algoritmo \textit{resolve} tal problema se ele sempre produz uma solução para qualquer uma de suas instâncias. Um objetivo bastante comum na busca de soluções para um problema é o desenvolvimento de um algoritmo eficiente, que resolve o problema no menor tempo possível. O campo da Teoria da Complexidade Computacional busca estudar e classificar os algoritmos, identificando a quantidade de recursos computacionais necessária para executar um algoritmo. Geralmente, a eficiência de um algoritmo é definida pela quantidade de operações fundamentais que o mesmo demanda para resolver o problema. Esta quantidade é usualmente estabelecida em termos do tamanho da instância do problema, denotado pelo símbolo $n$ \cite{Arora2009,Garey1979}.
 
 Uma das principais classes de problemas identificadas pela Teoria da Complexidade é a classe NP-completo, um subconjunto da classe NP, que significa \textit{polinomial não determinístico}. A classe NP contém todos os problemas cujas soluções podem ser verificadas em tempo polinomial, enquanto a classe NP-completo é composta por problemas onde todos os problemas em NP podem ser reduzidos para eles em tempo polinomial \cite{Garey1979}. Redução, nesse contexto, significa transformar um problema em outro de forma com que uma solução para o segundo problema também possa ser utilizada para resolver o primeiro \cite{Sipser1996}. Uma classe adicional de problemas estabelecida pela Teoria da Complexidade é a classe P, de \textit{polinomial}; esta classe contém problemas que podem ser solucionados em tempo polinomial ou inferior. P é um subconjunto de NP.
 
-O conceito de tempo polinomial é fundamental para compreender a importância das diferentes classes de problemas. Citar alguém aqui.
+O conceito de tempo polinomial é fundamental para compreender a importância das diferentes classes de problemas. Na tentativa de descrever qual propriedade torna um algoritmo eficiente, pesquisadores propuseram que algoritmos que demandavam uma quantidade de operações exponencial em relação ao tamanho do problema ($n$) eram excessivamente ineficientes, devido ao fator de crescimento multiplicativo. Desta forma, algoritmos eficientes foram definidos como possuindo um tempo de execução polinomial, isto é, demandando no máximo $n^{k}$ operações, onde $k$ é uma constante \cite{Kleinberg2005}. A figura \ref{fig:complexity} demonstra uma comparação entre alguns fatores de crescimento bastante comuns, evidenciando a velocidade do crescimento de operações em algoritmos de tempo exponencial, denotada pela curva laranja (segunda à esquerda).
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=14cm]{complexity.png}
+    \caption{Comparação entre a quantidade de operações fundamentais em função do tamanho do problema.}
+    \label{fig:complexity}
+\end{figure}
 
 Apesar de que as soluções para problemas NP-completos podem ser verificadas em tempo polinomial, nenhum algoritmo para resolver um problema NP-completo em tempo polinomial foi encontrado até hoje; todos demandam tempo exponencial ou superior. Apesar disso, não há nenhuma prova de que não existe um algoritmo eficiente para resolver problemas NP-completos. Esta condição é um dos principais pontos da questão ``P $=$ NP?'', um dos maiores problemas abertos no campo da Ciência da Computação \cite{Sipser1996}.
 
@@ -65,6 +72,14 @@ Onde $a_{i} \in A$, $x_{i} \in \left\{0, 1\right\}$ e $\sum x_{i} > 0$. Um algor
 \end{equation}
 
 O algoritmo aplicado neste trabalho tentará verificar todas as combinações de $x$ até que encontre uma combinação que solucione a equação ou até que as combinações se esgotem. Portanto, o algoritmo irá demandar tempo exponencial, pois no pior caso, todas as $2^{n} - 1$ combinações deverão ser testadas.
+
+\section{Trabalhos relacionados} \label{sec:relatedwork}
+
+O Problema da Soma dos Subconjuntos é um objeto de estudo frequente no campo da criptoanálise. Devido à inexistência de algoritmos exatos eficientes para resolver este problema, alguns criptossistemas baseados em suas propriedades foram desenvolvidos.
+
+O criptossistema de \cite{Merkle1978} envolve a utilização de um problema derivado do Problema da Soma dos Subconjuntos, conhecido como \textbf{problema da mochila}, onde cada elemento do conjunto é composto por uma quantidade e um peso. Este trabalho explora instâncias particularmente difíceis do problema da mochila, que entretanto podem ser resolvidas facilmente através do conhecimento de certas propriedades do conjunto de pesos da instância; estas propriedades são chamadas de \textit{trapdoor information}. O sistema foi um dos pioneiros na utilização de conceitos de criptografia assimétrica, porém sua segurança não pôde ser comprovada, devido à ausência de provas concretas da dificuldade computacional de problemas NP-completos.
+
+A proposta de criptossistemas baseados no problema da mochila foi respondida com diversas pesquisas sobre técnicas eficientes para quebrá-los. Um destes trabalhos, desenvolvido por \cite{Lagarias1985}, utiliza uma transformação do problema da mochila para a busca por um vetor curto em um reticulado (\textit{lattice}), posteriormente aplicando um algoritmo de tempo polinomial para tentar resolvê-lo. A técnica se mostrou bastante eficiente, entretanto nem sempre foi capaz de encontrar a solução em casos onde os pesos do conjunto eram codificados com um elevado número de bits.
 
 \section{Processamento paralelo} \label{sec:parallel}
 
