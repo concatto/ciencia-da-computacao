@@ -49,9 +49,18 @@ Entretanto, a categoria de algoritmos heurísticos que mais recebeu atenção da
 
 \noindent onde $x$ é o conjunto que descreve a rota candidata de tamanho $n$ e $d(x_{i}, x_{j})$ é a distância entre as cidades $x_{i}$ e $x_{j}$. Desta forma, um algoritmo pode mover-se iterativamente pelo \textit{espaço de busca}, que contém todas as rotas possíveis, buscando um conjunto $x$ que minimize a função $f(x)$. Porém, este espaço de busca (assim como de vários outros problemas) apresenta uma quantidade excessivamente grande de elementos, exigindo então a aplicação de métodos heurísticos.
 
-Problemas de otimização são objeto de estudo de diversas disciplinas, como pesquisa operacional, economia e as ciências naturais. A análise numérica é um dos campos com maior influência no estudo dos problemas de otimização, devido ao foco em métodos iterativos e aproximados, como o Método de Newton, através do qual é possível encontrar máximos ou mínimos locais quando aplicado à primeira derivada de uma função. Outro método capaz de encontrar pontos críticos é o Método dos Gradientes, que guia uma solução candidata para um ponto mínimo ou máximo a partir do gradiente de uma função. Este método é frequentemente aplicado em Redes Neurais Artificiais para conduzir a aprendizagem da rede \cite{Haykin1998}.
+Problemas de otimização são objeto de estudo de diversas disciplinas, como pesquisa operacional, economia e as ciências naturais. A análise numérica é um dos campos com maior influência no estudo dos problemas de otimização, devido ao foco em métodos iterativos e aproximados, como o Método de Newton, através do qual é possível encontrar soluções ótimas quando aplicado à primeira derivada de uma função. Outro método capaz de encontrar pontos críticos é o Método dos Gradientes, que guia uma solução candidata para um ponto mínimo ou máximo a partir do gradiente de uma função. Este método é frequentemente aplicado em Redes Neurais Artificiais para conduzir a aprendizagem da rede \cite{Haykin1998}.
 
-Este trabalho busca descrever o método heurístico conhecido como Algoritmo Genético, que utiliza conceitos da biologia evolucionária para otimizar uma função objetivo. Para este fim, a seção \ref{sec:introevolution} introduz alguns conceitos relativos à evolução por seleção natural; por sua vez, a seção \ref{sec:algorithm} apresenta a construção dos algoritmos genéticos, descrevendo sua estrutura fundamental; já a seção \ref{sec:geneticoperators} define os operadores genéticos de seleção, mutação e reprodução. A seção \ref{sec:applications} apresenta algumas aplicações dos algoritmos genéticos, e por fim, a seção \ref{sec:conclusions} apresenta uma breve discussão sobre o método, concluindo o trabalho.
+Diversos outros métodos numéricos existem para encontrar pontos ótimos de uma função objetivo, como o método Simplex, um algoritmo exato para problemas de programação linear. Entretanto, a maior parte desses métodos só é capaz de  convergir para um ótimo global quando o espaço de busca do problema é convexo, isto é, quando a função objetivo não possui \textbf{ótimos locais} \cite{Lachtermacher2009}. Ótimos locais consistem em pontos onde todas as soluções vizinhas possuem qualidade inferior à solução do ponto atual, porém soluções superiores podem estar localizadas em pontos distantes do presente. Desta forma, para funções com espaços de busca não-convexos, como é o caso em diversos problemas de otimização combinatória, os métodos supracitados são incapazes de encontrar um ótimo global. A figura \ref{fig:optima} exemplifica graficamente um espaço de busca não-convexo.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=8cm]{optima.png}
+  \caption{Exemplo de espaço de busca não-convexo com dois ótimos locais.}
+  \label{fig:optima}
+\end{figure}
+
+Este trabalho busca descrever o método heurístico conhecido como Algoritmo Genético, que utiliza conceitos da biologia evolucionária para encontrar o ótimo global de uma função objetivo que pode possuir ótimos locais. Para este fim, a seção \ref{sec:introevolution} introduz alguns conceitos relativos à evolução por seleção natural; por sua vez, a seção \ref{sec:algorithm} apresenta a construção dos algoritmos genéticos, descrevendo sua estrutura fundamental; já a seção \ref{sec:geneticoperators} define os operadores genéticos de seleção, mutação e reprodução. A seção \ref{sec:applications} apresenta algumas aplicações dos algoritmos genéticos, e por fim, a seção \ref{sec:conclusions} apresenta uma breve discussão sobre o método, concluindo o trabalho.
 
 \section{O processo evolucionário} \label{sec:introevolution}
 
@@ -166,7 +175,7 @@ Entretanto, para cromossomos mais complexos, com quantidade elevada de genes, a 
 
 \subsection{Operador de mutação} \label{sec:mutation}
 
-O último dos operadores de um algoritmo genético é o operador de mutação. Sua tarefa consiste em elevar a variação genética da população, impedindo que certos genes fiquem fixados em valores distantes do ótimo; este fenômeno é conhecido como \textbf{ótimo local} no contexto da otimização matemática. Encontrar a solução ótima global evitando a fixação em ótimos locais é um problema extraordinariamente difícil, e o operador de mutação é uma das principais ferramentas utilizadas pelos algoritmos genéticos na resolução desse problema, juntamente com o operador de reprodução \cite{Mitchell1998}.
+O último dos operadores de um algoritmo genético é o operador de mutação. Sua tarefa consiste em elevar a variação genética da população, impedindo que certos genes fiquem fixados em ótimos locais. Encontrar a solução ótima global evitando a fixação em ótimos locais é um problema extraordinariamente difícil, e o operador de mutação é uma das principais ferramentas utilizadas pelos algoritmos genéticos na resolução desse problema, juntamente com o operador de reprodução \cite{Mitchell1998}.
 
 O operador de mutação deve gerar alguma perturbação no cromossomo de um indivíduo. Esta perturbação pode tomar diversas formas, sendo que as mais comuns envolvem a alteração de um ou mais genes do cromossomo para um valor diferente do atual. Para o caso de cadeias de bits, o gene escolhido para mutação pode ter seu bit invertido; para o caso de valores reais, um número aleatório pode ser somado ou subtraído ao valor do gene, ou o valor pode ser simplesmente substituído por um número aleatório qualquer.
 
@@ -176,7 +185,7 @@ Por ser uma meta-heurística, o método de otimização por algoritmos genético
 
 Um caso recente de aplicação de algoritmos genéticos ocorreu durante o evento Opção Profissional por Área (OPA) de 2016, organizado pela Universidade do Vale do Itajaí. O evento tem como público-alvo jovens que se encontram no processo de escolha de um curso superior. Para apresentar o curso de Ciência da Computação, os integrantes do Laboratório de Inteligência Aplicada desenvolveram um algoritmo genético que evolui imagens inicialmente compostas por pixels aleatórios em direção a uma imagem real, desafiando os espectadores a descobrir qual era a imagem alvo enquanto introduziam conceitos de inteligência artificial e complexidade computacional. Um exemplo de execução deste algoritmo é apresentado na figura \ref{fig:imageevolution}.
 
-\begin{figure}[ht]
+\begin{figure}[h]
     \centering
     \includegraphics[width=10cm]{einstein.png}
     \caption{Imagem no processo de evolução em direção a uma fotografia do físico Albert Einstein através do algoritmo genético apresentado no OPA 2016.}

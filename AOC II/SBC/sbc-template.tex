@@ -38,15 +38,15 @@
 
 Um problema computacional pode ser interpretado como uma questão a ser respondida, geralmente possuindo \textit{parâmetros}, ou \textit{variáveis}. O problema deve ser definido a partir da descrição de todos os seus parâmetros e do estabelecimento de quais propriedades a resposta ou \textit{solução} deve ser composta para ser considerada uma resposta válida para o problema. Uma \textit{instância} do problema é obtida ao atribuir valores a todos os seus parâmetros \cite{Garey1979}.
 
-Algoritmos são procedimentos passo-a-passo que resolvem problemas. Dado um problema, um algoritmo \textit{resolve} tal problema se ele sempre produz uma solução para qualquer uma de suas instâncias. Um objetivo bastante comum na busca de soluções para um problema é o desenvolvimento de um algoritmo eficiente, que resolve o problema no menor tempo possível. O campo da Teoria da Complexidade Computacional busca estudar e classificar os algoritmos, identificando a quantidade de recursos computacionais necessária para executar um algoritmo. Geralmente, a eficiência de um algoritmo é definida pela quantidade de operações fundamentais que o mesmo demanda para resolver o problema. Esta quantidade é usualmente estabelecida em termos do tamanho da instância do problema, denotado pelo símbolo $n$ \cite{Arora2009,Garey1979}.
+Algoritmos são procedimentos passo-a-passo que resolvem problemas. Dado um problema, um algoritmo \textit{resolve} tal problema se ele sempre produz uma solução para qualquer uma de suas instâncias. Um objetivo bastante comum na busca de soluções para um problema é o desenvolvimento de um algoritmo eficiente, que resolve o problema no menor tempo possível. O campo da Teoria da Complexidade Computacional busca estudar e classificar os algoritmos, identificando a quantidade de recursos computacionais necessária para executar um algoritmo. Geralmente, a eficiência de um algoritmo é definida pela quantidade de operações fundamentais que o mesmo demanda para resolver o problema. Esta quantidade é usualmente estabelecida em termos do tamanho da instância do problema, que é denotado pelo símbolo $n$ \cite{Arora2009,Garey1979}.
 
 Uma das principais classes de problemas identificadas pela Teoria da Complexidade é a classe NP-completo, um subconjunto da classe NP, que significa \textit{polinomial não determinístico}. A classe NP contém todos os problemas cujas soluções podem ser verificadas em tempo polinomial, enquanto a classe NP-completo é composta por problemas onde todos os problemas em NP podem ser reduzidos para eles em tempo polinomial \cite{Garey1979}. Redução, nesse contexto, significa transformar um problema em outro de forma com que uma solução para o segundo problema também possa ser utilizada para resolver o primeiro \cite{Sipser1996}. Uma classe adicional de problemas estabelecida pela Teoria da Complexidade é a classe P, de \textit{polinomial}; esta classe contém problemas que podem ser solucionados em tempo polinomial ou inferior. P é um subconjunto de NP.
 
-O conceito de tempo polinomial é fundamental para compreender a importância das diferentes classes de problemas. Na tentativa de descrever qual propriedade torna um algoritmo eficiente, pesquisadores propuseram que algoritmos que demandavam uma quantidade de operações exponencial em relação ao tamanho do problema ($n$) eram excessivamente ineficientes, devido ao fator de crescimento multiplicativo. Desta forma, algoritmos eficientes foram definidos como possuindo um tempo de execução polinomial, isto é, demandando no máximo $n^{k}$ operações, onde $k$ é uma constante \cite{Kleinberg2005}. A figura \ref{fig:complexity} demonstra uma comparação entre alguns fatores de crescimento bastante comuns, evidenciando a velocidade do crescimento de operações em algoritmos de tempo exponencial, denotada pela curva laranja (segunda à esquerda).
+O conceito de tempo polinomial é fundamental para compreender a importância das diferentes classes de problemas. Na tentativa de descrever qual propriedade torna um algoritmo eficiente, pesquisadores propuseram que algoritmos que demandavam uma quantidade de operações exponencial em relação ao tamanho do problema ($n$) eram excessivamente ineficientes, devido ao fator de crescimento multiplicativo. Desta forma, algoritmos eficientes foram definidos como possuindo um tempo de execução polinomial, isto é, demandando no máximo $n^{k}$ operações, onde $k$ é uma constante \cite{Kleinberg2005}. A figura \ref{fig:complexity} demonstra uma comparação entre alguns fatores de crescimento bastante comuns, evidenciando a velocidade do crescimento da quantidade de operações exigidas por algoritmos de tempo exponencial, denotada pela curva laranja (segunda à esquerda).
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=14cm]{complexity.png}
+    \includegraphics[width=13cm]{complexity.png}
     \caption{Comparação entre a quantidade de operações fundamentais em função do tamanho do problema.}
     \label{fig:complexity}
 \end{figure}
@@ -77,9 +77,9 @@ O algoritmo aplicado neste trabalho tentará verificar todas as combinações de
 
 O Problema da Soma dos Subconjuntos é um objeto de estudo frequente no campo da criptoanálise. Devido à inexistência de algoritmos exatos eficientes para resolver este problema, alguns criptossistemas baseados em suas propriedades foram desenvolvidos.
 
-O criptossistema de \cite{Merkle1978} envolve a utilização de um problema derivado do Problema da Soma dos Subconjuntos, conhecido como \textbf{problema da mochila}, onde cada elemento do conjunto é composto por uma quantidade e um peso. Este trabalho explora instâncias particularmente difíceis do problema da mochila, que entretanto podem ser resolvidas facilmente através do conhecimento de certas propriedades do conjunto de pesos da instância; estas propriedades são chamadas de \textit{trapdoor information}. O sistema foi um dos pioneiros na utilização de conceitos de criptografia assimétrica, porém sua segurança não pôde ser comprovada, devido à ausência de provas concretas da dificuldade computacional de problemas NP-completos.
+O criptossistema de \cite{Merkle1978} envolve a utilização de um problema derivado do Problema da Soma dos Subconjuntos, conhecido como \textbf{problema da mochila}, onde cada elemento do conjunto é composto por um peso e uma quantidade. Este trabalho explora instâncias particularmente difíceis do problema da mochila, que entretanto podem ser resolvidas facilmente através do conhecimento de certas propriedades do conjunto de pesos da instância; estas propriedades são chamadas de \textit{trapdoor information}. O sistema foi um dos pioneiros na utilização de conceitos de criptografia assimétrica, porém sua segurança não pôde ser comprovada, devido à ausência de provas concretas da dificuldade computacional de problemas NP-completos.
 
-A proposta de criptossistemas baseados no problema da mochila foi respondida com diversas pesquisas sobre técnicas eficientes para quebrá-los. Um destes trabalhos, desenvolvido por \cite{Lagarias1985}, utiliza uma transformação do problema da mochila para a busca por um vetor curto em um reticulado (\textit{lattice}), posteriormente aplicando um algoritmo de tempo polinomial para tentar resolvê-lo. A técnica se mostrou bastante eficiente, entretanto nem sempre foi capaz de encontrar a solução em casos onde os pesos do conjunto eram codificados com um elevado número de bits.
+A proposta de criptossistemas baseados no problema da mochila foi respondida com diversas pesquisas sobre técnicas eficientes para quebrá-los. Um destes trabalhos, desenvolvido por \cite{Lagarias1985}, utiliza uma transformação do problema da mochila para a busca por um vetor curto em um reticulado (\textit{lattice}), posteriormente aplicando um algoritmo de tempo polinomial para tentar resolvê-lo. A técnica se mostrou bastante eficiente, entretanto nem sempre foi capaz de encontrar a solução em casos onde os pesos do conjunto eram codificados com um número elevado de bits.
 
 \section{Processamento paralelo} \label{sec:parallel}
 
@@ -98,8 +98,6 @@ Para a realização dos experimentos, foi escrito um programa  na linguagem C ut
 \end{itemize}
 
 Para os experimentos envolvendo múltiplas threads, um parâmetro adicional foi estabelecido para definir a quantidade de subconjuntos que cada thread deve testar ininterruptamente. Este parâmetro foi chamado de \textit{tamanho do trabalho}, e recebeu como valores 10, 100 e 1000.
-
-O algoritmo utilizado na realização dos experimentos em paralelo é descrito a seguir. Como entrada, o algoritmo recebe o tamanho do conjunto $n$, a quantidade de bits dos valores do conjunto, a quantidade de threads e o tamanho do trabalho. Inicialmente, o tempo atual é gravado para calcular a duração do algoritmo. Em seguida, um conjunto é gerado aleatoriamente com base nos parâmetros recebidos. Então, os identificadores das threads são criados para controlá-las durante a execução do programa. Na sequência, as operações que serão executadas em paralelo são especificadas.
 
 \begin{algorithm}[ht]
   \small
@@ -147,7 +145,7 @@ O algoritmo utilizado na realização dos experimentos em paralelo é descrito a
   \ForEach{thread $\in$ threads} {
     $resultado \leftarrow aguardarExecucao(thread)$ \;
     \If{$resultado \neq \emptyset$} {
-        $solucao \leftarrow resultado$ \;
+      $solucao \leftarrow resultado$ \;
     }
   }
   \BlankLine
@@ -155,34 +153,36 @@ O algoritmo utilizado na realização dos experimentos em paralelo é descrito a
   \Return{$\{solucao, duracao\}$} \;
 \end{algorithm}
 
+O procedimento utilizado na realização dos experimentos em paralelo é definido pelo algoritmo \ref{alg:exp}, através de uma representação em pseudocódigo; a seguir, suas particularidades serão descritas. Como entrada, o algoritmo recebe o tamanho do conjunto $n$, a quantidade de bits dos valores do conjunto, a quantidade de threads e o tamanho do trabalho. Inicialmente, o tempo atual é gravado para calcular a duração do algoritmo. Em seguida, um conjunto é gerado aleatoriamente com base nos parâmetros recebidos. Então, os identificadores das threads são criados para controlá-las durante a execução do programa. Na sequência, as operações que serão executadas em paralelo são especificadas.
+
 Cada thread permanece em um \textit{loop} que executa até que todos os subconjuntos sejam testados ou até que alguma thread encontre uma solução, realizando as operações detalhadas a seguir. O ponto de partida do trabalho é gerado pela função \textit{obterTrabalho}, que mantém o estado atual do trabalho, partindo do número 1 e sendo incrementado pelo parâmetro \textit{trabalho}. O estado deve ser protegido por uma \textit{mutex}, pois será acessado por várias threads; caso contrário, uma condição de corrida poderia ocorrer, causando anomalias no valor do estado \cite{Lewis1996}.
 
-Em seguida, um loop é iniciado partindo do ponto gerado pela função descrita anteriormente e executando \textit{trabalho} vezes. Para cada iteração, um subconjunto é gerado a partir da representação em binário do estado atual (por exemplo, para 7$_{10}$ = 111$_{2}$, apenas os três primeiros elementos do conjunto original serão inclusos). Caso o valor do estado atual ultrapasse a quantidade de subconjuntos, a thread é finalizada com o conjunto vazio como resultado. Caso contrário, a soma dos elementos do subconjunto é computada e, caso seja zero, todas as threads serão sinalizadas para interromperem sua execução e a thread atual será finalizada com o subconjunto atual como resultado. Por fim, se todos os subconjuntos forem testados, a thread termina com o conjunto vazio como resultado.
+Em seguida, um loop é iniciado partindo do ponto gerado pelo procedimento descrito anteriormente e executando \textit{trabalho} vezes. Para cada iteração do loop, um subconjunto é gerado a partir da representação em binário do estado atual (por exemplo, no estado 7$_{10}$ = 111$_{2}$, apenas os três primeiros elementos do conjunto original serão inclusos). Caso o valor do estado atual ultrapasse a quantidade de subconjuntos, a thread é finalizada com o conjunto vazio como resultado. Caso contrário, a soma dos elementos do subconjunto é computada e, caso seja zero, todas as threads serão sinalizadas para interromperem sua execução e a thread atual será finalizada com o subconjunto atual como resultado. Por fim, caso todos os subconjuntos já tiverem sido testados, a thread termina com o conjunto vazio como resultado.
 
 Enquanto as threads buscam a solução para o problema, o programa principal declara a solução final, inicialmente vazia, e fica aguardando o término das threads. Cada uma delas conterá um resultado, indicado pelas chamadas da função \textit{finalizarThread}. Caso o resultado de uma thread seja o conjunto vazio, a solução fica inalterada; caso contrário, a solução recebe o subconjunto que a thread encontrou. Quando todas as threads forem finalizadas, o algoritmo é terminado e retorna a solução encontrada (ou o conjunto vazio se não houver solução) e a duração do procedimento, que é calculada a partir da diferença entre o tempo atual e o tempo inicial.
 
-A versão sequencial do algoritmo é bastante similar à versão paralela, exceto pela ausência das threads. Desta forma, não é necessário criar identificadores, separar o trabalho em blocos, nem iniciar, sincronizar e aguardar o término das threads. O valor cuja representação em binário indica o subconjunto a ser gerado é simplesmente inicializado em 1 e incrementado cada vez que a solução não é encontrada, até atingir $2^{n} - 1$.
+A versão sequencial do algoritmo é bastante similar à versão paralela, exceto pela ausência das threads. Desta forma, não é necessário criar identificadores, separar o trabalho em blocos, nem iniciar, sincronizar e aguardar o término das threads. O valor cuja representação em binário indica o subconjunto a ser gerado é simplesmente inicializado em 1 e incrementado a todo momento em que a solução não é encontrada, até atingir $2^{n} - 1$.
 
 Os experimentos foram realizados em um computador com processador Intel Core i3-3240 com clock de 3.4 GHz e 4 núcleos e com o sistema operacional Windows 10 Pro 64 bits. O programa foi compilado utilizando GCC versão 4.8.1 no ambiente MinGW. Um aspecto importante para melhorar a confiabilidade dos dados foi estabelecer a mesma \textit{seed} para o gerador de números aleatórios nos diferentes testes, fazendo com que as sequências de valores gerados para os conjuntos sejam idênticas. Cada teste foi composto por 30 execuções do algoritmo para cada tamanho de conjunto.
 
 \section{Análise dos resultados} \label{sec:results}
 
-O primeiro passo tomado para analisar os resultados obtidos foi investigar as diferenças entre os diferentes tamanho de trabalho para duas e quatro threads, observando qual tamanho de trabalho oferece o melhor desempenho, medido pela média de tempo entre todos os tamanhos de conjunto.
+O primeiro passo tomado para analisar os resultados obtidos foi investigar as diferenças entre os distintos tamanho de trabalho para duas e quatro threads, observando qual tamanho de trabalho oferece o melhor desempenho, mensurado pela média de tempo entre todos os tamanhos de conjunto. Esta análise é apresentada na figura \ref{fig:chunks}, através da qual foi possível perceber que a diferença de desempenho é bastante pequena, porém o tamanho de trabalho 1000 se mostrou superior aos outros para quatro threads e ligeiramente inferior a 100 para duas threads.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=10.5cm]{chunks}
+    \includegraphics[width=9cm]{chunks}
     \caption{Média de tempo para diferentes tamanhos de trabalho}
     \label{fig:chunks}
 \end{figure}
 
-Através do gráfico da figura \ref{fig:chunks} foi possível perceber que a diferença de desempenho é bastante pequena, mas o tamanho de trabalho 1000 se mostrou superior aos outros para quatro threads e ligeiramente inferior a 100 para duas threads. Um aspecto interessante deste resultado é a tendência a uma performance melhor com 4 threads enquanto o tamanho do trabalho aumenta. Um trabalho futuro poderia investigar a efetividade de tamanhos de trabalho ainda maiores.
+Um aspecto interessante deste resultado é a tendência a uma performance melhor com 4 threads enquanto o tamanho do trabalho aumenta. Um trabalho futuro poderia investigar a efetividade de tamanhos de trabalho ainda maiores.
 
 Com isso, o tamanho de trabalho 1000 será utilizado nas análises a seguir. O próximo passo efetuado foi a realização da principal proposta deste trabalho: analisar o ganho de desempenho em função da quantidade de threads utilizadas. O gráfico da figura \ref{fig:performance} apresenta as médias de tempo que o algoritmo demandou para solucionar o problema em função do tamanho do conjunto, para 1, 2 e 4 threads. É possível perceber um ganho significativo de performance, especialmente quando $n > 40$.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=12cm]{performance}
+    \includegraphics[width=10cm]{performance}
     \caption{Média de tempo em função do tamanho do conjunto (n) para diferentes quantidades de threads}
     \label{fig:performance}
 \end{figure}
