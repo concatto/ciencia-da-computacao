@@ -23,6 +23,28 @@ void Sintatico::parse(Lexico *scanner, Semantico *semanticAnalyser) throw (Analy
     while ( ! step() ) {
 
     }
+
+//    while (!nodeStack.empty()) {
+//        printTree(nodeStack.top());
+
+//        nodeStack.pop();
+//    }
+
+    printTree(*nodeStack.top());
+}
+
+void Sintatico::printTree(const TreeNode& node, int depth)
+{
+    std::cout << std::string(depth * 2, ' ');
+    if (node.token.isEmpty()) {
+        std::cout << "No token / " << node.id << "\n";
+    } else {
+        std::cout << node.token.getId() << " => Lexeme: " << node.token.getLexeme() << "\n";
+    }
+
+    for (TreeNode* child : node.children) {
+        printTree(*child, depth + 1);
+    }
 }
 
 bool Sintatico::step() throw (AnalysisError)
@@ -41,11 +63,17 @@ bool Sintatico::step() throw (AnalysisError)
 
     const int* cmd = PARSER_TABLE[state][token-1];
 
+    if (cmd[0] != 2) {
+        std::cout << "Lexeme: " << currentToken->getLexeme() << "\n";
+    }
     switch (cmd[0])
     {
         case SHIFT:
         {
+            std::cout << "Shifted " << cmd[1] << "\n";
             stack.push(cmd[1]);
+            nodeStack.push(new TreeNode(*currentToken));
+
             if (previousToken != 0)
                 delete previousToken;
             previousToken = currentToken;
@@ -56,8 +84,24 @@ bool Sintatico::step() throw (AnalysisError)
         {
             const int* prod = PRODUCTIONS[cmd[1]];
 
-            for (int i=0; i<prod[1]; i++)
+            std::stack<TreeNode*> temp;
+            std::cout << "Reducing " << prod[1] << " items.\n";
+            for (int i=0; i<prod[1]; i++) {
+                std::cout << "R: " << stack.top() << "\n";
                 stack.pop();
+                if (!nodeStack.empty()) {
+                    temp.push(nodeStack.top());
+                    nodeStack.pop();
+                }
+            }
+
+            TreeNode* node = new TreeNode(prod[0]);
+            while (!temp.empty()) {
+                node->addChild(temp.top());
+                temp.pop();
+            }
+
+            nodeStack.push(node);
 
             int oldState = stack.top();
             stack.push(PARSER_TABLE[oldState][prod[0]-1][1]);
