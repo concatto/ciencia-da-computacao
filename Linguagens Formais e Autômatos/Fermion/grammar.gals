@@ -1,0 +1,84 @@
+#Options
+GenerateScanner = true
+GenerateParser = true
+Language = C++
+ScannerName = Lexico
+ParserName = Sintatico
+SemanticName = Semantico
+ScannerCaseSensitive = true
+ScannerTable = Full
+Input = String
+Parser = SLR
+#RegularDefinitions
+ignoraveis: [\n\s\t\r]+
+num: [0-9]+(\.[0-9]+)?
+var: [a-zA-Z][a-zA-Z0-9]*
+string: \".*\"
+#Tokens
+ : {ignoraveis}
+open_scope: "{"
+close_scope: "}"
+end: ";"
+timer_start: "a cada"
+lit_interval: "instante"
+ms: "ms"
+repeat_start: "repita"
+forever: "para sempre"
+times: "vezes"
+if: "se"
+attrib: "<-"
+open_paren: "("
+close_paren: ")"
+comma: ","
+gt: ">"
+gte: ">="
+lt: "<"
+lte: "<="
+eq: "="
+neq: "!="
+plus: "+"
+minus: "-"
+mult: "*"
+div: "/"
+lit_string: {string}
+number: {num}
+variable: {var}
+#NonTerminals
+<rec_expr>
+<expr>
+<control>
+<timer_control>
+<repeat_control>
+<if_control>
+<statement>
+<invocation>
+<parameters>
+<rvalue>
+<exp1>
+<exp2>
+<exp3>
+<exp4>
+<literal>
+<logical>
+<arith1>
+<arith2>
+#Grammar
+<rec_expr>		::= <expr> <rec_expr> | <expr> ;
+<expr>			::= #1 <statement> end #3 | <control> open_scope <rec_expr> close_scope ;
+<control>		::= <timer_control> | <repeat_control> | <if_control> ;
+<timer_control>		::= timer_start lit_interval | timer_start number ms ;
+<repeat_control>	::= repeat_start forever | repeat_start number times ;
+<if_control>		::= if <rvalue> ;
+<statement>		::= variable #2 attrib <rvalue> | <invocation> ;
+<invocation>		::= variable open_paren <parameters> close_paren ;
+<parameters>		::= <rvalue> comma <parameters> | <rvalue> | î ;
+
+<rvalue>		::= <exp1> ;
+<exp1>			::= <exp2> | <exp1> <logical> <exp2> ;
+<exp2>			::= <exp3> | <exp2> <arith1> <exp3> ;
+<exp3>			::= <exp4> | <exp3> <arith2> <exp4> ;
+<exp4>			::= <literal> #0 | <invocation> | open_paren <exp1> close_paren ;
+<literal>		::= number | variable | lit_string ;
+<logical>		::= gt | gte | lt | lte | eq | neq ;
+<arith1>		::= plus | minus ;
+<arith2>		::= mult | div ;
