@@ -14,10 +14,12 @@ class CorpoCeleste : public sf::CircleShape {
 public:
      float massa;
      sf::Vector2f velocidade;
+     bool ativo;
 
-     CorpoCeleste(float raio, float massa, sf::Vector2f velocidade = sf::Vector2f())
-          : sf::CircleShape(raio), massa(massa), velocidade(velocidade) {
+     CorpoCeleste(float raio, float massa, sf::Vector2f velocidade = sf::Vector2f(), bool ativo = true)
+          : sf::CircleShape(raio), massa(massa), velocidade(velocidade), ativo(ativo) {
           setFillColor(sf::Color::White);
+          setOrigin(raio, raio);
      }
 
      sf::Vector2f getCentro() const {
@@ -57,10 +59,24 @@ std::vector<sf::IntRect> particionarTextura(const sf::Texture& textura, int linh
 }
 
 
+sf::Vector2f getMousePosition(const sf::RenderWindow& window) {
+  return window.mapPixelToCoords(sf::Mouse::getPosition(window));
+}
+
+sf::Vector2f getMousePosition(const sf::RenderWindow& window, const sf::Event::MouseButtonEvent& e) {
+  return window.mapPixelToCoords(sf::Vector2i(e.x, e.y));
+}
+
 
 int main(int argc, char** argv) {
-	sf::RenderWindow window(sf::VideoMode(1280, 1024), "Hello");
+  float width = 1280;
+  float height = 1024;
+  
+	sf::RenderWindow window(sf::VideoMode(width, height), L"Planetário");
 	window.setFramerateLimit(60);
+  
+  sf::View view(sf::FloatRect(0, 0, width, height));
+  window.setView(view);
 
 	sf::Vector2f start;
 	sf::Vector2f end;
@@ -70,7 +86,7 @@ int main(int argc, char** argv) {
 	CorpoCeleste planeta2(8, 3, sf::Vector2f(5, 0));
 	CorpoCeleste planeta3(15, 5, sf::Vector2f(6, 0));
 
-	estrela.setPosition(570, 442);
+	estrela.setPosition(width / 2, height / 2);
 	planeta1.setPosition(500, 300);
 	planeta2.setPosition(400, 100);
 	planeta3.setPosition(600, 50);
@@ -88,7 +104,7 @@ int main(int argc, char** argv) {
 	std::cout << font.loadFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf") << "\n";
 
 	sf::Texture sunTexture;
-	sunTexture.loadFromFile("/home/concatto/ciencia-da-computacao/Minicurso SFML-OOP/sun.png");
+	sunTexture.loadFromFile("sun.png");
 
 	std::vector<sf::IntRect> rects = particionarTextura(sunTexture, 4, 8);
 
@@ -105,26 +121,33 @@ int main(int argc, char** argv) {
 			if (event.type == sf::Event::Closed) {
 				window.close();
 			} else if (event.type == sf::Event::MouseButtonPressed) {
-				if (event.mouseButton.button == sf::Mouse::Left) {
-					start = sf::Vector2f(event.mouseButton.x, event.mouseButton.y);
+				if (event.mouseButton.button == sf::Mouse::Right) {
+					start = getMousePosition(window, event.mouseButton);
+          
+          estrela.planetas.emplace_back(4, 1, sf::Vector2f(), false);
+          estrela.planetas.back().setPosition(start);
+          
 					shouldDraw = true;
 				}
 			} else if (event.type == sf::Event::MouseButtonReleased) {
-				if (event.mouseButton.button == sf::Mouse::Left) {
-					end = sf::Vector2f(event.mouseButton.x, event.mouseButton.y);
+				if (event.mouseButton.button == sf::Mouse::Right) {
+					end = getMousePosition(window, event.mouseButton);
 					shouldSpawn = true;
 					shouldDraw = false;
 				}
-			}
+			} else if (event.type == sf::Event::MouseWheelScrolled) {
+        view.zoom(event.mouseWheelScroll.delta * 0.2 + 1);
+        window.setView(view);
+      }
 		}
 
 
 		if (shouldSpawn) {
 			sf::Vector2f delta = end - start;
 
-			CorpoCeleste planeta(12, 1, sf::Vector2f(delta.x * alpha, delta.y * alpha));
-			planeta.setPosition(start.x - planeta.getRadius(), start.y - planeta.getRadius());
-			estrela.planetas.push_back(planeta);
+      CorpoCeleste& planeta = estrela.planetas.back();
+      planeta.velocidade = sf::Vector2f(delta.x * alpha, delta.y * alpha);
+      planeta.ativo = true;
 
 			shouldSpawn = false;
 		}
@@ -158,26 +181,33 @@ int main(int argc, char** argv) {
 			if (estrela.getGlobalBounds().intersects(planeta.getGlobalBounds())) {
 				it = estrela.planetas.erase(it);
 			} else {
-				sf::Vector2f diferenca = estrela.getCentro() - planeta.getCentro();
-				float distancia = std::sqrt(std::pow(diferenca.x, 2) + std::pow(diferenca.y, 2));
-				float angulo = std::atan2(diferenca.y, diferenca.x);
+        if (planeta.ativo) {
+          sf::Vector2f diferenca = estrela.getCentro() - planeta.getCentro();
+          float distancia = std::sqrt(std::pow(diferenca.x, 2) + std::pow(diferenca.y, 2));
+          float angulo = std::atan2(diferenca.y, diferenca.x);
 
-				float forcaGravitacional = (planeta.massa * estrela.massa) / std::pow(distancia, 2);
-				forcaGravitacional = forcaGravitacional / planeta.massa; //Segunda lei de Newton (F = m.a)
+          float forcaGravitacional = (planeta.massa * estrela.massa) / std::pow(distancia, 2);
+          forcaGravitacional = forcaGravitacional / planeta.massa; //Segunda lei de Newton (F = m.a)
 
-				sf::Vector2f pos = planeta.getCentro();
-				planeta.atualizar(forcaGravitacional, angulo);
+          sf::Vector2f pos = planeta.getCentro();
+          planeta.atualizar(forcaGravitacional, angulo);
+        }
 
 				window.draw(planeta);
 
 				++it;
 			}
-	     	}
+    }
 
 		if (shouldDraw) {
 			vertices[0] = sf::Vertex(sf::Vector2f(start), sf::Color::White);
-			vertices[1] = sf::Vertex(sf::Vector2f(sf::Mouse::getPosition(window)), sf::Color::White);
+			vertices[1] = sf::Vertex(sf::Vector2f(getMousePosition(window)), sf::Color::White);
 			window.draw(vertices);
+      
+      CorpoCeleste& planeta = estrela.planetas.back();
+      planeta.setRadius(planeta.getRadius() + 0.3);
+      planeta.setOrigin(planeta.getRadius(), planeta.getRadius());
+      planeta.massa += 0.9;
 		}
 
 		if (time == 5) {
