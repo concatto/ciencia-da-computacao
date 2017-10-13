@@ -1,17 +1,15 @@
 package br.univali.boolang;
 
-import java.util.function.BiConsumer;
-
 public class Semantico implements Constants {
-    private BiConsumer<Integer, Token> handler = null;
+    private SemanticConsumer handler = null;
     
     public void executeAction(int action, Token token) throws SemanticError {
         if (handler != null) {
-            handler.accept(action, token);
+            handler.consume(action, token);
         }
     }
     
-    public void onAction(BiConsumer<Integer, Token> handler) {
+    public void onAction(SemanticConsumer handler) {
         this.handler = handler;
     }
 }

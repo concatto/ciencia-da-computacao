@@ -43,7 +43,7 @@ public class Application {
         stack.push(operation.apply(a, b));
     }
     
-    private void handleAction(int action, Token token) {
+    private void handleAction(int action, Token token) throws SemanticError {
         switch (action) {
             case 0:
                 targetVariable = Optional.of(token.getLexeme());
@@ -58,8 +58,11 @@ public class Application {
                 stack.push(Integer.parseUnsignedInt(token.getLexeme(), 2));
                 break;
             case 4:
-                // TODO: Se a variável não existe
-                //System.out.println("Variable not found: \"" + token.getLexeme() + "\"");
+                // Se a variável não existe
+                if (!variables.containsKey(token.getLexeme())) {
+                  throw new SemanticError("Variable not found: \"" + token.getLexeme() + "\"", token.getPosition());
+                }
+                
                 stack.push(variables.get(token.getLexeme()));
                 break;
             case 5:
@@ -81,13 +84,13 @@ public class Application {
     }
     
     public Application() {
-        String program = "a <- 111 + 010 / 0; print a;";
+        String program = "a <- 111 + 0101 + c; print b;";
         Sintatico syntactic = new Sintatico();
         Lexico lexical = new Lexico(program);
         Semantico semantic = new Semantico();
         
         semantic.onAction((action, token) -> {
-            handleAction(action, token);
+          handleAction(action, token);
         });
         
         try {
