@@ -2,12 +2,18 @@
 <html>
   <head>
     <title>Graphical Recursion</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/addons/p5.dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.min.js"></script>
     <script>
+      var slider;
       var coef = 0.5;
       var maxLevel = 10;
 
       function setup() {
+        slider = createSlider(0, -1, 1);
+        slider.position(width + 30, 30);
+        slider.style("width", "100px");
+        
         createCanvas(400, 400);
         noStroke();
         frameRate(30);
@@ -31,7 +37,7 @@
         var variation = map(level, 1, maxLevel, 180, 0);
         var s = (millis() * 0.01) % 360;
 
-        var hue = intervalRandom(s, variation, -0.5) % 360;
+        var hue = intervalRandom(s, variation, slider.value()) % 360;
         if (hue < 0) hue += 360;
 
         fill(hue, 100, 100, invert ? 0.3 : 1);
