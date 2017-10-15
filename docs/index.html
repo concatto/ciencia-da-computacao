@@ -4,9 +4,16 @@
     <title>using Brain = std::function<Program(const Idea&)>;</title>
   </head>
   <body>
-    <code>
-      INSERT INTO ideas (title) VALUES
-        (<a href="recursion.html">Recursion</a>),
-    </code>
+    <pre>
+CREATE TABLE ideas (
+    id serial,
+    title anchor,
+    primary key(id)
+);
+
+INSERT INTO ideas (title) VALUES
+    (<a href="recursion.html">Recursion</a>)
+;
+    </pre>
   </body>
 </html
