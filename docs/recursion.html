@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Graphical Recursion</title>
+    <script src="http://cdnjs.com/libraries/p5.js"></script>
+    <script>
+      var coef = 0.5;
+      var maxLevel = 10;
+
+      function setup() {
+        createCanvas(400, 400);
+        noStroke();
+        colorMode(HSB, 360, 100, 100, 1);
+      }
+
+      function draw() {
+        clear();
+        delay(10);
+        drawCircle(width/2.0, width/2.0, height / 2.0, maxLevel, false);
+        drawCircle(width/2.0, width/2.0, height / 2.0, maxLevel, true);
+      }
+
+      function intervalRandom(s, len, mean) { 
+        var offset = (mean + 0.5) * len;
+        var low = s - offset;
+        var high = low + len;
+        return random(low, high);  
+      }
+
+      function drawCircle(x, xradius, yradius, level, invert) {
+        var variation = map(level, 1, maxLevel, 180, 0);
+        var s = (millis() * 0.01) % 360;
+
+        var hue = intervalRandom(s, variation, -0.5) % 360;
+        if (hue < 0) hue += 360;
+
+        fill(hue, 100, 100, invert ? 0.3 : 1);
+        if (invert) {
+          ellipse(height/2, x, xradius*2, yradius*2);
+        } else {
+          ellipse(x, height/2, xradius*2, yradius*2);
+        }
+
+        if(level > 1) {
+          level--;
+          drawCircle(x - xradius * coef, xradius * coef, yradius * coef, level, invert);
+          drawCircle(x + xradius * coef, xradius * coef, yradius * coef, level, invert);
+        }
+      }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
