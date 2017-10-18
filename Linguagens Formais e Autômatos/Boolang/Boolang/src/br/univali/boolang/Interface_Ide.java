@@ -150,19 +150,22 @@ public class Interface_Ide extends JFrame {
         
         area_console.setEditable(false);
         
+        area_codigo.setLineWrap(true);
         area_codigo.setColumns(5);
         area_codigo.setRows(15);
         
+        area_console.setLineWrap(true);
         area_console.setColumns(5);
         area_console.setRows(5);
         
-        panel_area_codigo.add(BorderLayout.CENTER, area_codigo);
+        panel_area_codigo.add(BorderLayout.CENTER, scroll_area_codigo);
         panel_botao_executar.add(botao_executar);
-        panel_area_console.add(BorderLayout.SOUTH, area_console);
+        panel_area_console.add(BorderLayout.SOUTH, scroll_area_console);
         
         panel_area_codigo.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
         panel_area_console.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
         panel_botao_executar.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+        
         
         botao_executar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,7 +173,6 @@ public class Interface_Ide extends JFrame {
             }
         });
         
-        getContentPane().add(panel_area_codigo, BorderLayout.CENTER);
         add(BorderLayout.NORTH, panel_botao_executar);
         add(BorderLayout.CENTER, panel_area_codigo);
         add(BorderLayout.SOUTH, panel_area_console);
