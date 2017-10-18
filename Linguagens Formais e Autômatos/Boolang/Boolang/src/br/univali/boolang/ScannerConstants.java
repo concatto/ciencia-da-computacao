@@ -29,7 +29,7 @@ public interface ScannerConstants
 
     String[] SCANNER_ERROR =
     {
-        "Caractere não esperado",
+        "Caractere nao esperado",
         "",
         "",
         "",
