@@ -32,7 +32,9 @@ public class Application {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Interface ide = new Interface();
+                //Interface ide = new Interface();
+                //ide.setVisible(true);
+                Interface_Ide ide = new Interface_Ide();
                 ide.setVisible(true);
             }
         });

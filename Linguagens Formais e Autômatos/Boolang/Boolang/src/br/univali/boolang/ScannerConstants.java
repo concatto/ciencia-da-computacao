@@ -39,7 +39,7 @@ public interface ScannerConstants
         "",
         "",
         "",
-        "Erro identificando attrib",
+        "Erro identificado: atribuição( <- )",
         "",
         "",
         "",
