@@ -50,6 +50,7 @@ public class Interface_Ide extends JFrame {
         area_console.setForeground(Color.BLACK);
         area_console.setText(console_result);
         console_result = "";
+        variables.clear();
     }
     
     private void completeAssignment() {
