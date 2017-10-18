@@ -1,6 +1,7 @@
 package br.univali.boolang;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
@@ -46,11 +47,7 @@ public class Interface_Ide extends JFrame {
     private Optional<String> targetVariable = Optional.empty();
     
     private void print_console() {
-        
-       /* variables.forEach((key, value) -> {
-            console_result = console_result + key + " => " + value + "\n";
-        });
-        */
+        area_console.setForeground(Color.BLACK);
         area_console.setText(console_result);
         console_result = "";
     }
@@ -122,6 +119,7 @@ public class Interface_Ide extends JFrame {
                 print_console();
             } catch (LexicalError | SemanticError | SyntaticError ex) {
                 console_result = ex.getMessage();
+                area_console.setForeground(Color.RED);
                 area_console.setText(console_result);
                 console_result = "";
             }
