@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -38,6 +39,7 @@ public class Interface_Ide extends JFrame {
     private JScrollPane scroll_area_console = new JScrollPane(area_console);
     
     private JButton botao_executar = new JButton("Executar");
+    private JCheckBox checkbox_binario = new JCheckBox("Saída binária");
     
     public void onExecute(Consumer<String> executionConsumer) { 
         botao_executar.addActionListener((ActionEvent e) -> {
@@ -53,6 +55,10 @@ public class Interface_Ide extends JFrame {
     public void displayError(String error) {
         area_console.setForeground(Color.RED);
         area_console.setText(error);
+    }
+    
+    public boolean isOutputBinary() {
+        return checkbox_binario.isSelected();
     }
     
     public Interface_Ide() throws HeadlessException {
@@ -83,6 +89,7 @@ public class Interface_Ide extends JFrame {
         
         panel_area_codigo.add(BorderLayout.CENTER, scroll_area_codigo);
         panel_botao_executar.add(botao_executar);
+        panel_botao_executar.add(checkbox_binario);
         panel_area_console.add(BorderLayout.SOUTH, scroll_area_console);
         
         panel_area_codigo.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));

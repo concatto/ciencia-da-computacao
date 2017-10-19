@@ -21,6 +21,7 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
  * @author 5928036
  */
 public class Application {
+    private Interface_Ide ide;
     private Sintatico syntactic = new Sintatico();
     private Semantico semantic = new Semantico();
     private String console_result = "";
@@ -39,7 +40,8 @@ public class Application {
     }
     
     private void displayValue() {
-        console_result = console_result + stack.pop() + "\n";
+        int value = stack.pop();
+        console_result = console_result + (ide.isOutputBinary() ? Integer.toBinaryString(value) : value) + "\n";
     }
         
     private void modifyStack(BiFunction<Integer, Integer, Integer> operation) {
@@ -105,7 +107,7 @@ public class Application {
             public void run() {
                 //Interface ide = new Interface();
                 //ide.setVisible(true);
-                Interface_Ide ide = new Interface_Ide();
+                ide = new Interface_Ide();
                 
                 ide.onExecute((program) -> {
                     Lexico lexical = new Lexico(program);
