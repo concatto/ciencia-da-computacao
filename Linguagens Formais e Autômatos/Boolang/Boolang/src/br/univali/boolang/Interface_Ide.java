@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Stack;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -36,105 +37,26 @@ public class Interface_Ide extends JFrame {
     private JScrollPane scroll_area_codigo = new JScrollPane(area_codigo);
     private JScrollPane scroll_area_console = new JScrollPane(area_console);
     
-    private JButton botao_executar = new JButton("▶");
+    private JButton botao_executar = new JButton("Executar");
     
-    Sintatico syntactic = new Sintatico();
-    Semantico semantic = new Semantico();
-    String console_result = "";
-    
-    private Map<String, Integer> variables = new HashMap<>();
-    private Stack<Integer> stack = new Stack<>();
-    private Optional<String> targetVariable = Optional.empty();
-    
-    private void print_console() {
-        area_console.setForeground(Color.BLACK);
-        area_console.setText(console_result);
-        console_result = "";
-        variables.clear();
-    }
-    
-    private void completeAssignment() {
-        targetVariable.ifPresent(value -> {
-            variables.put(value, stack.pop());
-            targetVariable = Optional.empty();
-        });
-    }
-    
-    private void displayValue() {
-        console_result = console_result + stack.pop() + "\n";
-    }
-        
-    private void modifyStack(BiFunction<Integer, Integer, Integer> operation) {
-        int a = stack.pop();
-        int b = stack.pop();
-        stack.push(operation.apply(a, b));  
-    }
-    
-    private void handleAction(int action, Token token) throws SemanticError {
-        switch (action) {
-            case 0:
-                targetVariable = Optional.of(token.getLexeme());
-                break;
-            case 1:
-                
-                completeAssignment();
-                break;
-            case 2:
-                displayValue();
-                break;
-            case 3:
-                stack.push(Integer.parseUnsignedInt(token.getLexeme(), 2));
-                break;
-            case 4:
-                // Se a variável não existe
-                if (!variables.containsKey(token.getLexeme())) {
-                  throw new SemanticError("Variavel não encontrada: \"" + token.getLexeme() + "\"", token.getPosition());
-                }
-                
-                stack.push(variables.get(token.getLexeme()));
-                break;
-            case 5:
-                modifyStack((a, b) -> a + b);
-                break;
-            case 6:
-                modifyStack((a, b) -> b - a);
-                break;
-            case 7:
-                modifyStack((a, b) -> a * b);
-                break;
-            case 8:
-                modifyStack((a, b) -> b / a);
-                break;
-            case 9:
-                modifyStack((a, b) -> (int) Math.pow(b, a));
-                break;
-        }
-    }
-     private void on_execute() { 
+    public void onExecute(Consumer<String> executionConsumer) { 
         botao_executar.addActionListener((ActionEvent e) -> {
-            Lexico lexical = new Lexico(area_codigo.getText());
-            
-            try {
-                syntactic.parse(lexical, semantic);
-
-                print_console();
-            } catch (LexicalError | SemanticError | SyntaticError ex) {
-                console_result = ex.getMessage();
-                area_console.setForeground(Color.RED);
-                area_console.setText(console_result);
-                console_result = "";
-            }
+            executionConsumer.accept(area_codigo.getText());
         });
+    }
+     
+    public void displayOutput(String output) {
+        area_console.setForeground(Color.BLACK);
+        area_console.setText(output);
+    }
+    
+    public void displayError(String error) {
+        area_console.setForeground(Color.RED);
+        area_console.setText(error);
     }
     
     public Interface_Ide() throws HeadlessException {
-        
-        semantic.onAction((action, token) -> {
-            handleAction(action, token);
-        });
-        
         init();
-        on_execute();
     }
     
     private void init() {
