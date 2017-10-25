@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Câncer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/addons/p5.dom.min.js"></script>
+    <script>
+      var meanSlider;
+	  var initialY = 1;
+	  var t = 0;
+	  var y = initialY;
+	  var r = 1;
+	  var K = 2000;
+	  var h = 0.01;
+	  var prevY;
+	  var total = 0;
+	  var acc = y;
+	  var xOrigin = 400;
+	  var yOrigin = 400;
+	  var maxDistance;
+	  var cells = [];
+	  var points = [];
+	  var wallSize = 10;
+	  var currentDistance = 0;
+	  var wallIncrease = 250 * (1 / K);
+	  var period = 2;
+	  
+
+      function setup() {
+		maxDistance = min([xOrigin, yOrigin]);
+	  
+        createCanvas(2000, 1000);
+        frameRate(120);
+        colorMode(HSB, 360, 100, 100, 1);
+		noStroke();
+		//stroke(0, 0, 0, 1);
+        
+        meanSlider = createSlider(-100, 100, 0);
+        meanSlider.position(width + 30, 30);
+        meanSlider.style("width", "100px");
+		
+		textSize(32);
+      }
+	  
+	  function tumorGrowth(y) {
+		return r * y * (1 - (y / K));
+	  }
+
+      function draw() {
+		clear();
+		
+		var increase = (h * tumorGrowth(y));
+		acc += increase;
+		y += increase;
+		
+		while (acc > 1) {
+			// Create a new cell for each whole number
+			var angle = random(TWO_PI);
+			var distance = random(currentDistance, currentDistance + wallSize);
+			
+			cells.push({
+				x: xOrigin + distance * cos(angle),
+				y: yOrigin + distance * sin(angle),
+				distance: distance,
+				hue: random(30)
+			});
+			
+			total++;
+			acc--;
+			currentDistance += wallIncrease;
+		}
+		
+		var xc = map(t, 0, 100, 0, width);
+		var yc = map(y, initialY, K, 500, 100);
+		
+		points.push({
+			x: xc + (2 * maxDistance) + 20,
+			y: yc
+		});
+		
+		drawElements();
+				
+		t = t + h;
+      }
+	  
+	  function drawElements() {	  
+		// Draw chart
+		for (var i = 0; i < points.length; i++) {
+			var p = points[i];
+			stroke(0, 0, 0, 1);
+			point(p.x, p.y);
+		}
+	  
+		// Draw cells
+		for (var i = cells.length - 1; i >= 0; i--) {		
+			var cell = cells[i];
+			
+			var fromWall = currentDistance - cell.distance;
+			var hue = map(fromWall, 0, K * wallIncrease, 360, 270) - cell.hue;
+			var brightness = map(fromWall, 0, K * wallIncrease, 100, 0);
+			
+			noStroke();
+			fill(hue, 100, brightness, 1);
+			ellipse(cell.x, cell.y, 15, 15);
+			
+			var movement = 3;
+			cells[i].x += random(-movement, movement);
+			cells[i].y += random(-movement, movement);
+		}
+		text("N. células: (" + total + "/" + K + ")", 800, 600);
+	  }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
