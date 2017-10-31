@@ -53,6 +53,7 @@ struct Nave {
   }
 };
 ```
+> Apresentar invocação da função membro.
 
 ### Exercício: crie uma função que faça com que a nave pare de acelerar quando atingir a velocidade máxima ou mínima (0).
 Solução:
