@@ -5,121 +5,159 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/addons/p5.dom.min.js"></script>
     <script>
-      var meanSlider;
-	  var initialY = 1;
-	  var t = 0;
-	  var y = initialY;
-	  var r = 2;
-	  var K = 5000;
-	  var h = 0.01;
-	  var prevY;
-	  var total = 0;
-	  var acc = y;
-	  var xOrigin = 400;
-	  var yOrigin = 400;
-	  var maxDistance;
-	  var cells = [];
-	  var points = [];
-	  var wallSize = 10;
-	  var currentDistance = 0;
-	  var scatterCoefficient = 230; // Controls the final radius of the tumor
-	  var wallIncrease = scatterCoefficient * (1 / K);
-	  var maxWallDistance = K * wallIncrease;
-	  var period = 2;
+		var nDose = 1;
+		var doseAlpha = 2;
+		var meanSlider;
+		var initialY = 1;
+		var t = 0;
+		var y = initialY;
+		var r = 2;
+		var K = 5000;
+		var h = 0.01;
+		var prevY;
+		var total = 0;
+		var acc = y;
+		var xOrigin = 400;
+		var yOrigin = 400;
+		var maxDistance;
+		var cells = [];
+		var points = [];
+		var wallSize = 10;
+		var currentDistance = 0;
+		var scatterCoefficient = 230; // Controls the final radius of the tumor
+		var wallIncrease = scatterCoefficient * (1 / K);
+		var maxWallDistance = K * wallIncrease;
+		var period = 1;
 	  
 
     function setup() {
-      maxDistance = min([xOrigin, yOrigin]);
-  
-      createCanvas(2000, 1000);
-      frameRate(120);
-      colorMode(HSB, 360, 100, 100, 1);
-      noStroke();
-      smooth();
-      
-      meanSlider = createSlider(-100, 100, 0);
-      meanSlider.position(width + 30, 30);
-      meanSlider.style("width", "100px");
-  
-      textSize(32);
+		maxDistance = min([xOrigin, yOrigin]);
+
+		createCanvas(2000, 1000);
+		frameRate(120);
+		colorMode(HSB, 360, 100, 100, 1);
+		noStroke();
+		smooth();
+
+		meanSlider = createSlider(-100, 100, 0);
+		meanSlider.position(width + 30, 30);
+		meanSlider.style("width", "100px");
+
+		textSize(32);
     }
 	  
-	  function tumorGrowth(y) {
-      return r * y * (1 - (y / K));
-	  }
+	function tumorGrowth(y) {
+		return r * y * (1 - (y / K));
+	}
+	
+	function applyChemotherapy(dose) {
+		var survivalFraction = Math.exp(-doseAlpha * dose);
+		console.log(alpha);
+		var deadCells = y - (y * survivalFraction);
+		y = y - deadCells;
+		
+		return deadCells;
+	}
 
-      function draw() {
-        clear();
-        
-        var increase = (h * tumorGrowth(y));
-        acc += increase;
-        y += increase;
-        
-        while (acc > 1) {
-          // Create a new cell for each whole number
-          var angle = random(TWO_PI);
-          var distance = random(currentDistance, currentDistance + wallSize);
-          
-          cells.push({
-            x: xOrigin + distance * cos(angle),
-            y: yOrigin + distance * sin(angle),
-            distance: distance,
-            hue: random(30)
-          });
-          
-          total++;
-          acc--;
-          currentDistance += wallIncrease;
-        }
-        
-        var xc = map(t, 0, 100, 0, width);
-        var yc = map(y, initialY, K, 500, 100);
-        
-        points.push({
-          x: xc + (2 * maxDistance) + 20,
-          y: yc
-        });
-        
-        drawElements();
-            
-        t = t + h;
-      }
+	function killCells(amount) {
+		var integerPortion = Math.floor(amount);
+		var fractionalPortion = amount - integerPortion;
+		acc -= fractionalPortion;
+		
+		for (var i = 0; i < integerPortion; i++) {
+			var index = Math.floor(random(cells.length));
+			cells.splice(index, 1);
+			
+			currentDistance -= wallIncrease;
+			total--;
+		}
+	}
+	
+	function draw() {
+		clear();
+
+		var increase = (h * tumorGrowth(y));
+		
+		if (t > nDose * period) {
+			var dose = 0.5;
+			
+			var killCount = applyChemotherapy(dose);
+			console.log("Killed " + killCount);
+			killCells(killCount);
+			
+			nDose++;
+		}
+		
+		acc += increase;
+		y += increase;
+
+		while (acc > 1) {
+			// Create a new cell for each whole number
+			var angle = random(TWO_PI);
+			var distance = random(currentDistance, currentDistance + wallSize);
+
+			cells.push({
+				x: xOrigin + distance * cos(angle),
+				y: yOrigin + distance * sin(angle),
+				distance: distance,
+				hue: random(30)
+			});
+
+			total++;
+			acc--;
+			currentDistance += wallIncrease;
+		}
+
+		var xc = map(t, 0, 100, 0, width);
+		var yc = map(y, initialY, K, 500, 100);
+
+		points.push({
+			x: xc + (2 * maxDistance) + 20,
+			y: yc
+		});
+
+		drawElements();
+			
+		t = t + h;
+	}
 	  
-	  function drawElements() {	  
-      // Draw chart
-      for (var i = 0; i < points.length; i++) {
-        var p = points[i];
-        stroke(0, 0, 0, 1);
-        point(p.x, p.y);
-      }
+	function drawElements() {
+		// Draw chart
+		for (var i = 0; i < points.length; i++) {
+			var p = points[i];
+			stroke(0, 0, 0, 1);
+			point(p.x, p.y);
+		}
       
-      // Draw cells
-      for (var i = cells.length - 1; i >= 0; i--) {		
-        var cell = cells[i];
-        
-        var fromWall = currentDistance - cell.distance;
-        var hue = 360;
-        var brightness = 100;
-        // Core starts to turn necrotic when the wall reaches 80% of its size
-        var threshold = maxWallDistance * 0.8;
-        
-        if (fromWall > threshold) {
-          hue = map(fromWall, threshold, maxWallDistance, 360, 270);
-          brightness = map(fromWall, threshold, maxWallDistance, 100, 0);
-        }
-        
-        var radius = map(cell.distance, 0, maxWallDistance, 10, 20);
-        
-        noStroke();
-        fill(hue - cell.hue, 100, brightness, 1);
-        ellipse(cell.x, cell.y, radius, radius);
-        
-        var movement = map(fromWall, 0, maxWallDistance, 3, 1);
-        cells[i].x += random(-movement, movement);
-        cells[i].y += random(-movement, movement);
-      }
-      text("N. células: (" + total + "/" + K + ")", 800, 600);
-	  }
+		// Draw cells
+		for (var i = cells.length - 1; i >= 0; i--) {		
+			var cell = cells[i];
+
+			var fromWall = currentDistance - cell.distance;
+			var hue = 360;
+			var brightness = 100;
+			// Core starts to turn necrotic when the wall reaches 80% of its size
+			var threshold = maxWallDistance * 0.8;
+
+			if (fromWall > threshold) {
+				hue = map(fromWall, threshold, maxWallDistance, 360, 270);
+				brightness = map(fromWall, threshold, maxWallDistance, 100, 0);
+			}
+
+			var radius = map(cell.distance, 0, maxWallDistance, 10, 20);
+
+			noStroke();
+			fill(hue - cell.hue, 100, brightness, 1);
+			ellipse(cell.x, cell.y, radius, radius);
+
+			var movement = map(fromWall, 0, maxWallDistance, 3, 1);
+			cells[i].x += random(-movement, movement);
+			cells[i].y += random(-movement, movement);
+		}
+		
+		text("N. células: (" + total + "/" + K + ")", 800, 600);
+		text("t: " + t, 800, 700);
+	}
     </script>
   </head>
   <body>
