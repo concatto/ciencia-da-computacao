@@ -98,3 +98,67 @@ int main() {
   }
 }
 ```
+
+> Apresentar o objeto sendo desenhado.
+
+## Seção 2: Entidades gráficas
+
+A biblioteca SFML oferece diversos tipos de formas geométricas para serem desenhadas. Todas elas compartilham certos aspectos, como cor, textura e transformação. Este último é essencial para qualquer aplicação gráfica.
+
+Transformações representam modificações na estrutura geométrica da entidade. As três transformações principais são: translação, escala e rotação. A primeira e provavelmente a mais importante especifica a localização do elemento no espaço, com o ponto (0, 0) indicando o canto superior esquerdo da janela. A posição dos objetos do SFML pode ser modificada através das funções membro `setPosition(x, y)` (absoluta) e `move(x, y)` (relativa).
+
+> Mostrar a utilização de ambas as funções na prática.
+
+### Exercício: fazer com que o objeto apareça no canto inferior direito e mova-se em uma diagonal para cima e para a esquerda.
+
+Solução:
+```c++
+int main() {
+  sf::RenderWindow janela(sf::VideoMode(800, 600), "");
+  janela.setFramerateLimit(60); // Fazer sem primeiro e depois adicionar.
+  sf::CircleShape circulo(30);
+  circulo.setPosition(800, 600);
+  
+  while (janela.isOpen()) {
+    janela.clear();
+    circulo.move(-0.1, -0.1);
+    janela.draw(circulo);
+    janela.display();
+  }
+}
+```
+
+A rotação se comporta de maneira similar, com o par de funções `setRotation(graus)` e `rotate(graus)`. Entretanto, ambas utilizam graus ao invés de radianos (ao contrário da biblioteca padrão de matemática do C++). Lembre-se que 180 graus equivalem a π radianos.
+
+> Mostrar rotação funcionando das duas maneiras. Não dá pra perceber porque é um círculo. `setPointCount(3);`
+
+Perceba que a rotação está sendo aplicada com base no canto superior esquerdo do objeto. Esta é a sua _origem_. Podemos modificar esta característica definindo a origem como o centro do nosso círculo: `setOrigin(30, 30)`.
+
+_Spiel sobre coordenadas polares_
+
+### Exercício: mova o triângulo para o canto inferior esquerdo da tela e faça com que ele se mova constantemente com um ângulo de 320 graus (1 grau = π / 180 radianos).
+
+Solução:
+```c++
+int main() {
+  // Criação da janela
+  sf::CircleShape circulo(30);
+  circulo.setOrigin(30, 30);
+  circulo.setScale(0.6, 1); // Durante a explicação
+  circulo.setPointCount(3);
+  circulo.setPosition(0, 600);
+  
+  float angulo = 320;
+  float rad = angulo * (M_PI / 180);
+  
+  while (janela.isOpen()) {
+    janela.clear();
+    circulo.setRotation(angulo + 90); // Ponta estreita fica na direção da forma
+    circulo.move(cos(rad), sin(rad));
+    janela.draw(circulo);
+    janela.display();
+  }
+}
+```
+
+Vamos aplicar estes passos na classe Nave que criamos anteriormente. Criaremos duas funções: `atualizar()`, que invoca as duas funções de atualização de velocidade e move a nave, e `orientar(graus)`, que define a direção da nave. Precisaremos adicionar dois campos: a entidade gráfica `sf::CircleShape forma` e a direção atual em graus `float direcao`.
