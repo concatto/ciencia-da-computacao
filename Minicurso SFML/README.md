@@ -266,7 +266,7 @@ Solução:
 float anguloProjetil = 0;
 while (janela.isOpen()) {
   // Ao definir a posição do projétil no tratador
-  anguloProjetil = nave.direcao;
+    anguloProjetil = nave.direcao;
 
   float radProjetil = anguloProjetil * (M_PI / 180);
   projetil.move(10 * cos(radProjetil), 10 * sin(radProjetil));
@@ -313,5 +313,30 @@ while (...) {
 Solução:
 
 ```c++
+vector<sf::CircleShape> projeteis;
 
+while (...) {
+  // No tratador:
+    sf::CircleShape projetil(5);
+    projetil.setOrigin(5, 5);
+    projetil.setPosition(nave.getPosition());
+    projetil.setRotation(nave.direcao); // Não muda nada na forma, mas armazena a direção
+
+    projeteis.push_back(projetil);
+    
+    
+  // Após janela.clear():
+  for (int i = 0; i < projeteis.size(); i++) {
+    // Surpresa! Referência não é só em parâmetros
+    sf::CircleShape& projetil = projeteis[i];
+
+    // Translação definida a partir da rotação
+    float projetilRad = projetil.getRotation() * (M_PI / 180);
+    projetil.move(20 * cos(projetilRad), 20 * sin(projetilRad));
+
+    janela.draw(projetil);
+  }
+}
 ```
+
+No próximo capítulo: sf::Clock, colisão e texturas. Fim.
