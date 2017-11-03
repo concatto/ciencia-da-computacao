@@ -279,4 +279,39 @@ Entretanto, continuamos com apenas um projétil, o que é bastante chato. Vamos 
 
 # Seção 4: Tópicos avançados
 
-Vector é
+Vectors são equivalentes a ArrayLists em Java ou Lists em C#. Armazenam um conjunto arbitrariamente grande de objetos de tipo genérico (portanto, devem ser usados com _templates_), oferecendo operações de inserção, remoção, e acesso por índice. Antes de qualquer coisa, devemos inserir um `#include <vector>`. Para exemplificar, podemos criar um vector de números inteiros e adicionar alguns números através da função `push_back(valor)`. O argumento desta função é um objeto do mesmo tipo do vector. Agora, se quisermos mostrar o conteúdo do vector, será necessário percorrê-lo, visitando um elemento por vez. A maneira mais básica de realizar esta operação é com um simples `for (int i = 0; i < vec.size(); i++)` e acessar os elementos com `vec[i]`. Porém, quando desejamos visitar todos os elementos e não nos importamos com o índice de cada um deles, podemos utilizar o for-each, presente na linguagem a partir do C++11: `for (int valor : vec)`.
+
+> Ir escrevendo enquanto fala, e mostrar a soma dos elementos no final.
+
+Naturalmente, não estamos limitados a tipos primitivos, como inteiros ou números reais. Podemos criar vectors de qualquer tipo. Inclusive de entidades gráficas como `sf::CircleShape`. Para quebrar a monotonia de círculos, vamos desenhar um conjunto de `sf::RectangleShape` agora. Podemos, por exemplo, criar 10 retângulos com espaçamento uniforme e tamanho crescente, e depois desenhá-los a cada frame.
+
+```c++
+vector<sf::RectangleShape> retangulos;
+for (int i = 0; i < 10; i++) {
+  float tamanho = 10 + i * 5;
+
+  // O construtor de RectangleShape define o tamanho do mesmo
+  // Espera um Vector2f, que simplesmente armazena dois floats
+  sf::RectangleShape r(sf::Vector2f(tamanho, tamanho));
+  r.setPosition(20 + tamanho * i, 100);
+  r.setFillColor(sf::Color::Red); // Altera a cor do retângulo
+
+  retangulos.push_back(r);
+}
+
+while (...) {
+  // Outras operações
+  
+  for (int i = 0; i < retangulos.size(); i++) {
+    janela.draw(retangulos[i]);
+  }
+}
+```
+
+### Exercício sustenido: criar um vector de projéteis. Deve-se adicionar um projétil ao apertar a barra de espaço e, a cada frame, mover e desenhar todos os projéteis. Boa sorte.
+
+Solução:
+
+```c++
+
+```
