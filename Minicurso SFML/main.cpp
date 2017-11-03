@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <cmath>
 
 struct Nave {
   sf::CircleShape forma;
@@ -13,7 +14,6 @@ struct Nave {
     this->velocidade = 0;
     forma.setRadius(30);
     forma.setPointCount(3);
-    forma.setScale(0.75, 1);
   }
   
   void desenhar(sf::RenderWindow& window) {
@@ -48,13 +48,20 @@ int main() {
   
   Nave nave(10);
   nave.aceleracao = 0.1;
-  nave.forma.setPosition(300, 500);
+  nave.forma.setPosition(0, 600);
+  nave.forma.setOrigin(30, 30);
+  nave.forma.setScale(0.6, 1);
+  
+  float angulo = 323;
+  float rad = angulo * (M_PI / 180);
   
   while (window.isOpen()) {
     window.clear();
     
-    nave.atualizar();
+    //nave.atualizar();
     
+    nave.forma.setRotation(angulo + 90);
+    nave.forma.move(2 * std::cos(rad), 2 * std::sin(rad));
     nave.desenhar(window);
     
     window.display();    
