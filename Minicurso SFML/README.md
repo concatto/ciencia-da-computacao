@@ -1,6 +1,6 @@
 # Minicurso SFML
 
-## Seção 1: Objetos
+# Seção 1: Objetos
 
 A declaração e utilização de classes é essencial para a programação orientada à objetos. Através delas, é possível armazenar e manipular dados heterogêneos facilmente. Em sua forma mais básica, uma classe consiste em uma coleção de variáveis armazenadas sob um identificador.
 
@@ -95,7 +95,7 @@ int main() {
 
 > Apresentar o objeto sendo desenhado.
 
-## Seção 2: Entidades gráficas
+# Seção 2: Entidades gráficas
 
 A biblioteca SFML oferece diversos tipos de formas geométricas para serem desenhadas. Todas elas compartilham certos aspectos, como cor, textura e transformação. Este último é essencial para qualquer aplicação gráfica.
 
@@ -196,7 +196,7 @@ struct Nave {
 
 Para deixar nossa vida significativamente mais fácil, podemos definir que a nave *é* um `sf::CircleShape`, ao invés de conter um membro que define sua forma. Basta usar herança! Para herdar uma classe em C++, basta complementar a declaração com dois pontos e a classe base, desta maneira: `struct Nave : sf::CircleShape`. Assim, podemos remover todas as menções da variável membro e substituir com `this->` (ou nada).
 
-## Seção 3: Interação
+# Seção 3: Interação
 
 Um jogo não seria um jogo se o jogador ficasse apenas observando as coisas acontecerem. Portanto, o SFML oferece maneiras de detectar entradas de um usuário tanto pelo mouse quanto pelo teclado, e até mesmo por joysticks.
 
