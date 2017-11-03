@@ -34,15 +34,7 @@ Entretanto, classes são mais do que mochilas que guardam variáveis. É possív
 
 ```c++
 struct Nave {
-  float velocidade;
-  float aceleracao;
-  float velMaxima;
-  
-  Nave(float velMaxima) {
-    this->velMaxima = velMaxima;
-    this->aceleracao = 0; // Uso do this é opcional
-    this->velocidade = 0;
-  }
+  // Declarações...
   
   void atualizarVelocidade() {
     // Acesso implícito aos membros da instância
@@ -65,6 +57,8 @@ void verificarVelocidade() {
   }
 }
 ```
+
+> Apresentar os métodos funcionando dentro do loop.
 
 > O conteúdo a seguir deve ser passado rapidamente e acompanhado de prática! Função void imprimir(Nave).
 
@@ -154,7 +148,7 @@ int main() {
   while (janela.isOpen()) {
     janela.clear();
     circulo.setRotation(angulo + 90); // Ponta estreita fica na direção da forma
-    circulo.move(cos(rad), sin(rad));
+    circulo.move(1.5 * cos(rad), 1.5 * sin(rad)); //Multiplicação representa a "velocidade"
     janela.draw(circulo);
     janela.display();
   }
@@ -162,3 +156,42 @@ int main() {
 ```
 
 Vamos aplicar estes passos na classe Nave que criamos anteriormente. Criaremos duas funções: `atualizar()`, que invoca as duas funções de atualização de velocidade e move a nave, e `orientar(graus)`, que define a direção da nave. Precisaremos adicionar dois campos: a entidade gráfica `sf::CircleShape forma` e a direção atual em graus `float direcao`.
+
+### Exercício sustenido: realizar as mudanças necessárias para efetivar a proposta acima.
+
+Solução:
+
+```c++
+struct Nave {
+  sf::CircleShape forma;
+  float direcao;
+  // Outros membros
+  
+  Nave(float velMaxima) {
+    this->velMaxima = velMaxima;
+    forma.setRadius(30); // Alternativa ao construtor de CircleShape
+    forma.setPointCount(3);
+    forma.setOrigin(30, 30);
+    forma.setScale(0.6, 1);
+  }
+  
+  void orientar(float graus) {
+    forma.setRotation(graus + 90);
+    direcao = graus;
+  }
+  
+  void atualizar() {
+    atualizarVelocidade();
+    verificarVelocidade();
+    
+    float rad = direcao * (M_PI / 180);
+    forma.move(velocidade * cos(rad), velocidade * sin(rad));
+  }
+  
+  // Declarações de atualizarVelocidade() e verificarVelocidade()
+};
+```
+
+> Brincar um pouco com uma instância.
+
+Eventos!
