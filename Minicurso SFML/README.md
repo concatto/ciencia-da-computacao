@@ -192,6 +192,91 @@ struct Nave {
 };
 ```
 
-> Brincar um pouco com uma instância.
+> Brincar um pouco com uma instância. Definir aceleração inicial.
 
-Eventos!
+Para deixar nossa vida significativamente mais fácil, podemos definir que a nave *é* um `sf::CircleShape`, ao invés de conter um membro que define sua forma. Basta usar herança! Para herdar uma classe em C++, basta complementar a declaração com dois pontos e a classe base, desta maneira: `struct Nave : sf::CircleShape`. Assim, podemos remover todas as menções da variável membro e substituir com `this->` (ou nada).
+
+## Seção 3: Interação
+
+Um jogo não seria um jogo se o jogador ficasse apenas observando as coisas acontecerem. Portanto, o SFML oferece maneiras de detectar entradas de um usuário tanto pelo mouse quanto pelo teclado, e até mesmo por joysticks.
+
+A primeira maneira é a consulta do estado do dispositivo de interesse em tempo real. Essencialmente, são perguntas do tipo "este botão está pressionado?". Naturalmente, este tipo de expressão se transforma em funções que retornam `bool`. As principais são: `sf::Keyboard::isKeyPressed(tecla)`, onde tecla possui a forma `sf::Keyboard::<tecla>`, e `sf::Mouse::isButtonPressed(botão)`, onde botão é `sf::Mouse::Left`, `::Right` ou `::Middle`.
+
+> Mostrar a detecção de um botão do teclado com `cout`.
+
+### Exercício: faça com que o jogador possa controlar a direção da nave através das teclas A e D.
+
+Solução:
+
+```c++
+// Dentro do while
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+    nave.orientar(nave.direcao + 4);
+  }
+
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+    nave.orientar(nave.direcao - 4);
+  }
+```
+
+### Exercício bemol: faça com que a nave possua aceleração positiva enquanto a tecla W estiver pressionada e negativa caso contrário.
+
+Solução:
+
+```c++
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+    nave.aceleracao = 0.1;
+  } else {
+    nave.aceleracao = -0.1;
+  }
+```
+
+A segunda maneira é através de um sistema completo de eventos, capaz de detectar cliques, pressionamentos de teclas e movimentos do mouse. Antes de qualquer outro tipo de evento, veremos um tratador para fechar a janela quando o botão "X" é clicado (finalmente!)
+
+```c++
+while (janela.isOpen()) {
+  sf::Event evento;                           // Variável que armazena as informações do evento
+  while (janela.pollEvent(evento)) {          // Caso um ou mais eventos ocorram, captura os dados em "evento"
+    if (evento.type == sf::Event::Closed) {   // Se for um clique no botão "X"
+      janela.close();                         // Fecha a janela
+    }
+  }
+  
+  // Resto
+}
+```
+
+Vamos agora adicionar projéteis ao nosso jogo. Para simplificar, vamos considerar que nosso projétil é simplesmente um pequeno círculo que se move em velocidade constante. Declare um círculo chamado `projetil` com raio 7 e origem no centro. Em todo quadro, desenhe-o e mova-o um pouco para a direita e para baixo. Com este protótipo de projétil pronto, vamos tratar do evento de pressionamento da barra de espaço:
+
+```c++
+if (evento.type == sf::Event::KeyPressed) {
+  if (evento.key.code == sf::Keyboard::Space) {
+    projetil.setPosition(nave.getPosition());
+  }
+}
+```
+
+Porém, entre os diversos problemas que temos, o mais gritante é que o projétil sempre se move para a mesma direção.
+
+### Exercício: corrija o comportamento supracitado. Utilize o poder da trigonometria.
+
+Solução:
+
+```c++
+float anguloProjetil = 0;
+while (janela.isOpen()) {
+  // Ao definir a posição do projétil no tratador
+  anguloProjetil = nave.direcao;
+
+  float radProjetil = anguloProjetil * (M_PI / 180);
+  projetil.move(10 * cos(radProjetil), 10 * sin(radProjetil));
+
+  // Desenhar
+}
+```
+
+Entretanto, continuamos com apenas um projétil, o que é bastante chato. Vamos resolver este problema com um conjunto de objetos: vector.
+
+# Seção 4: Tópicos avançados
+
+Vector é
