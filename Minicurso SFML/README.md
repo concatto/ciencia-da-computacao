@@ -339,4 +339,6 @@ while (...) {
 }
 ```
 
-No próximo capítulo: sf::Clock, colisão e texturas. Fim.
+Para tornar nosso jogo mais divertido, vamos permitir que o jogador mantenha a barra de espaço pressionada para atirar projéteis continuamente. Primeiramente, vamos precisar desacoplar a criação de projéteis do evento KeyPressed, substituindo por uma verificação em tempo real com `sf::Keyboard::isKeyPressed(sf::Keyboard::Space)`.
+
+Depois clock, asteróides + colisão
