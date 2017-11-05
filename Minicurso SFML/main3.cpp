@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cmath>
+#include <ctime>
+#include <cstdlib>
 #include <vector>
 #include <SFML/Graphics.hpp>
 
@@ -49,18 +51,21 @@ struct Nave : sf::CircleShape {
 };
 
 int main() {
+  srand(time(nullptr));
   sf::RenderWindow janela(sf::VideoMode(800, 600), "SFML");
   janela.setFramerateLimit(60);
 
   vector<sf::CircleShape> projeteis;
+  vector<sf::RectangleShape> asteroides;
   
   Nave nave(20);
   nave.aceleracao = 0.05;
   nave.setPosition(150, 300);
   nave.orientar(0);
   
-  float direcaoProjetil = 0;
+  //float direcaoProjetil = 0;
   sf::Clock relogio;
+  sf::Clock relogioAsteroide;
   
   while (janela.isOpen()) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
@@ -77,14 +82,7 @@ int main() {
         janela.close();
       } else if (evento.type == sf::Event::KeyPressed) {
         if (evento.key.code == sf::Keyboard::Space) {
-          /*
-          sf::CircleShape projetil(5);
-          projetil.setOrigin(5, 5);
-          projetil.setPosition(nave.getPosition());
-          projetil.setRotation(nave.direcao);
-          
-          projeteis.push_back(projetil);
-          */
+          // Antigamente, Adicionava um projétil
         }
       }
     }
@@ -107,18 +105,57 @@ int main() {
       }
     }
     
+    if (relogioAsteroide.getElapsedTime().asSeconds() > 0.5) {
+      relogioAsteroide.restart();
+      
+      sf::RectangleShape asteroide(sf::Vector2f(70, 70));
+      asteroide.setPosition(rand() % 800, rand() % 600);
+      asteroide.setFillColor(sf::Color::Red);
+      
+      asteroides.push_back(asteroide);
+    }
+    
     nave.atualizar();
     
     janela.clear();
     
+    
+    for (int i = asteroides.size() - 1; i >= 0; i--) {
+      for (int j = projeteis.size() - 1; j >= 0; j--) {
+        if (asteroides[i].getGlobalBounds().intersects(projeteis[j].getGlobalBounds())) {
+          projeteis.erase(projeteis.begin() + j);
+          asteroides.erase(asteroides.begin() + i);
+          
+          break;
+        }
+      }
+      
+      if (nave.getGlobalBounds().intersects(asteroides[i].getGlobalBounds())) {
+        return 0;
+      }
+    }
+    
+    sf::FloatRect retanguloJanela(0, 0, 800, 600);
     for (int i = 0; i < projeteis.size(); i++) {
       sf::CircleShape& projetil = projeteis[i];
       
-      float projetilRad = projetil.getRotation() * (M_PI / 180);
-      projetil.move(20 * cos(projetilRad), 20 * sin(projetilRad));
-      
-      janela.draw(projetil);
+      if (retanguloJanela.contains(projetil.getPosition())) {        
+        float projetilRad = projetil.getRotation() * (M_PI / 180);
+        projetil.move(20 * cos(projetilRad), 20 * sin(projetilRad));
+        
+        janela.draw(projetil);
+      } else {
+        projeteis.erase(projeteis.begin() + i);
+        i--;
+      }
     }
+    
+    for (sf::RectangleShape& asteroide : asteroides) {
+      asteroide.move(5, 1);
+      janela.draw(asteroide);
+    }
+    
+    //cout << "Projeteis: " << projeteis.size() << "\n";
     
     janela.draw(nave);
     janela.display();
