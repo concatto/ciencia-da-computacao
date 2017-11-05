@@ -60,6 +60,7 @@ int main() {
   nave.orientar(0);
   
   float direcaoProjetil = 0;
+  sf::Clock relogio;
   
   while (janela.isOpen()) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
@@ -76,12 +77,14 @@ int main() {
         janela.close();
       } else if (evento.type == sf::Event::KeyPressed) {
         if (evento.key.code == sf::Keyboard::Space) {
+          /*
           sf::CircleShape projetil(5);
           projetil.setOrigin(5, 5);
           projetil.setPosition(nave.getPosition());
           projetil.setRotation(nave.direcao);
           
           projeteis.push_back(projetil);
+          */
         }
       }
     }
@@ -90,6 +93,18 @@ int main() {
       nave.aceleracao = 0.1;
     } else {
       nave.aceleracao = -0.1;
+    }
+    
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+      if (relogio.getElapsedTime().asMilliseconds() > 100) {
+        sf::CircleShape projetil(5);
+        projetil.setOrigin(5, 5);
+        projetil.setPosition(nave.getPosition());
+        projetil.setRotation(nave.direcao);
+        
+        projeteis.push_back(projetil);
+        relogio.restart();
+      }
     }
     
     nave.atualizar();
