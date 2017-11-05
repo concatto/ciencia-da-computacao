@@ -430,6 +430,20 @@ for (int i = asteroides.size() - 1; i >= 0; i--) {
 }
 ```
 
+### Exercício: faça com que o programa termine quando a nave colidir com um asteroide.
+
+Solução:
+
+```c++
+for (int i = asteroides.size() - 1; i >= 0; i--) {
+  // Testes de colisão com projéteis
+  
+  if (nave.getGlobalBounds().intersects(asteroides[i].getGlobalBounds())) {
+    return;
+  }
+}
+```
+
 Para finalizar, vamos adicionar texturas ao nosso jogo. Para trabalharmos com texturas no SFML, precisamos de dois passos distintos: primeiro, devemos carregar a textura propriamente dita para a GPU, através da classe `sf::Texture` e suas funções membro. Posteriormente, precisamos desenhar a textura; esta parte pode ser realizada pela utilização da classe `sf::Sprite`, que consiste em uma entidade gráfica especializada em desenhar textures, ou pelo emprego das formas geométricas, que já conhecemos, as quais possuem uma função membro para definir textura. Vamos utilizar um Sprite para desenhar o plano de fundo.
 
 ```c++
