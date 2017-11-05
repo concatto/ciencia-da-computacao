@@ -339,6 +339,51 @@ while (...) {
 }
 ```
 
-Para tornar nosso jogo mais divertido, vamos permitir que o jogador mantenha a barra de espaço pressionada para atirar projéteis continuamente. Primeiramente, vamos precisar desacoplar a criação de projéteis do evento KeyPressed, substituindo por uma verificação em tempo real com `sf::Keyboard::isKeyPressed(sf::Keyboard::Space)`.
+Entretanto, nunca estamos removendo os projéteis, então nossa memória vai estar clamando por socorro após algum tempo. Falar sobre contains e intersects, e remoção do vector.
 
-Depois clock, asteróides + colisão
+Para tornar nosso jogo mais divertido, vamos permitir que o jogador mantenha a barra de espaço pressionada para atirar projéteis continuamente. Primeiramente, vamos precisar desacoplar a criação de projéteis do evento KeyPressed, substituindo por uma verificação em tempo real com `sf::Keyboard::isKeyPressed(sf::Keyboard::Space)`. Subsequentemente, precisaremos de algum tipo de relógio para verificar quanto tempo se passou desde o último tiro. A resposta para esta situação é a classe `sf::Clock`, que possui duas funções membro: `restart()`, que reinicia a contagem de tempo, e `getElapsedTime()`, que retorna quanto tempo se passou com uma instância de `sf::Time`, que por sua vez possui as funções membro `asMicroseconds()`, `asMilliseconds()` e `asSeconds()`.
+
+### Exercício: faça com o jogador só possa atirar uma vez a cada 100 milissegundos.
+
+Solução:
+```c++
+sf::Clock relogio;
+while (...) {
+  // Outras ações
+  
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+    if (relogio.getElapsedTime().asMilliseconds() > 100) {
+      sf::CircleShape projetil(5);
+      projetil.setOrigin(5, 5);
+      projetil.setPosition(nave.getPosition());
+      projetil.setRotation(nave.direcao);
+
+      projeteis.push_back(projetil);
+      relogio.restart();
+    }
+  }
+}
+```
+
+Para adicionar um pouco de dificuldade ao jogo, vamos criar asteroides aleatoriamente de vez em quando. Temos todas as ferramentas necessárias para isso.
+
+### Exercício sustenido: a cada segundo, faça com que um asteroide (retângulo 70x70) apareça em uma posição aleatória na tela.
+
+Solução: 
+
+```c++
+```
+
+Agora, a adição de colisões se torna bastante simples. Existem técnicas mais sofisticadas, mas basicamente o procedimento consiste em verificar para cada projétil na tela, se há uma intersecção com um asteroide (retângulo); caso haja, removemos tanto o projétil quanto o asteroide de seus respectivos vectors. 
+
+Exercício?
+
+Para finalizar, vamos adicionar texturas ao nosso jogo. Para trabalharmos com texturas no SFML, precisamos de dois passos distintos: primeiro, devemos carregar a textura propriamente dita para a GPU, através da classe `sf::Texture` e suas funções membro. Posteriormente, precisamos desenhar a textura; esta parte pode ser realizada pela utilização da classe `sf::Sprite`, que consiste em uma entidade gráfica especializada em desenhar textures, ou pelo emprego das formas geométricas, que já conhecemos, as quais possuem uma função membro para definir textura. Vamos utilizar um Sprite para desenhar o plano de fundo.
+
+```c++
+sf::Texture texturaFundo;
+texturaFundo.loadFromFile("fundo.jpg"); // Lê um arquivo de imagem e transfere para a memória da GPU
+
+sf::Sprite spriteFundo;
+spriteFundo.setTexture(texturaFundo);
+```
