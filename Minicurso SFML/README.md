@@ -339,7 +339,22 @@ while (...) {
 }
 ```
 
-Entretanto, nunca estamos removendo os projéteis, então nossa memória vai estar clamando por socorro após algum tempo. Falar sobre contains e intersects, e remoção do vector.
+Entretanto, nunca estamos removendo os projéteis, então nossa memória vai estar clamando por socorro após algum tempo. Logo, precisaremos verificar o retângulo da janela _contém_ o projétil em questão; caso não contenha, podemos removê-lo de nosso vector. Para isso, construiremos uma instância de `sf::FloatRect`, que representa um retângulo em memória, e não um objeto gráfico. Esta classe possui uma função membro `contains(ponto)`, que é perfeita para nosso problema atual. Seu construtor aceita quatro parâmetros: os dois primeiros definem a posição do canto superior esquerdo (x e y), e os dois últimos especificam seu tamanho (largura e altura). Utilizaremos (0, 0, 800, 600).
+
+```c++
+sf::FloatRect retanguloJanela(0, 0, 800, 600);
+for (int i = 0; i < projeteis.size(); i++) {
+  sf::CircleShape& projetil = projeteis[i];
+
+  if (retanguloJanela.contains(projetil.getPosition())) {        
+    // Desenhar
+  } else {
+    projeteis.erase(projeteis.begin() + i); // Remover o elemento do vector
+  }
+}
+```
+
+Porém, ao removermos um elemento de um vector, todos os elementos à sua frente dão um passo para trás. Temos duas escolhas para tratar disso: a primeira é realizar uma instrução de `i--;` após a remoção de um elemento, e a segunda é inverter a ordem do nosso loop: `for (int i = projeteis.size() - 1; i >= 0; i--)`. Escolha aquela que preferir.
 
 Para tornar nosso jogo mais divertido, vamos permitir que o jogador mantenha a barra de espaço pressionada para atirar projéteis continuamente. Primeiramente, vamos precisar desacoplar a criação de projéteis do evento KeyPressed, substituindo por uma verificação em tempo real com `sf::Keyboard::isKeyPressed(sf::Keyboard::Space)`. Subsequentemente, precisaremos de algum tipo de relógio para verificar quanto tempo se passou desde o último tiro. A resposta para esta situação é a classe `sf::Clock`, que possui duas funções membro: `restart()`, que reinicia a contagem de tempo, e `getElapsedTime()`, que retorna quanto tempo se passou com uma instância de `sf::Time`, que por sua vez possui as funções membro `asMicroseconds()`, `asMilliseconds()` e `asSeconds()`.
 
@@ -372,6 +387,25 @@ Para adicionar um pouco de dificuldade ao jogo, vamos criar asteroides aleatoria
 Solução: 
 
 ```c++
+vector<sf::RectangleShape> asteroides;
+sf::Clock relogioAsteroide;
+
+while (...) {
+  if (relogioAsteroide.getElapsedTime().asSeconds() > 0.5) {
+    relogioAsteroide.restart();
+
+    sf::RectangleShape asteroide(sf::Vector2f(70, 70));
+    asteroide.setPosition(rand() % 800, rand() % 600);
+    asteroide.setFillColor(sf::Color::Red);
+
+    asteroides.push_back(asteroide);
+  }
+  
+  // O uso de referência evita uma cópia desnecessária!
+  for (sf::RectangleShape& asteroide : asteroides) {
+    janela.draw(asteroide);
+  }
+}
 ```
 
 Agora, a adição de colisões se torna bastante simples. Existem técnicas mais sofisticadas, mas basicamente o procedimento consiste em verificar para cada projétil na tela, se há uma intersecção com um asteroide (retângulo); caso haja, removemos tanto o projétil quanto o asteroide de seus respectivos vectors. 
