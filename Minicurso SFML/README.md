@@ -316,14 +316,19 @@ Solução:
 vector<sf::CircleShape> projeteis;
 
 while (...) {
-  // No tratador:
-    sf::CircleShape projetil(5);
-    projetil.setOrigin(5, 5);
-    projetil.setPosition(nave.getPosition());
-    projetil.setRotation(nave.direcao); // Não muda nada na forma, mas armazena a direção
+  sf::Event evento;
+  while (janela.pollEvent(evento)) {
+    if (evento.type == sf::Event::KeyPressed) {
+      if (evento.key.code == sf::Keyboard::Space) {
+        sf::CircleShape projetil(5);
+        projetil.setOrigin(5, 5);
+        projetil.setPosition(nave.getPosition());
+        projetil.setRotation(nave.direcao); // Não muda nada na forma, mas armazena a direção
 
-    projeteis.push_back(projetil);
-    
+        projeteis.push_back(projetil);
+      }
+    }
+  }
     
   // Após janela.clear():
   for (int i = 0; i < projeteis.size(); i++) {
@@ -343,6 +348,7 @@ Entretanto, nunca estamos removendo os projéteis, então nossa memória vai est
 
 ```c++
 sf::FloatRect retanguloJanela(0, 0, 800, 600);
+
 for (int i = 0; i < projeteis.size(); i++) {
   sf::CircleShape& projetil = projeteis[i];
 
@@ -408,9 +414,21 @@ while (...) {
 }
 ```
 
-Agora, a adição de colisões se torna bastante simples. Existem técnicas mais sofisticadas, mas basicamente o procedimento consiste em verificar para cada projétil na tela, se há uma intersecção com um asteroide (retângulo); caso haja, removemos tanto o projétil quanto o asteroide de seus respectivos vectors. 
+Agora, a adição de colisões se torna bastante simples. Existem técnicas mais sofisticadas, mas basicamente o procedimento consiste em verificar se, para cada projétil na tela, há uma intersecção com um asteroide (retângulo); caso haja, removemos tanto o projétil quanto o asteroide de seus respectivos vectors. Usaremos a técnica de iteração reversa para a remoção dos elementos, e usaremos as funções `getGlobalBounds()` para obter o retângulo que envolve o elemento e `intersects(retangulo)`, uma função membro de `sf::FloatRect`, para verificar se existe uma intersecção entre dois retângulos.
 
-Exercício?
+```c++
+for (int i = asteroides.size() - 1; i >= 0; i--) {
+  for (int j = projeteis.size() - 1; j >= 0; j--) {
+    // Se houver intersecção
+    if (asteroides[i].getGlobalBounds().intersects(projeteis[j].getGlobalBounds())) {
+      projeteis.erase(projeteis.begin() + j);
+      asteroides.erase(asteroides.begin() + i);
+
+      break;
+    }
+  }
+}
+```
 
 Para finalizar, vamos adicionar texturas ao nosso jogo. Para trabalharmos com texturas no SFML, precisamos de dois passos distintos: primeiro, devemos carregar a textura propriamente dita para a GPU, através da classe `sf::Texture` e suas funções membro. Posteriormente, precisamos desenhar a textura; esta parte pode ser realizada pela utilização da classe `sf::Sprite`, que consiste em uma entidade gráfica especializada em desenhar textures, ou pelo emprego das formas geométricas, que já conhecemos, as quais possuem uma função membro para definir textura. Vamos utilizar um Sprite para desenhar o plano de fundo.
 
@@ -420,4 +438,10 @@ texturaFundo.loadFromFile("fundo.jpg"); // Lê um arquivo de imagem e transfere 
 
 sf::Sprite spriteFundo;
 spriteFundo.setTexture(texturaFundo);
+
+while (...) {
+  // Outras operações
+  
+  janela.draw(spriteFundo); // Desenhar o sprite, não a textura!
+}
 ```
