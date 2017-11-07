@@ -16,6 +16,8 @@
 	var K2 = 2000;
 	var h = 0.01;
 	var prevY;
+	var negativeXIncrease = 0;
+	var negativeYIncrease = 0;
 	//var totalX = initialX;
 	var accY = initialY;
 	var accX = initialX;
@@ -66,13 +68,17 @@
 		var survivalFraction = Math.exp(-doseAlpha * dose);
 		var deadCells;
 		if(isNormalCell){
+			console.log("X antes: " + x);
+			console.log("vet antes: " + normalCells.length);
 			deadCells = x - (x * survivalFraction);
-			x = x - deadCells;
+			x -= deadCells;
+			console.log(deadCells);
+			console.log("X depois: " + x);
 		}else {
 			deadCells = y - (y * survivalFraction);
-			y = y - deadCells;
+			
+			y -= deadCells;
 		}
-
 		return deadCells;
 	}
 
@@ -87,6 +93,7 @@
 				//currentDistance -= wallIncrease;
 				maxWallDistance -= wallIncrease;
 			}
+			console.log("Vet depois: " + normalCells.length);
 		}else {
 			accY -= fractionalPortion;
 
@@ -106,78 +113,100 @@
 
 		var increaseX = (h * competitiveGrowth(r1, x, y, K1, lambda1));
 		var increaseY = (h * competitiveGrowth(r2, y, x, K2, lambda2));
+		/*console.log("x: " +x);
+		console.log("vet: "+normalCells.length);*/
 		if (t > nDose * period) {
 			var normalKillCount = applyChemotherapy(normalAlpha, dose, true);
 			var cancerKillCount = applyChemotherapy(cancerAlpha, dose, false);
 			killCells(normalKillCount, true);
 			killCells(cancerKillCount, false);
-			
 			nDose++;
 		}
-		
+		console.log("Soma: " + (accX + increaseX));
+		console.log("increase -1: " + increaseX * -1);
 		if(increaseX < 0){
-			for (var i = 0; i < increaseX*-1; i++) {
+			negativeXIncrease += increaseX;
+
+		}else{
+			accX += increaseX;
+		}
+		if(increaseY < 0){
+			negativeYIncrease = increaseY;
+
+		}else{
+			accY += increaseY;
+		}
+
+		if(negativeXIncrease * -1 > 1){
+			for (var i = 0; i < negativeXIncrease * -1; i++) {
 				var index = Math.floor(random(normalCells.length));
 				normalCells.splice(index, 1);
-				currentDistance -= wallIncrease;
+				maxWallDistance -= wallIncrease;
+				negativeXIncrease += 1;
 			}
-		}	
-		if(increaseY < 0){
-			for (var i = 0; i < increaseY *-1; i++) {
-				var index = Math.floor(random(cells.length));
-				cells.splice(index, 1);
-				currentDistance -= wallIncrease;
-			}
+			
 		}
 		
-		accX += increaseX;
-		accY += increaseY;
+		if(negativeYIncrease * -1 > 1){
+			for (var i = 0; i < negativeYIncrease *-1; i++) {
+				var index = Math.floor(random(cells.length));
+				cells.splice(index, 1);
+				maxWallDistance -= wallIncrease;
+				negativeYIncrease += 1;
+			}
+			
+		}
+		
 		x += increaseX;
 		y += increaseY;
 	
-	while (accY > 1) { // Cria células cangerigenas
-		// Create a new cell for each whole number
-		var angle = random(TWO_PI);
-		var distance = random(currentDistance, currentDistance + wallSize);
+		while (accY > 1) { // Cria células cangerigenas
+			// Create a new cell for each whole number
+			var angle = random(TWO_PI);
+			var distance = random(currentDistance, currentDistance + wallSize);
 
-		cells.push({
-			x: xOrigin + distance * cos(angle),
-			y: yOrigin + distance * sin(angle),
-			distance: distance,
-			hue: random(30)
-		});
-		accY--;
-		maxWallDistance += wallIncrease;
-		//currentDistance += wallIncrease;
-	}
-	
-	while (accX > 1) { // Cria células saudáveis
-		// Create a new cell for each whole number
-		var angle = random(TWO_PI);
-		var distance = random(currentDistance, currentDistance + wallSize);
+			cells.push({
+				x: xOrigin + distance * cos(angle),
+				y: yOrigin + distance * sin(angle),
+				distance: distance,
+				hue: random(30)
+			});
+			accY--;
+			maxWallDistance += wallIncrease;
+			//currentDistance += wallIncrease;
+		}
+		
+		while (accX > 1) { // Cria células saudáveis
+			// Create a new cell for each whole number
+			var angle = random(TWO_PI);
+			var distance = random(currentDistance, currentDistance + wallSize);
 
-		normalCells.push({
-			x: xOrigin + distance * cos(angle),
-			y: yOrigin + distance * sin(angle),
-			distance: distance,
-			hue: random(30)
-		});
+			normalCells.push({
+				x: xOrigin + distance * cos(angle),
+				y: yOrigin + distance * sin(angle),
+				distance: distance,
+				hue: random(30)
+			});
 
-		accX--;
-		//currentDistance += wallIncrease;
-		maxWallDistance += wallIncrease;
-	}
+			accX--;
+			//currentDistance += wallIncrease;
+			maxWallDistance += wallIncrease;
+		}
+		/*
+		x = normalCells.length;
+		y = cells.length;*/
+		
+		console.log("vet: " + normalCells.length);
+		console.log("x: " + x);
 	
-	/*x = normalCells.length;
-	y = cells.length;*/
-	
-	var maxY = max([K1, K2]);
+		var maxY = max([K1, K2]);
 		insertPoint(normalPoints, x, initialX, maxY, true);
 		insertPoint(tumorPoints, y, initialY, maxY, false);
 
 		drawElements();
-		text("Celulas normais " + Math.floor(normalCells.length), 800, 600);
-		text("Celulas cancerigenas " + Math.floor(cells.length), 800, 700);
+		text("Celulas normais " + Math.floor(x), 800, 600);
+		text("Celulas cancerigenas " + Math.floor(y), 800, 700);
+		
 			
 		t = t + h;
 	}
@@ -237,6 +266,7 @@
 		}
 		
 		// Draw cancerous cells
+		
 		for (var i = cells.length - 1; i >= 0; i--) { // Desenha células cancerigenas
 			var cell = cells[i];
 
