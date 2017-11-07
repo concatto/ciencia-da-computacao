@@ -20,6 +20,8 @@
 	var totalX = initialX;
 	var accY = y;
 	var accX = x;
+	var accYNegative = 0;
+	var accXNegative = 0;
 	var xOrigin = 400;
 	var yOrigin = 400;
 	var maxDistance;
@@ -30,6 +32,7 @@
 	var wallSize = 10;
 	var currentDistance = 0;
 	var scatterCoefficient = 230; // Controls the final radius of the tumor
+	var buttonRunPressed = false;
 	
 	// take a look at
 	var wallIncrease = scatterCoefficient * (1 / K2);
@@ -41,20 +44,76 @@
 
 
 	function setup(teste, teste) {
-		var input = createInput();
-		input.position(20, 65);
 		maxDistance = min([xOrigin, yOrigin]);
-
 		createCanvas(2000, 1000);
 		frameRate(120);
 		colorMode(HSB, 360, 100, 100, 1);
 		noStroke();
 		smooth();
 
-		meanSlider = createSlider(-100, 100, 0);
-		meanSlider.position(width + 30, 30);
-		meanSlider.style("width", "100px");
+		inputInitialY = createInput();
+		inputInitialY.position(0, 30);
+		
+		inputInitialX = createInput();
+		inputInitialX.position(200, 30);
+		
+		inputLambda1 = createInput();
+		inputLambda1.position(400, 30);
+		
+		inputLambda2 = createInput();
+		inputLambda2.position(600, 30);
 
+		inputR1 = createInput();
+		inputR1.position(800, 30);
+
+		inputR2 = createInput();
+		inputR2.position(1000, 30);
+
+		inputK1 = createInput();
+		inputK1.position(0, 80);
+
+		inputK2 = createInput();
+		inputK2.position(200, 80);
+
+		inputPeriod = createInput();
+		inputPeriod.position(400, 80);
+
+		inputNDose = createInput();
+		inputNDose.position(600, 80);
+
+		inputDose = createInput();
+		inputDose.position(800, 80);
+
+		inputCancerAlpha = createInput();
+		inputCancerAlpha.position(1000, 80);
+
+		inputNormalAlpha = createInput();
+		inputNormalAlpha.position(1200, 80);
+
+		buttonRun = createButton('Run');
+ 		buttonRun.position(0, 110);
+
+		buttonStop = createButton('Stop');
+ 		buttonStop.position(60, 110);
+
+ 		putText();
+	}
+
+  function putText() {
+		textSize(12);
+		text("Initial Cancer Cells", 0, 10);
+		text("Initial Normal Cells", 200, 10);
+		text("Impact of Cancerous Cell", 400, 10);
+		text("Reduction in Cancerous", 600, 10);
+		text("Normal Cells Growth Rate", 800, 10);
+		text("Cancerous Cells Growth Rate", 1000, 10);
+		text("Carrying Capacity Normal Cells", 0, 60);
+		text("Carrying Capacity Cancerous Cells", 200, 60);
+		text("Period", 400, 60);
+		text("Number of Dose", 600, 60);
+		text("Dose", 800, 60);
+		text("Cancer Alpha", 1000, 60);
+		text("Normal Alpha", 1200, 60);
 		textSize(32);
 	}
 
@@ -88,10 +147,11 @@
 			for (var i = 0; i < integerPortion; i++) {
 				var index = Math.floor(random(normalCells.length));
 				normalCells.splice(index, 1);
-				
-				//currentDistance -= wallIncrease;
+
+				currentDistance -= wallIncrease;
 				totalX--;
 			}
+
 		}else if(!isNormalCell){
 			accY -= fractionalPortion;
 
@@ -99,7 +159,7 @@
 				var index = Math.floor(random(cells.length));
 				cells.splice(index, 1);
 				
-				//currentDistance -= wallIncrease;
+				currentDistance -= wallIncrease;
 				totalY--;
 			}
 		}
@@ -107,7 +167,38 @@
 	
 
 	function draw() {
+		buttonRun.mousePressed(() => {
+ 			/*initialY = inputInitialY.value(); // initial cancer biomass
+			initialX = inputInitialX.value(); // initial normal cells biomass
+			lambda1 = inputLambda1.value(); // Impact of cancerous cells in normal biomass
+			lambda2 = inputLambda2.value(); // Reduction in cancerous biomass from normal cells
+			r1 = inputR1.value(); // normal cells growth rate
+			r2 = inputR2.value(); // cancerous cells growth rate
+			K1 = inputK1.value(); // Carrying capacity of normal cells
+			K2 = inputK2.value(); // Carrying capacity of cancerous cells
+			period = inputPeriod.value();
+			dose = inputDose.value();
+			nDose = inputNDose.value();
+			cancerAlpha = inputCancerAlpha.value();
+			normalAlpha = inputNormalAlpha.value();*/
+
+ 			buttonRunPressed = true;
+			});
+
+ 		buttonStop.mousePressed(() => {
+ 			buttonRunPressed = false;
+ 			clear();
+ 			putText();
+ 		});
+
+ 		if (buttonRunPressed) {
+ 			init();
+ 		}
+	}
+
+	function init() {
 	clear();
+	putText();
 
 	var increaseX = (h * competitiveGrowth(r1, x, y, K1, lambda1));
 	var increaseY = (h * competitiveGrowth(r2, y, x, K2, lambda2));
@@ -127,6 +218,21 @@
 	y += increaseY;
 	x += increaseX;
 
+	if(increaseX < 0) {
+		for (var i = 0; i < increaseX*-1; i++) {
+			var index = Math.floor(random(normalCells.length));
+			normalCells.splice(index, 1);
+			currentDistance -= wallIncrease;
+		}
+	}	
+	if(increaseY < 0){
+		for (var i = 0; i < increaseY *-1; i++) {
+			var index = Math.floor(random(cells.length));
+			cells.splice(index, 1);
+			
+			currentDistance -= wallIncrease;
+		}
+	}
 	
 	while (accY > 1) { // Cria células cangerigenas
 		// Create a new cell for each whole number

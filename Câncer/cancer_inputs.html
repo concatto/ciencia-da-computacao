@@ -152,7 +152,7 @@
 	                var index = Math.floor(random(normalCells.length));
 	                normalCells.splice(index, 1);
 	               
-	                currentDistance -= wallIncrease;
+	                //currentDistance -= wallIncrease;
 	                totalX--;
 	            }
 	        }else if(!isNormalCell){
@@ -172,7 +172,7 @@
 	    function draw() {
 
 	    	buttonRun.mousePressed(() => {
-	 			initialY = inputInitialY.value(); // initial cancer biomass
+	 			/*initialY = inputInitialY.value(); // initial cancer biomass
 				initialX = inputInitialX.value(); // initial normal cells biomass
 				lambda1 = inputLambda1.value(); // Impact of cancerous cells in normal biomass
 				lambda2 = inputLambda2.value(); // Reduction in cancerous biomass from normal cells
@@ -184,7 +184,7 @@
 				dose = inputDose.value();
 				nDose = inputNDose.value();
 				cancerAlpha = inputCancerAlpha.value();
-				normalAlpha = inputNormalAlpha.value();
+				normalAlpha = inputNormalAlpha.value();*/
 
 	 			buttonRunPressed = true;
  			});
@@ -201,8 +201,8 @@
 	    }
 
 		function init() {
-
 		    clear();
+		  
 		 	putText();
 		    var increaseX = (h * competitiveGrowth(r1, x, y, K1, lambda1));
 		    var increaseY = (h * competitiveGrowth(r2, y, x, K2, lambda2));
