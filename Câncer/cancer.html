@@ -11,7 +11,7 @@
 		var initialY = 1;
 		var t = 0;
 		var y = initialY;
-		var r = 2;
+		var r = 1.2;
 		var K = 5000;
 		var h = 0.01;
 		var prevY;
@@ -65,8 +65,8 @@
 		acc -= fractionalPortion;
 		
 		for (var i = 0; i < integerPortion; i++) {
-			var index = Math.floor(random(cells.length));
-			cells.splice(index, 1);
+			//var index = Math.floor(random(cells.length));
+			cells.splice(cells.length - 1, 1);
 			
 			currentDistance -= wallIncrease;
 			total--;
@@ -79,7 +79,7 @@
 		var increase = (h * tumorGrowth(y));
 		
 		if (t > nDose * period) {
-			var dose = 0.5;
+			var dose = 0.1;
 			
 			var killCount = applyChemotherapy(dose);
 			console.log("Killed " + killCount);
@@ -124,9 +124,14 @@
 	function drawElements() {
 		// Draw chart
 		for (var i = 0; i < points.length; i++) {
-			var p = points[i];
-			stroke(0, 0, 0, 1);
-			point(p.x, p.y);
+      var p = points[i];
+      stroke(p.hue, 100, 100, 1);
+      if (i == 0) {
+        point(p.x, p.y);
+      } else {
+        var prevP = points[i - 1];
+        line(prevP.x, prevP.y, p.x, p.y); 
+      }
 		}
       
 		// Draw cells
