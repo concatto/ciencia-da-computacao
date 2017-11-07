@@ -67,17 +67,15 @@
 		var deadCells;
 		if(isNormalCell){
 			deadCells = x - (x * survivalFraction);
-			//x = x - deadCells;
+			x = x - deadCells;
 		}else {
 			deadCells = y - (y * survivalFraction);
-			//y = y - deadCells;
+			y = y - deadCells;
 		}
 
 		return deadCells;
 	}
 
-	// Arthur -- Mata os dois tipos de célula baseado no boolean (segundo parâmetro) isNormalCell
-	// Prestar atenção no currentDistance, tem algo errado com ele, não necessáriamente nessa função, pode ser em outra..
 	function killCells(amount, isNormalCell) {
 		var integerPortion = Math.floor(amount);
 		var fractionalPortion = amount - integerPortion;
@@ -134,6 +132,8 @@
 		
 		accX += increaseX;
 		accY += increaseY;
+		x += increaseX;
+		y += increaseY;
 	
 	while (accY > 1) { // Cria células cangerigenas
 		// Create a new cell for each whole number
@@ -168,8 +168,8 @@
 		maxWallDistance += wallIncrease;
 	}
 	
-	x = normalCells.length;
-	y = cells.length;
+	/*x = normalCells.length;
+	y = cells.length;*/
 	
 	var maxY = max([K1, K2]);
 		insertPoint(normalPoints, x, initialX, maxY, true);
