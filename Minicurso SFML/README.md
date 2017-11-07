@@ -108,10 +108,10 @@ Transformações representam modificações na estrutura geométrica da entidade
 Solução:
 ```c++
 int main() {
-  sf::RenderWindow janela(sf::VideoMode(800, 600), "");
+  sf::RenderWindow janela(sf::VideoMode(1100, 900), "");
   janela.setFramerateLimit(60); // Fazer sem primeiro e depois adicionar.
   sf::CircleShape circulo(30);
-  circulo.setPosition(800, 600);
+  circulo.setPosition(1100, 900);
   
   while (janela.isOpen()) {
     janela.clear();
@@ -140,7 +140,7 @@ int main() {
   circulo.setOrigin(30, 30);
   circulo.setScale(0.6, 1); // Durante a explicação
   circulo.setPointCount(3);
-  circulo.setPosition(0, 600);
+  circulo.setPosition(0, 900);
   
   float angulo = 320;
   float rad = angulo * (M_PI / 180);
@@ -246,7 +246,7 @@ while (janela.isOpen()) {
 }
 ```
 
-Vamos agora adicionar projéteis ao nosso jogo. Para simplificar, vamos considerar que nosso projétil é simplesmente um pequeno círculo que se move em velocidade constante. Declare um círculo chamado `projetil` com raio 7 e origem no centro. Em todo quadro, desenhe-o e mova-o um pouco para a direita e para baixo. Com este protótipo de projétil pronto, vamos tratar do evento de pressionamento da barra de espaço:
+Vamos agora adicionar projéteis ao nosso jogo. Para simplificar, vamos considerar que nosso projétil é simplesmente um pequeno círculo que se move em velocidade constante. Declare um círculo chamado `projetil` com raio 5 e origem no centro. Em todo quadro, desenhe-o e mova-o um pouco para a direita e para baixo. Com este protótipo de projétil pronto, vamos tratar do evento de pressionamento da barra de espaço:
 
 ```c++
 if (evento.type == sf::Event::KeyPressed) {
@@ -344,10 +344,10 @@ while (...) {
 }
 ```
 
-Entretanto, nunca estamos removendo os projéteis, então nossa memória vai estar clamando por socorro após algum tempo. Logo, precisaremos verificar o retângulo da janela _contém_ o projétil em questão; caso não contenha, podemos removê-lo de nosso vector. Para isso, construiremos uma instância de `sf::FloatRect`, que representa um retângulo em memória, e não um objeto gráfico. Esta classe possui uma função membro `contains(ponto)`, que é perfeita para nosso problema atual. Seu construtor aceita quatro parâmetros: os dois primeiros definem a posição do canto superior esquerdo (x e y), e os dois últimos especificam seu tamanho (largura e altura). Utilizaremos (0, 0, 800, 600).
+Entretanto, nunca estamos removendo os projéteis, então nossa memória vai estar clamando por socorro após algum tempo. Logo, precisaremos verificar o retângulo da janela _contém_ o projétil em questão; caso não contenha, podemos removê-lo de nosso vector. Para isso, construiremos uma instância de `sf::FloatRect`, que representa um retângulo em memória, e não um objeto gráfico. Esta classe possui uma função membro `contains(ponto)`, que é perfeita para nosso problema atual. Seu construtor aceita quatro parâmetros: os dois primeiros definem a posição do canto superior esquerdo (x e y), e os dois últimos especificam seu tamanho (largura e altura). Utilizaremos (0, 0, 1100, 900).
 
 ```c++
-sf::FloatRect retanguloJanela(0, 0, 800, 600);
+sf::FloatRect retanguloJanela(0, 0, 1100, 900);
 
 for (int i = 0; i < projeteis.size(); i++) {
   sf::CircleShape& projetil = projeteis[i];
@@ -401,7 +401,7 @@ while (...) {
     relogioAsteroide.restart();
 
     sf::RectangleShape asteroide(sf::Vector2f(70, 70));
-    asteroide.setPosition(rand() % 800, rand() % 600);
+    asteroide.setPosition(rand() % 1100, rand() % 900);
     asteroide.setFillColor(sf::Color::Red);
 
     asteroides.push_back(asteroide);
@@ -448,7 +448,7 @@ Para finalizar, vamos adicionar texturas ao nosso jogo. Para trabalharmos com te
 
 ```c++
 sf::Texture texturaFundo;
-texturaFundo.loadFromFile("fundo.jpg"); // Lê um arquivo de imagem e transfere para a memória da GPU
+texturaFundo.loadFromFile("universe.jpg"); // Lê um arquivo de imagem e transfere para a memória da GPU
 
 sf::Sprite spriteFundo;
 spriteFundo.setTexture(texturaFundo);
@@ -457,5 +457,34 @@ while (...) {
   // Outras operações
   
   janela.draw(spriteFundo); // Desenhar o sprite, não a textura!
+}
+```
+
+Com o plano de fundo, vamos partir para nosso último passo: aplicar uma textura nos projéteis. Isso demandará algumas adaptações, pois nossos projéteis atualmente são definidos como `sf::CircleShape`. Entretanto, os sprites suportam grande parte das operações que formas geométricas oferecem, com poucas exceções. Uma delas é a definição do raio (afinal, um sprite não é um círculo!), então a invocação do construtor e consequentemente a definição da origem deverão ser modificadas. Primeiramente, vamos trocar o tipo de nosso vector de projéteis para `vector<sf::Sprite>`, fazendo com que ele passe a armazenar sprites ao invés de círculos. O bloco de código de criação também deverá ser modificado, mudando o tipo de variável para `sf::Sprite` e removendo a chamada do construtor. Remova também o `setOrigin()`; posteriormente iremos utilizá-lo de outra maneira. Por fim, altere o tipo da variável no trecho de código que verifica se os projéteis ainda estão dentro dos limites da tela e desenha-os.
+
+### Exercício final: carregue a textura "shot.png". Faça com que os projéteis usem esta textura. Faça também com que a origem dos projéteis seja automaticamente definida para o centro da textura.
+
+Solução:
+
+```c++
+sf::Texture texturaProjetil;
+texturaProjetil.loadFromFile("shot.png");
+
+while (...) {
+  // Outras coisas
+  
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+    if (relogio.getElapsedTime().asMilliseconds() > 100) {
+      // Carregar a textura nesse ponto abriria as portas para espíritos malignos.
+    
+      sf::Sprite projetil;
+      projetil.setTexture(texturaProjetil);
+      projetil.setOrigin(texturaProjetil.getSize().x / 2.0, texturaProjetil.getSize().y / 2.0);
+      
+      // Mais coisas
+    }
+  }
+  
+  // Resto das coisas
 }
 ```
