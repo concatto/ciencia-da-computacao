@@ -2,6 +2,8 @@
 #include <cmath>
 #include <SFML/Graphics.hpp>
 
+using namespace std;
+
 struct Nave : sf::CircleShape {
   float velMaxima;
   float velocidade = 0;
@@ -49,8 +51,8 @@ int main() {
   sf::RenderWindow janela(sf::VideoMode(800, 600), "SFML");
   janela.setFramerateLimit(60);
   
-  sf::CircleShape projetil(5);
-  projetil.setOrigin(5, 5);
+  sf::RectangleShape projetil(sf::Vector2f(10, 4));
+  projetil.setOrigin(5, 2);
   
   Nave nave(20);
   nave.aceleracao = 0.05;
@@ -65,6 +67,7 @@ int main() {
       if (evento.type == sf::Event::Closed) {
         janela.close();
       } else if (evento.type == sf::Event::KeyPressed) {
+        //cout << evento.key.code << "\n";
         if (evento.key.code == sf::Keyboard::Space) {
           projetil.setPosition(nave.getPosition());
           direcaoProjetil = nave.direcao;
@@ -93,6 +96,7 @@ int main() {
     
     float projetilRad = direcaoProjetil * (M_PI / 180);
     projetil.move(20 * cos(projetilRad), 20 * sin(projetilRad));
+    //projetil.setRotation(direcaoProjetil);
     
     janela.draw(projetil);
     janela.draw(nave);

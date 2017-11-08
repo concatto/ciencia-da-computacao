@@ -55,7 +55,7 @@ int main() {
   sf::RenderWindow janela(sf::VideoMode(800, 600), "SFML");
   janela.setFramerateLimit(60);
 
-  vector<sf::CircleShape> projeteis;
+  vector<sf::RectangleShape> projeteis;
   vector<sf::RectangleShape> asteroides;
   
   Nave nave(20);
@@ -95,8 +95,8 @@ int main() {
     
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
       if (relogio.getElapsedTime().asMilliseconds() > 100) {
-        sf::CircleShape projetil(5);
-        projetil.setOrigin(5, 5);
+        sf::RectangleShape projetil(sf::Vector2f(10, 4));
+        projetil.setOrigin(5, 2);
         projetil.setPosition(nave.getPosition());
         projetil.setRotation(nave.direcao);
         
@@ -137,7 +137,7 @@ int main() {
     
     sf::FloatRect retanguloJanela(0, 0, 800, 600);
     for (int i = 0; i < projeteis.size(); i++) {
-      sf::CircleShape& projetil = projeteis[i];
+      sf::RectangleShape& projetil = projeteis[i];
       
       if (retanguloJanela.contains(projetil.getPosition())) {        
         float projetilRad = projetil.getRotation() * (M_PI / 180);
