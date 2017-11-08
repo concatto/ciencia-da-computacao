@@ -246,7 +246,7 @@ while (janela.isOpen()) {
 }
 ```
 
-Vamos agora adicionar projéteis ao nosso jogo. Para simplificar, vamos considerar que nosso projétil é simplesmente um pequeno círculo que se move em velocidade constante. Declare um círculo chamado `projetil` com raio 5 e origem no centro. Em todo quadro, desenhe-o e mova-o um pouco para a direita e para baixo. Com este protótipo de projétil pronto, vamos tratar do evento de pressionamento da barra de espaço:
+Vamos agora adicionar projéteis ao nosso jogo. Para simplificar, vamos considerar que nosso projétil é simplesmente um pequeno retângulo que se move em velocidade constante. Declare um retângulo chamado `projetil` com tamanho 10x4 e origem no centro. Em todo quadro, desenhe-o e mova-o um pouco para a direita e para baixo. Com este protótipo de projétil pronto, vamos tratar do evento de pressionamento da barra de espaço:
 
 ```c++
 if (evento.type == sf::Event::KeyPressed) {
@@ -283,7 +283,7 @@ Vectors são equivalentes a ArrayLists em Java ou Lists em C#. Armazenam um conj
 
 > Ir escrevendo enquanto fala, e mostrar a soma dos elementos no final.
 
-Naturalmente, não estamos limitados a tipos primitivos, como inteiros ou números reais. Podemos criar vectors de qualquer tipo. Inclusive de entidades gráficas como `sf::CircleShape`. Para quebrar a monotonia de círculos, vamos desenhar um conjunto de `sf::RectangleShape` agora. Podemos, por exemplo, criar 10 retângulos com espaçamento uniforme e tamanho crescente, e depois desenhá-los a cada frame.
+Naturalmente, não estamos limitados a tipos primitivos, como inteiros ou números reais. Podemos criar vectors de qualquer tipo. Inclusive de entidades gráficas como `sf::CircleShape` ou `sf::RectangleShape`. Podemos, por exemplo, criar 10 retângulos com espaçamento uniforme e tamanho crescente, e depois desenhá-los a cada frame.
 
 ```c++
 vector<sf::RectangleShape> retangulos;
@@ -320,10 +320,10 @@ while (...) {
   while (janela.pollEvent(evento)) {
     if (evento.type == sf::Event::KeyPressed) {
       if (evento.key.code == sf::Keyboard::Space) {
-        sf::CircleShape projetil(5);
-        projetil.setOrigin(5, 5);
+        sf::RectangleShape projetil(sf::Vector2f(10, 4));
+        projetil.setOrigin(5, 2);
         projetil.setPosition(nave.getPosition());
-        projetil.setRotation(nave.direcao); // Não muda nada na forma, mas armazena a direção
+        projetil.setRotation(nave.direcao); // Serve para armazenar a direção também
 
         projeteis.push_back(projetil);
       }
@@ -333,7 +333,7 @@ while (...) {
   // Após janela.clear():
   for (int i = 0; i < projeteis.size(); i++) {
     // Surpresa! Referência não é só em parâmetros
-    sf::CircleShape& projetil = projeteis[i];
+    sf::RectangleShape& projetil = projeteis[i];
 
     // Translação definida a partir da rotação
     float projetilRad = projetil.getRotation() * (M_PI / 180);
@@ -374,8 +374,8 @@ while (...) {
   
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
     if (relogio.getElapsedTime().asMilliseconds() > 100) {
-      sf::CircleShape projetil(5);
-      projetil.setOrigin(5, 5);
+      sf::RectangleShape projetil(sf::Vector2f(10, 4));
+      projetil.setOrigin(5, 2);
       projetil.setPosition(nave.getPosition());
       projetil.setRotation(nave.direcao);
 
@@ -475,7 +475,7 @@ while (...) {
   
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
     if (relogio.getElapsedTime().asMilliseconds() > 100) {
-      // Carregar a textura nesse ponto abriria as portas para espíritos malignos.
+      // Carregar a textura nesse ponto abriria as portas para espíritos malignos!!!
     
       sf::Sprite projetil;
       projetil.setTexture(texturaProjetil);
