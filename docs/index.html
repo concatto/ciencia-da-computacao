@@ -24,6 +24,17 @@ INSERT INTO ideas (title) VALUES
     (<a href="recursion.html">Recursion</a>),
     (<a href="cancer.html">Cancer</a>)
 ;
+
+CREATE TABLE ipfs (
+  id serial,
+  hash varchar(64),
+  title varchar(255),
+  primary key(id)
+);
+
+INSERT INTO ipfs (hash, title) VALUES
+    ('<a href="https://gateway.ipfs.io/ipfs/QmS2SbgwSZnzoVRMHQq5dQTi9NGbFpvqbVHNxmbNjCvnQ4">QmS2SbgwSZnzoVRMHQq5dQTi9NGbFpvqbVHNxmbNjCvnQ4</a>', 'Scores')
+;
     </pre>
   </body>
 </html
