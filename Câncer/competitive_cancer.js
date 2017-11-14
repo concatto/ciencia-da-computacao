@@ -180,24 +180,68 @@
 			cancerAlpha = inputCancerAlpha.value();
 			normalAlpha = inputNormalAlpha.value();*/
 
-			initialY = 1;
+			/*initialY = 1;
 			initialX = 3000;
 			lambda1 = 0.003;
 			lambda2 = 0.00002;
 			r1 = 1.5;
 			r2 = 1.5;
 			K1 = 3000;
-			K2 = 2000;
+			K2 = 3000;
 			period = 2;
 			dose = 0.2;
 			nDose = 1;
 			cancerAlpha = 2;
-			normalAlpha = 3;
+			normalAlpha = 2;
+			*/
 
+			//APLICACAO SEM COMPETICAO
+			/*initialY = 2.5;
+			initialX = 5000;
+			lambda1 = 0;
+			lambda2 = 0;
+			r1 = 0.000106;
+			r2 = 0.00021;
+			K1 = 5000;
+			K2 = 50;
+			period = 5;
+			nDose = 0;
+			dose = 0;
+			cancerAlpha = 0;
+			normalAlpha = 0;*/
 
-			t = 0;
+			//APLICACAO COM COMPETICAO
+			/*initialY = 2.5;
+			initialX = 5000;
+			lambda1 = 0.000356;
+			lambda2 = -0.0001875;
+			r1 = 0.000106;
+			r2 = 0.00021;
+			K1 = 5000;
+			K2 = 50;
+			period = 5;
+			nDose = 0;
+			dose = 0;
+			cancerAlpha = 0;
+			normalAlpha = 0;*/
+
+			initialY = 2.5;
+			initialX = 5000;
+			lambda1 = 0.000356;
+			lambda2 = -0.0001875;
+			r1 = 0.000106;
+			r2 = 0.00021;
+			K1 = 5000;
+			K2 = 50;
+			period = 5;
+			nDose = 0;
+			dose = 0;
+			cancerAlpha = 0;
+			normalAlpha = 0;
+
+			/*t = 0;
 			y = initialY; // Cancerous biomass
-			x = initialX; // Normal biomass*/
+			x = initialX; // Normal biomass
 			h = 0.01;
 			negativeXIncrease = 0;
 			negativeYIncrease = 0;
@@ -212,14 +256,13 @@
 			tumorPoints = [];
 			wallSize = 10;
 			currentDistance = 0;
-			scatterCoefficient = 230; // Controls the final radius of the tumor
+			scatterCoefficient = 230; // Controls the final radius of the tumor*/
 
 			buttonRunPressed = true;
 		});
 
  		buttonStop.mousePressed(() => {
  			buttonRunPressed = false;
- 			clear();
  			putText();
  		});
 
@@ -324,8 +367,8 @@
 		insertPoint(tumorPoints, y, initialY, maxY, false);
 
 		drawElements();
-		text("Celulas normais " + Math.floor(x), 800, 600);
-		text("Celulas cancerigenas " + Math.floor(y), 800, 700);
+		text("Celulas normais " + x , 800, 600);
+		text("Celulas cancerigenas " + y, 800, 700);
 		
 			
 		t = t + h;
