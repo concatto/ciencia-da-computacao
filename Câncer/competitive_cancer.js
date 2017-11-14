@@ -166,7 +166,7 @@
 	function draw() {
 
 		buttonRun.mousePressed(() => {
- 			initialY = inputInitialY.value(); // initial cancer biomass
+ 			/*initialY = inputInitialY.value(); // initial cancer biomass
 			initialX = inputInitialX.value(); // initial normal cells biomass
 			lambda1 = inputLambda1.value(); // Impact of cancerous cells in normal biomass
 			lambda2 = inputLambda2.value(); // Reduction in cancerous biomass from normal cells
@@ -178,9 +178,9 @@
 			dose = inputDose.value();
 			nDose = inputNDose.value();
 			cancerAlpha = inputCancerAlpha.value();
-			normalAlpha = inputNormalAlpha.value();
+			normalAlpha = inputNormalAlpha.value();*/
 
-			/*initialY = 1;
+			initialY = 1;
 			initialX = 3000;
 			lambda1 = 0.003;
 			lambda2 = 0.00002;
@@ -192,7 +192,7 @@
 			dose = 0.2;
 			nDose = 1;
 			cancerAlpha = 2;
-			normalAlpha = 3;*/
+			normalAlpha = 3;
 
 
 			t = 0;

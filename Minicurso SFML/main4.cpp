@@ -52,11 +52,17 @@ struct Nave : sf::CircleShape {
 
 int main() {
   srand(time(nullptr));
-  sf::RenderWindow janela(sf::VideoMode(800, 600), "SFML");
+  sf::RenderWindow janela(sf::VideoMode(900, 900), "SFML");
   janela.setFramerateLimit(60);
 
-  vector<sf::RectangleShape> projeteis;
+  vector<sf::Sprite> projeteis;
   vector<sf::RectangleShape> asteroides;
+  
+  sf::Texture texturaEspaco;
+  texturaEspaco.loadFromFile("universe.jpg");
+  
+  sf::Sprite espaco;
+  espaco.setTexture(texturaEspaco);
   
   Nave nave(20);
   nave.aceleracao = 0.05;
@@ -95,8 +101,12 @@ int main() {
     
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
       if (relogio.getElapsedTime().asMilliseconds() > 100) {
-        sf::RectangleShape projetil(sf::Vector2f(10, 4));
-        projetil.setOrigin(5, 2);
+        sf::Texture texturaProjetil;
+        texturaProjetil.loadFromFile("shot.png");
+        
+        sf::Sprite projetil;
+        projetil.setTexture(texturaProjetil);
+        projetil.setOrigin(texturaProjetil.getSize().x / 2.0, texturaProjetil.getSize().y / 2.0);
         projetil.setPosition(nave.getPosition());
         projetil.setRotation(nave.direcao);
         
@@ -109,7 +119,7 @@ int main() {
       relogioAsteroide.restart();
       
       sf::RectangleShape asteroide(sf::Vector2f(70, 70));
-      asteroide.setPosition(rand() % 800, rand() % 600);
+      asteroide.setPosition(rand() % 900, rand() % 900);
       asteroide.setFillColor(sf::Color::Red);
       
       asteroides.push_back(asteroide);
@@ -118,6 +128,7 @@ int main() {
     nave.atualizar();
     
     janela.clear();
+    janela.draw(espaco);
     
     
     for (int i = asteroides.size() - 1; i >= 0; i--) {
@@ -135,9 +146,9 @@ int main() {
       }
     }
     
-    sf::FloatRect retanguloJanela(0, 0, 800, 600);
+    sf::FloatRect retanguloJanela(0, 0, 900, 900);
     for (int i = 0; i < projeteis.size(); i++) {
-      sf::RectangleShape& projetil = projeteis[i];
+      sf::Sprite& projetil = projeteis[i];
       
       if (retanguloJanela.contains(projetil.getPosition())) {        
         float projetilRad = projetil.getRotation() * (M_PI / 180);

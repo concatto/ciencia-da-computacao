@@ -2,3 +2,7 @@ Divide-and-conquer
 Dynamic programming
 Greedy algorithm
 Local search
+
+Tópicos:
+Análise de Estratégias de Amplificação da Resistência de Redes Complexas a Processos Epidêmicos
+Investigação Quanto ao Papel de Círculos Sociais no Desempenho Discente no Ensino Superior
