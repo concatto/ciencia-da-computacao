@@ -75,9 +75,6 @@
 		inputPeriod = createInput();
 		inputPeriod.position(400, 80);
 
-		inputNDose = createInput();
-		inputNDose.position(600, 80);
-
 		inputDose = createInput();
 		inputDose.position(800, 80);
 
@@ -107,8 +104,7 @@
 		text("Carrying Capacity Normal Cells", 0, 60);
 		text("Carrying Capacity Cancerous Cells", 200, 60);
 		text("Period", 400, 60);
-		text("Number of Dose", 600, 60);
-		text("Dose", 800, 60);
+		text("Dose", 600, 60);
 		text("Cancer Alpha", 1000, 60);
 		text("Normal Alpha", 1200, 60);
 		textSize(32);
@@ -224,7 +220,7 @@
 			dose = 0;
 			cancerAlpha = 0;
 			normalAlpha = 0;*/
-
+			
 			initialY = 2.5;
 			initialX = 5000;
 			lambda1 = 0.000356;
