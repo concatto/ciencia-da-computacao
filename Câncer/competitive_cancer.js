@@ -3,7 +3,7 @@
 	var normalAlpha = 3;
 	var meanSlider;
 	var initialY = 1;
-	var initialX = 3000;
+	var initialX = 0; //30000
 	var t = 0;
 	var y = initialY; // Cancerous biomass
 	var x = initialX; // Normal biomass*/
@@ -225,15 +225,15 @@
 			initialX = 5000;
 			lambda1 = 0.000356;
 			lambda2 = -0.0001875;
-			r1 = 0.000106;
-			r2 = 0.00021;
+			r1 = 0.0106;
+			r2 = 0.021;
 			K1 = 5000;
-			K2 = 50;
-			period = 5;
-			nDose = 0;
-			dose = 0;
-			cancerAlpha = 0;
-			normalAlpha = 0;
+			K2 = 4000;
+			period = 2;
+			nDose = 1;
+			dose = 0.2;
+			cancerAlpha = 2;
+			normalAlpha = 3;
 
 			/*t = 0;
 			y = initialY; // Cancerous biomass
