@@ -1,5 +1,11 @@
 \begin{thebibliography}{}
 
+\bibitem[{American Cancer Society} 2017]{ACS2017}
+{American Cancer Society} (2017).
+\newblock Cancer facts \& figures 2017.
+\newblock
+  https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2017/cancer-facts-and-figures-2017.pdf.
+
 \bibitem[Boulic and Renault 1991]{boulic:91}
 Boulic, R. and Renault, O. (1991).
 \newblock 3d hierarchies for animation.
@@ -16,5 +22,10 @@ Smith, A. and Jones, B. (1999).
 \newblock On the complexity of computing.
 \newblock In Smith-Jones, A.~B., editor, {\em Advances in Computer Science},
   pages 555--566. Publishing Press.
+
+\bibitem[{World Health Organization} 2017]{WHO2017}
+{World Health Organization} (2017).
+\newblock Cancer fact sheet.
+\newblock http://www.who.int/mediacentre/factsheets/fs297/en/.
 
 \end{thebibliography}

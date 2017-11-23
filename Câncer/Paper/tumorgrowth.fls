@@ -102,6 +102,8 @@ INPUT /usr/share/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
 INPUT /usr/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 INPUT /usr/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 INPUT /usr/share/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm
+INPUT /usr/share/texmf-dist/tex/latex/psnfss/omspcr.fd
+INPUT /usr/share/texmf-dist/tex/latex/psnfss/omspcr.fd
 INPUT /usr/share/texmf-dist/fonts/tfm/adobe/times/ptmbi7t.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
