@@ -34,7 +34,7 @@
 \end{abstract}
 
 \begin{resumo}
-  O câncer é uma das principais causas de morte em diversos países, e prevê-se que o número de novos casos aumentará significativamente no futuro próximo. Neste contexto, a modelagem matemática da doença fornece uma plataforma para a realização de experimentações e a descoberta de novos conhecimentos quanto à seu comportamento através de meios computacionais, contornando a necessidade de utilização de materiais orgânicos. Assim, este trabalho buscou investigar modelos matemáticos de crescimento de tumores malignos, analisando-os tanto em relação à sua expressividade quanto à sua capacidade de representar fielmente o fenômeno real, levando em conta a construção de um simulador de fácil compreensão. % Terminar?
+  O câncer é uma das principais causas de morte em diversos países, e prevê-se que o número de novos casos aumentará significativamente no futuro próximo. Neste contexto, a modelagem matemática da doença fornece uma plataforma para a realização de experimentações e a descoberta de novos conhecimentos quanto à seu comportamento através de meios computacionais, contornando a necessidade de utilização de materiais orgânicos. Assim, este trabalho buscou investigar modelos matemáticos de crescimento de tumores malignos, analisando-os tanto em relação à sua expressividade quanto à sua capacidade de representar fielmente o fenômeno real, levando em conta a construção de um simulador de fácil compreensão. % concluir melhor? Está bem abstrato
 \end{resumo}
 
 \section{Introdução}
@@ -52,7 +52,15 @@ Para uma melhor disseminação das características gerais do câncer, foram pro
   \item Mecânismos de Invasão e Metástase: Propriedade metástica em um sub-grupo celular.\ldots
 \end{itemize}
 
+%Resistência a mecanismos naturais de morte celular: um mecânismo natural de inibição do crescimento desregulado de células é a morte programada ou apoptose, que introduz o suícidio celular, células cancerigênas podem desenvolver vários mecânismos para limitar ou até mesmo dibrar este processo. O método mais comum é através da perda da função TP53, outra forma é através do aumento de reguladores antiapoptoticos.
+
+%Potencial ilimitado de multiplicação: a partir do ano 2000, já era aceito que células cancerígenas tinham capacidade de reprodução ilimitade, diferindo do comportamento de células normais no corpo humano, que possuem um limite de vezes que podem passar pelo ciclo de crescimento e divisão celular. Esta limitação é principalmente relacionada com o estado de senescence, um estado normalmente irreversível que acaba eliminando a célula. Raramente células normais são capazes de dibrar este estado, existem várias evidências que apontam que a capacidade de dibrar este estado é devido a telomeres protegendo o DNA da célula, na maior parte das células essa proteção se degrada progressivamente, porém, em uma pequena parte isso não acontece, desta forma caracterizando a imortalidade celular.
+
 %http://www.cell.com/cell/fulltext/S0092-8674(11)00127-9, https://drfelipeades.wordpress.com/2014/11/13/as-seis-principais-caracteristicas-do-cancer/
+
+
+
+% Falar sobre as características do câncer. Ver Hallmarks of Cancer.
 
 % Falar sobre experimentações in vivo e as dificuldades. Ver Cancer Modeling and Simulation (e-mail Santana)
 Um ciclo ideal para afirmações do desenvolvimento citado nas pesquisas, faz-se necessário observações fenomenológicas, na qual toda teoria relatada é alterada para experiências de consciência. Cientistas em medicina biológica optam por abordagens inofensivas, onde são realizadas testes \textit{in vivo}, ou seja, ratos, embriões de frangos ou \textit{in vitro}. Os resultados das experiência observáveis, tanto por meios biológicos, matemáticos ou físicos, podem gerar modelos à fins de descrever padrões de comportamento.
@@ -62,47 +70,33 @@ Os atributos da pesquisa indicam referencias para soluções matematicas de comp
 
 % Falar sobre modelagem matemática em geral e de câncer. Ver artigos de survey
 %Modelos matematicos
-A modelagem matemática é a área que investiga e gera simulações computacionais reais para compreender determinados comportamentos específicos, ou seja, consiste em descrever em equações matemáticas um fenômeno.
+A modelagem matemática é a área que investiga e gera simulações computacionais reais para compreender determinados comportamentos específicos,
 %1modelo do cancer
-O processo de modelagem dos modelos matemáticos do câncer demanda o conhecimento de diferentes origens, tanto biôlogicos, medicinais, matemáticos e etc.
+O processo de modelagem dos modelos matemáticos do câncer demanda o conhecimento de diferentes origens, tanto biôlogicos, medicinais e matemáticos.
 
 % Aprofundar para o contexto do artigo, falando sobre o objetivo e apresentar seções (separar parágrafos se ficar grande).
 
-Este artigo é estruturado de forma que apresente uma introdução a doença e técnicas de modelagem da mesma, seguido de uma discussão sobre modelos já existentes e sobre o modelo implementado neste trabalho, por fim, expõe uma revisão bibliográfica sobre trabalhos relacionados.
-
 \section{Revisão bibliográfica} % Alt: Trabalhos relacionados
-Durante todos estes anos de pesquisa, vários modelos matemáticos para o Câncer foram propostos,
+
 % Falar sobre alguns artigos relacionados, não necessariamente aqueles que acabamos utilizando. Citar outras abordagens além de equações diferenciais. Falar sobre crescimento logístico/Gompertz, etc. MUITAS citações nesta seção.
 
 % Modelo de Panetta
 
-\begin{equation} \label{eq:normalgrowth}
-  \frac{\mathrm{d} s}{\mathrm{d} t} = r_{1} s \left ( 1 - \frac{s}{K} - \lambda_{1} c \right )
-\end{equation}
-
-\begin{equation} \label{eq:cancergrowth}
-  \frac{\mathrm{d} c}{\mathrm{d} t} = r_{2} c \left ( 1 - \frac{c}{K} - \lambda_{1} s \right )
-\end{equation}
-
 \begin{equation}
-  s(np^{+}) = F_{1}(D) s(np^{-})
-\end{equation}
+\frac{\mathrm{d} s}{\mathrm{d} t} = r_{1} s \left ( 1 - \frac{s}{K} - \lambda_{1} c \right )
 
-\begin{equation}
-  c(np^{+}) = F_{2}(D) c(np^{-})
+\frac{\mathrm{d} c}{\mathrm{d} t} = r_{2} c \left ( 1 - \frac{c}{K} - \lambda_{1} s \right )
+
+
 \end{equation}
 
 % Falar de alguns modelos mais obscuros como sistemas multiagentes e equações diferenciais parciais.
 
 Neste trabalho, a modelagem de \cite{Panetta1996} foi selecionada para implementação e análise, devido à sua generalidade e semelhança em relação a abordagens relacionadas. A existência de parâmetros para o controle de cada uma de suas variáveis permite que algumas de suas características, como a competição entre células normais e cancerígenas, sejam completamente desativadas, favorecendo a comparação com modelos mais simples.
 
-\section{Metodologia} \label{sec:methodology} % Alt: Modelos e métodos
+\section{Metodologia} % Alt: Modelos e métodos
 
-\subsection{Resolução }
-
-O sistema de equações diferenciais proposto por \cite{Panetta1996} para a modelagem do crescimento de tumores é composto por equações diferenciais ordinárias de primeira ordem não-lineares, devido à presença do expoente 2 nas variáveis dependentes. Assim, se faz necessária a utilização de métodos numéricos para a aproximação de sua solução, pois a não-linearidade torna a resolução analítica inviável.
-
-Diversas técnicas de resolução de equações diferenciais ordinárias estão disponíveis na literatura, possuindo variados níveis de estabilidade, convergência e complexidade. Entre as estratégias mais eminentes, se encontram o Método de Euler e os Métodos de Runge--Kutta, que consistem em generalizações do primeiro e tipicamente apresentam desempenho superior; entretanto, tal superioridade é acompanhada de uma maior dificuldade de análise e implementação \cite{Butcher2016}. Como os objetivos deste trabalho incluem o desenvolvimento de um simulador do crescimento de tumores malignos visando facilidade de compreensão, o Método de Euler foi selecionado para solucionar aproximadamente o conjunto de equações diferenciais.
+O sistema de equações diferenciais proposto por \cite{Panetta1996} para a modelagem do crescimento de tumores é composto por equações diferenciais ordinárias não-lineares, devido à presença
 
 % Aprofundar em relação aos modelos utilizados. Apresentar as equações detalhadamente, trazendo paralelos com a seção passada
 
