@@ -34,30 +34,30 @@
 \end{abstract}
 
 \begin{resumo}
-  O câncer é uma das principais causas de morte em diversos países, e prevê-se que o número de novos casos aumentará significativamente no futuro próximo. Neste contexto, a modelagem matemática da doença fornece uma plataforma para a realização de experimentações e a descoberta de novos conhecimentos quanto à seu comportamento através de meios computacionais, contornando a necessidade de utilização de materiais orgânicos. Assim, este trabalho buscou investigar modelos matemáticos de crescimento de tumores malignos, analisando-os tanto em relação à sua expressividade quanto à sua capacidade de representar fielmente o fenômeno real, levando em conta a construção de um simulador de fácil compreensão. % Terminar?
+  O câncer é uma das principais causas de morte em diversos países, e prevê-se que o número de novos casos aumentará significativamente no futuro próximo. Neste contexto, a modelagem matemática da doença fornece uma plataforma para a realização de experimentações e a descoberta de novos conhecimentos quanto à seu comportamento através de meios computacionais, contornando a necessidade de utilização de materiais orgânicos. Assim, este trabalho buscou investigar modelos matemáticos de crescimento de tumores malignos, analisando-os tanto em relação à sua expressividade quanto à sua capacidade de representar fielmente o fenômeno real, levando em conta a construção de um simulador de baixa complexidade. % Terminar?
 \end{resumo}
 
 \section{Introdução}
 
 O grupo de doenças conhecido como câncer é caracterizado pelo crescimento desinibido de células anormais em um organismo, possuindo a capacidade de invadir o sistema circulatório e se espalhar para órgãos distantes. Diversos fatores podem causar o surgimento do câncer, incluindo tanto hábitos e o estilo de vida individual quanto características genéticas. Mundialmente, o câncer (também chamado de tumor maligno ou neoplasia) é a segunda causa mais frequente de morte, sendo responsável pelo falecimento de aproximadamente 9 milhões de indivíduos no ano de 2015 \cite{WHO2017,ACS2017}.
 
-Para uma melhor disseminação das características gerais do câncer, foram propostos seis aspectos biológicos que juntos formam o princípio da diversidade de doenças neoplásicas, sendo adquiridas progressivamente durante o desenvolvimento do tumor. Elas são denominadas da seguinte maneira: autossuficiência em sinais estimuladores de crescimento (\textit{Sustaining Proliferative Signaling}), evasão de supressores de crescimento (\textit{Evading Growth Suppressors}), resistência a morte celular (\textit{Resisting Cell Death}), potencial ilimitado de multiplicação (\textit{Enabling Replicative Immortality}), estimulo à angiogênese (\textit{Inducing Angiogenesis}) e a invasão de outros tecidos e capacidade de fazer metástases (\textit{Activating invasion and metastasis}).
+Para uma melhor disseminação das características gerais do câncer, foram propostos seis aspectos biológicos que juntos formam o princípio da diversidade de doenças neoplásicas, sendo adquiridas progressivamente durante o desenvolvimento do tumor. Elas são denominadas da seguinte maneira \cite{Hanahan2011}:
 
 \begin{itemize}
-  \item Autossuficiência em Sinais Estimuladores de Crescimento: Possuir controle sobre sinais proliferativos e aumentar a frequência com que estes sinais são liberados.
-  \item Evasão de Supressores de Crescimento: Capacidade de evadir sistemas que regulam e limitam o crescimento celular.
-  \item Resistência a Morte Celular: Resistência a mecânismos naturais que resultam na morte celular.
-  \item Potencial ilimitado de multiplicação: Ignorar o estado de senescência e crise que induz a célula à um estado não reprodutivo e morte celular, respectivamente.
-  \item Indução à Angiogêneses:  Capacidade de criar novos vasos sanguíneos a fim de aumentar o recebimento de nutrientes e oxigênio.
-  \item Mecânismos de Invasão e Metástase: Propriedade metástica em um sub-grupo celular.\ldots
+  \item Autossuficiência em Sinais Estimuladores de Crescimento (\textit{Sustaining Proliferative Signaling}): possuir controle sobre sinais proliferativos e aumentar a frequência com que estes sinais são liberados;
+  \item Evasão de Supressores de Crescimento (\textit{Evading Growth Suppressors}): capacidade de ignorar sistemas que regulam e limitam o crescimento celular, mesmo quando existe alguma anormalidade na célula ou em seus arredores;
+  \item Resistência a Morte Celular (\textit{Resisting Cell Death}): resistência a mecânismos naturais que resultam na morte programada das células quando as mesmas são danificadas.
+  \item Potencial Ilimitado de Multiplicação (\textit{Enabling Replicative Immortality}): ignorar o estado de senescência e crise que induz a célula à um estado não reprodutivo e morte celular, respectivamente.
+  \item Indução da Angiogênese (\textit{Inducing Angiogenesis}): capacidade de criar novos vasos sanguíneos a fim de aumentar o recebimento de nutrientes e oxigênio.
+  \item Mecânismos de Invasão e Metástase (\textit{Activating Invasion and Metastasis}): Propriedade metástica em um sub-grupo celular.\ldots
 \end{itemize}
 
 %http://www.cell.com/cell/fulltext/S0092-8674(11)00127-9, https://drfelipeades.wordpress.com/2014/11/13/as-seis-principais-caracteristicas-do-cancer/
 
 % Falar sobre experimentações in vivo e as dificuldades. Ver Cancer Modeling and Simulation (e-mail Santana)
-Um ciclo ideal para afirmações do desenvolvimento citado nas pesquisas, faz-se necessário observações fenomenológicas, na qual toda teoria relatada é alterada para experiências de consciência. Cientistas em medicina biológica optam por abordagens inofensivas, onde são realizadas testes \textit{in vivo}, ou seja, ratos, embriões de frangos ou \textit{in vitro}. Os resultados das experiência observáveis, tanto por meios biológicos, matemáticos ou físicos, podem gerar modelos à fins de descrever padrões de comportamento.
+Um ciclo ideal para afirmações do desenvolvimento citado nas pesquisas, faz-se necessário observações fenomenológicas, na qual toda teoria relatada é alterada para experiências de consciência. Cientistas em medicina biológica optam por abordagens inofensivas, onde são realizadas testes \textit{in vivo}, ou seja, ratos, embriões de frangos ou \textit{in vitro}. Os resultados das experiências observáveis, tanto por meios biológicos, matemáticos ou físicos, podem gerar modelos à fins de descrever padrões de comportamento \cite{Preziosi2003}.
 
-Os atributos da pesquisa indicam referencias para soluções matematicas de comportamentos aprofundados do problema, logo, o retrato matematico pode ser implementado para gerar modelos \textit{in silico} do evento. Para que o modelo gerado seja aceitavel, a modelagem deve ter um certo grau de refino e precisão, portanto, deve haver ciclos de comparações entre as simulações do modelo matemático com os experimentos realizados em laboratório. As simulações inversas precisam concordar com as propriedades qualitativas da solução, caso contrário, o código numérico não é suficientemente preciso e que o teor as previsões precisam concordar com as experiências, caso contrário, o modelo matemático não é satisfatório.
+Os atributos da pesquisa indicam referencias para soluções matemáticas de comportamentos aprofundados do problema, logo, o retrato matemático pode ser implementado para gerar modelos \textit{in silico} do evento. Para que o modelo gerado seja aceitável, a modelagem deve ter um certo grau de refino e precisão, portanto, deve haver ciclos de comparações entre as simulações do modelo matemático com os experimentos realizados em laboratório. As simulações inversas precisam concordar com as propriedades qualitativas da solução, caso contrário, o código numérico não é suficientemente preciso e que o teor as previsões precisam concordar com as experiências, caso contrário, o modelo matemático não é satisfatório \cite{Preziosi2003}. % Esta?
 %COLOCAR A REFERENCIA  BIBLIOGRAFICA!
 
 % Falar sobre modelagem matemática em geral e de câncer. Ver artigos de survey
@@ -98,15 +98,21 @@ Neste trabalho, a modelagem de \cite{Panetta1996} foi selecionada para implement
 
 \section{Metodologia} \label{sec:methodology} % Alt: Modelos e métodos
 
-\subsection{Resolução }
+Para atingir os objetivos definidos neste trabalho, se fez necessária a construção de simulador computacional capaz de receber como parâmetros de entrada as variáveis do modelo adotado e gerar como saída um conjunto de triplas $(s, c, t)$, com $s$ representando o número de células saudáveis, $c$ representando o número de células cancerígenas (Equações~\ref{eq:normalgrowth} e \ref{eq:cancergrowth}) e $t$ representando o tempo decorrido em dias (com $t_{0} = 0$ e $t_{n} = T$ indicando os pontos de início e término da simulação, respectivamente). Assim, dois parâmetros adicionais de entrada $s_{0}$ e $c_{0}$ se tornam necessários para especificar as condições iniciais do sistema, caracterizando-o como um problema de valor inicial (P.V.I.). O intervalo de tempo entre dois registros é definido pela estratégia de resolução numérica do problema, descrito adiante na Subseção~\ref{sec:numerical}.
+
+\subsection{Resolução das equações diferenciais} \label{sec:numerical}
 
 O sistema de equações diferenciais proposto por \cite{Panetta1996} para a modelagem do crescimento de tumores é composto por equações diferenciais ordinárias de primeira ordem não-lineares, devido à presença do expoente 2 nas variáveis dependentes. Assim, se faz necessária a utilização de métodos numéricos para a aproximação de sua solução, pois a não-linearidade torna a resolução analítica inviável.
 
-Diversas técnicas de resolução de equações diferenciais ordinárias estão disponíveis na literatura, possuindo variados níveis de estabilidade, convergência e complexidade. Entre as estratégias mais eminentes, se encontram o Método de Euler e os Métodos de Runge--Kutta, que consistem em generalizações do primeiro e tipicamente apresentam desempenho superior; entretanto, tal superioridade é acompanhada de uma maior dificuldade de análise e implementação \cite{Butcher2016}. Como os objetivos deste trabalho incluem o desenvolvimento de um simulador do crescimento de tumores malignos visando facilidade de compreensão, o Método de Euler foi selecionado para solucionar aproximadamente o conjunto de equações diferenciais.
+Diversas técnicas de resolução de equações diferenciais ordinárias estão disponíveis na literatura, possuindo diversos níveis de estabilidade, precisão e complexidade. Entre as estratégias mais eminentes, se encontram o Método de Euler e os Métodos de Runge--Kutta, que consistem em generalizações do primeiro e tipicamente apresentam desempenho superior; entretanto, tal superioridade é acompanhada de uma maior dificuldade de análise e implementação \cite{Butcher2016}. Como os objetivos deste trabalho incluem o desenvolvimento de um simulador do crescimento de tumores malignos visando facilidade de compreensão, o Método de Euler foi selecionado para solucionar aproximadamente o conjunto de equações diferenciais.
+
+% Falar sobre como o método de Euler funciona (<= 2 parágrafos)
+
+\begin{equation}
+  x(t_{n+1}) = x(t_{n}) + h f(x) % Finalizar, não está pronto!
+\end{equation}
 
 % Aprofundar em relação aos modelos utilizados. Apresentar as equações detalhadamente, trazendo paralelos com a seção passada
-
-% Falar sobre discretização e o método de Euler (podemos pensar em Diferenças Finitas pra ter uma comparação)
 
 \section{Análise de resultados}
 
