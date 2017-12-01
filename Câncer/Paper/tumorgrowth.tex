@@ -70,9 +70,10 @@ O processo de modelagem dos modelos matemáticos do câncer demanda o conhecimen
 
 Este artigo é estruturado de forma que apresente uma introdução a doença e técnicas de modelagem da mesma, seguido de uma discussão sobre modelos já existentes e sobre o modelo implementado neste trabalho, por fim, expõe uma revisão bibliográfica sobre trabalhos relacionados.
 
-\section{Revisão bibliográfica} % Alt: Trabalhos relacionados
+\section{Revisão bibliográfica} \label{sec:relatedwork} % Alt: Trabalhos relacionados
 Durante todos estes anos de pesquisa, vários modelos matemáticos para o Câncer foram propostos,
 % Falar sobre alguns artigos relacionados, não necessariamente aqueles que acabamos utilizando. Citar outras abordagens além de equações diferenciais. Falar sobre crescimento logístico/Gompertz, etc. MUITAS citações nesta seção.
+% CITAR: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC52015/pdf/pnas01064-0099.pdf (Cornil 1991)
 % >= 1 página de conteúdo.
 % Modelo de Panetta
 
@@ -124,8 +125,11 @@ O Método de Euler consiste em uma estratégia simples e direta para a resoluç�
 
 % Falar sobre o simulador JS + p5
 
+\subsection{Validação}
 
-\section{Análise de resultados}
+Para verificar o nível de precisão do simulador proposto neste trabalho, foi realizada uma análise comparativa dos resultados gerados pelo sistema com o conjunto de experimentações \textit{in vitro} efetuado por \cite{Cornil1991}, as quais envolveram o estudo do crescimento de células de melanoma e interações entre células normais e cancerígenas. O trabalho dos autores foi apresentado com mais detalhes na Seção~\ref{sec:relatedwork}; subsequentemente, na Seção~\ref{sec:results}, os dados obtidos pelo simulador descrito no presente, juntamente com o conjunto de parâmetros que regem o sistema, serão dispostos de maneira a facilitar a comparação com as observações de \cite{Cornil1991}.
+
+\section{Análise de resultados} \label{sec:results}
 
 % Muitas tabelas e gráficos. Falar sobre semelhanças e diferenças. Comparar, analisar, descrever
 
