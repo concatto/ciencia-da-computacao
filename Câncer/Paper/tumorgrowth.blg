@@ -3,44 +3,44 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: tumorgrowth.aux
 The style file: sbc.bst
 Database file #1: tumorgrowth.bib
-You've used 7 entries,
+You've used 8 entries,
             1935 wiz_defined-function locations,
-            520 strings with 4840 characters,
-and the built_in function-call counts, 2372 in all, are:
-= -- 232
-> -- 81
-< -- 6
-+ -- 26
-- -- 26
-* -- 188
-:= -- 432
-add.period$ -- 21
-call.type$ -- 7
-change.case$ -- 46
-chr.to.int$ -- 7
-cite$ -- 7
-duplicate$ -- 90
-empty$ -- 171
-format.name$ -- 35
-if$ -- 454
+            529 strings with 5128 characters,
+and the built_in function-call counts, 2686 in all, are:
+= -- 262
+> -- 88
+< -- 7
++ -- 28
+- -- 28
+* -- 214
+:= -- 489
+add.period$ -- 24
+call.type$ -- 8
+change.case$ -- 52
+chr.to.int$ -- 8
+cite$ -- 8
+duplicate$ -- 104
+empty$ -- 197
+format.name$ -- 38
+if$ -- 515
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 7
-newline$ -- 38
-num.names$ -- 21
-pop$ -- 38
+missing$ -- 8
+newline$ -- 43
+num.names$ -- 24
+pop$ -- 41
 preamble$ -- 1
-purify$ -- 48
+purify$ -- 54
 quote$ -- 0
-skip$ -- 71
+skip$ -- 82
 stack$ -- 0
-substring$ -- 167
-swap$ -- 5
+substring$ -- 188
+swap$ -- 6
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 38
+type$ -- 44
 warning$ -- 0
-while$ -- 19
+while$ -- 22
 width$ -- 0
-write$ -- 89
+write$ -- 102

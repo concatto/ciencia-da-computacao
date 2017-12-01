@@ -6,6 +6,13 @@
 \newblock
   https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2017/cancer-facts-and-figures-2017.pdf.
 
+\bibitem[Berenbaum 1969]{Berenbaum1969}
+Berenbaum, M. (1969).
+\newblock Dose-response curves for agents that impair cell reproductive
+  integrity. a fundamental difference between dose-response curves of
+  antimetabolites and those for radiation and alkylating agents.
+\newblock {\em British journal of cancer}, 23(2):426.
+
 \bibitem[Butcher 2016]{Butcher2016}
 Butcher, J.~C. (2016).
 \newblock {\em Numerical methods for ordinary differential equations}.

@@ -85,11 +85,11 @@ Durante todos estes anos de pesquisa, vários modelos matemáticos para o Cânce
   \frac{\mathrm{d} c}{\mathrm{d} t} = r_{2} c \left ( 1 - \frac{c}{K} - \lambda_{1} s \right )
 \end{equation}
 
-\begin{equation}
+\begin{equation} \label{eq:normalchemo}
   s(np^{+}) = F_{1}(D) s(np^{-})
 \end{equation}
 
-\begin{equation}
+\begin{equation} \label{eq:cancerchemo}
   c(np^{+}) = F_{2}(D) c(np^{-})
 \end{equation}
 
@@ -99,7 +99,12 @@ Neste trabalho, a modelagem de \cite{Panetta1996} foi selecionada para implement
 
 \section{Metodologia} \label{sec:methodology} % Alt: Modelos e métodos
 
-Para atingir os objetivos definidos neste trabalho, se fez necessária a construção de simulador computacional capaz de receber como parâmetros de entrada as variáveis do modelo adotado e gerar como saída um conjunto de triplas $(s, c, t)$, com $s$ representando o número de células saudáveis, $c$ representando o número de células cancerígenas (Equações~\ref{eq:normalgrowth} e \ref{eq:cancergrowth}) e $t$ representando o tempo decorrido em dias (com $t_{0} = 0$ e $t_{n} = T$ indicando os pontos de início e término da simulação, respectivamente). Assim, dois parâmetros adicionais de entrada $s_{0}$ e $c_{0}$ se tornam necessários para especificar as condições iniciais do sistema, caracterizando-o como um problema de valor inicial (P.V.I.). O intervalo de tempo entre dois registros é definido pela estratégia de resolução numérica do problema, descrito adiante na Subseção~\ref{sec:numerical}.
+Para atingir os objetivos definidos neste trabalho, se fez necessária a construção de simulador computacional capaz de receber como parâmetros de entrada as variáveis do modelo adotado e gerar como saída um conjunto de triplas $(s, c, t)$, com $s$ representando o número de células saudáveis, $c$ representando o número de células cancerígenas (Equações~\ref{eq:normalgrowth} e \ref{eq:cancergrowth}) e $t$ representando o tempo decorrido em dias (com $t_{0} = 0$ e $t_{n} = T$ indicando os pontos de início e término da simulação, respectivamente).
+Assim, dois parâmetros adicionais de entrada $s_{0}$ e $c_{0}$ se tornam necessários para especificar as condições iniciais do sistema, caracterizando-o como um problema de valor inicial (P.V.I.). O intervalo de tempo entre dois registros é definido pela estratégia de resolução numérica do problema, descrita na Subseção~\ref{sec:numerical}.
+
+% Neste parágrafo estamos falando das três equações de Berenbaum 1969, então não será necessário enumerá-las na seção anterior
+Como foi descrito na Seção~\ref{sec:relatedwork}, o modelo adotado utiliza as Equações~\ref{eq:normalchemo} e \ref{eq:cancerchemo} para determinar a fração de células normais e cancerígenas sobreviventes após uma dose da medicação quimioterápica.
+Como escolhas para as funções $F_1$ e $F_2$, \cite{Berenbaum1969} propõe duas funções exponenciais e uma hiperbólica, com base em extensivas análises a partir de dados de experimentos \textit{in vivo}. Com o intuito de minimizar o número de parâmetros do modelo, a função $F(D) = e^{- \alpha D}$ será empregada tanto para $F_1$ e $F_2$, pois a mesma demandará dois parâmetros adicionais $\alpha_1$ e $\alpha_2$, enquanto as remanescentes demandariam quatro novos parâmetros.
 
 \subsection{Resolução das equações diferenciais} \label{sec:numerical}
 
@@ -121,17 +126,21 @@ O Método de Euler consiste em uma estratégia simples e direta para a resoluç�
 
 \noindent sendo que o parâmetro $h$ representa o \emph{tamanho do passo}, ou seja, o intervalo entre avaliações da função ($t_{n+1} - t_{n}$). Este parâmetro é responsável pela precisão do método; quanto mais reduzido for seu valor, menor será o erro em relação à solução exata da equação diferencial, porém maior será o esforço computacional necessário para efetuar a resolução do problema. No contexto deste trabalho, $h$ representará também o intervalo entre a criação dos registros de saída pelo simulador.
 
-\subsection{Construção do simulador} \label{sec:simulator}
+\subsection{Detalhamento do simulador} \label{sec:simulator}
 
-% Falar sobre o simulador JS + p5
+O simulador computacional descrito neste trabalho foi implementado utilizando a linguagem de programação JavaScript, incluindo também um módulo de interface gráfica desenvolvido com as linguagens de marcação HTML e CSS. Para realizar a atualização dinâmica da interface gráfica ao longo da simulação, a biblioteca \emph{p5.js} foi empregada, a qual é capaz de desenhar tanto formas geométricas bidimensionais simples quanto complexos modelos de três dimensões.
+
+% Falar sobre como é a representação da célula e etc.
 
 \subsection{Validação}
 
-Para verificar o nível de precisão do simulador proposto neste trabalho, foi realizada uma análise comparativa dos resultados gerados pelo sistema com o conjunto de experimentações \textit{in vitro} efetuado por \cite{Cornil1991}, as quais envolveram o estudo do crescimento de células de melanoma e interações entre células normais e cancerígenas. O trabalho dos autores foi apresentado com mais detalhes na Seção~\ref{sec:relatedwork}; subsequentemente, na Seção~\ref{sec:results}, os dados obtidos pelo simulador descrito no presente, juntamente com o conjunto de parâmetros que regem o sistema, serão dispostos de maneira a facilitar a comparação com as observações de \cite{Cornil1991}.
+Para verificar o nível de precisão do simulador proposto neste trabalho, foi realizada uma análise comparativa dos resultados gerados pelo sistema com o conjunto de experimentações \textit{in vitro} efetuado por \cite{Cornil1991}, as quais envolveram o estudo do crescimento de células de melanoma e interações entre células normais e cancerígenas. O trabalho dos autores foi apresentado com mais detalhes na Seção~\ref{sec:relatedwork}; subsequentemente, na Seção~\ref{sec:results}, os dados obtidos pelo simulador descrito no presente artigo, juntamente com o conjunto de parâmetros utilizados como entrada, serão dispostos de maneira a facilitar a comparação com as observações de \cite{Cornil1991}.
 
 \section{Análise de resultados} \label{sec:results}
 
 % Muitas tabelas e gráficos. Falar sobre semelhanças e diferenças. Comparar, analisar, descrever
+
+% Falar sobre a configuração do computador onde foram realizados os experimentos. Mencionar o tempo em relação a h!
 
 \section{Conclusões}
 
