@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.11.24)  30 NOV 2017 11:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.11.24)  1 DEC 2017 00:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -567,20 +567,20 @@ Underfull \hbox (badness 8094) in paragraph at lines 97--98
 <fig1.jpg, id=24, 254.3904pt x 232.2276pt>
 File: fig1.jpg Graphic file (type jpg)
 <use fig1.jpg>
-Package pdftex.def Info: fig1.jpg  used on input line 186. on input line 186.
-Package pdftex.def Info: Requested size: 213.39568pt x 194.81471pt on input line 186.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 187.
+Package pdftex.def Info: fig1.jpg  used on input line 150. on input line 150.
+Package pdftex.def Info: Requested size: 213.39568pt x 194.81471pt on input line 150.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 151.
  (/usr/share/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 187.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 151.
 <fig2.jpg, id=25, 205.7286pt x 234.1548pt>
 File: fig2.jpg Graphic file (type jpg)
 <use fig2.jpg>
-Package pdftex.def Info: fig2.jpg  used on input line 193. on input line 193.
-Package pdftex.def Info: Requested size: 128.0387pt x 145.73541pt on input line 193.
- [4] [5 <./fig1.jpg> <./fig2.jpg>] (./tumorgrowth.bbl
+Package pdftex.def Info: fig2.jpg  used on input line 157. on input line 157.
+Package pdftex.def Info: Requested size: 128.0387pt x 145.73541pt on input line 157.
+ [4 <./fig1.jpg>] (./tumorgrowth.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 4--8
 []\OT1/ptm/m/n/12 American Can-cer So-ci-ety (2017).  Can-cer facts & fi-gu-res 2017.
  []
@@ -595,20 +595,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 31--34
 []\OT1/ptm/m/n/12 World He-alth Or-ga-ni-za-tion (2017).  Can-cer fact sheet.
  []
 
-) [6] (./tumorgrowth.aux) ) 
+) [5 <./fig2.jpg>] (./tumorgrowth.aux) ) 
 Here is how much of TeX's memory you used:
  3468 strings out of 492985
  45946 string characters out of 6138637
- 122506 words of memory out of 5000000
+ 123508 words of memory out of 5000000
  6947 multiletter control sequences out of 15000+600000
  22662 words of font info for 46 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,9n,28p,965b,321s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on tumorgrowth.pdf (6 pages, 212200 bytes).
+Output written on tumorgrowth.pdf (5 pages, 210243 bytes).
 PDF statistics:
- 78 PDF objects out of 1000 (max. 8388607)
- 54 compressed objects within 1 object stream
+ 75 PDF objects out of 1000 (max. 8388607)
+ 52 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

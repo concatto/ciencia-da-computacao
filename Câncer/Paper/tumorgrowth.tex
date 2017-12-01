@@ -34,7 +34,7 @@
 \end{abstract}
 
 \begin{resumo}
-  O câncer é uma das principais causas de morte em diversos países, e prevê-se que o número de novos casos aumentará significativamente no futuro próximo. Neste contexto, a modelagem matemática da doença fornece uma plataforma para a realização de experimentações e a descoberta de novos conhecimentos quanto à seu comportamento através de meios computacionais, contornando a necessidade de utilização de materiais orgânicos. Assim, este trabalho buscou investigar modelos matemáticos de crescimento de tumores malignos, analisando-os tanto em relação à sua expressividade quanto à sua capacidade de representar fielmente o fenômeno real, levando em conta a construção de um simulador de baixa complexidade. % Terminar?
+  O câncer é uma das principais causas de morte em diversos países, e prevê-se que o número de novos casos aumentará significativamente no futuro próximo. Neste contexto, a modelagem matemática da doença fornece uma plataforma para a realização de experimentações e a descoberta de novos conhecimentos quanto à seu comportamento através de meios computacionais, contornando a necessidade de utilização de materiais orgânicos. Assim, este trabalho buscou investigar modelos matemáticos de crescimento de tumores malignos, analisando-os tanto em relação à sua expressividade quanto à sua capacidade de representar fielmente o fenômeno real, levando em conta a construção de um simulador de baixa complexidade. % Terminar melhor? (max 10 linhas)
 \end{resumo}
 
 \section{Introdução}
@@ -73,7 +73,7 @@ Este artigo é estruturado de forma que apresente uma introdução a doença e t
 \section{Revisão bibliográfica} % Alt: Trabalhos relacionados
 Durante todos estes anos de pesquisa, vários modelos matemáticos para o Câncer foram propostos,
 % Falar sobre alguns artigos relacionados, não necessariamente aqueles que acabamos utilizando. Citar outras abordagens além de equações diferenciais. Falar sobre crescimento logístico/Gompertz, etc. MUITAS citações nesta seção.
-
+% >= 1 página de conteúdo.
 % Modelo de Panetta
 
 \begin{equation} \label{eq:normalgrowth}
@@ -104,15 +104,26 @@ Para atingir os objetivos definidos neste trabalho, se fez necessária a constru
 
 O sistema de equações diferenciais proposto por \cite{Panetta1996} para a modelagem do crescimento de tumores é composto por equações diferenciais ordinárias de primeira ordem não-lineares, devido à presença do expoente 2 nas variáveis dependentes. Assim, se faz necessária a utilização de métodos numéricos para a aproximação de sua solução, pois a não-linearidade torna a resolução analítica inviável.
 
-Diversas técnicas de resolução de equações diferenciais ordinárias estão disponíveis na literatura, possuindo diversos níveis de estabilidade, precisão e complexidade. Entre as estratégias mais eminentes, se encontram o Método de Euler e os Métodos de Runge--Kutta, que consistem em generalizações do primeiro e tipicamente apresentam desempenho superior; entretanto, tal superioridade é acompanhada de uma maior dificuldade de análise e implementação \cite{Butcher2016}. Como os objetivos deste trabalho incluem o desenvolvimento de um simulador do crescimento de tumores malignos visando facilidade de compreensão, o Método de Euler foi selecionado para solucionar aproximadamente o conjunto de equações diferenciais.
+Diversas técnicas de resolução de equações diferenciais ordinárias estão disponíveis na literatura, possuindo diversos níveis de estabilidade, precisão e complexidade. Entre as estratégias mais eminentes, se encontram o Método de Euler e os Métodos de Runge--Kutta, que consistem em generalizações do primeiro e tipicamente apresentam desempenho superior; entretanto, tal superioridade é acompanhada de uma maior dificuldade de análise e implementação \cite{Butcher2016}. Como os objetivos deste trabalho incluem o desenvolvimento de um simulador do crescimento de tumores malignos visando facilidade de compreensão e codificação, o Método de Euler foi selecionado para solucionar aproximadamente o conjunto de equações diferenciais.
 
-% Falar sobre como o método de Euler funciona (<= 2 parágrafos)
+O Método de Euler consiste em uma estratégia simples e direta para a resolução de equações diferencias ordinárias, sendo baseado em repetidas avaliações da função característica da equação diferencial. Dado um problema de valor inicial da forma
 
 \begin{equation}
-  x(t_{n+1}) = x(t_{n}) + h f(x) % Finalizar, não está pronto!
+  \frac{\mathrm{d} y}{\mathrm{d} t} = f(y), \qquad y(t_{0}) = y_{0}
 \end{equation}
 
-% Aprofundar em relação aos modelos utilizados. Apresentar as equações detalhadamente, trazendo paralelos com a seção passada
+\noindent com $f(y)$ representando uma função qualquer da variável $y$ e $y_{0}$ indicando a condição inicial do problema, o Método de Euler pode ser formulado da seguinte maneira \cite{Butcher2016}:
+
+\begin{equation}
+  y(t_{n+1}) = y(t_{n}) + h f(y(t_{n}))
+\end{equation}
+
+\noindent sendo que o parâmetro $h$ representa o \emph{tamanho do passo}, ou seja, o intervalo entre avaliações da função ($t_{n+1} - t_{n}$). Este parâmetro é responsável pela precisão do método; quanto mais reduzido for seu valor, menor será o erro em relação à solução exata da equação diferencial, porém maior será o esforço computacional necessário para efetuar a resolução do problema. No contexto deste trabalho, $h$ representará também o intervalo entre a criação dos registros de saída pelo simulador.
+
+\subsection{Construção do simulador} \label{sec:simulator}
+
+% Falar sobre o simulador JS + p5
+
 
 \section{Análise de resultados}
 
@@ -126,54 +137,7 @@ Diversas técnicas de resolução de equações diferenciais ordinárias estão 
 
 % Apresentar sugestões para trabalhos futuros.
 
-All full papers and posters (short papers) submitted to some SBC conference,
-including any supporting documents, should be written in English or in
-Portuguese. The format paper should be A4 with single column, 3.5 cm for upper
-margin, 2.5 cm for bottom margin and 3.0 cm for lateral margins, without
-headers or footers. The main font must be Times, 12 point nominal size, with 6
-points of space before each paragraph. Page numbers must be suppressed.
-
-Full papers must respect the page limits defined by the conference.
-Conferences that publish just abstracts ask for \textbf{one}-page texts.
-
-\section{First Page} \label{sec:firstpage}
-
-The first page must display the paper title, the name and address of the
-authors, the abstract in English and ``resumo'' in Portuguese (``resumos'' are
-required only for papers written in Portuguese). The title must be centered
-over the whole page, in 16 point boldface font and with 12 points of space
-before itself. Author names must be centered in 12 point font, bold, all of
-them disposed in the same line, separated by commas and with 12 points of
-space after the title. Addresses must be centered in 12 point font, also with
-12 points of space after the authors' names. E-mail addresses should be
-written using font Courier New, 10 point nominal size, with 6 points of space
-before and 6 points of space after.
-
-The abstract and ``resumo'' (if is the case) must be in 12 point Times font,
-indented 0.8cm on both sides. The word \textbf{Abstract} and \textbf{Resumo},
-should be written in boldface and must precede the text.
-
-\section{CD-ROMs and Printed Proceedings}
-
-In some conferences, the papers are published on CD-ROM while only the
-abstract is published in the printed Proceedings. In this case, authors are
-invited to prepare two final versions of the paper. One, complete, to be
-published on the CD and the other, containing only the first page, with
-abstract and ``resumo'' (for papers in Portuguese).
-
-\section{Sections and Paragraphs}
-
-Section titles must be in boldface, 13pt, flush left. There should be an extra
-12 pt of space before each title. Section numbering is optional. The first
-paragraph of each section should not be indented, while the first lines of
-subsequent paragraphs should be indented by 1.27 cm.
-
-\subsection{Subsections}
-
-The subsection titles must be in boldface, 12pt, flush left.
-
 \section{Figures and Captions}\label{sec:figs}
-
 
 Figure and table captions should be centered if less than one line
 (Figure~\ref{fig:exampleFig1}), otherwise justified and indented by 0.8cm on
@@ -230,14 +194,6 @@ internet, etc.). The image resolution on paper should be about 600 dpi for
 black-and-white images, and 150-300 dpi for grayscale images.  Do not include
 images with excessive resolution, as they may take hours to print, without any
 visible difference in the result.
-
-\section{References}
-
-The references must be listed using 12 point font size, with 6 points of space
-before each reference. The first line of each reference should not be
-indented, while the subsequent should be indented by 0.5 cm.
-
-
 
 \bibliographystyle{sbc}
 \bibliography{tumorgrowth}

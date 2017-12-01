@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex tumorgrowth"] 1512048523 "tumorgrowth.aux" "tumorgrowth.bbl" "tumorgrowth" 1512048523
+["bibtex tumorgrowth"] 1512096982 "tumorgrowth.aux" "tumorgrowth.bbl" "tumorgrowth" 1512097098
   "./sbc.bst" 1412946846 21864 a668496cca21cfdd211f7fb5f0d57565 ""
-  "tumorgrowth.aux" 1512048523 2551 6ffaf5bd1ae6ec78e081921ad19b4540 ""
+  "tumorgrowth.aux" 1512097098 2283 fd9a89bd206a87a852baa7ddf8ebaee8 ""
   "tumorgrowth.bib" 1512047452 3331 25fc495e42475e882dc3c875452943d2 ""
   (generated)
   "tumorgrowth.blg"
   "tumorgrowth.bbl"
-["pdflatex"] 1512048523 "tumorgrowth.tex" "tumorgrowth.pdf" "tumorgrowth" 1512048523
+["pdflatex"] 1512097097 "tumorgrowth.tex" "tumorgrowth.pdf" "tumorgrowth" 1512097098
   "/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1510784367 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1510784337 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1510784341 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -98,10 +98,10 @@
   "fig1.jpg" 1412946846 39933 79da1f77b4599c71378d76c4aec374c6 ""
   "fig2.jpg" 1412946846 22945 a28e60c395d91384d9e32be051b6cd94 ""
   "sbc-template.sty" 1412946846 5285 fb8f2a32de10fa23e40f15acd9749a09 ""
-  "tumorgrowth.aux" 1512048523 2551 6ffaf5bd1ae6ec78e081921ad19b4540 ""
-  "tumorgrowth.bbl" 1512048523 1240 365c72c3a831f6e6085064c1284c73d7 "bibtex tumorgrowth"
-  "tumorgrowth.tex" 1512048519 15479 2636b49a3ad1cc59dffffe3648b17606 ""
+  "tumorgrowth.aux" 1512097098 2283 fd9a89bd206a87a852baa7ddf8ebaee8 ""
+  "tumorgrowth.bbl" 1512096982 1240 365c72c3a831f6e6085064c1284c73d7 "bibtex tumorgrowth"
+  "tumorgrowth.tex" 1512097097 13929 4e173f56ba64322237aeb9af8511bcd4 ""
   (generated)
   "tumorgrowth.pdf"
-  "tumorgrowth.aux"
   "tumorgrowth.log"
+  "tumorgrowth.aux"
