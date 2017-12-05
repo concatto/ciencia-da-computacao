@@ -186,11 +186,13 @@ A linguagem de programação JavaScript não oferece nenhum suporte para a execu
   $t \leftarrow t + h$ \;
 \end{algorithm}
 
-O Algoritmo~\ref{alg:update} explicita as mudanças aplicadas sobre as variáveis do modelo, abstraindo as equações utilizadas, as quais já foram definidas anteriormente. As primeiras duas e as últimas três instruções demonstram a aplicação do Método de Euler, com as mudanças nas variáveis ($\Delta s$ e $\Delta c$) sendo computadas no início para serem posteriormente adicionadas à quantidade total de células. As variáveis $Z_s$ e $Z_c$ são utilizadas para controlar a quantidade de células desenhadas, pois é necessário converter os deltas para valores inteiros.
+O Algoritmo~\ref{alg:update} explicita as mudanças aplicadas sobre as variáveis do modelo, abstraindo as equações utilizadas, as quais já foram definidas anteriormente. As primeiras duas e as últimas três instruções demonstram a aplicação do Método de Euler, com as mudanças nas variáveis ($\Delta s$ e $\Delta c$) sendo computadas no início para serem posteriormente adicionadas à quantidade total de células. As variáveis $Z_s$ e $Z_c$ são utilizadas para controlar a quantidade de células desenhadas; como tal procedimento exige a conversão dos deltas para valores inteiros, as partes fracionárias devem ser acumuladas para que eventualmente possam contribuir para a atualização do número de células.
 
 \subsection{Validação}
 
 Para verificar o nível de precisão do simulador proposto neste trabalho, foi realizada uma análise comparativa dos resultados gerados pelo sistema com o conjunto de experimentações \textit{in vitro} efetuado por \cite{Cornil1991}, as quais envolveram o estudo do crescimento de células de melanoma e interações entre células normais e cancerígenas. O trabalho dos autores foi apresentado com mais detalhes na Seção~\ref{sec:relatedwork}; subsequentemente, na Seção~\ref{sec:results}, os dados obtidos pelo simulador descrito no presente artigo, juntamente com o conjunto de parâmetros utilizados como entrada, serão dispostos de maneira a facilitar a comparação com as observações de \cite{Cornil1991}.
+
+Adicionalmente, com a intenção de avaliar a efetividade da aproximação do Método de Euler, o módulo de resolução de equações diferenciais do motor computacional \emph{Wolfram|Alpha} foi utilizado para obter resultados externos referentes às equações utilizadas neste trabalho. Para tal, foi necessário desconsiderar os fatores de competição, pois a ferramenta não oferece suporte para a resolução de sistemas de equações diferenciais; além disso, a quimioterapia também teve de ser eliminada deste teste, pois a ferramenta também não oferece uma forma de lidar com alterações periódicas na função.
 
 \section{Análise de resultados} \label{sec:results}
 
