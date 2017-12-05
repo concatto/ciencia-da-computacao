@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 
 \usepackage{sbc-template}
-
+\usepackage[ruled,vlined]{algorithm2e}
 \usepackage{graphicx,url}
 
 \usepackage[brazil]{babel}
@@ -78,15 +78,15 @@ Durante todos estes anos de pesquisa, vários modelos matemáticos para o Cânce
 % CITAR: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC52015/pdf/pnas01064-0099.pdf (Cornil 1991)
 % >= 1 página de conteúdo.
 % Modelo de Panetta
-%FAZER A CITAÇÃO NO X kkk
-Estudos feitos por (X) avaliam os resultados da influencia de fibroblastos dermicos normais nas celulas de melanomas de humanos obtidas em diferentes estágios do progresso do tumor. Foi descoberto, por experimentos em vitro, que a maioria de linhas de melanomas derivadas do inicio do estagio da fase de crescimento radial ou metaestático são reprimidas por fibroblastos dermicos normais, insinuando que o cresimento homeostático negativo ainda estão operantes nas celulas melanomas dos estagios iniciais da doença. Entretanto, cerca de 80\% da celulas melanomas derivada da metastase já avançada, foram estimadas o crescimento consistente para crescerem na presença de fibroblastos dermicos. Logo, o conjuntos de resultados obtidos indicam que fibroblastos poder tem efeitos de crescimento antieticos e inesperados em tumores.
+%FAZER A CITAÇÃO NO X kkk --feito!
+Estudos feitos por \cite{Cornil1991} avaliam os resultados da influencia de fibroblastos dermicos normais nas celulas de melanomas de humanos obtidas em diferentes estágios do progresso do tumor. Foi descoberto, por experimentos em vitro, que a maioria de linhas de melanomas derivadas do inicio do estagio da fase de crescimento radial ou metaestático são reprimidas por fibroblastos dermicos normais, insinuando que o cresimento homeostático negativo ainda estão operantes nas celulas melanomas dos estagios iniciais da doença. Entretanto, cerca de 80\% da celulas melanomas derivada da metastase já avançada, foram estimadas o crescimento consistente para crescerem na presença de fibroblastos dermicos. Logo, o conjuntos de resultados obtidos indicam que fibroblastos poder tem efeitos de crescimento antieticos e inesperados em tumores.
 
 \begin{equation} \label{eq:normalgrowth}
-  \frac{\mathrm{d} s}{\mathrm{d} t} = r_{1} s \left ( 1 - \frac{s}{K} - \lambda_{1} c \right )
+  \frac{\mathrm{d} s}{\mathrm{d} t} = r_{1} s \left ( 1 - \frac{s}{K_1} - \lambda_{1} c \right )
 \end{equation}
 
 \begin{equation} \label{eq:cancergrowth}
-  \frac{\mathrm{d} c}{\mathrm{d} t} = r_{2} c \left ( 1 - \frac{c}{K} - \lambda_{1} s \right )
+  \frac{\mathrm{d} c}{\mathrm{d} t} = r_{2} c \left ( 1 - \frac{c}{K_2} - \lambda_{2} s \right )
 \end{equation}
 
 \begin{equation} \label{eq:normalchemo}
@@ -96,6 +96,8 @@ Estudos feitos por (X) avaliam os resultados da influencia de fibroblastos dermi
 \begin{equation} \label{eq:cancerchemo}
   c(np^{+}) = F_{2}(D) c(np^{-})
 \end{equation}
+
+% p: período entre doses
 
 % Falar de alguns modelos mais obscuros como sistemas multiagentes e equações diferenciais parciais.
 
@@ -108,11 +110,11 @@ Assim, dois parâmetros adicionais de entrada $s_{0}$ e $c_{0}$ se tornam necess
 
 % Neste parágrafo estamos falando das três equações de Berenbaum 1969, então não será necessário enumerá-las na seção anterior
 Como foi descrito na Seção~\ref{sec:relatedwork}, o modelo adotado utiliza as Equações~\ref{eq:normalchemo} e \ref{eq:cancerchemo} para determinar a fração de células normais e cancerígenas sobreviventes após uma dose da medicação quimioterápica.
-Como escolhas para as funções $F_1$ e $F_2$, \cite{Berenbaum1969} propõe duas funções exponenciais e uma hiperbólica, com base em extensivas análises a partir de dados de experimentos \textit{in vivo}. Com o intuito de minimizar o número de parâmetros do modelo, a função $F(D) = e^{- \alpha D}$ será empregada tanto para $F_1$ e $F_2$, pois a mesma demandará dois parâmetros adicionais $\alpha_1$ e $\alpha_2$, enquanto as remanescentes demandariam quatro novos parâmetros.
+Como escolhas para as funções $F_1$ e $F_2$, \cite{Berenbaum1969} propõe duas funções exponenciais e uma hiperbólica, com base em extensivas análises a partir de dados de experimentos \textit{in vivo}. Com o intuito de minimizar o número de parâmetros do modelo, a função exponencial $F(D) = e^{- \alpha D}$ será empregada tanto para $F_1$ e $F_2$, pois a mesma demandará dois parâmetros adicionais $\alpha_1$ e $\alpha_2$, enquanto as remanescentes demandariam quatro novos parâmetros.
 
 \subsection{Resolução das equações diferenciais} \label{sec:numerical}
 
-O sistema de equações diferenciais proposto por \cite{Panetta1996} para a modelagem do crescimento de tumores é composto por equações diferenciais ordinárias de primeira ordem não-lineares, devido à presença do expoente 2 nas variáveis dependentes. Assim, se faz necessária a utilização de métodos numéricos para a aproximação de sua solução, pois a não-linearidade torna a resolução analítica inviável.
+O sistema de equações diferenciais proposto por \cite{Panetta1996} para a modelagem do crescimento de tumores é composto por equações diferenciais ordinárias de primeira ordem não-lineares, devido à presença do expoente 2 nas variáveis dependentes, como pode ser verificado no termo $s(s / K_1)$ na Equação~\ref{eq:normalgrowth}. Assim, se faz necessária a utilização de métodos numéricos para a aproximação de sua solução, pois a não-linearidade torna a resolução analítica inviável.
 
 Diversas técnicas de resolução de equações diferenciais ordinárias estão disponíveis na literatura, possuindo diversos níveis de estabilidade, precisão e complexidade. Entre as estratégias mais eminentes, se encontram o Método de Euler e os Métodos de Runge--Kutta, que consistem em generalizações do primeiro e tipicamente apresentam desempenho superior; entretanto, tal superioridade é acompanhada de uma maior dificuldade de análise e implementação \cite{Butcher2016}. Como os objetivos deste trabalho incluem o desenvolvimento de um simulador do crescimento de tumores malignos visando facilidade de compreensão e codificação, o Método de Euler foi selecionado para solucionar aproximadamente o conjunto de equações diferenciais.
 
@@ -132,9 +134,60 @@ O Método de Euler consiste em uma estratégia simples e direta para a resoluç�
 
 \subsection{Detalhamento do simulador} \label{sec:simulator}
 
-O simulador computacional descrito neste trabalho foi implementado utilizando a linguagem de programação JavaScript, incluindo também um módulo de interface gráfica desenvolvido com as linguagens de marcação HTML e CSS. Para realizar a atualização dinâmica da interface gráfica ao longo da simulação, a biblioteca \emph{p5.js} foi empregada, a qual é capaz de desenhar tanto formas geométricas bidimensionais simples quanto complexos modelos de três dimensões.
+O simulador computacional descrito neste trabalho foi implementado utilizando a linguagem de programação JavaScript, incluindo também um módulo de interface gráfica desenvolvido com as linguagens de marcação HTML e CSS. Para realizar a atualização dinâmica da interface gráfica ao longo da simulação, a biblioteca \emph{p5.js} foi empregada, a qual é capaz de desenhar tanto formas geométricas bidimensionais simples quanto complexos modelos de três dimensões. Na ferramenta construída, células normais foram representadas por círculos de cor verde, enquanto células cancerígenas foram caracterizadas por cículos em tons de vermelho.
 
-% Falar sobre como é a representação da célula e etc.
+A linguagem de programação JavaScript não oferece nenhum suporte para a execução de código de maneira paralela (\textit{multithreaded}); portanto, os procedimentos de atualização das variáveis do modelo e o desenho das entidades gráficas devem obrigatoriamente ocorrer de modo serial, no mesmo contexto de execução. A biblioteca \emph{p5.js} invoca continuamente uma função de nome \emph{draw()}, a qual é definida pelo desenvolvedor, para atualizar o estado do programa e, por fim, a própria tela. O Algoritmo~\ref{alg:update} apresenta o procedimento de atualização implementado neste trabalho.
+
+\begin{algorithm}[h]
+  \small
+  \DontPrintSemicolon
+  \caption{Atualização do Estado do Simulador}
+  \label{alg:update}
+  \SetKwInOut{Input}{Input}
+ \Input{$G(V,E)$, $\lambda$}
+
+  $\Delta s \leftarrow h * crescimentoNormal(s, c)$ \; \tcc*[r]{Equação~\ref{eq:normalgrowth}}
+  $\Delta c \leftarrow h * crescimentoCancerigeno(c, s)$ \; \tcc*[r]{Equação~\ref{eq:cancergrowth}}
+  \BlankLine
+
+  \If{$t \geq n * p$}{
+    \tcp{Calcula quantas células morreram com a dose}
+    $(M_s, M_c) \leftarrow aplicarQuimioterapia(s, c)$ \; \tcc*[r]{Equações~\ref{eq:normalchemo} e \ref{eq:cancerchemo}}
+    \BlankLine
+
+    $\Delta s \leftarrow \Delta s - M_s$ \;
+    $\Delta c \leftarrow \Delta c - M_c$ \;
+    \BlankLine
+
+    $n \leftarrow n + 1$ \;
+  }
+  \BlankLine
+
+  $Z_s \leftarrow Z_s + \Delta s$ \;
+  $Z_c \leftarrow Z_c + \Delta c$ \;
+  \BlankLine
+
+  $I_s \leftarrow floor(Z_s)$ \;
+  $I_c \leftarrow floor(Z_c)$ \;
+  \BlankLine
+
+  \tcp{Cria células se os valores forem positivos}
+  \tcp{e remove caso contrário}
+  $atualizarCelulas(I_s, I_c)$\;
+  \BlankLine
+
+  $Z_s \leftarrow Z_s - I_s$ \;
+  $Z_c \leftarrow Z_c - I_c$ \;
+  \BlankLine
+
+  $s \leftarrow s + \Delta s$ \;
+  $c \leftarrow c + \Delta c$ \;
+  \BlankLine
+
+  $t \leftarrow t + h$ \;
+\end{algorithm}
+
+% Explicar com mais detalhes
 
 \subsection{Validação}
 
