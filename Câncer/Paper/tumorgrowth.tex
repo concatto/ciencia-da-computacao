@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 
 \usepackage{sbc-template}
-\usepackage[ruled,vlined]{algorithm2e}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
 \usepackage{graphicx,url}
 
 \usepackage[brazil]{babel}
@@ -72,7 +72,7 @@ O processo de criação dos modelos matemáticos do câncer é extremamente comp
 Este artigo é estruturado de forma que apresente uma introdução a doença e técnicas de modelagem da mesma, seguido de uma discussão sobre modelos já existentes e sobre o modelo implementado neste trabalho, por fim, expõe uma revisão bibliográfica sobre trabalhos relacionados.
 
 \section{Revisão bibliográfica} \label{sec:relatedwork} % Alt: Trabalhos relacionados
-Durante todos estes anos de pesquisa, vários modelos matemáticos para o Câncer foram propostos, 
+Durante todos estes anos de pesquisa, vários modelos matemáticos para o Câncer foram propostos,
 
 % Falar sobre alguns artigos relacionados, não necessariamente aqueles que acabamos utilizando. Citar outras abordagens além de equações diferenciais. Falar sobre crescimento logístico/Gompertz, etc. MUITAS citações nesta seção.
 Um dos modelos adotados foi o modelo de Gompertz, no qual é denominado um modelo de serie temporal e função sigmoide(função matemática com forma de S), aonde o crescimento é mais lento no início e no final da curva. (...Falar mais sobre o que é e o que faz e (logistico)). Existem dois tipos principais de modelos Gompertz, o primeiro modelo, um único parametro controla o tempo, e no segundo modelo um único parâmentro controla o valor inicial para a curva. %não sei se coloco isso(sobre 1º e 2º modelo de Gompertz)
@@ -82,7 +82,7 @@ Um dos modelos adotados foi o modelo de Gompertz, no qual é denominado um model
 % Modelo de Panetta
 %FAZER A CITAÇÃO NO X kkk --feito!
 
-Estudos feitos por \cite{Cornil1991} avaliam os resultados da influência de fibroblastos dérmicos normais nas células de melanomas de humanos obtidas em diferentes estágios do progresso do tumor. Foi descoberto, por experimentos \textit{in vitro}, que a maioria das linhas de melanomas derivadas do início do estágio da fase de crescimento radial ou metaestático são reprimidas por fibroblastos dérmicos normais, insinuando que o cresimento homeostático negativo ainda estão operantes nas células melanomas dos estágios iniciais da doença. Entretanto, cerca de 80\% da células melanomas derivada da metástase já avançada, foram estimadas o crescimento consistente na presença de fibroblastos dérmicos. Logo, o conjuntos de resultados obtidos indicam que fibroblastos podem ter efeitos de crescimento antiéticos e inesperados em tumores.
+Estudos feitos por \cite{Cornil1991} avaliam os resultados da influência de fibroblastos dérmicos normais nas células de melanomas de humanos obtidos em diferentes estágios do progresso do tumor. Foi descoberto, por experimentos \textit{in vitro}, que a maioria das linhas de melanomas derivadas do início do estágio da fase de crescimento radial ou metaestático são reprimidas por fibroblastos dérmicos normais, insinuando que o cresimento homeostático negativo ainda estão operantes nas células melanomas dos estágios iniciais da doença. Entretanto, cerca de 80\% da células melanomas derivada da metástase já avançada, foram estimadas o crescimento consistente na presença de fibroblastos dérmicos. Logo, o conjuntos de resultados obtidos indicam que fibroblastos podem ter efeitos de crescimento antiéticos e inesperados em tumores.
 
 \begin{equation} \label{eq:normalgrowth}
   \frac{\mathrm{d} s}{\mathrm{d} t} = r_{1} s \left ( 1 - \frac{s}{K_1} - \lambda_{1} c \right )
@@ -144,18 +144,18 @@ A linguagem de programação JavaScript não oferece nenhum suporte para a execu
 \begin{algorithm}[h]
   \small
   \DontPrintSemicolon
-  \caption{Atualização do Estado do Simulador}
+  \caption{draw() - Atualização do Estado do Simulador}
   \label{alg:update}
   \SetKwInOut{Input}{Input}
  \Input{$G(V,E)$, $\lambda$}
 
-  $\Delta s \leftarrow h * crescimentoNormal(s, c)$ \; \tcc*[r]{Equação~\ref{eq:normalgrowth}}
-  $\Delta c \leftarrow h * crescimentoCancerigeno(c, s)$ \; \tcc*[r]{Equação~\ref{eq:cancergrowth}}
+  $\Delta s \leftarrow h * crescimentoNormal(s, c)$  \tcc*[r]{Equação~\ref{eq:normalgrowth}} \;
+  $\Delta c \leftarrow h * crescimentoCancerigeno(c, s)$  \tcc*[r]{Equação~\ref{eq:cancergrowth}} \;
   \BlankLine
 
-  \If{$t \geq n * p$}{
+  \If{$t > n * p$}{
     \tcp{Calcula quantas células morreram com a dose}
-    $(M_s, M_c) \leftarrow aplicarQuimioterapia(s, c)$ \; \tcc*[r]{Equações~\ref{eq:normalchemo} e \ref{eq:cancerchemo}}
+    $(M_s, M_c) \leftarrow aplicarQuimioterapia(s, c)$ \tcc*[r]{Equações~\ref{eq:normalchemo} e \ref{eq:cancerchemo}} \;
     \BlankLine
 
     $\Delta s \leftarrow \Delta s - M_s$ \;
@@ -170,17 +170,13 @@ A linguagem de programação JavaScript não oferece nenhum suporte para a execu
   $Z_c \leftarrow Z_c + \Delta c$ \;
   \BlankLine
 
-  $I_s \leftarrow floor(Z_s)$ \;
-  $I_c \leftarrow floor(Z_c)$ \;
-  \BlankLine
-
   \tcp{Cria células se os valores forem positivos}
   \tcp{e remove caso contrário}
-  $atualizarCelulas(I_s, I_c)$\;
+  $atualizarCelulas(floor(Z_s), floor(Z_c))$\;
   \BlankLine
 
-  $Z_s \leftarrow Z_s - I_s$ \;
-  $Z_c \leftarrow Z_c - I_c$ \;
+  $Z_s \leftarrow Z_s - floor(Z_s)$ \;
+  $Z_c \leftarrow Z_c - floor(Z_c)$ \;
   \BlankLine
 
   $s \leftarrow s + \Delta s$ \;
@@ -190,7 +186,7 @@ A linguagem de programação JavaScript não oferece nenhum suporte para a execu
   $t \leftarrow t + h$ \;
 \end{algorithm}
 
-% Explicar com mais detalhes
+O Algoritmo~\ref{alg:update} explicita as mudanças aplicadas sobre as variáveis do modelo, abstraindo as equações utilizadas, as quais já foram definidas anteriormente. As primeiras duas e as últimas três instruções demonstram a aplicação do Método de Euler, com as mudanças nas variáveis ($\Delta s$ e $\Delta c$) sendo computadas no início para serem posteriormente adicionadas à quantidade total de células. As variáveis $Z_s$ e $Z_c$ são utilizadas para controlar a quantidade de células desenhadas, pois é necessário converter os deltas para valores inteiros.
 
 \subsection{Validação}
 
