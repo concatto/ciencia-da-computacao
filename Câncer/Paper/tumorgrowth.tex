@@ -34,7 +34,7 @@
 \end{abstract}
 
 \begin{resumo}
-  O câncer é uma das principais causas de morte em diversos países, e prevê-se que o número de novos casos aumentará significativamente no futuro próximo. Neste contexto, a modelagem matemática da doença fornece uma plataforma para a realização de experimentações e a descoberta de novos conhecimentos quanto à seu comportamento através de meios computacionais, contornando a necessidade de utilização de materiais orgânicos. Assim, este trabalho buscou investigar modelos matemáticos de crescimento de tumores malignos, analisando-os tanto em relação à sua expressividade quanto à sua capacidade de representar fielmente o fenômeno real, levando em conta a construção de um simulador de baixa complexidade. % Terminar melhor? (max 10 linhas)
+  O câncer é uma das principais causas de morte em diversos países, e prevê-se que o número de novos casos aumentará significativamente no futuro próximo. Neste contexto, a modelagem matemática da doença fornece uma plataforma para a realização de experimentações e a descoberta de novos conhecimentos quanto à seu comportamento através de meios computacionais, contornando a necessidade de utilização de materiais orgânicos. Assim, este trabalho buscou investigar modelos matemáticos de crescimento de tumores malignos, analisando-os tanto em relação à sua expressividade quanto à sua capacidade de representar fielmente o fenômeno real, levando em conta a construção de um simulador de complexidade limitada. % Terminar melhor? (max 10 linhas)
 \end{resumo}
 
 \section{Introdução}
@@ -69,7 +69,7 @@ O processo de criação dos modelos matemáticos do câncer é extremamente comp
 
 % Aprofundar para o contexto do artigo, falando sobre o objetivo e apresentar seções (separar parágrafos se ficar grande).
 
-Este artigo é estruturado de forma que apresente uma introdução a doença e técnicas de modelagem da mesma, seguido de uma discussão sobre modelos já existentes e sobre o modelo implementado neste trabalho, por fim, expõe uma revisão bibliográfica sobre trabalhos relacionados.
+Este artigo é estruturado da seguinte maneira: a Seção~\ref{sec:relatedwork} apresenta alguns trabalhos relacionados ao presente, apontando algumas das abordagens discutidas na literatura sobre a modelagem matemática do crescimento de tumores malignos; na sequência, a Seção~\ref{sec:methodology} apresenta a metodologia adotada para a construção do simulador proposto neste trabalho, explorando detalhes da implementação computacional do mesmo; subsequentemente, a Seção~\ref{sec:results} descreve e analisa os resultados obtidos através da utilização do simulador, relacionando-os com dados provenientes de outras investigações; por fim, a seção~\ref{sec:conclusions} discute sobre algumas conclusões extraídas a partir dos resultados coletados e da análise comparativa, além de comentar sobre os objetivos atingidos e sobre oportunidades para aprimoramentos.
 
 \section{Revisão bibliográfica} \label{sec:relatedwork} % Alt: Trabalhos relacionados
 Durante todos estes anos de pesquisa, vários modelos matemáticos para o Câncer foram propostos,
@@ -108,7 +108,7 @@ Neste trabalho, a modelagem de \cite{Panetta1996} foi selecionada para implement
 
 \section{Metodologia} \label{sec:methodology} % Alt: Modelos e métodos
 
-Para atingir os objetivos definidos neste trabalho, se fez necessária a construção de simulador computacional capaz de receber como parâmetros de entrada as variáveis do modelo adotado e gerar como saída um conjunto de triplas $(s, c, t)$, com $s$ representando o número de células saudáveis, $c$ representando o número de células cancerígenas (Equações~\ref{eq:normalgrowth} e \ref{eq:cancergrowth}) e $t$ representando o tempo decorrido em dias (com $t_{0} = 0$ e $t_{n} = T$ indicando os pontos de início e término da simulação, respectivamente).
+Para atingir os objetivos definidos neste trabalho, se fez necessária a construção de um simulador computacional capaz de receber como parâmetros de entrada as variáveis do modelo adotado e gerar como saída um conjunto de triplas $(s, c, t)$, com $s$ representando o número de células saudáveis, $c$ representando o número de células cancerígenas (Equações~\ref{eq:normalgrowth} e \ref{eq:cancergrowth}) e $t$ representando o tempo decorrido em dias (com $t_{0} = 0$ e $t_{n} = T$ indicando os pontos de início e término da simulação, respectivamente).
 Assim, dois parâmetros adicionais de entrada $s_{0}$ e $c_{0}$ se tornam necessários para especificar as condições iniciais do sistema, caracterizando-o como um problema de valor inicial (P.V.I.). O intervalo de tempo entre dois registros é definido pela estratégia de resolução numérica do problema, descrita na Subseção~\ref{sec:numerical}.
 
 % Neste parágrafo estamos falando das três equações de Berenbaum 1969, então não será necessário enumerá-las na seção anterior
@@ -187,7 +187,7 @@ A linguagem de programação JavaScript não oferece nenhum suporte para a execu
   $t \leftarrow t + h$ \;
 \end{algorithm}
 
-O Algoritmo~\ref{alg:update} explicita as mudanças aplicadas sobre as variáveis do modelo, abstraindo as equações utilizadas, as quais foram previamente definidas. As primeiras duas e as últimas três instruções demonstram a aplicação do Método de Euler, com as mudanças nas variáveis ($\Delta s$ e $\Delta c$) sendo computadas no início para serem posteriormente adicionadas à quantidade total de células. As variáveis $Z_s$ e $Z_c$, inicializadas com zero, são utilizadas para controlar a quantidade de células desenhadas; como tal procedimento exige a conversão dos deltas para valores inteiros, as partes fracionárias devem ser acumuladas para que eventualmente possam contribuir para a atualização do número de células. % Falar sobre quimioterapia
+O Algoritmo~\ref{alg:update} explicita as mudanças aplicadas sobre as variáveis do modelo, abstraindo as equações utilizadas pelo modelo (definidas na Seção~\ref{sec:relatedwork}). As primeiras duas e as últimas três instruções demonstram a aplicação do Método de Euler, com as mudanças nas variáveis ($\Delta s$ e $\Delta c$) sendo computadas no início para serem posteriormente adicionadas à quantidade total de células. As variáveis $Z_s$ e $Z_c$, inicializadas com zero, são utilizadas para controlar a quantidade de células desenhadas; como tal procedimento exige a conversão dos deltas para valores inteiros, as partes fracionárias devem ser acumuladas para que eventualmente possam contribuir para a atualização do número de células. A função responsável por aplicar a quimioterapia recebe a quantidade de células normais e cancerígenas como entrada e retorna o número de células de ambos os tipos que foram mortas pela dose ($M_s$ e $M_c$). Por fim, o procedimento de atualização do número de células aceita a mudança inteira do número de células por parâmetro e cria ou remove células do respectivo tipo, com base no sinal do valor recebido.
 
 \subsection{Validação}
 
@@ -201,7 +201,7 @@ Adicionalmente, com a intenção de avaliar a efetividade da aproximação do M�
 
 % Falar sobre a configuração do computador onde foram realizados os experimentos. Mencionar o tempo em relação a h!
 
-\section{Conclusões}
+\section{Conclusões} \label{sec:conclusions}
 
 % Falar brevemente sobre tudo que fizemos.
 
