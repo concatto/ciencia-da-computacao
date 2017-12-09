@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.11.24)  6 DEC 2017 02:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.11.24)  8 DEC 2017 00:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -620,8 +620,12 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <10.95> on input line 150.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 152.
- [5]
-<fig1.jpg, id=32, 254.3904pt x 232.2276pt>
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5]
+<fig1.jpg, id=30, 254.3904pt x 232.2276pt>
 File: fig1.jpg Graphic file (type jpg)
 <use fig1.jpg>
 Package pdftex.def Info: fig1.jpg  used on input line 222. on input line 222.
@@ -632,7 +636,7 @@ File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 223.
-<fig2.jpg, id=33, 205.7286pt x 234.1548pt>
+<fig2.jpg, id=31, 205.7286pt x 234.1548pt>
 File: fig2.jpg Graphic file (type jpg)
 <use fig2.jpg>
 Package pdftex.def Info: fig2.jpg  used on input line 229. on input line 229.
@@ -654,16 +658,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 46--49
 
 ) [8] (./tumorgrowth.aux) ) 
 Here is how much of TeX's memory you used:
- 4479 strings out of 492985
- 62016 string characters out of 6138637
- 150292 words of memory out of 5000000
- 7936 multiletter control sequences out of 15000+600000
+ 4480 strings out of 492985
+ 62033 string characters out of 6138637
+ 155300 words of memory out of 5000000
+ 7937 multiletter control sequences out of 15000+600000
  29478 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,12n,28p,893b,481s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,12n,28p,1229b,481s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
 
-Output written on tumorgrowth.pdf (8 pages, 246292 bytes).
+Output written on tumorgrowth.pdf (8 pages, 247502 bytes).
 PDF statistics:
  94 PDF objects out of 1000 (max. 8388607)
  66 compressed objects within 1 object stream
