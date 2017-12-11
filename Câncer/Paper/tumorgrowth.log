@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.10.23)  11 DEC 2017 18:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.10.23)  11 DEC 2017 20:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -608,23 +608,23 @@ LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 43.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-Underfull \hbox (badness 8094) in paragraph at lines 135--136
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]
+Underfull \hbox (badness 8094) in paragraph at lines 141--142
 []\OT1/ptm/m/n/12 Neste tra-ba-lho, a mo-de-la-gem de [[]] foi se-le-ci-o-nada para
  []
 
-[4] [5]
+[5] [6]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 177.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 183.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 178.
+(Font)              <10.95> on input line 184.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 180.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 186.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6] (./tumorgrowth.bbl
+[7] (./tumorgrowth.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 4--8
 []\OT1/ptm/m/n/12 American Can-cer So-ci-ety (2017).  Can-cer facts & fi-gu-res 2017.
  []
@@ -634,26 +634,26 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--8
 \OT1/ptm/m/n/12 https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-
  []
 
-[7]
+[8]
 Underfull \hbox (badness 10000) in paragraph at lines 64--67
 []\OT1/ptm/m/n/12 World He-alth Or-ga-ni-za-tion (2017).  Can-cer fact sheet.
  []
 
-) [8] (./tumorgrowth.aux) ) 
+) [9] (./tumorgrowth.aux) ) 
 Here is how much of TeX's memory you used:
- 4596 strings out of 492990
- 64418 string characters out of 6138687
- 163655 words of memory out of 5000000
- 8057 multiletter control sequences out of 15000+600000
+ 4597 strings out of 492990
+ 64435 string characters out of 6138687
+ 163665 words of memory out of 5000000
+ 8058 multiletter control sequences out of 15000+600000
  26633 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,12n,28p,1229b,481s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/concatto/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmsy10.657pk> </home/concatto/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmr10.657pk> </home/concatto/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmmi10.657pk> </home/concatto/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmsy8.600pk> </home/concatto/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmmi8.600pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmex10.pk> </home/concatto/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmmi12.600pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr12.pk> </home/concatto/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmsy10.720pk>{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc} </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy10.pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr8.pk></usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dis
 t/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on tumorgrowth.pdf (8 pages, 122855 bytes).
+Output written on tumorgrowth.pdf (9 pages, 130412 bytes).
 PDF statistics:
- 178 PDF objects out of 1000 (max. 8388607)
- 80 compressed objects within 1 object stream
+ 189 PDF objects out of 1000 (max. 8388607)
+ 82 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

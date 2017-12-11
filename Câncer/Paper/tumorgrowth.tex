@@ -67,22 +67,21 @@ O processo de criação dos modelos matemáticos do câncer é extremamente comp
 Este artigo é estruturado da seguinte maneira: a Seção~\ref{sec:relatedwork} apresenta alguns trabalhos relacionados ao presente, apontando algumas das abordagens discutidas na literatura sobre a modelagem matemática do crescimento de tumores malignos; na sequência, a Seção~\ref{sec:methodology} apresenta a metodologia adotada para a construção do simulador proposto neste trabalho, explorando detalhes da implementação computacional do mesmo; subsequentemente, a Seção~\ref{sec:results} descreve e analisa os resultados obtidos através da utilização do simulador, relacionando-os com dados provenientes de outras investigações; por fim, a seção~\ref{sec:conclusions} discute sobre algumas conclusões extraídas a partir dos resultados coletados e da análise comparativa, além de comentar sobre os objetivos atingidos e sobre oportunidades para aprimoramentos.
 
 \section{Revisão bibliográfica} \label{sec:relatedwork} % Alt: Trabalhos relacionados
-Durante todos estes anos de pesquisa, vários modelos matemáticos para o Câncer foram propostos,
 
 % Falar sobre alguns artigos relacionados, não necessariamente aqueles que acabamos utilizando. Citar outras abordagens além de equações diferenciais. Falar sobre crescimento logístico/Gompertz, etc. MUITAS citações nesta seção.
-Um dos modelos adotados foi o modelo de Gompertz, no qual é denominado um modelo de serie temporal e função sigmoide(função matemática com forma de S), aonde o crescimento é mais lento no início e no final da curva. Diferente da função logística, que a borda da curva é simetrica no início e no fim, o modelo de gompertz tem uma borda de curva maior no final do crescimento do que no início. Este modelo é utilizados por várias áreas que demandam um resultado parecidos com exponenciais, tal como o crescimento do ser humano.
-
-Modelo logístico:
+Um dos modelos adotados foi o modelo de Gompertz, no qual é denominado um modelo de serie temporal e função sigmoide(função matemática com forma de S), aonde o crescimento é mais lento no início e no final da curva. Diferente da função logística, que a borda da curva é simetrica no início e no fim, o modelo de Gompertz tem uma borda de curva maior no final do crescimento do que no início. Este modelo é utilizados por várias áreas que demandam um resultado parecidos com exponenciais, tal como o crescimento do ser humano. A formulação para o modelo logístico consiste em
 
 \begin{equation} \label{eq:logistic}
   \frac{\mathrm{d} y}{\mathrm{d} t} = \lambda r \left (1 - \frac{y}{K} \right )
 \end{equation}
 
-Modelo de Gompertz:
+\noindent enquanto para o modelo de Gompertz, a equação de crescimento é definida como
 
 \begin{equation} \label{eq:gompertz}
-  \frac{\mathrm{d} y}{\mathrm{d} t} = -\lambda r log \left (\frac{y}{K} \right )
+  \frac{\mathrm{d} y}{\mathrm{d} t} = -\lambda r \; log \left (\frac{y}{K} \right )
 \end{equation}
+
+\noindent onde $r$ é a taxa de crescimento e $K$ é o limite superior da variável dependente $y$. Para ambos os casos, é possível observar que quando $y \to K$, a mudança tenderá a 0.
 
 % CITAR: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC52015/pdf/pnas01064-0099.pdf (Cornil 1991)
 % >= 1 página de conteúdo.
@@ -105,12 +104,15 @@ Tal modelo, por ser linear, pode ser resolvido de maneira analítica, com sua so
 
 O câncer pode ser tratado por meio de técnicas locais, como cirurgias ou radioterapia, ou através de tratamentos sistêmicos, como quimioterapia e inibidores de angiogênese \cite{Sanga2006}; no presente trabalho, a quimioterapia foi selecionada para aprofudamento, devido à sua ação não-localizada e simplicidade de modelagem.
 
-Ainda no trabalho de \cite{Enderling2014}, foi apresentada uma abordagem simples e direta para a inclusão de tratamento por quimioterapia nas equações de crescimento.
+Ainda no trabalho de \cite{Enderling2014}, foi apresentada uma abordagem simples e direta para a inclusão de tratamento por quimioterapia, onde um termo da forma $\beta y$ é subtraído da equação de quimioterapia, com $\beta$ representando a intensidade do tratamento quimioterápico e $y$ o número de células cancerígenas. Tal estratégia, apesar de bastante clara e intuitiva, assume que os efeitos da quimioterapia são constantes, sem levar em conta a periodicidade das doses.
 
-% Falar sobre o coeficiente de quimioterapia (Enderling 2014)
-% Gancho: modelo de tratamento de Panetta 1996
-% Competição (Panetta 1996)
+Em contrapartida, em um estudo realizado por \cite{Panetta1996}, uma estratégia de modelagem de quimioterapia por meio de pulsos foi proposta. Nesta abordagem, doses de quimioterapia são aplicadas de maneira periódica, instantaneamente eliminando uma fração das células cancerígenas do organismo. Apesar de também possuir simplificações significativas, este método contorna a característica constante da modelagem apresentada por \cite{Enderling2014}. A formulação do método, juntamente com outros detalhes do modelo, serão explorados a seguir, na Subseção~\ref{sec:competition}.
 
+\subsection{Modelagem competitiva} \label{sec:competition}
+
+Além de oferecer uma forma alternativa para a inclusão de tratamento por quimioterapia nos modelos de crescimento conhecidos, o trabalho de \cite{Panetta1996} aborda também o papel de células normais no processo de crescimento do tumor, levando em conta sua influência sobre a taxa de multiplicação de células cancerígenas e vice-versa. Sua estratégia de modelagem da quimioterapia, descrita anteriormente, também se aplica sobre as células normais, pois as mesmas também podem ser eliminadas com as doses da medicação, caracterizando um efeito colateral do tratamento quimioterápico.
+
+A partir dos estudos de \cite{Cornil1991}, é possível verificar que células normais de fato impõem efeitos sobre a massa cancerígena, sendo capazes tanto de inibir quanto potencializar seu crescimento, fornecendo assim uma validação conceitual da modelagem proposta por \cite{Panetta1996}. O modelo completo, que leva em conta tanto a interação entre os diferentes tipos de células e o tratamento por quimioterapia, consiste no seguinte conjunto de equações:
 
 \begin{equation} \label{eq:normalgrowth}
   \frac{\mathrm{d} s}{\mathrm{d} t} = r_{1} s \left ( 1 - \frac{s}{K_1} - \lambda_{1} c \right )
@@ -128,7 +130,11 @@ Ainda no trabalho de \cite{Enderling2014}, foi apresentada uma abordagem simples
   c(np^{+}) = F_{2}(D) c(np^{-})
 \end{equation}
 
-% p: período entre doses
+\noindent onde as Equações~\ref{eq:normalgrowth} e \ref{eq:cancergrowth} descrevem a mudança no número de células normais e cancerígenas (respectivamente) ao longo do tempo, enquanto as Equações~\ref{eq:normalchemo} e \ref{eq:cancerchemo} modelam a aplicação periódica de doses de quimioterapia.
+
+As equações de crescimento do modelo são do tipo logístico, com a inclusão do \emph{termo de competição} (com os coeficientes $\lambda_1$ e $\lambda_2$) na porção direita das equações. A variável $s$ caracteriza o número de células normais, enquanto $c$ identifica o número de células cancerígenas. A presença do termo com o tipo de célula contrária em cada uma das duas equações concretiza a noção de competitividade no modelo.
+
+Já as equações de tratamento, por sua vez, possuem algumas peculiaridades. O termo $n$ consiste em uma variável auxiliar que representa o ``índice'' da dose, possuindo valor 1 para a primeira, 2 para a segunda e assim por diante, enquanto o parâmetro $p$ define o período entre as doses. O produto destes dois termos define cada instante de tempo onde ocorrerá a aplicação da quimioterapia. Por exemplo, se $p = 0.5$, as doses ocorrerão quando $t \in \{0.5, 1.0, 1.5, 2.0, 2.5, ...\}$. Por fim, $D$ representa a intensidade da dose da medicação, possuindo o mesmo valor para ambas as equações, enquanto $F_1$ e $F_2$ são funções de entrada que especificam a resposta do organismo à dose em relação ao número de células normais e cancerígenas, respectivamente.
 
 % Falar de alguns modelos mais obscuros como sistemas multiagentes e equações diferenciais parciais.
 
