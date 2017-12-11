@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 
 \usepackage{sbc-template}
-\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage[ruled,vlined,linesnumbered,portuguese]{algorithm2e}
 \usepackage{graphicx,url}
 
 \usepackage[brazil]{babel}
@@ -26,11 +26,7 @@
 \maketitle
 
 \begin{abstract}
-  This meta-paper describes the style to be used in articles and short papers
-  for SBC conferences. For papers in English, you should add just an abstract
-  while for the papers in Portuguese, we also ask for an abstract in
-  Portuguese (``resumo''). In both cases, abstracts should not have more than
-  10 lines and must be in the first page of the paper.
+  Cancer is one of the main causes of death in many countries around the world, and the number of new cases is predicted to increase significantly in the next few years. In this context, the mathematical modelling of the disease offers a platform for the development of experiments and the discovery of new knowledge abouts its behaviour through computational means, avoiding the need to employ organic materials. Thus, this work sought to investigate mathematical models of tumour growth, analyzing them with regards to their expressiveness as well as their ability to accurately represent the real phenomenon, taking into account the development of a simulator with limited complexity.
 \end{abstract}
 
 \begin{resumo}
@@ -146,7 +142,7 @@ A linguagem de programação JavaScript não oferece nenhum suporte para a execu
   \DontPrintSemicolon
   \caption{draw() - Atualização do Estado do Simulador}
   \label{alg:update}
-  \SetKwInOut{Input}{Input}
+  \SetKwInOut{Input}{Entrada}
  \Input{$s$, $c$, $h$}
 
   $\Delta s \leftarrow h * crescimentoNormal(s, c)$
