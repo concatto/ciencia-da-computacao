@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.10.23)  11 DEC 2017 20:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.10.23)  11 DEC 2017 21:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -620,11 +620,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <10.95> on input line 184.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 186.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[7] (./tumorgrowth.bbl
+ [7] (./tumorgrowth.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 4--8
 []\OT1/ptm/m/n/12 American Can-cer So-ci-ety (2017).  Can-cer facts & fi-gu-res 2017.
  []
@@ -643,16 +639,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 64--67
 Here is how much of TeX's memory you used:
  4597 strings out of 492990
  64435 string characters out of 6138687
- 163665 words of memory out of 5000000
+ 160665 words of memory out of 5000000
  8058 multiletter control sequences out of 15000+600000
  26633 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,12n,28p,1229b,481s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,12n,28p,1229b,479s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/concatto/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmsy10.657pk> </home/concatto/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmr10.657pk> </home/concatto/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmmi10.657pk> </home/concatto/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmsy8.600pk> </home/concatto/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmmi8.600pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmex10.pk> </home/concatto/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmmi12.600pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr12.pk> </home/concatto/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmsy10.720pk>{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc} </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy10.pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr8.pk></usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dis
 t/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on tumorgrowth.pdf (9 pages, 130412 bytes).
+Output written on tumorgrowth.pdf (9 pages, 129763 bytes).
 PDF statistics:
- 189 PDF objects out of 1000 (max. 8388607)
+ 188 PDF objects out of 1000 (max. 8388607)
  82 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)

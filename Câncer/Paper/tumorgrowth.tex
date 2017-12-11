@@ -64,7 +64,7 @@ Apesar dos modelos matématicos apresentarem fatores favoráveis para a contribu
 O processo de criação dos modelos matemáticos do câncer é extremamente complexo pois envolve o conhecimento de diferentes áreas de conhecimento, tais como biôlogicas, medicinais, matemáticos, Além de demandar um valor inicial mais proximo do resultado real, no qual vem sendo um problema nos dias atuais.
 % Aprofundar para o contexto do artigo, falando sobre o objetivo e apresentar seções (separar parágrafos se ficar grande).
 
-Este artigo é estruturado da seguinte maneira: a Seção~\ref{sec:relatedwork} apresenta alguns trabalhos relacionados ao presente, apontando algumas das abordagens discutidas na literatura sobre a modelagem matemática do crescimento de tumores malignos; na sequência, a Seção~\ref{sec:methodology} apresenta a metodologia adotada para a construção do simulador proposto neste trabalho, explorando detalhes da implementação computacional do mesmo; subsequentemente, a Seção~\ref{sec:results} descreve e analisa os resultados obtidos através da utilização do simulador, relacionando-os com dados provenientes de outras investigações; por fim, a seção~\ref{sec:conclusions} discute sobre algumas conclusões extraídas a partir dos resultados coletados e da análise comparativa, além de comentar sobre os objetivos atingidos e sobre oportunidades para aprimoramentos.
+Este artigo é estruturado da seguinte maneira: a Seção~\ref{sec:relatedwork} apresenta alguns trabalhos relacionados a este, apontando algumas das abordagens discutidas na literatura; na sequência, a Seção~\ref{sec:methodology} apresenta a metodologia adotada para a construção do simulador proposto neste trabalho, explorando detalhes da implementação computacional do mesmo; subsequentemente, a Seção~\ref{sec:results} descreve e analisa os resultados obtidos através da utilização do simulador, relacionando-os com dados provenientes de outras investigações; por fim, a seção~\ref{sec:conclusions} discute sobre algumas conclusões extraídas a partir dos resultados coletados e da análise comparativa, além de comentar sobre os objetivos atingidos e sobre oportunidades para aprimoramentos.
 
 \section{Revisão bibliográfica} \label{sec:relatedwork} % Alt: Trabalhos relacionados
 
@@ -134,7 +134,7 @@ A partir dos estudos de \cite{Cornil1991}, é possível verificar que células n
 
 As equações de crescimento do modelo são do tipo logístico, com a inclusão do \emph{termo de competição} (com os coeficientes $\lambda_1$ e $\lambda_2$) na porção direita das equações. A variável $s$ caracteriza o número de células normais, enquanto $c$ identifica o número de células cancerígenas. A presença do termo com o tipo de célula contrária em cada uma das duas equações concretiza a noção de competitividade no modelo.
 
-Já as equações de tratamento, por sua vez, possuem algumas peculiaridades. O termo $n$ consiste em uma variável auxiliar que representa o ``índice'' da dose, possuindo valor 1 para a primeira, 2 para a segunda e assim por diante, enquanto o parâmetro $p$ define o período entre as doses. O produto destes dois termos define cada instante de tempo onde ocorrerá a aplicação da quimioterapia. Por exemplo, se $p = 0.5$, as doses ocorrerão quando $t \in \{0.5, 1.0, 1.5, 2.0, 2.5, ...\}$. Por fim, $D$ representa a intensidade da dose da medicação, possuindo o mesmo valor para ambas as equações, enquanto $F_1$ e $F_2$ são funções de entrada que especificam a resposta do organismo à dose em relação ao número de células normais e cancerígenas, respectivamente.
+Já as equações de tratamento, por sua vez, possuem algumas peculiaridades. O termo $n$ consiste em uma variável auxiliar que representa o ``índice'' da dose, possuindo valor 1 para a primeira, 2 para a segunda e assim por diante, enquanto o parâmetro $p$ define o período entre as doses. O produto destes dois termos define cada instante de tempo onde ocorrerá a aplicação da quimioterapia. Por exemplo, se $p = 0.5$, as doses ocorrerão quando $t \in \{0.5, 1.0, 1.5, ...\}$. Por fim, $D$ representa a intensidade da dose da medicação, possuindo o mesmo valor para ambas as equações, enquanto $F_1$ e $F_2$ são funções de entrada que especificam a resposta do organismo à dose em relação ao número de células normais e cancerígenas, respectivamente.
 
 % Falar de alguns modelos mais obscuros como sistemas multiagentes e equações diferenciais parciais.
 
@@ -171,7 +171,7 @@ O Método de Euler consiste em uma estratégia simples e direta para a resoluç�
 
 \subsection{Detalhamento do simulador} \label{sec:simulator}
 
-O simulador computacional descrito neste trabalho foi implementado utilizando a linguagem de programação JavaScript, incluindo também um módulo de interface gráfica desenvolvido com as linguagens de marcação HTML e CSS. Para realizar a atualização dinâmica da interface gráfica ao longo da simulação, a biblioteca \emph{p5.js} foi empregada, a qual é capaz de desenhar tanto formas geométricas bidimensionais simples quanto complexos modelos de três dimensões. Na ferramenta construída, células normais foram representadas por círculos de cor verde, enquanto células cancerígenas foram caracterizadas por cículos em tons de vermelho.
+O simulador computacional descrito neste trabalho foi implementado utilizando a linguagem de programação JavaScript, incluindo também um módulo de interface gráfica desenvolvido com as linguagens de marcação HTML e CSS. Para realizar a atualização dinâmica da interface gráfica ao longo da simulação, a biblioteca \emph{p5.js} foi empregada. Na ferramenta construída, células normais foram representadas por círculos de cor verde, enquanto células cancerígenas foram caracterizadas por cículos em tons de vermelho e preto.
 
 A linguagem de programação JavaScript não oferece nenhum suporte para a execução de código de maneira paralela (\textit{multithreaded}); portanto, os procedimentos de atualização das variáveis do modelo e o desenho das entidades gráficas devem obrigatoriamente ocorrer de modo serial, no mesmo contexto de execução. A biblioteca \emph{p5.js} invoca continuamente uma função de nome \emph{draw()}, a qual é definida pelo desenvolvedor, para atualizar o estado do programa e, por fim, a própria tela. O Algoritmo~\ref{alg:update} apresenta o procedimento de atualização implementado neste trabalho.
 
@@ -185,11 +185,11 @@ A linguagem de programação JavaScript não oferece nenhum suporte para a execu
 
   $\Delta s \leftarrow h * crescimentoNormal(s, c)$
   \tcp*[r]{Equação~\ref{eq:normalgrowth}}
-  $\Delta c \leftarrow h * crescimentoCancerigeno(c, s)$ \tcp*[r]{Equação~\ref{eq:cancergrowth}}
+  $\Delta c \leftarrow h * crescimentoCancerigeno(c, s)$
+  \tcp*[r]{Equação~\ref{eq:cancergrowth}}
   \BlankLine
 
   \If{$t > n * p$}{
-    \tcp{Calcula quantas células morreram com a dose}
     $(M_s, M_c) \leftarrow aplicarQuimioterapia(s, c)$ \tcp*[r]{Equações~\ref{eq:normalchemo} e \ref{eq:cancerchemo}}
     \BlankLine
 
@@ -205,8 +205,6 @@ A linguagem de programação JavaScript não oferece nenhum suporte para a execu
   $Z_c \leftarrow Z_c + \Delta c$ \;
   \BlankLine
 
-  \tcp{Cria células se os valores forem positivos}
-  \tcp{e remove caso contrário}
   $atualizarCelulas(floor(Z_s), floor(Z_c))$\;
   \BlankLine
 
@@ -216,8 +214,6 @@ A linguagem de programação JavaScript não oferece nenhum suporte para a execu
 
   $s \leftarrow s + \Delta s$ \;
   $c \leftarrow c + \Delta c$ \;
-  \BlankLine
-
   $t \leftarrow t + h$ \;
 \end{algorithm}
 
