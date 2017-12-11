@@ -3,21 +3,20 @@
 	var cancerAlpha = 2;
 	var normalAlpha = 3;
 	var meanSlider;
-	var initialY = 1;
+	var initialY = 2.5;
 	var postData = {};
-	var initialX = 3000;
+	var initialX = 5000;
 	var t = 0;
 	var y = initialY; // Cancerous biomass
 	var x = initialX; // Normal biomass*/
-	var lambda1 = 0.003; // Impact of cancerous cells in normal biomass
-	var lambda2 = 0.00002; // Reduction in cancerous biomass from normal cells
-	var r1 = 1.5;
-	var chemotherapy = true;
+	var lambda1 = 0.00; // Impact of cancerous cells in normal biomass
+	var lambda2 = 0.0000; // Reduction in cancerous biomass from normal cells
+	var r1 = 0.212;
 	var prevT = 0;
-	var r2 = 1.5;
-	var K1 = 3000;
-	var K2 = 2000;
-	var h = 0.01;
+	var r2 = 0.42;
+	var K1 = 5000;
+	var K2 = 50;
+	var h = 0.05;
 	var prevY;
 	var negativeXIncrease = 0;
 	var negativeYIncrease = 0;
@@ -174,7 +173,7 @@
 			nDose = inputNDose.value();
 			cancerAlpha = inputCancerAlpha.value();
 			normalAlpha = inputNormalAlpha.value();*/
-
+/*
 			initialY = 1;
 			initialX = 3000;
 			lambda1 = 0.003;
@@ -188,7 +187,7 @@
 			nDose = 1;
 			cancerAlpha = 2;
 			normalAlpha = 2;
-			
+			*/
 
 			//APLICACAO SEM COMPETICAO
 			/*initialY = 2.5;
@@ -271,15 +270,14 @@
 		putText();
 		var increaseX = (h * competitiveGrowth(r1, x, y, K1, lambda1));
 		var increaseY = (h * competitiveGrowth(r2, y, x, K2, lambda2));
-		/*console.log("x: " +x);
-		console.log("vet: "+normalCells.length);*/
+		/*
 		if (t > nDose * period) {
 			var normalKillCount = applyChemotherapy(normalAlpha, dose, true);
 			var cancerKillCount = applyChemotherapy(cancerAlpha, dose, false);
 			killCells(normalKillCount, true);
 			killCells(cancerKillCount, false);
 			nDose++;
-		}
+		}*/
 		if(increaseX < 0){
 			negativeXIncrease += increaseX;
 
@@ -363,10 +361,11 @@
 		t = t + h;
 
 		if(t - prevT >= 1){
-			postData = {x: x, y: y, t: t, h: h, chemotherapy: chemotherapy, dose: dose, period: period};
+			//postData = {x: x, y: y, t: t, h: h, dose: dose, period: period};
+			postData = {y: y, t: t};
 			prevT = t;
 			httpPost(url, 'JSON', postData, function(arg){
-				console.log(arg);			
+				console.log(arg);
 			});		
 		}
 	}
