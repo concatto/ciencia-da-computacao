@@ -1,8 +1,10 @@
 	var nDose = 1;
+	var url = "http://127.0.0.1:5000/";
 	var cancerAlpha = 2;
 	var normalAlpha = 3;
 	var meanSlider;
 	var initialY = 1;
+	var postData = {};
 	var initialX = 3000;
 	var t = 0;
 	var y = initialY; // Cancerous biomass
@@ -10,6 +12,8 @@
 	var lambda1 = 0.003; // Impact of cancerous cells in normal biomass
 	var lambda2 = 0.00002; // Reduction in cancerous biomass from normal cells
 	var r1 = 1.5;
+	var chemotherapy = true;
+	var prevT = 0;
 	var r2 = 1.5;
 	var K1 = 3000;
 	var K2 = 2000;
@@ -119,12 +123,8 @@
 		var survivalFraction = Math.exp(-doseAlpha * dose);
 		var deadCells;
 		if(isNormalCell){
-			console.log("X antes: " + x);
-			console.log("vet antes: " + normalCells.length);
 			deadCells = x - (x * survivalFraction);
 			x -= deadCells;
-			console.log(deadCells);
-			console.log("X depois: " + x);
 		}else {
 			deadCells = y - (y * survivalFraction);
 			
@@ -144,7 +144,6 @@
 				//currentDistance -= wallIncrease;
 				maxWallDistance -= wallIncrease;
 			}
-			console.log("Vet depois: " + normalCells.length);
 		}else {
 			accY -= fractionalPortion;
 
@@ -176,7 +175,7 @@
 			cancerAlpha = inputCancerAlpha.value();
 			normalAlpha = inputNormalAlpha.value();*/
 
-			/*initialY = 1;
+			initialY = 1;
 			initialX = 3000;
 			lambda1 = 0.003;
 			lambda2 = 0.00002;
@@ -189,7 +188,7 @@
 			nDose = 1;
 			cancerAlpha = 2;
 			normalAlpha = 2;
-			*/
+			
 
 			//APLICACAO SEM COMPETICAO
 			/*initialY = 2.5;
@@ -220,7 +219,7 @@
 			dose = 0;
 			cancerAlpha = 0;
 			normalAlpha = 0;*/
-			
+			/*
 			initialY = 2.5;
 			initialX = 5000;
 			lambda1 = 0.000356;
@@ -233,7 +232,7 @@
 			nDose = 0;
 			dose = 0;
 			cancerAlpha = 0;
-			normalAlpha = 0;
+			normalAlpha = 0;*/
 
 			/*t = 0;
 			y = initialY; // Cancerous biomass
@@ -281,8 +280,6 @@
 			killCells(cancerKillCount, false);
 			nDose++;
 		}
-		console.log("Soma: " + (accX + increaseX));
-		console.log("increase -1: " + increaseX * -1);
 		if(increaseX < 0){
 			negativeXIncrease += increaseX;
 
@@ -354,10 +351,6 @@
 		/*
 		x = normalCells.length;
 		y = cells.length;*/
-		
-		console.log("vet: " + normalCells.length);
-		console.log("x: " + x);
-	
 		var maxY = max([K1, K2]);
 		insertPoint(normalPoints, x, initialX, maxY, true);
 		insertPoint(tumorPoints, y, initialY, maxY, false);
@@ -368,6 +361,14 @@
 		
 			
 		t = t + h;
+
+		if(t - prevT >= 1){
+			postData = {x: x, y: y, t: t, h: h, chemotherapy: chemotherapy, dose: dose, period: period};
+			prevT = t;
+			httpPost(url, 'JSON', postData, function(arg){
+				console.log(arg);			
+			});		
+		}
 	}
 
 	function insertPoint(points, value, initial, maxValue, isNormal) {
