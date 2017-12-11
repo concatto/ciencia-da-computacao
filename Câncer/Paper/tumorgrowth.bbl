@@ -26,6 +26,11 @@ Cornil, I., Theodorescu, D., Man, S., Herlyn, M., Jambrosic, J., and Kerbel, R.
 \newblock {\em Proceedings of the National Academy of Sciences},
   88(14):6028--6032.
 
+\bibitem[Enderling and Chaplain 2014]{Enderling2014}
+Enderling, H. and Chaplain, M. A.~J. (2014).
+\newblock Mathematical modeling of tumor growth and treatment.
+\newblock {\em Current pharmaceutical design}, 20(30):4934--4940.
+
 \bibitem[Hanahan and Weinberg 2011]{Hanahan2011}
 Hanahan, D. and Weinberg, R. (2011).
 \newblock Hallmarks of cancer: The next generation.
@@ -41,6 +46,19 @@ Panetta, J.~C. (1996).
 Preziosi, L. (2003).
 \newblock {\em Cancer modelling and simulation}.
 \newblock CRC Press.
+
+\bibitem[Sachs et~al. 2001]{Sachs2001}
+Sachs, R., Hlatky, L., and Hahnfeldt, P. (2001).
+\newblock Simple ode models of tumor growth and anti-angiogenic or radiation
+  treatment.
+\newblock {\em Mathematical and Computer Modelling}, 33(12-13):1297--1305.
+
+\bibitem[Sanga et~al. 2006]{Sanga2006}
+Sanga, S., Sinek, J.~P., Frieboes, H.~B., Ferrari, M., Fruehauf, J.~P., and
+  Cristini, V. (2006).
+\newblock Mathematical modeling of cancer progression and response to
+  chemotherapy.
+\newblock {\em Expert review of anticancer therapy}, 6(10):1361--1376.
 
 \bibitem[{World Health Organization} 2017]{WHO2017}
 {World Health Organization} (2017).

@@ -26,7 +26,7 @@
 \maketitle
 
 \begin{abstract}
-  Cancer is one of the main causes of death in many countries around the world, and the number of new cases is predicted to increase significantly in the next few years. In this context, the mathematical modelling of the disease offers a platform for the development of experiments and the discovery of new knowledge abouts its behaviour through computational means, avoiding the need to employ organic materials. Thus, this work sought to investigate mathematical models of tumour growth, analyzing them with regards to their expressiveness as well as their ability to accurately represent the real phenomenon, taking into account the development of a simulator with limited complexity.
+  Cancer is one of the leading causes of death in many countries around the world, and the number of new cases is predicted to increase significantly in the next few years. In this context, the mathematical modelling of the disease offers a platform for the development of experiments and the discovery of new knowledge abouts its behaviour through computational means, avoiding the need to employ organic materials. Thus, this work sought to investigate mathematical models of tumour growth, analyzing them with regards to their expressiveness as well as their ability to accurately represent the real phenomenon, taking into account the development of a simulator with limited complexity.
 \end{abstract}
 
 \begin{resumo}
@@ -45,7 +45,7 @@ Para uma melhor disseminação das características gerais do câncer, foram pro
   \item Resistência a Morte Celular (\textit{Resisting Cell Death}): resistência a mecânismos naturais que resultam na morte programada das células quando as mesmas são danificadas.
   \item Potencial Ilimitado de Multiplicação (\textit{Enabling Replicative Immortality}): ignorar o estado de senescência e crise que induz a célula à um estado não reprodutivo e morte celular, respectivamente.
   \item Indução da Angiogênese (\textit{Inducing Angiogenesis}): capacidade de criar novos vasos sanguíneos a fim de aumentar o recebimento de nutrientes e oxigênio.
-  \item Mecânismos de Invasão e Metástase (\textit{Activating Invasion and Metastasis}): Propriedade metástica em um sub-grupo celular.\ldots
+  \item Mecânismos de Invasão e Metástase (\textit{Activating Invasion and Metastasis}): Propriedade metástica em um sub-grupo celular, permitindo que a doença se espalhe para outros órgãos do organismo, possivelmente distantes do original.
 \end{itemize}
 
 %http://www.cell.com/cell/fulltext/S0092-8674(11)00127-9, https://drfelipeades.wordpress.com/2014/11/13/as-seis-principais-caracteristicas-do-cancer/
@@ -72,12 +72,45 @@ Durante todos estes anos de pesquisa, vários modelos matemáticos para o Cânce
 % Falar sobre alguns artigos relacionados, não necessariamente aqueles que acabamos utilizando. Citar outras abordagens além de equações diferenciais. Falar sobre crescimento logístico/Gompertz, etc. MUITAS citações nesta seção.
 Um dos modelos adotados foi o modelo de Gompertz, no qual é denominado um modelo de serie temporal e função sigmoide(função matemática com forma de S), aonde o crescimento é mais lento no início e no final da curva. Diferente da função logística, que a borda da curva é simetrica no início e no fim, o modelo de gompertz tem uma borda de curva maior no final do crescimento do que no início. Este modelo é utilizados por várias áreas que demandam um resultado parecidos com exponenciais, tal como o crescimento do ser humano.
 
+Modelo logístico:
+
+\begin{equation} \label{eq:logistic}
+  \frac{\mathrm{d} y}{\mathrm{d} t} = \lambda r \left (1 - \frac{y}{K} \right )
+\end{equation}
+
+Modelo de Gompertz:
+
+\begin{equation} \label{eq:gompertz}
+  \frac{\mathrm{d} y}{\mathrm{d} t} = -\lambda r log \left (\frac{y}{K} \right )
+\end{equation}
+
 % CITAR: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC52015/pdf/pnas01064-0099.pdf (Cornil 1991)
 % >= 1 página de conteúdo.
 % Modelo de Panetta
 %FAZER A CITAÇÃO NO X kkk --feito!
 
 Estudos feitos por \cite{Cornil1991} avaliam os resultados da influência de fibroblastos dérmicos normais nas células de melanomas de humanos obtidos em diferentes estágios do progresso do tumor. Foi descoberto, por experimentos \textit{in vitro}, que a maioria das linhas de melanomas derivadas do início do estágio da fase de crescimento radial ou metaestático são reprimidas por fibroblastos dérmicos normais, insinuando que o cresimento homeostático negativo ainda estão operantes nas células melanomas dos estágios iniciais da doença. Entretanto, cerca de 80\% da células melanomas derivada da metástase já avançada, foram estimadas o crescimento consistente na presença de fibroblastos dérmicos. Logo, o conjuntos de resultados obtidos indicam que fibroblastos podem ter efeitos de crescimento antiéticos e inesperados em tumores.
+
+No trabalho de \cite{Enderling2014}, foi realizada uma revisão geral sobre técnicas de modelagem matemática do crescimento de tumores malignos por meio de equações diferenciais, desde modelos simples e lineares até abordagens considerando difusão e equações diferenciais parciais. Segundo os autores, com corroboração fornecida por \cite{Sachs2001}, o modelo mais simples de crescimento de tumores malignos consiste em:
+
+\begin{equation} \label{eq:linear}
+  \frac{\mathrm{d} y}{\mathrm{d} t} = \lambda y, \qquad y(0) = N
+\end{equation}
+
+\noindent onde $y$ é o número de células cancerígenas, $N$ descreve a quantidade inicial de tais células e $\lambda$ é um coeficiente constante que define a taxa de crescimento do tumor. Se o mesmo por positivo, haverá crescimento do tumor; caso contrário, o tumor tenderá ao desaparecimento.
+
+Tal modelo, por ser linear, pode ser resolvido de maneira analítica, com sua solução possuindo a forma $y(t) = N e^{r t}$. Entretanto, devido a sua simplicidade, este modelo não captura algumas características essenciais da doença, como a redução na velocidade de crescimento a partir de certo ponto ao longo de sua evolução ou a baixa taxa de crescimento em seus estágios iniciais. Portanto, modelos de crescimento não-lineares, como o logístico ou de Gompertz, podem ser utilizados para tratar destes aspectos; tais modelos são apresentados nas Equações~\ref{eq:logistic} e \ref{eq:gompertz}, respectivamente, com $y$ representando o número de células cancerigenas, $r$ representando a taxa de crescimento do tumor e $K$ indicando a quantidade máxima de células que o organismo é capaz de suportar.
+
+\subsection{Modelagem de tratamento} \label{sec:treatment}
+
+O câncer pode ser tratado por meio de técnicas locais, como cirurgias ou radioterapia, ou através de tratamentos sistêmicos, como quimioterapia e inibidores de angiogênese \cite{Sanga2006}; no presente trabalho, a quimioterapia foi selecionada para aprofudamento, devido à sua ação não-localizada e simplicidade de modelagem.
+
+Ainda no trabalho de \cite{Enderling2014}, foi apresentada uma abordagem simples e direta para a inclusão de tratamento por quimioterapia nas equações de crescimento.
+
+% Falar sobre o coeficiente de quimioterapia (Enderling 2014)
+% Gancho: modelo de tratamento de Panetta 1996
+% Competição (Panetta 1996)
+
 
 \begin{equation} \label{eq:normalgrowth}
   \frac{\mathrm{d} s}{\mathrm{d} t} = r_{1} s \left ( 1 - \frac{s}{K_1} - \lambda_{1} c \right )
@@ -204,63 +237,63 @@ Adicionalmente, com a intenção de avaliar a efetividade da aproximação do M�
 
 % Apresentar sugestões para trabalhos futuros.
 
-\section{Figures and Captions}\label{sec:figs}
+%\section{Figures and Captions}\label{sec:figs}
 
-Figure and table captions should be centered if less than one line
-(Figure~\ref{fig:exampleFig1}), otherwise justified and indented by 0.8cm on
-both margins, as shown in Figure~\ref{fig:exampleFig2}. The caption font must
-be Helvetica, 10 point, boldface, with 6 points of space before and after each
-caption.
+%Figure and table captions should be centered if less than one line
+%(Figure~\ref{fig:exampleFig1}), otherwise justified and indented by 0.8cm on
+%both margins, as shown in Figure~\ref{fig:exampleFig2}. The caption font must
+%be Helvetica, 10 point, boldface, with 6 points of space before and after each
+%caption.
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.5\textwidth]{fig1.jpg}
-\caption{A typical figure}
-\label{fig:exampleFig1}
-\end{figure}
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[width=.5\textwidth]{fig1.jpg}
+%\caption{A typical figure}
+%\label{fig:exampleFig1}
+%\end{figure}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.3\textwidth]{fig2.jpg}
-\caption{This figure is an example of a figure caption taking more than one
-  line and justified considering margins mentioned in Section~\ref{sec:figs}.}
-\label{fig:exampleFig2}
-\end{figure}
-
-In tables, try to avoid the use of colored or shaded backgrounds, and avoid
-thick, doubled, or unnecessary framing lines. When reporting empirical data,
-do not use more decimal digits than warranted by their precision and
-reproducibility. Table caption must be placed before the table (see Table 1)
-and the font used must also be Helvetica, 10 point, boldface, with 6 points of
-space before and after each caption.
-
-\begin{table}[ht]
-\centering
-\caption{Variables to be considered on the evaluation of interaction
-  techniques}
-\label{tab:exTable1}
-\smallskip
-\begin{tabular}{|l|c|c|}
-\hline
-& Value 1 & Value 2\\[0.5ex]
-\hline
-&&\\[-2ex]
-Case 1 & 1.0 $\pm$ 0.1 & 1.75$\times$10$^{-5}$ $\pm$ 5$\times$10$^{-7}$\\[0.5ex]
-\hline
-&&\\[-2ex]
-Case 2 & 0.003(1) & 100.0\\[0.5ex]
-\hline
-\end{tabular}
-\end{table}
-
-\section{Images}
-
-All images and illustrations should be in black-and-white, or gray tones,
-excepting for the papers that will be electronically available (on CD-ROMs,
-internet, etc.). The image resolution on paper should be about 600 dpi for
-black-and-white images, and 150-300 dpi for grayscale images.  Do not include
-images with excessive resolution, as they may take hours to print, without any
-visible difference in the result.
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[width=.3\textwidth]{fig2.jpg}
+%\caption{This figure is an example of a figure caption taking more than one
+%  line and justified considering margins mentioned in Section~\ref{sec:figs}.}
+%\label{fig:exampleFig2}
+%\end{figure}
+%
+%In tables, try to avoid the use of colored or shaded backgrounds, and avoid
+%thick, doubled, or unnecessary framing lines. When reporting empirical data,
+%do not use more decimal digits than warranted by their precision and
+%reproducibility. Table caption must be placed before the table (see Table 1)
+%and the font used must also be Helvetica, 10 point, boldface, with 6 points of
+%space before and after each caption.
+%
+%\begin{table}[ht]
+%\centering
+%\caption{Variables to be considered on the evaluation of interaction
+%  techniques}
+%\label{tab:exTable1}
+%\smallskip
+%\begin{tabular}{|l|c|c|}
+%\hline
+%& Value 1 & Value 2\\[0.5ex]
+%\hline
+%&&\\[-2ex]
+%Case 1 & 1.0 $\pm$ 0.1 & 1.75$\times$10$^{-5}$ $\pm$ 5$\times$10$^{-7}$\\[0.5ex]
+%\hline
+%&&\\[-2ex]
+%Case 2 & 0.003(1) & 100.0\\[0.5ex]
+%\hline
+%\end{tabular}
+%\end{table}
+%
+%\section{Images}
+%
+%All images and illustrations should be in black-and-white, or gray tones,
+%excepting for the papers that will be electronically available (on CD-ROMs,
+%internet, etc.). The image resolution on paper should be about 600 dpi for
+%black-and-white images, and 150-300 dpi for grayscale images.  Do not include
+%images with excessive resolution, as they may take hours to print, without any
+%visible difference in the result.
 
 \bibliographystyle{sbc}
 \bibliography{tumorgrowth}
