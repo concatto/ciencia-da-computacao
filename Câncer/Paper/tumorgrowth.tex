@@ -235,9 +235,13 @@ Crescimento de celulas cancerígenas sem competição e sem quimioterapia.
 
 \includegraphics{noChemoCompet}
 
-Testes adicionado quimioterapia e competição também foram realizados, trazendo resultados discrepantes na quantia de células em função do tempo. Os parâmetros utilizados foram os mesmos, diferindo apenas no \lambda1 = 0.00003, \lambda2 = 0.0000002, dose = 0.2 e período da dose = 2.
+Testes adicionando quimioterapia e competição também foram realizados, trazendo resultados discrepantes na quantia de células em função do tempo. Os parâmetros utilizados foram os mesmos, diferindo apenas no \lambda1 = 0.00003, \lambda2 = 0.0000002, dose = 0.2 e período da dose = 2 que não constam na literatura citada, portanto foram estimados de forma arbitrária.
 
 \includegraphics{chemoCompet}
+
+O primeiro teste realizado demonstra um valor bem próximo do estimado pela literatura citada, onde foi encontrado Y(5) \cong 3000, desta forma, assegurando a relevância do simulador.
+
+Como esperado, existe uma grande diferença no crescimento das células cancerígenas quando aplicado a quimioterapia e levado em consideração a competição. Outro ponto relevante é que o modelo apresentado assume que as células morrem assim que a dose de quimioterapia é aplicada, dando um aspecto de escada no segundo gráfico.
 
 \section{Conclusões} \label{sec:conclusions}
 
