@@ -9,14 +9,14 @@
 	var t = 0;
 	var y = initialY; // Cancerous biomass
 	var x = initialX; // Normal biomass*/
-	var lambda1 = 0.00; // Impact of cancerous cells in normal biomass
-	var lambda2 = 0.0000; // Reduction in cancerous biomass from normal cells
+	var lambda1 = 0.003; // Impact of cancerous cells in normal biomass
+	var lambda2 = 0.00002; // Reduction in cancerous biomass from normal cells
 	var r1 = 0.212;
 	var prevT = 0;
 	var r2 = 0.42;
 	var K1 = 5000;
 	var K2 = 50;
-	var h = 0.05;
+	var h = 1;
 	var prevY;
 	var negativeXIncrease = 0;
 	var negativeYIncrease = 0;
@@ -362,7 +362,7 @@
 
 		if(t - prevT >= 1){
 			//postData = {x: x, y: y, t: t, h: h, dose: dose, period: period};
-			postData = {y: y, t: t};
+			postData = {y: y*2000};
 			prevT = t;
 			httpPost(url, 'JSON', postData, function(arg){
 				console.log(arg);

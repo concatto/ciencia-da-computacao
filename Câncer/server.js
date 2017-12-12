@@ -17,7 +17,8 @@ app.use(bodyParser.json());
 app.use(enableCors);
 
 app.post("/", (req, res) => {
-	fs.appendFileSync("noChemoNoCompetitiveGrowthh5.txt", json2csv({data: req.body, fields: fields, hasCSVColumnTitle: false}) + "\n");
+	//console.log(req.body);
+	fs.appendFileSync("chemo3.csv", json2csv({data: req.body, fields: fields, hasCSVColumnTitle: false}) + "\n");
 	res.status(200).send(true);
 });
 

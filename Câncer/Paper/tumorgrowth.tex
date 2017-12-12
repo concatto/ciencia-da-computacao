@@ -3,6 +3,7 @@
 \usepackage{sbc-template}
 \usepackage[ruled,vlined,linesnumbered,portuguese]{algorithm2e}
 \usepackage{graphicx,url}
+\graphicspath{ {/} }
 
 \usepackage[brazil]{babel}
 %\usepackage[latin1]{inputenc}
@@ -227,9 +228,16 @@ Adicionalmente, com a intenção de avaliar a efetividade da aproximação do M�
 
 \section{Análise de resultados} \label{sec:results}
 
-% Muitas tabelas e gráficos. Falar sobre semelhanças e diferenças. Comparar, analisar, descrever
+Como mencionado anteriormente, o teste realizado para validar o simulador proposto foi baseado no experimento sem quimioterapia e sem competição realizado \textit{in vitro} por \cite{Cornil1991}. Os valores selecionados como \textit{step} do método de Euler para todos os testes foram 0,01, 0,1 e 1.
+Os parâmetros utilizados foram r1 = 0.212, r2 = 0.42, K1 = 10^7, K2 = 10^5, X(0) = 10^7, Y(0) = 5000, \lambda1 = 0 e \lambda2 = 0 conforme proposto por \cite{Cornil1991}.
 
-% Falar sobre a configuração do computador onde foram realizados os experimentos. Mencionar o tempo em relação a h!
+Crescimento de celulas cancerígenas sem competição e sem quimioterapia.
+
+\includegraphics{noChemoCompet}
+
+Testes adicionado quimioterapia e competição também foram realizados, trazendo resultados discrepantes na quantia de células em função do tempo. Os parâmetros utilizados foram os mesmos, diferindo apenas no \lambda1 = 0.003, \lambda2 = 0.00002, dose = 0.2 e período da dose = 2.
+
+\includegraphics{chemoCompet}
 
 \section{Conclusões} \label{sec:conclusions}
 
