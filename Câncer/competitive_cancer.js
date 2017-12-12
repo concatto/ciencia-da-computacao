@@ -16,7 +16,7 @@
 	var r2 = 0.42;
 	var K1 = 5000;
 	var K2 = 50;
-	var h = 1;
+	var h = 0.1;
 	var prevY;
 	var negativeXIncrease = 0;
 	var negativeYIncrease = 0;
@@ -270,14 +270,14 @@
 		putText();
 		var increaseX = (h * competitiveGrowth(r1, x, y, K1, lambda1));
 		var increaseY = (h * competitiveGrowth(r2, y, x, K2, lambda2));
-		/*
+		
 		if (t > nDose * period) {
 			var normalKillCount = applyChemotherapy(normalAlpha, dose, true);
 			var cancerKillCount = applyChemotherapy(cancerAlpha, dose, false);
 			killCells(normalKillCount, true);
 			killCells(cancerKillCount, false);
 			nDose++;
-		}*/
+		}
 		if(increaseX < 0){
 			negativeXIncrease += increaseX;
 
