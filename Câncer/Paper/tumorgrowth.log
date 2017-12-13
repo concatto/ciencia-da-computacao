@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.11.24)  11 DEC 2017 23:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.11.24)  11 DEC 2017 23:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -621,23 +621,23 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 187.
  [7]
-<noChemoCompet.png, id=39, 602.25pt x 375.4025pt>
+<noChemoCompet.png, id=39, 458.46281pt x 246.9225pt>
 File: noChemoCompet.png Graphic file (type png)
 <use noChemoCompet.png>
 Package pdftex.def Info: noChemoCompet.png  used on input line 236. on input line 236.
-Package pdftex.def Info: Requested size: 341.43437pt x 212.83601pt on input line 236.
+Package pdftex.def Info: Requested size: 341.43437pt x 183.89906pt on input line 236.
 LaTeX Font Info:    Try loading font information for OT1+phv on input line 237.
  (/usr/share/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 237.
-<chemoCompet.png, id=41, 605.26125pt x 375.4025pt>
+<chemoCompet.png, id=41, 450.9347pt x 243.15843pt>
 File: chemoCompet.png Graphic file (type png)
 <use chemoCompet.png>
 Package pdftex.def Info: chemoCompet.png  used on input line 245. on input line 245.
-Package pdftex.def Info: Requested size: 341.43437pt x 211.77057pt on input line 245.
- [8] (./tumorgrowth.bbl
+Package pdftex.def Info: Requested size: 341.43437pt x 184.12334pt on input line 245.
+ [8] [9 <./noChemoCompet.png> <./chemoCompet.png>] (./tumorgrowth.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 4--8
 []\OT1/ptm/m/n/12 American Can-cer So-ci-ety (2017).  Can-cer facts & fi-gu-res 2017.
  []
@@ -647,12 +647,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--8
 \OT1/ptm/m/n/12 https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-
  []
 
-[9 <./noChemoCompet.png>]
+
 Underfull \hbox (badness 10000) in paragraph at lines 64--67
 []\OT1/ptm/m/n/12 World He-alth Or-ga-ni-za-tion (2017).  Can-cer fact sheet.
  []
 
-) [10 <./chemoCompet.png>] (./tumorgrowth.aux) ) 
+) [10] (./tumorgrowth.aux) ) 
 Here is how much of TeX's memory you used:
  4684 strings out of 492985
  65742 string characters out of 6138637
@@ -661,9 +661,9 @@ Here is how much of TeX's memory you used:
  29478 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,12n,28p,1229b,479s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/u
-rw/times/utmri8a.pfb>
-Output written on tumorgrowth.pdf (10 pages, 241992 bytes).
+{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb
+>
+Output written on tumorgrowth.pdf (10 pages, 229344 bytes).
 PDF statistics:
  103 PDF objects out of 1000 (max. 8388607)
  71 compressed objects within 1 object stream
