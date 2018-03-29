@@ -1,0 +1,6 @@
+swell direction - swell height - wind direction - wind speed - quality
+perfeito (clássico):		 			 60 - 1.2 - 265 -  4 - 7.46
+bom (dá uma brincadeira):	 			 83 - 0.8 -  60 -  6 - 2.00
+ruim (flat):							130 - 0.4 - 265 - 12 - 2.00
+bom (dá uma brincadeira): 29/03 6AM		 90 - 1.0 - 250 -  5 - 6.56
+ruim (flat): 29/03 6PM					 90 - 0.6 -  40 - 10 - 2.00
