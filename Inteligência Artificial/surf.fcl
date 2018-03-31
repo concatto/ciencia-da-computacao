@@ -49,9 +49,9 @@ FUZZIFY swell_height
 END_FUZZIFY
 
 DEFUZZIFY quality
-	TERM poor := (0, 0) (2, 1) (4, 0);
-	TERM moderate := (3, 0) (5, 1) (7, 0);
-	TERM great := (6, 0) (8, 1) (10, 0);
+	TERM poor := (0, 1) (2, 1) (4, 0);
+	TERM moderate := (2, 0) (4, 1) (6, 1) (8, 0);
+	TERM great := (6, 0) (8, 1) (10, 1);
 	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
 	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
 END_DEFUZZIFY
