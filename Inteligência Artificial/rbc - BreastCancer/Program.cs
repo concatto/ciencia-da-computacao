@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace BreastCancer
@@ -12,6 +13,7 @@ namespace BreastCancer
         public List<float> MeanWeights { get; set; }
         public List<float> ErrorWeights { get; set; }
         public List<float> ExtremeWeights { get; set; }
+        public double TestRatio { get; set; }
 
 
         // Creates a new randomized experiment setup, splitting the data in two parts
@@ -31,6 +33,7 @@ namespace BreastCancer
 
             CaseBase = dataset.GetRange(0, dataset.Count - testCount);
             TestSet = dataset.GetRange(dataset.Count - testCount, testCount);
+            TestRatio = testRatio;
         }
     }
 
@@ -41,7 +44,7 @@ namespace BreastCancer
 			return input.Select(row => new BreastCancerCase(row)).ToList();
 		}
 
-        static void RunExperiment(ExperimentSetup setup)
+        static double RunExperiment(ExperimentSetup setup)
         {
             int n = setup.TestSet.Count;
             int[,] confusionMatrix = new int[n, n]; // Implicitly filled with zeros
@@ -73,7 +76,7 @@ namespace BreastCancer
 
                     bool valid = match.Malignant == actual;
 
-                    float y = match.CompareTo(testCase, setup.MeanWeights, setup.ErrorWeights, setup.ExtremeWeights);
+                    double y = match.CompareTo(testCase, setup.MeanWeights, setup.ErrorWeights, setup.ExtremeWeights);
                     Console.WriteLine("\nSimilarity: " + y);
                     Console.WriteLine("Valid diagnosis: " + (valid ? "YES" : "NO"));
                     Console.WriteLine();
@@ -88,20 +91,89 @@ namespace BreastCancer
             // True Negatives + True Positives / Negatives + Positives
             double accuracy = (double) (confusionMatrix[0, 0] + confusionMatrix[1, 1]) / (double) n;
             Console.WriteLine("Accuracy: " + accuracy);
+
+            return accuracy;
+        }
+
+        static IEnumerable<List<float>> f(List<float> vals, int n, List<float> options)
+        {
+            foreach (float v in options)
+            {
+                List<float> copy = new List<float>(vals);
+                copy.Add(v);
+                if (n > 1) {
+                    foreach (List<float> z in f(copy, n - 1, options))
+                    {
+                        yield return z;
+                    }
+                } else {
+                    yield return copy;
+                }
+            }
+        }
+
+        static IEnumerable<List<float>> GenerateWeights(int n, List<float> options) {
+            foreach (List<float> z in f(new List<float>(), n, options))
+            {
+                yield return z;
+            }
+        }
+
+        static void ReplicateUntil(List<float> values, int targetCount) {
+            int n = values.Count;
+            while (values.Count < targetCount) {
+                values.AddRange(values.GetRange(0, n));
+            }
+        }
+
+        static void GenerateAndExecuteExperiments(List<BreastCancerCase> data)
+        {
+            int nChoices = 2;
+
+            List<float> weightOptions = Enumerable.Range(1, nChoices)
+                .Select(x => (float) x / nChoices)
+                .ToList();
+
+            List<double> ratioChoices = new List<double>() {0.2, 0.3};
+            int k = TumourFeatures.FeatureCount;
+
+            using (var writer = new StreamWriter("./experiments.csv"))
+            {
+                Enumerable.Range(1, k * 3).ToList()
+                    .ForEach(x => writer.Write("w" + x + ";"));
+
+                writer.WriteLine("ratio;acc");
+
+                foreach (double ratio in ratioChoices) {
+                    var generator = GenerateWeights(k, weightOptions);
+
+                    foreach (List<float> weights in generator)
+                    {
+                        ReplicateUntil(weights, k * 3);
+                        int replications = 5;
+                        //List<double> values = new List<double>();
+
+                        for (int i = 0; i < replications; i++) {
+                            ExperimentSetup setup = new ExperimentSetup(data, ratio);
+                            setup.MeanWeights = weights.GetRange(0, k);
+                            setup.ErrorWeights = weights.GetRange(k, k);
+                            setup.ExtremeWeights = weights.GetRange(k * 2, k);
+
+                            double accuracy = RunExperiment(setup);
+
+                            weights.ForEach(x => writer.Write(x + ";"));
+                            writer.WriteLine(ratio + ";" + accuracy);
+                        }
+                    }
+                }
+            }
         }
 
         static void Main(string[] args)
         {
             List<BreastCancerCase> data = Parse(Reader.Read("./data.csv", ','));
 
-            List<float> weights = Enumerable.Repeat(1f, TumourFeatures.FeatureCount).ToList();
-
-            ExperimentSetup setup = new ExperimentSetup(data, 0.3);
-            setup.MeanWeights = weights;
-            setup.ErrorWeights = weights;
-            setup.ExtremeWeights = weights;
-
-            RunExperiment(setup);
+            GenerateAndExecuteExperiments(data);
         }
     }
 }

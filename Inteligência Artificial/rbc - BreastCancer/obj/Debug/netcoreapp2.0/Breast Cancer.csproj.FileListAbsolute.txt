@@ -8,3 +8,13 @@
 /home/concatto/Breast Cancer/bin/Debug/netcoreapp2.0/Breast Cancer.pdb
 /home/concatto/Breast Cancer/obj/Debug/netcoreapp2.0/Breast Cancer.dll
 /home/concatto/Breast Cancer/obj/Debug/netcoreapp2.0/Breast Cancer.pdb
+/extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/bin/Debug/netcoreapp2.0/Breast Cancer.deps.json
+/extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/bin/Debug/netcoreapp2.0/Breast Cancer.runtimeconfig.json
+/extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/bin/Debug/netcoreapp2.0/Breast Cancer.runtimeconfig.dev.json
+/extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/bin/Debug/netcoreapp2.0/Breast Cancer.dll
+/extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/bin/Debug/netcoreapp2.0/Breast Cancer.pdb
+/extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/obj/Debug/netcoreapp2.0/Breast Cancer.csproj.CoreCompileInputs.cache
+/extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/obj/Debug/netcoreapp2.0/Breast Cancer.AssemblyInfoInputs.cache
+/extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/obj/Debug/netcoreapp2.0/Breast Cancer.AssemblyInfo.cs
+/extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/obj/Debug/netcoreapp2.0/Breast Cancer.dll
+/extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/obj/Debug/netcoreapp2.0/Breast Cancer.pdb

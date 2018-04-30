@@ -670,11 +670,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/concatto/Breast Cancer/Breast Cancer.csproj",
+      "projectUniqueName": "/extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/Breast Cancer.csproj",
       "projectName": "Breast Cancer",
-      "projectPath": "/home/concatto/Breast Cancer/Breast Cancer.csproj",
+      "projectPath": "/extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/Breast Cancer.csproj",
       "packagesPath": "/home/concatto/.nuget/packages/",
-      "outputPath": "/home/concatto/Breast Cancer/obj/",
+      "outputPath": "/extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/opt/dotnet/sdk/NuGetFallbackFolder"

@@ -54,59 +54,59 @@ namespace BreastCancer
             Console.WriteLine("Fractal Dimension: " + FractalDimension);
         }
 
-        public float CalculateSimilarity(TumourFeatures other, List<float> weights)
+        public double CalculateSimilarity(TumourFeatures other, List<float> weights)
         {
-            //Definir o min e max dos atributos
-            double maxRadius;
-            double maxRadius; 
-            double maxPerimeter;
-            double maxArea;
-            double maxConcavity;
-            double maxconcavePoints;
-            double maxSymmetry;
-            double maxFractalDimension;
-            
-            double minRadius;
-            double minRadius;
-            double minPerimeter;
-            double minArea;
-            double minConcavity;
-            double minconcavePoints;
-            double minSymmetry;
-            double minFractalDimension;
+            return 1;
 
-            List<double> similarities = new List<double>() {
-                1 - ((other.radius - this.radius) / maxRadius - minRadius),
-                1 - ((other.texture - this.texture) / maxTexture - minTexture),
-                1 - ((other.perimeter - this.perimeter) / maxPerimeter - minPerimeter),
-                1 - ((other.area - this.area) / maxArea - minArea),
-                1 - ((other.concavity - this.concavity) / maxConcavity - minConcavity),
-                1 - ((other.concavePoints - this.concavePoints) / maxConcavePoints - minConcavePoints),
-                1 - ((other.symmetry - this.symmetry) / maxSymmetry - minSymmetry),
-                1 - ((other.fractalDimension - this.fractalDimension) / maxFractalDimension - minFractalDimension)
-            };
+            // //Definir o min e max dos atributos
+            // double maxRadius;
+            // double maxPerimeter;
+            // double maxArea;
+            // double maxConcavity;
+            // double maxConcavePoints;
+            // double maxSymmetry;
+            // double maxFractalDimension;
+            
+            // double minRadius;
+            // double minPerimeter;
+            // double minArea;
+            // double minConcavity;
+            // double minConcavePoints;
+            // double minSymmetry;
+            // double minFractalDimension;
 
-            /*double similarityRadius = 1 - ((other.radius - this.radius) / maxRadius - minRadius); 
-            double similarityTexture = 1 - ((other.texture - this.texture) / maxTexture - minTexture);
-            double similarityPerimeter = 1 - ((other.perimeter - this.perimeter) / maxPerimeter - minPerimeter);
-            double similarityArea = 1 - ((other.area - this.area) / maxArea - minArea);
-            double similaritySmoothness = 1 - ((other.area - this.area) / maxArea - minArea);
-            double similarityConcavity = 1 - ((other.concavity - this.concavity) / maxConcavity - minConcavity);
-            double similarityConcavePoints = 1 - ((other.concavePoints - this.concavePoints) / maxConcavePoints - minConcavePoints);
-            double similaritySymmetry = 1 - ((other.symmetry - this.symmetry) / maxSymmetry - minSymmetry);
-            double similarityFractalDimension = 1- ((other.fractalDimension - this.fractalDimension) / maxFractalDimension - minFractalDimension);*/
-            
-            double similarityTotal = 0.0;
-            double weightSum = 0.0;
+            // List<double> similarities = new List<double>() {
+            //     1 - ((other.Radius - this.Radius) / maxRadius - minRadius),
+            //     1 - ((other.Texture - this.Texture) / maxTexture - minTexture),
+            //     1 - ((other.Perimeter - this.Perimeter) / maxPerimeter - minPerimeter),
+            //     1 - ((other.Area - this.Area) / maxArea - minArea),
+            //     1 - ((other.Concavity - this.Concavity) / maxConcavity - minConcavity),
+            //     1 - ((other.ConcavePoints - this.ConcavePoints) / maxConcavePoints - minConcavePoints),
+            //     1 - ((other.Symmetry - this.Symmetry) / maxSymmetry - minSymmetry),
+            //     1 - ((other.FractalDimension - this.FractalDimension) / maxFractalDimension - minFractalDimension)
+            // };
 
-            for (int index = 0; index < similarities.Count; index++) {
-                similarityTotal += weights[index] * similarities[index];
-                weightSum += weights[index];
-            }
+            // /*double similarityRadius = 1 - ((other.radius - this.radius) / maxRadius - minRadius); 
+            // double similarityTexture = 1 - ((other.texture - this.texture) / maxTexture - minTexture);
+            // double similarityPerimeter = 1 - ((other.perimeter - this.perimeter) / maxPerimeter - minPerimeter);
+            // double similarityArea = 1 - ((other.area - this.area) / maxArea - minArea);
+            // double similaritySmoothness = 1 - ((other.area - this.area) / maxArea - minArea);
+            // double similarityConcavity = 1 - ((other.concavity - this.concavity) / maxConcavity - minConcavity);
+            // double similarityConcavePoints = 1 - ((other.concavePoints - this.concavePoints) / maxConcavePoints - minConcavePoints);
+            // double similaritySymmetry = 1 - ((other.symmetry - this.symmetry) / maxSymmetry - minSymmetry);
+            // double similarityFractalDimension = 1- ((other.fractalDimension - this.fractalDimension) / maxFractalDimension - minFractalDimension);*/
             
-            similarityTotal = similarityTotal / weightSum;
+            // double similarityTotal = 0.0;
+            // double weightSum = 0.0;
+
+            // for (int index = 0; index < similarities.Count; index++) {
+            //     similarityTotal += weights[index] * similarities[index];
+            //     weightSum += weights[index];
+            // }
             
-            return similarityTotal;
+            // similarityTotal = similarityTotal / weightSum;
+            
+            // return similarityTotal;
         }
     }
 }

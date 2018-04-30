@@ -46,10 +46,10 @@ namespace BreastCancer
         }
 
         // Similarity comparison
-        public float CompareTo(BreastCancerCase other, List<float> meanWeights,
+        public double CompareTo(BreastCancerCase other, List<float> meanWeights,
             List<float> errorWeights, List<float> extremeWeights)
         {
-            List<float> values = new List<float>();
+            List<double> values = new List<double>();
             values.Add(this.Mean.CalculateSimilarity(other.Mean, meanWeights));
             values.Add(this.StandardError.CalculateSimilarity(other.StandardError, errorWeights));
             values.Add(this.Extreme.CalculateSimilarity(other.Extreme, extremeWeights));
