@@ -18,3 +18,13 @@
 /extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/obj/Debug/netcoreapp2.0/Breast Cancer.AssemblyInfo.cs
 /extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/obj/Debug/netcoreapp2.0/Breast Cancer.dll
 /extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/obj/Debug/netcoreapp2.0/Breast Cancer.pdb
+/home/concatto/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/bin/Debug/netcoreapp2.0/Breast Cancer.deps.json
+/home/concatto/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/bin/Debug/netcoreapp2.0/Breast Cancer.runtimeconfig.json
+/home/concatto/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/bin/Debug/netcoreapp2.0/Breast Cancer.runtimeconfig.dev.json
+/home/concatto/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/bin/Debug/netcoreapp2.0/Breast Cancer.dll
+/home/concatto/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/bin/Debug/netcoreapp2.0/Breast Cancer.pdb
+/home/concatto/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/obj/Debug/netcoreapp2.0/Breast Cancer.csproj.CoreCompileInputs.cache
+/home/concatto/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/obj/Debug/netcoreapp2.0/Breast Cancer.AssemblyInfoInputs.cache
+/home/concatto/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/obj/Debug/netcoreapp2.0/Breast Cancer.AssemblyInfo.cs
+/home/concatto/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/obj/Debug/netcoreapp2.0/Breast Cancer.dll
+/home/concatto/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/obj/Debug/netcoreapp2.0/Breast Cancer.pdb

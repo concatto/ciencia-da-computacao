@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace BreastCancer
 {
@@ -44,7 +46,7 @@ namespace BreastCancer
 			return input.Select(row => new BreastCancerCase(row)).ToList();
 		}
 
-        static double RunExperiment(ExperimentSetup setup)
+        static double RunExperiment(ExperimentSetup setup, bool print = false)
         {
             int n = setup.TestSet.Count;
             int[,] confusionMatrix = new int[n, n]; // Implicitly filled with zeros
@@ -56,9 +58,12 @@ namespace BreastCancer
                         testCase, setup.MeanWeights, setup.ErrorWeights, setup.ExtremeWeights
                     )).ToList();
 
-                Console.WriteLine("Case under evaluation: ");
-                testCase.Print();
-                Console.WriteLine("\nMost similar cases in the database:\n");
+                if (print)
+                {
+                    Console.WriteLine("Case under evaluation: ");
+                    testCase.Print();
+                    Console.WriteLine("\nMost similar cases in the database:\n");
+                }
 
                 bool actual = testCase.Malignant;
                 bool predicted = ordered[0].Malignant;
@@ -67,30 +72,37 @@ namespace BreastCancer
                 int column = actual ? 0 : 1;
                 confusionMatrix[row, column]++;
 
-                for (int i = 0; i < 5; i++)
+                if (print)
                 {
-                    BreastCancerCase match = ordered[i];
+                    for (int i = 0; i < 5; i++)
+                    {
+                        BreastCancerCase match = ordered[i];
 
-                    Console.WriteLine("Match n. #" + i);
-                    match.Print();
+                        double y = match.CompareTo(testCase, setup.MeanWeights, setup.ErrorWeights, setup.ExtremeWeights);
 
-                    bool valid = match.Malignant == actual;
+                        Console.WriteLine("Match n. #" + i);
+                        match.Print();
 
-                    double y = match.CompareTo(testCase, setup.MeanWeights, setup.ErrorWeights, setup.ExtremeWeights);
-                    Console.WriteLine("\nSimilarity: " + y);
-                    Console.WriteLine("Valid diagnosis: " + (valid ? "YES" : "NO"));
-                    Console.WriteLine();
+                        bool valid = match.Malignant == actual;
+
+                        Console.WriteLine("\nSimilarity: " + y);
+                        Console.WriteLine("Valid diagnosis: " + (valid ? "YES" : "NO"));
+                        Console.WriteLine();
+                    }
                 }
             }
 
-            Console.WriteLine("Outcome:");
-            Console.WriteLine("\tB\tM");
-            Console.WriteLine("B\t" + confusionMatrix[0, 0] + "\t" + confusionMatrix[0, 1]);
-            Console.WriteLine("M\t" + confusionMatrix[1, 0] + "\t" + confusionMatrix[1, 1]);
-
             // True Negatives + True Positives / Negatives + Positives
             double accuracy = (double) (confusionMatrix[0, 0] + confusionMatrix[1, 1]) / (double) n;
-            Console.WriteLine("Accuracy: " + accuracy);
+
+            if (print)
+            {
+                Console.WriteLine("Outcome:");
+                Console.WriteLine("\tB\tM");
+                Console.WriteLine("B\t" + confusionMatrix[0, 0] + "\t" + confusionMatrix[0, 1]);
+                Console.WriteLine("M\t" + confusionMatrix[1, 0] + "\t" + confusionMatrix[1, 1]);
+                Console.WriteLine("Accuracy: " + accuracy);
+            }
 
             return accuracy;
         }
@@ -140,17 +152,21 @@ namespace BreastCancer
             using (var writer = new StreamWriter("./experiments.csv"))
             {
                 Enumerable.Range(1, k * 3).ToList()
-                    .ForEach(x => writer.Write("w" + x + ";"));
+                    .ForEach(x => writer.Write("w" + x + ","));
 
-                writer.WriteLine("ratio;acc");
+                writer.WriteLine("ratio,acc");
 
                 foreach (double ratio in ratioChoices) {
                     var generator = GenerateWeights(k, weightOptions);
 
+                    int replications = 5;
+                    int combinations = (int) Math.Pow(weightOptions.Count, k) * replications;
+                    int current = 0;
+
                     foreach (List<float> weights in generator)
                     {
                         ReplicateUntil(weights, k * 3);
-                        int replications = 5;
+                    
                         //List<double> values = new List<double>();
 
                         for (int i = 0; i < replications; i++) {
@@ -159,10 +175,12 @@ namespace BreastCancer
                             setup.ErrorWeights = weights.GetRange(k, k);
                             setup.ExtremeWeights = weights.GetRange(k * 2, k);
 
-                            double accuracy = RunExperiment(setup);
+                            double accuracy = RunExperiment(setup, true);
 
-                            weights.ForEach(x => writer.Write(x + ";"));
-                            writer.WriteLine(ratio + ";" + accuracy);
+                            weights.ForEach(x => writer.Write(x + ","));
+                            writer.WriteLine(ratio + "," + accuracy);
+
+                            Console.WriteLine((current++) + "/" + combinations + " => " + accuracy);
                         }
                     }
                 }
@@ -171,6 +189,8 @@ namespace BreastCancer
 
         static void Main(string[] args)
         {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+
             List<BreastCancerCase> data = Parse(Reader.Read("./data.csv", ','));
 
             GenerateAndExecuteExperiments(data);
