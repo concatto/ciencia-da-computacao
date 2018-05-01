@@ -56,57 +56,48 @@ namespace BreastCancer
 
         public double CalculateSimilarity(TumourFeatures other, List<float> weights)
         {
-            return 1;
-
-            // //Definir o min e max dos atributos
-            // double maxRadius;
-            // double maxPerimeter;
-            // double maxArea;
-            // double maxConcavity;
-            // double maxConcavePoints;
-            // double maxSymmetry;
-            // double maxFractalDimension;
+            float maxRadius = 30;
+            float maxTexture = 31; 
+            float maxPerimeter = 200;
+            float maxArea = 2500;
+            float maxConcavity = 140;
+            float maxConcavePoints = 340;
+            float maxSymmetry = 400;
+            float maxFractalDimension = 250;
             
-            // double minRadius;
-            // double minPerimeter;
-            // double minArea;
-            // double minConcavity;
-            // double minConcavePoints;
-            // double minSymmetry;
-            // double minFractalDimension;
+            float minRadius = 1;
+            float minTexture = 1;
+            float minPerimeter = 1;
+            float minArea = 100;
+            float minConcavity = 1;
+            float minConcavePoints = 10;
+            float minSymmetry = 0;
+            float minFractalDimension = 0;
 
-            // List<double> similarities = new List<double>() {
-            //     1 - ((other.Radius - this.Radius) / maxRadius - minRadius),
-            //     1 - ((other.Texture - this.Texture) / maxTexture - minTexture),
-            //     1 - ((other.Perimeter - this.Perimeter) / maxPerimeter - minPerimeter),
-            //     1 - ((other.Area - this.Area) / maxArea - minArea),
-            //     1 - ((other.Concavity - this.Concavity) / maxConcavity - minConcavity),
-            //     1 - ((other.ConcavePoints - this.ConcavePoints) / maxConcavePoints - minConcavePoints),
-            //     1 - ((other.Symmetry - this.Symmetry) / maxSymmetry - minSymmetry),
-            //     1 - ((other.FractalDimension - this.FractalDimension) / maxFractalDimension - minFractalDimension)
-            // };
+            List<float> similarities = new List<float>() {
+                1 - ((other.Radius - this.Radius) / maxRadius - minRadius),
+                1 - ((other.Texture - this.Texture) / maxTexture - minTexture),
+                1 - ((other.Perimeter - this.Perimeter) / maxPerimeter - minPerimeter),
+                1 - ((other.Area - this.Area) / maxArea - minArea),
+                1 - ((other.Concavity - this.Concavity) / maxConcavity - minConcavity),
+                1 - ((other.ConcavePoints - this.ConcavePoints) / maxConcavePoints - minConcavePoints),
+                1 - ((other.Symmetry - this.Symmetry) / maxSymmetry - minSymmetry),
+                1 - ((other.FractalDimension - this.FractalDimension) / maxFractalDimension - minFractalDimension)
+            };
 
-            // /*double similarityRadius = 1 - ((other.radius - this.radius) / maxRadius - minRadius); 
-            // double similarityTexture = 1 - ((other.texture - this.texture) / maxTexture - minTexture);
-            // double similarityPerimeter = 1 - ((other.perimeter - this.perimeter) / maxPerimeter - minPerimeter);
-            // double similarityArea = 1 - ((other.area - this.area) / maxArea - minArea);
-            // double similaritySmoothness = 1 - ((other.area - this.area) / maxArea - minArea);
-            // double similarityConcavity = 1 - ((other.concavity - this.concavity) / maxConcavity - minConcavity);
-            // double similarityConcavePoints = 1 - ((other.concavePoints - this.concavePoints) / maxConcavePoints - minConcavePoints);
-            // double similaritySymmetry = 1 - ((other.symmetry - this.symmetry) / maxSymmetry - minSymmetry);
-            // double similarityFractalDimension = 1- ((other.fractalDimension - this.fractalDimension) / maxFractalDimension - minFractalDimension);*/
+           
             
-            // double similarityTotal = 0.0;
-            // double weightSum = 0.0;
+            float similarityTotal = 0;
+            float weightSum = 0;
 
-            // for (int index = 0; index < similarities.Count; index++) {
-            //     similarityTotal += weights[index] * similarities[index];
-            //     weightSum += weights[index];
-            // }
+            for (int index = 0; index < similarities.Count; index++) {
+                similarityTotal += weights[index] * similarities[index];
+                weightSum += weights[index];
+            }
             
-            // similarityTotal = similarityTotal / weightSum;
+            similarityTotal = similarityTotal / weightSum;
             
-            // return similarityTotal;
+            return similarityTotal;
         }
     }
 }
