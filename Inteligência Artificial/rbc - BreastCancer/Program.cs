@@ -160,12 +160,15 @@ namespace BreastCancer
                 //foreach (double ratio in ratioChoices) {
                     var generator = GenerateWeights(k, weightOptions);
 
-                    int replications = 5;
+                    //int replications = 20;
+                    int replications = 1;
                     int combinations = (int) Math.Pow(weightOptions.Count, k) * replications;
                     int current = 0;
 
-                    foreach (List<float> weights in generator)
-                    {
+                    List<float> weights = new List<float>() {1, 0.5f, 1, 1, 1, 0.5f, 1, 1, 0.5f, 0.5f};
+
+                    //foreach (List<float> weights in generator)
+                    //{
                         ReplicateUntil(weights, k * 3);
                     
                         //List<double> values = new List<double>();
@@ -176,14 +179,14 @@ namespace BreastCancer
                             setup.ErrorWeights = weights.GetRange(k, k);
                             setup.ExtremeWeights = weights.GetRange(k * 2, k);
 
-                            double accuracy = RunExperiment(setup, false);
+                            double accuracy = RunExperiment(setup, true);
 
                             weights.ForEach(x => writer.Write(x + ","));
                             writer.WriteLine(ratio + "," + accuracy);
 
                             Console.WriteLine((current++) + "/" + combinations + " => " + accuracy);
                         }
-                    }
+                    //}
                 //}
             }
         }
@@ -195,8 +198,8 @@ namespace BreastCancer
             List<BreastCancerCase> data = Parse(Reader.Read("./data.csv", ','));
 
             Parallel.Invoke(
-                () => GenerateAndExecuteExperiments(data, 0.1),
-                () => GenerateAndExecuteExperiments(data, 0.2),
+                //() => GenerateAndExecuteExperiments(data, 0.1),
+                //() => GenerateAndExecuteExperiments(data, 0.2),
                 () => GenerateAndExecuteExperiments(data, 0.3)
             );
             

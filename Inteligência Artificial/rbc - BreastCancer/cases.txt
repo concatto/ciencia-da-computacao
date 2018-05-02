@@ -1,0 +1,239 @@
+Case under evaluation:
+Breast Cancer Case #869931
+Mean of the features:
+Radius: 13.74
+Texture: 17.91
+Perimeter: 88.12
+Area: 585
+Smoothness: 0.07944
+Compactness: 0.06376
+Concavity: 0.02881
+Concave Points: 0.01329
+Symmetry: 0.1473
+Fractal Dimension: 0.0558
+Standard Error of the features:
+Radius: 0.25
+Texture: 0.7574
+Perimeter: 1.573
+Area: 21.47
+Smoothness: 0.002838
+Compactness: 0.01592
+Concavity: 0.0178
+Concave Points: 0.005828
+Symmetry: 0.01329
+Fractal Dimension: 0.001976
+Extreme values of the features:
+Radius: 15.34
+Texture: 22.46
+Perimeter: 97.19
+Area: 725.9
+Smoothness: 0.09711
+Compactness: 0.1824
+Concavity: 0.1564
+Concave Points: 0.06019
+Symmetry: 0.235
+Fractal Dimension: 0.07014
+Diagnosis: Benign
+
+Most similar cases in the database:
+
+Match n. #0
+Breast Cancer Case #86561
+Mean of the features:
+Radius: 13.85
+Texture: 17.21
+Perimeter: 88.44
+Area: 588.7
+Smoothness: 0.08785
+Compactness: 0.06136
+Concavity: 0.0142
+Concave Points: 0.01141
+Symmetry: 0.1614
+Fractal Dimension: 0.0589
+Standard Error of the features:
+Radius: 0.2185
+Texture: 0.8561
+Perimeter: 1.495
+Area: 17.91
+Smoothness: 0.004599
+Compactness: 0.009169
+Concavity: 0.009127
+Concave Points: 0.004814
+Symmetry: 0.01247
+Fractal Dimension: 0.001708
+Extreme values of the features:
+Radius: 15.49
+Texture: 23.58
+Perimeter: 100.3
+Area: 725.9
+Smoothness: 0.1157
+Compactness: 0.135
+Concavity: 0.08115
+Concave Points: 0.05104
+Symmetry: 0.2364
+Fractal Dimension: 0.07182
+Diagnosis: Benign
+
+Similarity: 16.4970531463623
+Valid diagnosis: YES
+
+Match n. #1
+Breast Cancer Case #912558
+Mean of the features:
+Radius: 13.7
+Texture: 17.64
+Perimeter: 87.76
+Area: 571.1
+Smoothness: 0.0995
+Compactness: 0.07957
+Concavity: 0.04548
+Concave Points: 0.0316
+Symmetry: 0.1732
+Fractal Dimension: 0.06088
+Standard Error of the features:
+Radius: 0.2431
+Texture: 0.9462
+Perimeter: 1.564
+Area: 20.64
+Smoothness: 0.003245
+Compactness: 0.008186
+Concavity: 0.01698
+Concave Points: 0.009233
+Symmetry: 0.01285
+Fractal Dimension: 0.001524
+Extreme values of the features:
+Radius: 14.96
+Texture: 23.53
+Perimeter: 95.78
+Area: 686.5
+Smoothness: 0.1199
+Compactness: 0.1346
+Concavity: 0.1742
+Concave Points: 0.09077
+Symmetry: 0.2518
+Fractal Dimension: 0.0696
+Diagnosis: Benign
+
+Similarity: 16.4966710408529
+Valid diagnosis: YES
+
+=============================================
+
+Case under evaluation:
+Breast Cancer Case #874662
+Mean of the features:
+Radius: 11.81
+Texture: 17.39
+Perimeter: 75.27
+Area: 428.9
+Smoothness: 0.1007
+Compactness: 0.05562
+Concavity: 0.02353
+Concave Points: 0.01553
+Symmetry: 0.1718
+Fractal Dimension: 0.0578
+Standard Error of the features:
+Radius: 0.1859
+Texture: 1.926
+Perimeter: 1.011
+Area: 14.47
+Smoothness: 0.007831
+Compactness: 0.008776
+Concavity: 0.01556
+Concave Points: 0.00624
+Symmetry: 0.03139
+Fractal Dimension: 0.001988
+Extreme values of the features:
+Radius: 12.57
+Texture: 26.48
+Perimeter: 79.57
+Area: 489.5
+Smoothness: 0.1356
+Compactness: 0.1
+Concavity: 0.08803
+Concave Points: 0.04306
+Symmetry: 0.32
+Fractal Dimension: 0.06576
+Diagnosis: Benign
+
+Most similar cases in the database:
+
+Match n. #0
+Breast Cancer Case #893783
+Mean of the features:
+Radius: 11.7
+Texture: 19.11
+Perimeter: 74.33
+Area: 418.7
+Smoothness: 0.08814
+Compactness: 0.05253
+Concavity: 0.01583
+Concave Points: 0.01148
+Symmetry: 0.1936
+Fractal Dimension: 0.06128
+Standard Error of the features:
+Radius: 0.1601
+Texture: 1.43
+Perimeter: 1.109
+Area: 11.28
+Smoothness: 0.006064
+Compactness: 0.00911
+Concavity: 0.01042
+Concave Points: 0.007638
+Symmetry: 0.02349
+Fractal Dimension: 0.001661
+Extreme values of the features:
+Radius: 12.61
+Texture: 26.55
+Perimeter: 80.92
+Area: 483.1
+Smoothness: 0.1223
+Compactness: 0.1087
+Concavity: 0.07915
+Concave Points: 0.05741
+Symmetry: 0.3487
+Fractal Dimension: 0.06958
+Diagnosis: Benign
+
+Similarity: 16.4970022837321
+Valid diagnosis: YES
+
+Match n. #1
+Breast Cancer Case #891703
+Mean of the features:
+Radius: 11.85
+Texture: 17.46
+Perimeter: 75.54
+Area: 432.7
+Smoothness: 0.08372
+Compactness: 0.05642
+Concavity: 0.02688
+Concave Points: 0.0228
+Symmetry: 0.1875
+Fractal Dimension: 0.05715
+Standard Error of the features:
+Radius: 0.207
+Texture: 1.238
+Perimeter: 1.234
+Area: 13.88
+Smoothness: 0.007595
+Compactness: 0.015
+Concavity: 0.01412
+Concave Points: 0.008578
+Symmetry: 0.01792
+Fractal Dimension: 0.001784
+Extreme values of the features:
+Radius: 13.06
+Texture: 25.75
+Perimeter: 84.35
+Area: 517.8
+Smoothness: 0.1369
+Compactness: 0.1758
+Concavity: 0.1316
+Concave Points: 0.0914
+Symmetry: 0.3101
+Fractal Dimension: 0.07007
+Diagnosis: Benign
+
+Similarity: 16.4960784912109
+Valid diagnosis: YES

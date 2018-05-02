@@ -43,7 +43,8 @@ with open("experiments_merged.csv", "r") as input:
             i += 1
         
 
-    for v in sorted(means, key=lambda x: x[0]):
+    three = [z for z in means if z[1] == '0.3']
+    for v in sorted(three, key=lambda x: x[-1]):
         print(weight_choices[v[0]])
         print(v)
 
