@@ -75,14 +75,14 @@ namespace BreastCancer
             float minFractalDimension = 0;
 
             List<float> similarities = new List<float>() {
-                1 - ((other.Radius - this.Radius) / maxRadius - minRadius),
-                1 - ((other.Texture - this.Texture) / maxTexture - minTexture),
-                1 - ((other.Perimeter - this.Perimeter) / maxPerimeter - minPerimeter),
-                1 - ((other.Area - this.Area) / maxArea - minArea),
-                1 - ((other.Concavity - this.Concavity) / maxConcavity - minConcavity),
-                1 - ((other.ConcavePoints - this.ConcavePoints) / maxConcavePoints - minConcavePoints),
-                1 - ((other.Symmetry - this.Symmetry) / maxSymmetry - minSymmetry),
-                1 - ((other.FractalDimension - this.FractalDimension) / maxFractalDimension - minFractalDimension)
+                1 - (Math.Abs(other.Radius - this.Radius) / maxRadius - minRadius),
+                1 - (Math.Abs(other.Texture - this.Texture) / maxTexture - minTexture),
+                1 - (Math.Abs(other.Perimeter - this.Perimeter) / maxPerimeter - minPerimeter),
+                1 - (Math.Abs(other.Area - this.Area) / maxArea - minArea),
+                1 - (Math.Abs(other.Concavity - this.Concavity) / maxConcavity - minConcavity),
+                1 - (Math.Abs(other.ConcavePoints - this.ConcavePoints) / maxConcavePoints - minConcavePoints),
+                1 - (Math.Abs(other.Symmetry - this.Symmetry) / maxSymmetry - minSymmetry),
+                1 - (Math.Abs(other.FractalDimension - this.FractalDimension) / maxFractalDimension - minFractalDimension)
             };
 
            

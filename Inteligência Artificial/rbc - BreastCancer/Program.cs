@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace BreastCancer
 {
@@ -68,8 +69,8 @@ namespace BreastCancer
                 bool actual = testCase.Malignant;
                 bool predicted = ordered[0].Malignant;
 
-                int row = predicted ? 0 : 1;
-                int column = actual ? 0 : 1;
+                int row = predicted ? 1 : 0;
+                int column = actual ? 1 : 0;
                 confusionMatrix[row, column]++;
 
                 if (print)
@@ -138,7 +139,7 @@ namespace BreastCancer
             }
         }
 
-        static void GenerateAndExecuteExperiments(List<BreastCancerCase> data)
+        static void GenerateAndExecuteExperiments(List<BreastCancerCase> data, double ratio)
         {
             int nChoices = 2;
 
@@ -146,17 +147,17 @@ namespace BreastCancer
                 .Select(x => (float) x / nChoices)
                 .ToList();
 
-            List<double> ratioChoices = new List<double>() {0.2, 0.3};
+            // List<double> ratioChoices = new List<double>() {0.1, 0.2, 0.3};
             int k = TumourFeatures.FeatureCount;
 
-            using (var writer = new StreamWriter("./experiments.csv"))
+            using (var writer = new StreamWriter("./experiments" + ratio + ".csv"))
             {
                 Enumerable.Range(1, k * 3).ToList()
                     .ForEach(x => writer.Write("w" + x + ","));
 
                 writer.WriteLine("ratio,acc");
 
-                foreach (double ratio in ratioChoices) {
+                //foreach (double ratio in ratioChoices) {
                     var generator = GenerateWeights(k, weightOptions);
 
                     int replications = 5;
@@ -175,7 +176,7 @@ namespace BreastCancer
                             setup.ErrorWeights = weights.GetRange(k, k);
                             setup.ExtremeWeights = weights.GetRange(k * 2, k);
 
-                            double accuracy = RunExperiment(setup, true);
+                            double accuracy = RunExperiment(setup, false);
 
                             weights.ForEach(x => writer.Write(x + ","));
                             writer.WriteLine(ratio + "," + accuracy);
@@ -183,7 +184,7 @@ namespace BreastCancer
                             Console.WriteLine((current++) + "/" + combinations + " => " + accuracy);
                         }
                     }
-                }
+                //}
             }
         }
 
@@ -193,7 +194,12 @@ namespace BreastCancer
 
             List<BreastCancerCase> data = Parse(Reader.Read("./data.csv", ','));
 
-            GenerateAndExecuteExperiments(data);
+            Parallel.Invoke(
+                () => GenerateAndExecuteExperiments(data, 0.1),
+                () => GenerateAndExecuteExperiments(data, 0.2),
+                () => GenerateAndExecuteExperiments(data, 0.3)
+            );
+            
         }
     }
 }

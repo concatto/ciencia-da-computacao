@@ -664,23 +664,23 @@
     ]
   },
   "packageFolders": {
-    "/home/suro/.nuget/packages/": {},
-    "/home/suro/dotnet/sdk/NuGetFallbackFolder": {}
+    "/home/concatto/.nuget/packages/": {},
+    "/opt/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/suro/Área de Trabalho/faculdade/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/Breast Cancer.csproj",
+      "projectUniqueName": "/extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/Breast Cancer.csproj",
       "projectName": "Breast Cancer",
-      "projectPath": "/home/suro/Área de Trabalho/faculdade/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/Breast Cancer.csproj",
-      "packagesPath": "/home/suro/.nuget/packages/",
-      "outputPath": "/home/suro/Área de Trabalho/faculdade/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/obj/",
+      "projectPath": "/extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/Breast Cancer.csproj",
+      "packagesPath": "/home/concatto/.nuget/packages/",
+      "outputPath": "/extra/ciencia-da-computacao/Inteligência Artificial/rbc - BreastCancer/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/home/suro/dotnet/sdk/NuGetFallbackFolder"
+        "/opt/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/home/suro/.nuget/NuGet/NuGet.Config"
+        "/home/concatto/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
