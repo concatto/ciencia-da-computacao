@@ -1,7 +1,7 @@
 import numpy as np
 
 def sigmoid(x):
-	return 1 / (1 + np.exp(-x))
+    return 1 / (1 + np.exp(-x))
 
 
 class Layer:
@@ -29,18 +29,39 @@ class NeuralNetwork:
 		}
 
 
-	def activate(self, z, method):
-		activation_function = self.activations[method]
-		return activation_function(z)
+	def activate(self, layer):
+		activation_function = self.activations[layer.activation]
+		return activation_function(layer.z)
 
-	
+	def activation_gradient(self, layer):
+		derivative = self.activation_derivatives[layer.activation]
+		return derivative(layer.z)
+
+
+	def compute_gradients(self, y):
+		print("What was expected:")
+		print(y)
+		print("Gradients (reversed)")
+		previous_layer = None
+		for i, layer in enumerate(reversed(self.layers)):
+			error = None
+			if i == 0:	# this is the output layer
+				error = layer.a - y
+			else:		# this is a hidden or input layer
+				error = np.dot(previous_layer.gradients, previous_layer.weights.T)
+
+			print("Layer {0}".format(i))
+			print("Error")
+			print(error)
+			print("Gradients")
+			layer.gradients = np.multiply(error, self.activation_gradient(layer))
+			print(layer.gradients)
+			previous_layer = layer
+
+
 	def compute_loss(self, net_output, expected_output):
 		return np.mean(np.square(expected_output - net_output), axis=1)
 
-	def output_derivative(self):
-		last_layer = self.layers[-1]
-		derivative = self.activation_derivatives[last_layer.activation]
-		return derivative(last_layer.z)
 
 	def initialize_layers(self, input_size):
 		previous_size = input_size
@@ -52,10 +73,20 @@ class NeuralNetwork:
 			layer.initialize(previous_size)
 
 
+	def update_weights(self, x):
+		previous_output = x
+		for i, layer in enumerate(self.layers):
+			delta = np.dot(previous_output.T, layer.gradients)
+			print("Delta of {0}".format(i))
+			print(delta)
+			previous_output = layer.a
+
+
+
 	def fit(self, training_values, expected_output, output_activation='sigmoid'):
 		x = np.matrix(training_values)
 		y = np.matrix(expected_output)
-		
+
 		print("Network input (un-scaled)")
 		print(x)
 
@@ -68,21 +99,21 @@ class NeuralNetwork:
 
 		# Initialize the weights of all layers
 		self.initialize_layers(x.shape[1])
-		
+
 		self.layers[0].weights = np.matrix([
 			[0.15, 0.25],
 			[0.20, 0.3]
 		])
-		
+
 		self.layers[0].biases = np.matrix([[0.35, 0.35]])
-		
+
 		self.layers[1].weights = np.matrix([
 			[0.4, 0.5],
 			[0.45, 0.55]
 		])
 
 		self.layers[1].biases = np.matrix([[0.6, 0.6]])
-		
+
 		# Define the "last layer output" as the scaled input values
 		previous_x = x / x_max
 		for i, layer in enumerate(self.layers):
@@ -98,29 +129,34 @@ class NeuralNetwork:
 			# layer and the current layer's weights, then add the biases
 			# of the current layer.
 			layer.z = np.dot(previous_x, layer.weights) + layer.biases
-			
+
 			print(layer.z)
-			print("Activated")
 
 			# Apply the activation function to every value of the matrix,
 			# element by element.
-			layer.a = self.activate(layer.z, layer.activation)
+			layer.a = self.activate(layer)
 
+			print("Activated")
 			print(layer.a)
 
 			# Store the result for use in the next iteration
 			previous_x = layer.a
 
+		self.compute_gradients(y / y_max)
+		self.update_weights(x / x_max)
+
 		# Scale back the values
 		output = previous_x * y_max
-		errors = output - expected_output
-		print("Errors:")
-		print(errors)
-		backpropagating_error = np.multiply(errors, self.output_derivative())
-		print("Backpropagating errors of the output:")
-		print(backpropagating_error)
-	
-		
+
+		#self.compute_gradients(output)
+		#errors = output - expected_output
+		#print("Errors:")
+		#print(errors)
+		#backpropagating_error = np.multiply(errors, self.activation_gradient(self.layers[-1]))
+		#print("Backpropagating errors of the output:")
+		#print(backpropagating_error)
+
+
 		print("Network output (un-scaled)")
 		print(output)
 		print("Error")
