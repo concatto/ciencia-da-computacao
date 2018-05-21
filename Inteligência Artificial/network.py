@@ -77,6 +77,13 @@ class NeuralNetwork:
 		previous_output = x
 		for i, layer in enumerate(self.layers):
 			delta = np.dot(previous_output.T, layer.gradients)
+
+			weights_delta = np.sum(delta, axis=0)
+			biases_delta = np.sum(layer.gradients, axis=0)
+
+			layer.weights -= np.multiply(weights_delta, self.learning_rate)
+			layer.biases -= np.multiply(biases_delta, self.learning_rate)
+
 			print("Delta of {0}".format(i))
 			print(delta)
 			previous_output = layer.a
@@ -91,8 +98,8 @@ class NeuralNetwork:
 		print(x)
 
 		# Compute the maximum values of the input and output for rescaling
-		x_max = np.max(x) * 0 + 1
-		y_max = np.max(y) * 0 + 1
+		x_max = np.max(x)
+		y_max = np.max(y)
 
 		# Insert the output layer as the last layer
 		self.add_layer(Layer(y.shape[1], activation=output_activation))
@@ -100,70 +107,72 @@ class NeuralNetwork:
 		# Initialize the weights of all layers
 		self.initialize_layers(x.shape[1])
 
-		self.layers[0].weights = np.matrix([
-			[0.15, 0.25],
-			[0.20, 0.3]
-		])
 
-		self.layers[0].biases = np.matrix([[0.35, 0.35]])
+		#self.layers[0].weights = np.matrix([
+		#	[0.15, 0.25],
+		#	[0.20, 0.3]
+		#])
 
-		self.layers[1].weights = np.matrix([
-			[0.4, 0.5],
-			[0.45, 0.55]
-		])
+		#self.layers[0].biases = np.matrix([[0.35, 0.35]])
 
-		self.layers[1].biases = np.matrix([[0.6, 0.6]])
+		#self.layers[1].weights = np.matrix([
+		#	[0.4, 0.5],
+		#	[0.45, 0.55]
+		#])
 
-		# Define the "last layer output" as the scaled input values
-		previous_x = x / x_max
-		for i, layer in enumerate(self.layers):
-			print("Dot between")
-			print(previous_x)
-			print("and")
-			print(layer.weights)
-			print("With biases")
-			print(layer.biases)
-			print("Equals:")
+		#self.layers[1].biases = np.matrix([[0.6, 0.6]])
 
-			# Compute the dot product between the output of the previous
-			# layer and the current layer's weights, then add the biases
-			# of the current layer.
-			layer.z = np.dot(previous_x, layer.weights) + layer.biases
+		for k in range(1, 10000):
+			# Define the "last layer output" as the scaled input values
+			previous_a = x / x_max
+			for i, layer in enumerate(self.layers):
+				#print("Dot between")
+				#print(previous_a)
+				#print("and")
+				#print(layer.weights)
+				#print("With biases")
+				#print(layer.biases)
+				#print("Equals:")
 
-			print(layer.z)
+				# Compute the dot product between the output of the previous
+				# layer and the current layer's weights, then add the biases
+				# of the current layer.
+				layer.z = np.dot(previous_a, layer.weights) + layer.biases
 
-			# Apply the activation function to every value of the matrix,
-			# element by element.
-			layer.a = self.activate(layer)
+				#print(layer.z)
 
-			print("Activated")
-			print(layer.a)
+				# Apply the activation function to every value of the matrix,
+				# element by element.
+				layer.a = self.activate(layer)
 
-			# Store the result for use in the next iteration
-			previous_x = layer.a
+				print("Activated")
+				print(layer.a)
 
-		self.compute_gradients(y / y_max)
-		self.update_weights(x / x_max)
+				# Store the result for use in the next iteration
+				previous_a = layer.a
 
-		# Scale back the values
-		output = previous_x * y_max
+			self.compute_gradients(y / y_max)
+			self.update_weights(x / x_max)
 
-		#self.compute_gradients(output)
-		#errors = output - expected_output
-		#print("Errors:")
-		#print(errors)
-		#backpropagating_error = np.multiply(errors, self.activation_gradient(self.layers[-1]))
-		#print("Backpropagating errors of the output:")
-		#print(backpropagating_error)
+			# Scale back the values
+			output = previous_a * y_max
+
+			#self.compute_gradients(output)
+			#errors = output - expected_output
+			#print("Errors:")
+			#print(errors)
+			#backpropagating_error = np.multiply(errors, self.activation_gradient(self.layers[-1]))
+			#print("Backpropagating errors of the output:")
+			#print(backpropagating_error)
 
 
-		print("Network output (un-scaled)")
-		print(output)
-		print("Error")
+			print("Network output (un-scaled)")
+			print(output)
+			print("Error")
 
-		# Compute the loss function of the network
-		error = self.compute_loss(output, y)
-		print(error)
+			# Compute the loss function of the network
+			error = self.compute_loss(output, y)
+			print(error)
 
 
 	def add_layer(self, layer):
