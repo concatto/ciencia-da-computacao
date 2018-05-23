@@ -5,7 +5,7 @@ from keras.models import Sequential
 from keras.layers import Dense
 
 X, y = load_iris(True)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.00001)
 
 def encode(vals):
     out = np.zeros((len(vals), np.max(vals) + 1))
@@ -23,8 +23,8 @@ model.add(Dense(units=10, activation='sigmoid', input_dim=4))
 model.add(Dense(units=3, activation='sigmoid'))
 model.compile(loss='mean_squared_error', optimizer='sgd', metrics=['accuracy'])
 
-model.fit(X_train, y_train, epochs=10000, batch_size=32)
+model.fit(X_train, y_train, epochs=10000, batch_size=len(X))
 
-result = model.evaluate(X_test, y_test)
+result = model.evaluate(X_train, y_train)
 print(model.metrics_names)
 print(result)

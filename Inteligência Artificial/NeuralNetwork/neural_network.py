@@ -30,9 +30,7 @@ class NeuralNetwork:
 
 
 	def compute_gradients(self, y):
-		print("What was expected:")
-		print(y)
-		print("Gradients (reversed)")
+		#print("Gradients (reversed)")
 		previous_layer = None
 		for i, layer in enumerate(reversed(self.layers)):
 			error = None
@@ -41,17 +39,17 @@ class NeuralNetwork:
 			else:		# this is a hidden or input layer
 				error = np.dot(previous_layer.gradients, previous_layer.weights.T)
 
-			print("Layer {0}".format(i))
-			print("Error")
-			print(error)
-			print("Gradients")
+			#print("Layer {0}".format(i))
+			#print("Error")
+			#print(error)
+			#print("Gradients")
 			layer.gradients = np.multiply(error, self.activation_gradient(layer))
-			print(layer.gradients)
+			#print(layer.gradients)
 			previous_layer = layer
 
 
 	def compute_loss(self, net_output, expected_output):
-		return np.mean(np.square(expected_output - net_output), axis=1)
+		return np.mean(np.square(expected_output - net_output))
 
 
 	def initialize_layers(self, input_size):
@@ -73,11 +71,11 @@ class NeuralNetwork:
 			weights_delta = np.sum(delta, axis=0)
 			biases_delta = np.sum(layer.gradients, axis=0)
 
-			layer.weights -= np.multiply(weights_delta, self.learning_rate)
-			layer.biases -= np.multiply(biases_delta, self.learning_rate)
+			layer.weights -= np.multiply(weights_delta, self.learning_rate / len(x))
+			layer.biases -= np.multiply(biases_delta, self.learning_rate / len(x))
 
-			print("Delta of {0}".format(i))
-			print(delta)
+			#print("Delta of {0}".format(i))
+			#print(delta)
 			previous_output = layer.a
 
 
@@ -102,7 +100,9 @@ class NeuralNetwork:
 		x_normalized = x / x_max
 		y_normalized = y / y_max
 
-		for k in range(1, 10000):
+		epochs = 10000
+		for k in range(epochs):
+			print(k)
 			# Define the "last layer output" as the normalized input values
 			previous_a = x_normalized
 			for i, layer in enumerate(self.layers):
@@ -125,8 +125,8 @@ class NeuralNetwork:
 				# element by element.
 				layer.a = self.activate(layer)
 
-				print("Activated")
-				print(layer.a)
+				#print("Activated")
+				#print(layer.a)
 
 				# Store the result for use in the next iteration
 				previous_a = layer.a
@@ -137,14 +137,26 @@ class NeuralNetwork:
 			# Denormalize the values
 			output = previous_a * y_max
 
-			print("Network output (un-scaled)")
-			print(output)
-			print("Error")
+			if k == epochs - 1:
+				print("Network output (un-scaled)")
+				print(np.round(output))
+				print("Expected output")
+				print(np.round(y, 3))
+				print("Error")
+				# Compute the loss function of the network
+				error = self.compute_loss(output, y)
+				print(error)
 
-			# Compute the loss function of the network
-			error = self.compute_loss(output, y)
-			print(error)
-
+				rounded = np.round(output)
+				trues = 0
+				total = 0
+				for vx, vy in zip(rounded, y):
+					total += 1
+					print(vx)
+					print(vy)
+					if np.array_equal(vx, vy):
+						trues += 1
+				print(trues / total)
 
 	def add_layer(self, layer):
 		self.layers.append(layer)
