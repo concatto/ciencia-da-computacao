@@ -34,9 +34,11 @@ class NeuralNetwork:
 		previous_layer = None
 		for i, layer in enumerate(reversed(self.layers)):
 			error = None
-			if i == 0:	# this is the output layer
+			if i == 0:
+				# this is the output layer
 				error = layer.a - y
-			else:		# this is a hidden or input layer
+			else:
+				# this is a hidden or input layer
 				error = np.dot(previous_layer.gradients, previous_layer.weights.T)
 
 			#print("Layer {0}".format(i))
@@ -80,7 +82,7 @@ class NeuralNetwork:
 
 
 
-	def fit(self, training_values, expected_output, output_activation='sigmoid'):
+	def fit(self, training_values, expected_output, output_activation='sigmoid', epochs=100):
 		x = np.matrix(training_values)
 		y = np.matrix(expected_output)
 
@@ -100,7 +102,6 @@ class NeuralNetwork:
 		x_normalized = x / x_max
 		y_normalized = y / y_max
 
-		epochs = 10000
 		for k in range(epochs):
 			print(k)
 			# Define the "last layer output" as the normalized input values
