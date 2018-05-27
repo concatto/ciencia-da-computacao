@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.utils import shuffle
 from layers import Layer
 
 def sigmoid(x):
@@ -82,7 +83,7 @@ class NeuralNetwork:
 		for i, layer in enumerate(self.layers):
 			delta = np.dot(previous_output.T, layer.gradients)
 
-                        # Sum the deltas row-wise (i.e. across all input examples)
+            # Sum the deltas row-wise (i.e. across all input examples)
 			weights_delta = np.sum(delta, axis=0)
 			biases_delta = np.sum(layer.gradients, axis=0)
 
@@ -147,6 +148,8 @@ class NeuralNetwork:
 		#print(x)
 
 		for k in range(epochs):
+			x, y = shuffle(x, y)
+
 			# Forward pass through the network
 			error, acc, output = self.evaluate(x, y, normalize=False)
 

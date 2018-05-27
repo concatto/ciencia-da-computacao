@@ -36,13 +36,12 @@ def load_dataset(csv_file, input_dimension, shuffle=True, test_ratio=0):
 
 X, y, X_test, y_test = load_dataset("CasosArtrite2.csv", input_dimension=17, test_ratio=0.3)
 
-training_losses = []
-validation_losses = []
-training_accuracies = []
-validation_accuracies = []
-
 epochs = 10000
-epoch_vals = np.arange(0, epochs)
+
+model_data = np.vstack([
+	np.arange(0, epochs),
+	np.zeros([4, epochs])
+])
 
 # ============== end config ==============
 
@@ -53,23 +52,31 @@ nn.add_layer(Layer(20))
 
 nn.initialize(X.shape[1], y.shape[1])
 
-for k in epoch_vals:
+plt.ion()
+
+for k in model_data[0, :]:
+	k = int(k)
 	# Train for a single epoch
 	for epoch, train_loss, train_acc in nn.fit(X, y, epochs=1):
-		training_losses.append(train_loss)
-		training_accuracies.append(train_acc)
+		model_data[1, k] = train_loss
+		model_data[2, k] = train_acc
 
 	# Then make a validation test
 	error, acc, out = nn.evaluate(X_test, y_test)
-	validation_losses.append(error)
-	validation_accuracies.append(acc)
+	model_data[3, k] = error
+	model_data[4, k] = acc
 	print("Validation: Loss {0}, accuracy {1}".format(error, acc))
 
-plt.plot(epoch_vals, training_accuracies, label="Treinamento")
-plt.plot(epoch_vals, validation_accuracies, label="Validação")
-plt.legend()
-plt.xlabel("Época")
-plt.ylabel("Erro Médio Quadrado")
+	if k % 100 == 0:
+		plt.plot(model_data[0, :k+1], model_data[1, :k+1], label="Treinamento", color="red")
+		plt.plot(model_data[0, :k+1], model_data[3, :k+1], label="Validação", color="green")
+		plt.pause(0.000001)
+	if k == 0:
+		plt.legend()
+		plt.xlabel("Época")
+		plt.ylabel("Erro Médio Quadrado")
+
+
 plt.show()
 
 
