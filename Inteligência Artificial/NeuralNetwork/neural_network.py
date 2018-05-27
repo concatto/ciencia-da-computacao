@@ -54,6 +54,19 @@ class NeuralNetwork:
 		return np.mean(np.square(expected_output - net_output))
 
 
+	def compute_accuracy(self, output, expected):
+		output = output
+		expected = expected
+
+		trues, total = 0, 0
+		for o, e in zip(output, expected):
+			total += 1
+			if np.argmax(o) == np.argmax(e):
+				trues += 1
+
+		return trues / total
+
+
 	def initialize_layers(self, input_size):
 		previous_size = input_size
 
@@ -81,83 +94,66 @@ class NeuralNetwork:
 			previous_output = layer.a
 
 
+	def evaluate(self, x, y, normalize=True):
+		if normalize:
+			x, y = self.normalize(x), self.normalize(y)
 
-	def fit(self, training_values, expected_output, output_activation='sigmoid', epochs=100):
-		x = np.matrix(training_values)
-		y = np.matrix(expected_output)
+		output = self.feedforward(x)
+		error = self.compute_loss(output, y)
+		acc = self.compute_accuracy(output, y)
 
-		print("Network input (un-scaled)")
-		print(x)
+		return error, acc, output
 
-		# Compute the maximum values of the input and output for normalizing
-		x_max = np.max(x)
-		y_max = np.max(y)
 
+	def feedforward(self, x):
+		# Define the "last layer output" as the input values
+		previous_a = x
+
+		for i, layer in enumerate(self.layers):
+			# Compute the dot product between the output of the previous
+			# layer and the current layer's weights, then add the biases
+			# of the current layer.
+			layer.z = np.dot(previous_a, layer.weights) + layer.biases
+
+			# Apply the activation function to every value of the matrix,
+			# element by element.
+			layer.a = self.activate(layer)
+
+			# Store the result for use in the next iteration
+			previous_a = layer.a
+
+		return previous_a
+
+
+	def normalize(self, data):
+		largest = np.max(data)
+		return data / largest
+
+
+	def initialize(self, input_dimension, output_dimension, output_activation='sigmoid'):
 		# Insert the output layer as the last layer
-		self.add_layer(Layer(y.shape[1], activation=output_activation))
+		self.add_layer(Layer(output_dimension, activation=output_activation))
 
 		# Initialize the weights of all layers
-		self.initialize_layers(x.shape[1])
+		self.initialize_layers(input_dimension)
 
-		x_normalized = x / x_max
-		y_normalized = y / y_max
+
+
+	def fit(self, training_values, expected_output, epochs=100):
+		x = self.normalize(np.matrix(training_values))
+		y = self.normalize(np.matrix(expected_output))
+
+		#print("Network input")
+		#print(x)
 
 		for k in range(epochs):
-			print(k)
-			# Define the "last layer output" as the normalized input values
-			previous_a = x_normalized
-			for i, layer in enumerate(self.layers):
-				#print("Dot between")
-				#print(previous_a)
-				#print("and")
-				#print(layer.weights)
-				#print("With biases")
-				#print(layer.biases)
-				#print("Equals:")
+			# Forward pass through the network
+			error, acc, output = self.evaluate(x, y, normalize=False)
 
-				# Compute the dot product between the output of the previous
-				# layer and the current layer's weights, then add the biases
-				# of the current layer.
-				layer.z = np.dot(previous_a, layer.weights) + layer.biases
+			self.compute_gradients(y)
+			self.update_weights(x)
 
-				#print(layer.z)
-
-				# Apply the activation function to every value of the matrix,
-				# element by element.
-				layer.a = self.activate(layer)
-
-				#print("Activated")
-				#print(layer.a)
-
-				# Store the result for use in the next iteration
-				previous_a = layer.a
-
-			self.compute_gradients(y_normalized)
-			self.update_weights(x_normalized)
-
-			# Denormalize the values
-			output = previous_a * y_max
-
-			if k == epochs - 1:
-				print("Network output (un-scaled)")
-				print(np.round(output))
-				print("Expected output")
-				print(np.round(y, 3))
-				print("Error")
-				# Compute the loss function of the network
-				error = self.compute_loss(output, y)
-				print(error)
-
-				rounded = np.round(output)
-				trues = 0
-				total = 0
-				for vx, vy in zip(rounded, y):
-					total += 1
-					print(vx)
-					print(vy)
-					if np.array_equal(vx, vy):
-						trues += 1
-				print(trues / total)
+			yield k, error, acc
 
 	def add_layer(self, layer):
 		self.layers.append(layer)
