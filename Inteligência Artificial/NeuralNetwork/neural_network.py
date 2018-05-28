@@ -12,12 +12,14 @@ class NeuralNetwork:
 		self.layers = list()
 		self.activations = {
 			'sigmoid': lambda z: sigmoid(z),
-			'relu': lambda z: np.maximum(z, 0)
+			'relu': lambda z: np.maximum(z, 0),
+			'tanh': lambda z: np.tanh(z)
 		}
 
 		self.activation_derivatives = {
 			'sigmoid': lambda z: np.multiply(sigmoid(z), 1 - sigmoid(z)),
-			'relu': lambda z: 1 if z > 0 else 0
+			'relu': np.vectorize(lambda z: 1 if z > 0 else 0),
+			'tanh': lambda z: 1 - np.power(np.tanh(z), 2)
 		}
 
 
@@ -52,7 +54,8 @@ class NeuralNetwork:
 
 
 	def compute_loss(self, net_output, expected_output):
-		return np.mean(np.square(expected_output - net_output))
+		energy = np.sum(np.square(expected_output - net_output), axis=1)
+		return np.mean(np.divide(energy, 2))
 
 
 	def compute_accuracy(self, output, expected):
@@ -131,6 +134,8 @@ class NeuralNetwork:
 		return data / largest
 
 
+	# Adds the output layer and initializes the weights of all layers.
+	# Invoke only after adding all intended hidden layers.
 	def initialize(self, input_dimension, output_dimension, output_activation='sigmoid'):
 		# Insert the output layer as the last layer
 		self.add_layer(Layer(output_dimension, activation=output_activation))
