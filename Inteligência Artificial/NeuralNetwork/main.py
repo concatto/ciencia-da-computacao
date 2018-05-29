@@ -6,6 +6,7 @@ import csv
 import multiprocessing
 import time
 
+np.random.seed()
 # This is the configuration of the present experiment.
 
 X, y, X_test, y_test = loader.load_dataset("CasosArtrite2.csv", input_dimension=17, test_ratio=0.3)
@@ -65,12 +66,13 @@ def single_run(hidden_neurons, learning_rate, hidden_activation, output_activati
 	return results
 
 
-learning_rates = [0.001, 0.005, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4]
-activations = ['sigmoid', 'tanh', 'relu']
-neurons = [5, 10, 15, 20, 25, 30, 40, 50]
+learning_rates = [0.001]#, 0.005, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4]
+activations = ['sigmoid']#, 'tanh', 'relu']
+neurons = [5]#, 10, 15, 20, 25, 30, 40, 50]
 
 
 def run_experiment(replications, portion):
+	np.random.seed()
 	print("Starting up!")
 	total = len(learning_rates) * (len(activations) ** 2) * len(neurons) * replications
 	done = 0
@@ -102,7 +104,7 @@ if __name__ ==	'__main__':
 	jobs = list()
 
 	n_jobs = 2
-	runs_per_job = 2
+	runs_per_job = 1
 
 	for i in range(n_jobs):
 		job = multiprocessing.Process(target=run_experiment, args=(runs_per_job, i,))
