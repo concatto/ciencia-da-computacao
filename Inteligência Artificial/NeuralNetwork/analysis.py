@@ -2,22 +2,37 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-path = "/home/concatto/Downloads/GoodResultsNN/4/experiments_portion0.csv"
+path = "experiments_portion_merged.csv"
 df_full = pd.read_csv(path)
 
 def select(frame, variable, value):
 	return frame.loc[frame[variable] == value]
 
+label_dictionary = {
+	"hidden_activation": "Ativação na camada oculta",
+	"output_activation": "Ativação na camada de saída",
+	"hidden_neurons": "Neurônios na camada oculta",
+	"learning_rate": "Taxa de aprendizado",
+	"best_validation_loss": "Erro quadrático médio",
+	"best_validation_acc": "Acurácia"
+}
+
 def generate_plot(index, dependent, xlabel=None, ylabel=None, title="Relacionamento parâmetro x qualidade"):
 	df = df_full
-	df = select(df, 'hidden_activation', 'sigmoid')
+	df = select(df, 'hidden_activation', 'tanh')
 	df = select(df, 'output_activation', 'sigmoid')
+	df = select(df, 'hidden_neurons', 50)
 
+	#x = df[index]
+	#y = df[dependent]
+	#plt.scatter(x, y, alpha=0.005)
+	#plt.show()
+	#return
 
 	if xlabel == None:
-		xlabel = index
+		xlabel = label_dictionary[index]
 	if ylabel == None:
-		ylabel = dependent
+		ylabel = label_dictionary[dependent]
 
 	values = pd.unique(df[index])
 
@@ -38,7 +53,7 @@ def generate_plot(index, dependent, xlabel=None, ylabel=None, title="Relacioname
 	#acc = filtered[]
 
 
-generate_plot('learning_rate', 'best_validation_loss', xlabel="Taxa de Aprendizagem", ylabel="Erro Quadrático Médio")
+generate_plot('learning_rate', 'best_validation_loss')
 
 #plt.boxplot(acc)
 #plt.show()

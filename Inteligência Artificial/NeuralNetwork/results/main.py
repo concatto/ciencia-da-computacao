@@ -5,9 +5,7 @@ import loader
 import csv
 import multiprocessing
 import time
-import matplotlib.pyplot as plt
 
-np.random.seed()
 # This is the configuration of the present experiment.
 
 X, y, X_test, y_test = loader.load_dataset("CasosArtrite2.csv", input_dimension=17, test_ratio=0.3)
@@ -44,24 +42,6 @@ def single_run(hidden_neurons, learning_rate, hidden_activation, output_activati
 
 	elapsed = time.time() - start
 
-	plt.plot(model_data[0, :], model_data[1, :], label="Erro (treinamento)")
-	plt.plot(model_data[0, :], model_data[3, :], label="Erro (validação)")
-	plt.legend(loc="lower right")
-	plt.xlabel("Época")
-	plt.title("Erro ao longo do tempo")
-	plt.show()
-
-	plt.clf()
-
-	plt.plot(model_data[0, :], model_data[2, :], label="Acurácia (treinamento)")
-	plt.plot(model_data[0, :], model_data[4, :], label="Acurácia (validação)")
-	plt.legend(loc="lower right")
-	plt.xlabel("Época")
-	plt.title("Acurácia ao longo do tempo")
-	plt.show()
-
-
-
 	results = {
 		'best_training_loss': np.min(model_data[1, :]),
 		'best_training_loss_epoch': np.argmin(model_data[1, :]),
@@ -85,16 +65,17 @@ def single_run(hidden_neurons, learning_rate, hidden_activation, output_activati
 	return results
 
 
-learning_rates = [0.001]#, 0.005, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4]
-activations = ['sigmoid']#, 'tanh', 'relu']
-neurons = [5]#, 10, 15, 20, 25, 30, 40, 50]
+learning_rates = [0.001, 0.005, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4]
+activations = ['sigmoid', 'tanh', 'relu']
+neurons = [5, 10, 15, 20, 25, 30, 40, 50]
 
 
 def run_experiment(replications, portion):
 	np.random.seed()
 	print("Starting up!")
+
 	total = len(learning_rates) * (len(activations) ** 2) * len(neurons) * replications
-	done = 0
+	current = 0
 
 	results = list()
 	for learning_rate in learning_rates:
@@ -104,9 +85,8 @@ def run_experiment(replications, portion):
 					for replication in range(replications):
 						r = single_run(n_neurons, learning_rate, h_activation, o_activation)
 						results.append(r)
-						done += 1
-						print("{0}/{1}".format(done, total))
-
+						current += 1
+						print("{0}/{1}".format(current, total))
 
 	file_name = "experiments_portion{0}.csv".format(portion)
 	keys = results[0].keys()
@@ -117,15 +97,13 @@ def run_experiment(replications, portion):
 		writer.writerows(results)
 
 
-single_run(50, 0.4, 'tanh', 'sigmoid')
 
 
-"""
 if __name__ ==	'__main__':
 	jobs = list()
 
-	n_jobs = 2
-	runs_per_job = 1
+	n_jobs = 6
+	runs_per_job = 4
 
 	for i in range(n_jobs):
 		job = multiprocessing.Process(target=run_experiment, args=(runs_per_job, i,))
@@ -134,5 +112,5 @@ if __name__ ==	'__main__':
 
 	for job in jobs:
 		job.join()
-"""
+
 
