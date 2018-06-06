@@ -15,14 +15,16 @@ label_dictionary = {
 	"learning_rate": "Taxa de aprendizado",
 	"best_validation_loss": "Erro quadrático médio",
 	"best_validation_acc": "Acurácia",
-        "elapsed_seconds": "Tempo de execução (s)"
+	"elapsed_seconds": "Tempo de execução (s)",
+	"best_validation_acc_epoch": "Época da melhor acurácia",
 }
 
 def generate_plot(index, dependent, xlabel=None, ylabel=None, title="Relacionamento parâmetro x qualidade"):
 	df = df_full
 	df = select(df, 'hidden_activation', 'tanh')
 	df = select(df, 'output_activation', 'sigmoid')
-	#df = select(df, 'hidden_neurons', 50)
+	df = select(df, 'hidden_neurons', 50)
+	#df = select(df, 'learning_rate', 0.4)
 
 	#x = df[index]
 	#y = df[dependent]
@@ -54,7 +56,7 @@ def generate_plot(index, dependent, xlabel=None, ylabel=None, title="Relacioname
 	#acc = filtered[]
 
 
-generate_plot('hidden_neurons', 'elapsed_seconds')
+generate_plot('learning_rate', 'best_validation_acc_epoch')
 
 #plt.boxplot(acc)
 #plt.show()

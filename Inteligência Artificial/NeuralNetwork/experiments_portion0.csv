@@ -1,2 +1,0 @@
-best_training_loss,best_training_loss_epoch,best_validation_loss,best_validation_loss_epoch,best_training_acc,best_training_acc_epoch,best_validation_acc,best_validation_acc_epoch,final_validation_loss,final_validation_acc,final_training_loss,final_training_acc,learning_rate,hidden_neurons,hidden_activation,output_activation,elapsed_seconds
-0.2766414088224372,9999,0.31791261230864415,1731,0.7352941176470589,2121,0.6,2027,0.32894178408744656,0.5333333333333333,0.2766414088224372,0.7352941176470589,0.001,5,sigmoid,sigmoid,26.119303226470947
