@@ -17,6 +17,8 @@ label_dictionary = {
 	"best_validation_acc": "Acurácia",
 	"elapsed_seconds": "Tempo de execução (s)",
 	"best_validation_acc_epoch": "Época da melhor acurácia",
+        "elapsed_seconds": "Tempo de execução (s)",
+	"best_validation_acc_epoch": "Época do melhor valor de acurácia"
 }
 
 def generate_plot(index, dependent, xlabel=None, ylabel=None, title="Relacionamento parâmetro x qualidade"):
@@ -25,6 +27,7 @@ def generate_plot(index, dependent, xlabel=None, ylabel=None, title="Relacioname
 	df = select(df, 'output_activation', 'sigmoid')
 	df = select(df, 'hidden_neurons', 50)
 	#df = select(df, 'learning_rate', 0.4)
+	df = select(df, 'learning_rate', 0.4)
 
 	#x = df[index]
 	#y = df[dependent]

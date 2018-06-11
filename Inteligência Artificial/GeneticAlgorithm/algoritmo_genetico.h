@@ -3,6 +3,7 @@
 
 #include "util.h"
 #include <vector>
+#include <cmath>
 
 /**
  * Este struct representa um indivíduo da população,
@@ -21,12 +22,13 @@ struct Individuo {
  */
 class AlgoritmoGenetico {
 private:
+    bool debug;
     std::vector<Individuo> populacao;
     double taxaCruzamento = 0.7;
     double taxaMutacao = 0.1;
 
 public:
-    AlgoritmoGenetico(int tamanhoPopulacao, int comprimentoCromossomo) {
+    AlgoritmoGenetico(int tamanhoPopulacao, int comprimentoCromossomo, bool debug = false) : debug(debug) {
         gerarPopulacaoInicial(tamanhoPopulacao, comprimentoCromossomo);
     }
 
@@ -37,7 +39,7 @@ public:
             for (int j = 0; j < comprimento; j++) {
                 int valor;
 
-                if (aleatorio() < 0.5) {
+                if (gerarAleatorio() < 0.5) {
                     valor = 0;
                 } else {
                     valor = 1;
@@ -46,8 +48,24 @@ public:
                 individuo.cromossomo.push_back(valor);
             }
 
+            individuo.aptidao = avaliarIndividuo(individuo);
             populacao.push_back(individuo);
         }
+    }
+
+    const Individuo& getMelhorIndividuo() {
+        int melhor = 0;
+        for (int i = 1; i < populacao.size(); i++) {
+            if (populacao[i].aptidao > populacao[melhor].aptidao) {
+                melhor = i;
+            }
+        }
+
+        return populacao[melhor];
+    }
+
+    const std::vector<Individuo>& getPopulacao() {
+        return populacao;
     }
 
     /**
@@ -55,11 +73,41 @@ public:
      * gerando uma nova população a partir dos operadores.
      */
     void evoluir() {
+        std::vector<Individuo> novaPopulacao;
 
+        while (novaPopulacao.size() < populacao.size()) {
+            if (debug) std::cout << "Selecionando...\n";
+            std::vector<int> pais = selecionar();
+            if (debug) std::cout << "Cruzando...\n";
+            std::vector<Individuo> filhos = aplicarCruzamento(populacao[pais[0]], populacao[pais[1]]);
+
+            if (debug) std::cout << "Mutando...\n";
+            aplicarMutacao(filhos[0]);
+            aplicarMutacao(filhos[1]);
+
+            if (debug) std::cout << "Avaliando...\n";
+            filhos[0].aptidao = avaliarIndividuo(filhos[0]);
+            filhos[1].aptidao = avaliarIndividuo(filhos[1]);
+
+            if (debug) {
+                std::cout << "Filhos gerados com aptidão " << filhos[0].aptidao << " e " << filhos[1].aptidao << "\n";
+            }
+
+            novaPopulacao.push_back(filhos[0]);
+            novaPopulacao.push_back(filhos[1]);
+        }
+
+        populacao = novaPopulacao;
     }
 
     double avaliarIndividuo(const Individuo& individuo) {
-        return 0;
+        int dist = std::abs(paraDecimal(individuo.cromossomo) - 999999);
+
+        if (dist == 0) {
+            return 999;
+        }
+
+        return 1.0 / dist;
     }
 
     /**
@@ -71,7 +119,7 @@ public:
         int k = individuo.cromossomo.size();
         for (int i = 0; i < k; i++) {
             // Verificar se este gene sofrerá mutação
-            if (aleatorio() < (taxaMutacao / k)) {
+            if (gerarAleatorio() < (taxaMutacao / k)) {
                 // Substituir pelo valor contrário
                 if (individuo.cromossomo[i] == 0) {
                     individuo.cromossomo[i] = 1;
@@ -87,10 +135,41 @@ public:
      * Realiza a seleção de dois indivíduos da população,
      * onde a chance de seleção é proporcional à aptidão
      * do indivíduo. O vector retornado sempre conterá
-     * apenas dois elementos.
+     * apenas dois elementos (os índices).
      */
-    std::vector<Individuo> selecionar() {
+    std::vector<int> selecionar() {
+        // Utilizaremos o método da Roleta.
+        int primeiro = executarRoleta();
+        int segundo;
 
+        do {
+            segundo = executarRoleta();
+        } while (primeiro == segundo);
+
+        std::vector<int> resultado;
+
+        resultado.push_back(primeiro);
+        resultado.push_back(segundo);
+
+        return resultado;
+    }
+
+    int executarRoleta() {
+        double aptidaoTotal = 0;
+        for (const Individuo& individuo : populacao) {
+            aptidaoTotal += individuo.aptidao;
+        }
+
+        double valor = gerarAleatorio() * aptidaoTotal;
+        double soma = 0;
+        for (int i = 0; i < populacao.size(); i++) {
+            // Se fosse passar do ponto escolhido, retornar o índice atual.
+            if (soma + populacao[i].aptidao >= valor) {
+                return i;
+            }
+
+            soma += populacao[i].aptidao;
+        }
     }
 
     /**
@@ -102,12 +181,12 @@ public:
     std::vector<Individuo> aplicarCruzamento(const Individuo& a, const Individuo& b) {
         std::vector<Individuo> resultado;
 
-        if (aleatorio() < taxaCruzamento) {
+        if (gerarAleatorio() < taxaCruzamento) {
             int comprimento = a.cromossomo.size();
 
             // Converter (arredondando para baixo) o produto entre um número
             // aleatório, de 0 a 1, e o comprimento do cromossomo.
-            int corte = static_cast<int>(aleatorio() * comprimento);
+            int corte = static_cast<int>(gerarAleatorio() * comprimento);
 
             Individuo filhoA;
             Individuo filhoB;
@@ -115,12 +194,12 @@ public:
             for (int i = 0; i < comprimento; i++) {
                 if (i < corte) {
                     // Abaixo do corte: recebe do pai contrário
-                    filhoA.cromossomo[i] = b.cromossomo[i];
-                    filhoB.cromossomo[i] = a.cromossomo[i];
+                    filhoA.cromossomo.push_back(b.cromossomo[i]);
+                    filhoB.cromossomo.push_back(a.cromossomo[i]);
                 } else {
                     // Acima do corte: recebe do mesmo pai
-                    filhoA.cromossomo[i] = a.cromossomo[i];
-                    filhoB.cromossomo[i] = b.cromossomo[i];
+                    filhoA.cromossomo.push_back(a.cromossomo[i]);
+                    filhoB.cromossomo.push_back(b.cromossomo[i]);
                 }
             }
 
