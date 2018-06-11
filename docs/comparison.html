@@ -1,0 +1,210 @@
+<html>
+    <head>
+        <title>Comparação entre C++ e Java</title>
+        <meta content="">
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+            }
+            
+            body {
+				max-width: 100vw;
+				background-color: #efeae7;
+			}
+
+            #comparison {
+				font-size: 12px;
+                display: flex;
+                max-width: 80%;
+                max-height: 100vh;
+            }
+
+            #comparison > div {
+                display: flex;
+                flex: 1;
+                overflow: scroll;
+            }
+
+			#comparison > div:not(:last-of-type) {
+				margin-right: 6px;
+			}
+            
+            
+        </style>
+        
+        <link href="prism.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div id="comparison">
+            <div id="cpp">
+				<pre>
+<code class="language-cpp line-numbers">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+// Em structs, todos os membros são públicos por padrão
+struct Pagina {
+    std::string conteudo;
+    double integridade;
+
+    Pagina(const std::string&amp; conteudo, double integridade)
+        : conteudo(conteudo), integridade(integridade) {
+        // A lista inicializadora acima (após os dois pontos) realiza a atribuição aos membros da classe
+    }
+};
+
+class LivroAntigo {
+private:
+    std::vector&lt;Pagina&gt; paginas;
+
+public:
+    LivroAntigo() {
+        // Vazio
+    }
+
+//  void adicionarPagina(Pagina&amp; pagina) {          // ERRO: impossível armazenar referência em um vector
+//  void adicionarPagina(Pagina pagina) {           // AVISO: cópía desnecessária
+    void adicionarPagina(const Pagina&amp; pagina) {    // CORRETO: uma cópia é adicionada ao vector e o objeto é somente-leitura
+        paginas.push_back(pagina);
+    }
+
+    void imprimir() {
+        // Evita a criação desnecessária de cópias
+        for (const Pagina&amp; pagina : paginas) {
+            std::cout &lt;&lt; pagina.conteudo &lt;&lt; &quot;\n&quot;;
+            std::cout &lt;&lt; &quot;Nível de integridade: &quot; &lt;&lt; pagina.integridade &lt;&lt; &quot;\n&quot;;
+        }
+    }
+
+    std::string conteudoEntre(int inicio, int fim) {
+        std::string conteudo = &quot;&quot;;
+
+        for (int i = inicio; i &lt; fim; i++) {
+            conteudo += paginas[i].conteudo + &quot;\n&quot;;
+        }
+
+        return conteudo;
+    }
+
+    void rasgar() {
+        // Referência é necessária pois os objetos serão modificados
+        for (Pagina&amp; pagina : paginas) {
+            pagina.integridade = 0;
+        }
+    }
+};
+
+int main() {
+    LivroAntigo livro;
+
+    Pagina um(&quot;Tenores autem memoratarum litterarum sunt, qui sequuntur. Ac primum quidem pro Rituali Romano.&quot;, 0.5);
+    Pagina dois(&quot;Datum Romae apud S. Mariam Majorem sub Annulo Piscatoris, die 17 Junii MDCXIV.&quot;, 0.8);
+
+    livro.adicionarPagina(um);
+    livro.adicionarPagina(dois);
+
+    livro.imprimir();
+}
+
+</code></pre>
+            </div>
+            
+            <div id="java">
+				<pre>
+<code class="language-java line-numbers">import java.util.List;
+import java.util.ArrayList;
+
+public class Demo {
+    static class Pagina {
+        public String conteudo;
+        public double integridade;
+
+        public Pagina(String conteudo, double integridade) {
+            this.conteudo = conteudo;
+            this.integridade = integridade;
+        }
+    }
+
+    static class LivroAntigo {
+        // Ao contrário do C++, é necessário inicializar a lista explicitamente
+        private List&lt;Pagina&gt; paginas = new ArrayList&lt;&gt;();
+
+        // No Java deve-se prefixar todos os campos e funções com a visibilidade
+        public LivroAntigo() {
+            // Vazio
+        }
+
+        // No Java não há opção de passar por somente-leitura ou por cópia.
+        // Por padrão, a passagem é por referência (exceto para primitivos, que são passados por valor)
+        public void adicionarPagina(Pagina pagina) {
+            paginas.add(pagina);
+        }
+
+        public void imprimir() {
+            // Novamente não há opção de controle de acesso
+            for (Pagina pagina : paginas) {
+                System.out.println(pagina.conteudo);
+                System.out.println(&quot;Nível de integridade: &quot; + pagina.integridade);
+            }
+        }
+
+        public String conteudoEntre(int inicio, int fim) {
+            String conteudo = &quot;&quot;;
+
+            for (int i = inicio; i &lt; fim; i++) {
+                conteudo += paginas.get(i).conteudo + &quot;\n&quot;;
+            }
+
+            return conteudo;
+        }
+
+        public void rasgar() {
+            // Objetos são referências por padrão
+            for (Pagina pagina: paginas) {
+                pagina.integridade = 0;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        LivroAntigo livro = new LivroAntigo();
+
+        Pagina um = new Pagina(&quot;Tenores autem memoratarum litterarum sunt, qui sequuntur. Ac primum quidem pro Rituali Romano.&quot;, 0.5);
+        Pagina dois = new Pagina(&quot;Datum Romae apud S. Mariam Majorem sub Annulo Piscatoris, die 17 Junii MDCXIV&quot;, 0.8);
+
+        livro.adicionarPagina(um);
+        livro.adicionarPagina(dois);
+        
+        livro.imprimir();
+    }
+}</code></pre>
+		</div>
+	</div>
+	<script src="prism.js"></script>
+    <script>
+		(function() {
+			var isSyncingLeftScroll = false;
+			var isSyncingRightScroll = false;
+			var leftDiv = document.getElementById('java');
+			var rightDiv = document.getElementById('cpp');
+
+			leftDiv.onscroll = function() {
+			if (!isSyncingLeftScroll) {
+				isSyncingRightScroll = true;
+				rightDiv.scrollTop = this.scrollTop;
+			}
+			isSyncingLeftScroll = false;
+			}
+
+			rightDiv.onscroll = function() {
+			if (!isSyncingRightScroll) {
+				isSyncingLeftScroll = true;
+				leftDiv.scrollTop = this.scrollTop;
+			}
+			isSyncingRightScroll = false;
+			}
+        })();
+    </script>
+    </body>
+
+</html>
