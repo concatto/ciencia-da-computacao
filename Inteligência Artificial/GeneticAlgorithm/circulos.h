@@ -76,22 +76,42 @@ void gerarTextura(sf::RenderTexture& alvo, const std::vector<int>& cromossomo, i
     alvo.display();
 }
 
+//double computarDiferenca(const sf::Image& imagemA, const sf::Image& imagemB) {
+//    sf::Vector2u tamanho = imagemA.getSize();
+
+//    int total = 0;
+
+//    for (int x = 0; x < tamanho.x; x++) {
+//        for (int y = 0; y < tamanho.y; y++) {
+//            sf::Color corA = imagemA.getPixel(x, y);
+//            sf::Color corB = imagemB.getPixel(x, y);
+
+//            int r = std::abs(corA.r - corB.r);
+//            int g = std::abs(corA.g - corB.g);
+//            int b = std::abs(corA.b - corB.b);
+
+//            total += r + g + b;
+//        }
+//    }
+
+//    return total;
+//}
+
+
 double computarDiferenca(const sf::Image& imagemA, const sf::Image& imagemB) {
+    const sf::Uint8* pixelsA = imagemA.getPixelsPtr();
+    const sf::Uint8* pixelsB = imagemB.getPixelsPtr();
     sf::Vector2u tamanho = imagemA.getSize();
 
     int total = 0;
 
-    for (int x = 0; x < tamanho.x; x++) {
-        for (int y = 0; y < tamanho.y; y++) {
-            sf::Color corA = imagemA.getPixel(x, y);
-            sf::Color corB = imagemB.getPixel(x, y);
+    for (int k = 0; k < tamanho.x * tamanho.y; k++) {
+        int i = k * 4;
+        int r = std::abs(pixelsA[i + 0] - pixelsB[i + 0]);
+        int g = std::abs(pixelsA[i + 1] - pixelsB[i + 1]);
+        int b = std::abs(pixelsA[i + 2] - pixelsB[i + 2]);
 
-            int r = std::abs(corA.r - corB.r);
-            int g = std::abs(corA.g - corB.g);
-            int b = std::abs(corA.b - corB.b);
-
-            total += r + g + b;
-        }
+        total += r + g + b;
     }
 
     return total;

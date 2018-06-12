@@ -32,7 +32,7 @@ double gerarAleatorio() {
 int paraDecimal(const std::vector<int>& binario, int inicio, int fim) {
     int total = 0;
     for (int i = inicio; i < fim; i++) {
-        int deslocamento = binario.size() - i - 1;
+        int deslocamento = fim - i - 1;
         total = total | (binario[i] << deslocamento);
     }
 
@@ -82,9 +82,10 @@ std::vector<std::vector<int>> segmentar(const std::vector<int>& binario, int seg
 
 std::vector<int> segmentarDecimal(const std::vector<int>& binario, int segmentos) {
     std::vector<int> resultado;
-
-    for (const std::vector<int>& segmento : segmentar(binario, segmentos)) {
-        resultado.push_back(paraDecimal(segmento));
+    int l = binario.size() / segmentos;
+    for (int i = 0; i < segmentos; i++) {
+        int inicio = i * l;
+        resultado.push_back(paraDecimal(binario, inicio, inicio + l));
     }
 
     return resultado;
