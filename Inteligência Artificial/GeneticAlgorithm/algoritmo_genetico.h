@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <cmath>
+#include <cstdlib>
 
 /**
  * Este struct representa um indivíduo da população,
@@ -24,7 +25,9 @@ struct Individuo {
  */
 class AlgoritmoGenetico {
 private:
+    sf::RenderTexture textura;
     sf::Image referencia;
+    const sf::Uint8* pixels;
     bool debug;
     std::vector<Individuo> populacao;
     double taxaCruzamento = 0.7;
@@ -32,7 +35,33 @@ private:
 
 public:
     AlgoritmoGenetico(int tamanhoPopulacao, int comprimentoCromossomo, bool debug = false) : debug(debug) {
-        std::cout << referencia.loadFromFile("LIA_LEDS.png");
+        FILE * pFile;
+        long lSize;
+        char * buffer;
+        size_t result;
+
+        pFile = fopen ( "LIA_LEDS.png" , "rb" );
+        if (pFile==NULL) {fputs ("File error",stderr); exit (1);}
+
+        // obtain file size:
+        fseek (pFile , 0 , SEEK_END);
+        lSize = ftell (pFile);
+        rewind (pFile);
+
+        // allocate memory to contain the whole file:
+        buffer = (char*) malloc (sizeof(char)*lSize);
+        if (buffer == NULL) {fputs ("Memory error",stderr); exit (2);}
+
+        // copy the file into the buffer:
+        result = fread (buffer,1,lSize,pFile);
+        if (result != lSize) {fputs ("Reading error",stderr); exit (3);}
+
+        std::cout << referencia.loadFromMemory(buffer, lSize);
+
+        pixels = referencia.getPixelsPtr();
+
+        sf::Vector2u tamanho = referencia.getSize();
+        textura.create(tamanho.x, tamanho.y);
 
         gerarPopulacaoInicial(tamanhoPopulacao, comprimentoCromossomo);
     }
@@ -102,12 +131,10 @@ public:
     }
 
     double avaliarIndividuo(const Individuo& individuo) {
-        sf::RenderTexture textura;
-
         textura.clear();
         gerarTextura(textura, individuo.cromossomo, 100, 203, 200);
 
-        return 1 / computarDiferenca(textura.getTexture().copyToImage(), referencia);
+        return 1 / computarDiferenca(textura.getTexture().copyToImage().getPixelsPtr(), pixels, referencia.getSize());
     }
 
     /**

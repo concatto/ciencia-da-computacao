@@ -7,10 +7,8 @@
 #include "circulos.h"
 #include <chrono>
 
-void desenharIndividuo(const Individuo& individuo, sf::RenderWindow& janela, int segmentos) {
+void desenharIndividuo(const Individuo& individuo, sf::RenderWindow& janela, sf::RenderTexture& textura, int segmentos) {
     sf::Vector2u tamanho = janela.getSize();
-
-    sf::RenderTexture textura;
 
     textura.clear();
     gerarTextura(textura, individuo.cromossomo, segmentos, tamanho.x, tamanho.y);
@@ -22,12 +20,15 @@ int main() {
     std::srand(std::time(nullptr));
 
     sf::RenderWindow window(sf::VideoMode(203, 200), "Hello SFML");
+    sf::RenderTexture textura;
+    sf::Vector2u tamanho = window.getSize();
+    textura.create(tamanho.x, tamanho.y);
 
-    AlgoritmoGenetico ag(200, 8000, false);
+    AlgoritmoGenetico ag(50, 8000, false);
 
 
     auto start = std::chrono::high_resolution_clock::now();
-    for (int i = 0; i <= 1000; i++) {
+    for (int i = 0; i <= 500; i++) {
         window.clear();
         std::cout << "Starting generation " << i << "\n";
         ag.evoluir();
@@ -35,12 +36,16 @@ int main() {
         const Individuo& melhor = ag.getMelhorIndividuo();
         std::cout << "Melhor distância: " << (1 / melhor.aptidao) << "\n";
 
-        desenharIndividuo(melhor, window, 100);
+        desenharIndividuo(melhor, window, textura, 100);
 
         window.display();
     }
     auto end = std::chrono::high_resolution_clock::now();
     std::cout << std::chrono::duration_cast<std::chrono::seconds>(end - start).count() << "\n";
+
+    while (true) {
+        window.display();
+    }
 
     return 0;
 }

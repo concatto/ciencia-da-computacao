@@ -63,8 +63,6 @@ sf::CircleShape criarElipse(const std::vector<int>& cromossomo, int larguraMax, 
 }
 
 void gerarTextura(sf::RenderTexture& alvo, const std::vector<int>& cromossomo, int elipses, int largura, int altura) {
-    alvo.create(largura, altura);
-
     std::vector<std::vector<int>> segmentos = segmentar(cromossomo, elipses);
 
     for (const std::vector<int>& segmento : segmentos) {
@@ -98,11 +96,7 @@ void gerarTextura(sf::RenderTexture& alvo, const std::vector<int>& cromossomo, i
 //}
 
 
-double computarDiferenca(const sf::Image& imagemA, const sf::Image& imagemB) {
-    const sf::Uint8* pixelsA = imagemA.getPixelsPtr();
-    const sf::Uint8* pixelsB = imagemB.getPixelsPtr();
-    sf::Vector2u tamanho = imagemA.getSize();
-
+double computarDiferenca(const sf::Uint8* pixelsA, const sf::Uint8* pixelsB, const sf::Vector2u& tamanho) {
     int total = 0;
 
     for (int k = 0; k < tamanho.x * tamanho.y; k++) {
