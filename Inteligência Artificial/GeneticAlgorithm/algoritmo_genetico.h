@@ -24,20 +24,22 @@ struct Individuo {
 class AlgoritmoGenetico {
 private:
     bool debug;
+    std::vector<Ponto> cidades;
     std::vector<Individuo> populacao;
     double taxaCruzamento = 0.7;
     double taxaMutacao = 0.0009;
 
 public:
-    AlgoritmoGenetico(int tamanhoPopulacao, int comprimentoCromossomo, bool debug = false) : debug(debug) {
-        gerarPopulacaoInicial(tamanhoPopulacao, comprimentoCromossomo);
+    AlgoritmoGenetico(int tamanhoPopulacao, const std::vector<Ponto>& cidades, bool debug = false) : debug(debug) {
+        this->cidades = cidades;
+        gerarPopulacaoInicial(tamanhoPopulacao);
     }
 
-    void gerarPopulacaoInicial(int tamanhoPopulacao, int comprimento) {
+    void gerarPopulacaoInicial(int tamanhoPopulacao) {
         for (int i = 0; i < tamanhoPopulacao; i++) {
             Individuo individuo;
 
-            individuo.cromossomo = cromossomoAleatorio(comprimento);
+            individuo.cromossomo = conjuntoOrdenadoAleatorio(cidades.size());
             individuo.aptidao = avaliarIndividuo(individuo);
             populacao.push_back(individuo);
 
@@ -98,27 +100,39 @@ public:
     }
 
     double avaliarIndividuo(const Individuo& individuo) {
+        double soma = 0;
+        const std::vector<int>& cromossomo = individuo.cromossomo;
 
+        for (int i = 0; i < cromossomo.size(); i++) {
+            int destino = i + 1;
+
+            if (destino == cromossomo.size()) {
+                destino = 0;
+            }
+
+            int a = cromossomo[i];
+            int b = cromossomo[destino];
+
+            double dist = distanciaEuclidiana(cidades[a], cidades[b]);
+
+            std::cout << "Distancia entre " << a << " e " << b << " = " << dist << "\n";
+
+            soma += dist;
+        }
+
+        return 1 / soma;
     }
 
     /**
-     * Aplica o operador de mutação em cada um dos genes do
-     * indivíduo com chance r/k, onde r é dado pela taxa de
-     * mutação e k representa o comprimento do cromossomo.
+     * Aplica o operador de mutação no indivíduo com
+     * chance r, onde r é dado pela taxa de mutação.
      */
     void aplicarMutacao(Individuo& individuo) {
-        int k = individuo.cromossomo.size();
-        for (int i = 0; i < k; i++) {
-            // Verificar se este gene sofrerá mutação
-            if (gerarAleatorio() < (taxaMutacao)) {
-                // Substituir pelo valor contrário
-                if (individuo.cromossomo[i] == 0) {
-                    individuo.cromossomo[i] = 1;
-                } else {
-                    individuo.cromossomo[i] = 0;
-                }
+        if (gerarAleatorio() < (taxaMutacao)) {
+            int a = gerarAleatorio() * individuo.cromossomo.size();
+            int b = gerarAleatorio() * individuo.cromossomo.size();
 
-            }
+            std::swap(individuo.cromossomo[a], individuo.cromossomo[b]);
         }
     }
 
@@ -192,36 +206,61 @@ public:
         std::vector<Individuo> resultado;
 
         if (gerarAleatorio() < taxaCruzamento) {
-            int comprimento = a.cromossomo.size();
-
-            // Converter (arredondando para baixo) o produto entre um número
-            // aleatório, de 0 a 1, e o comprimento do cromossomo.
-            int corte = static_cast<int>(gerarAleatorio() * comprimento);
-
-            Individuo filhoA;
-            Individuo filhoB;
-
-            std::vector<int> mascara = cromossomoAleatorio(comprimento);
-            for (int i = 0; i < comprimento; i++) {
-                if (mascara[i] == 0) {
-                    // Abaixo do corte: recebe do pai contrário
-                    filhoA.cromossomo.push_back(b.cromossomo[i]);
-                    filhoB.cromossomo.push_back(a.cromossomo[i]);
-                } else {
-                    // Acima do corte: recebe do mesmo pai
-                    filhoA.cromossomo.push_back(a.cromossomo[i]);
-                    filhoB.cromossomo.push_back(b.cromossomo[i]);
-                }
-            }
-
-            resultado.push_back(filhoA);
-            resultado.push_back(filhoB);
+            resultado.push_back(pmx(a, b));
+            resultado.push_back(pmx(b, a));
         } else {
             resultado.push_back(a);
             resultado.push_back(b);
         }
 
         return resultado;
+    }
+
+    Individuo pmx(const Individuo& a, const Individuo& b) {
+        Individuo filho;
+
+        // Iniciamos com uma cópia do cromossomo de B
+        filho.cromossomo = b.cromossomo;
+
+        int inicio = gerarAleatorio() * filho.cromossomo.size();
+        int fim = gerarAleatorio() * filho.cromossomo.size();
+
+        if (inicio > fim) {
+            std::swap(inicio, fim);
+        }
+
+        std::vector<int> trecho;
+        // Copiar os valores do trecho de A para o filho
+        for (int i = inicio; i < fim; i++) {
+            filho.cromossomo[i] = a.cromossomo[i];
+
+            trecho.push_back(a.cromossomo[i]);
+        }
+
+        for (int i = inicio; i < fim; i++) {
+            int valorTrecho = trecho[i - inicio];
+            int valorB = b.cromossomo[i];
+
+            if (!contem(valorB, trecho)) {
+
+                int indiceA = i;
+                bool finalizado = false;
+                do {
+                    int valorA = a.cromossomo[indiceA];
+
+                    int indice = buscarIndice(valorA, b.cromossomo);
+                    if (indice >= inicio && indice < fim) {
+                        indiceA = indice;
+                    } else {
+                        finalizado = true;
+                    }
+                } while (!finalizado);
+
+                filho.cromossomo[indiceA] = valorTrecho;
+            }
+        }
+
+        return filho;
     }
 };
 

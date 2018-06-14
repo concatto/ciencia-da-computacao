@@ -22,7 +22,7 @@ Ponto processarLinha(const std::string& linha) {
     return Ponto(0, 0);
 }
 
-void lerTSP(const std::string& caminho) {
+std::vector<Ponto> lerTSP(const std::string& caminho) {
     std::ifstream stream(caminho);
 
     std::cout << stream.is_open() << "\n";
@@ -40,6 +40,8 @@ void lerTSP(const std::string& caminho) {
             secaoCoordenadas = true;
         }
     }
+
+    return pontos;
 }
 
 #endif // LEITOR_TSP_H

@@ -6,6 +6,7 @@
 #include <limits>
 #include <string>
 #include <cmath>
+#include <algorithm>
 
 struct Ponto {
     double x;
@@ -83,6 +84,11 @@ double infinitoDouble(bool positivo = true) {
     return infinito<double>(positivo);
 }
 
+template <class T>
+bool contem(const T& valor, const std::vector<T>& lista) {
+    return std::find(lista.begin(), lista.end(), valor) != lista.end();
+}
+
 std::vector<std::vector<int>> segmentar(const std::vector<int>& binario, int segmentos) {
     std::vector<std::vector<int>> resultado;
     int tamanhoSegmento = binario.size() / segmentos;
@@ -129,5 +135,29 @@ std::vector<int> cromossomoAleatorio(int comprimento) {
 
     return cromossomo;
 }
+
+std::vector<int> conjuntoOrdenadoAleatorio(int n) {
+    std::vector<int> conjunto;
+
+    for (int i = 0; i < n; i++) {
+        conjunto.push_back(i);
+    }
+
+    std::random_shuffle(conjunto.begin(), conjunto.end());
+
+    return conjunto;
+}
+
+template <class T>
+int buscarIndice(const T& valor, const std::vector<T>& lista) {
+    for (int i = 0; i < lista.size(); i++) {
+        if (lista[i] == valor) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
 
 #endif // UTIL_H
