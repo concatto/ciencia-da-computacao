@@ -2,8 +2,6 @@
 #define ALGORITMO_GENETICO_H
 
 #include "util.h"
-#include "circulos.h"
-#include <SFML/Graphics.hpp>
 #include <vector>
 #include <cmath>
 #include <cstdlib>
@@ -25,9 +23,6 @@ struct Individuo {
  */
 class AlgoritmoGenetico {
 private:
-    sf::RenderTexture textura;
-    sf::Image referencia;
-    const sf::Uint8* pixels;
     bool debug;
     std::vector<Individuo> populacao;
     double taxaCruzamento = 0.7;
@@ -35,34 +30,6 @@ private:
 
 public:
     AlgoritmoGenetico(int tamanhoPopulacao, int comprimentoCromossomo, bool debug = false) : debug(debug) {
-        FILE * pFile;
-        long lSize;
-        char * buffer;
-        size_t result;
-
-        pFile = fopen ( "LIA_LEDS.png" , "rb" );
-        if (pFile==NULL) {fputs ("File error",stderr); exit (1);}
-
-        // obtain file size:
-        fseek (pFile , 0 , SEEK_END);
-        lSize = ftell (pFile);
-        rewind (pFile);
-
-        // allocate memory to contain the whole file:
-        buffer = (char*) malloc (sizeof(char)*lSize);
-        if (buffer == NULL) {fputs ("Memory error",stderr); exit (2);}
-
-        // copy the file into the buffer:
-        result = fread (buffer,1,lSize,pFile);
-        if (result != lSize) {fputs ("Reading error",stderr); exit (3);}
-
-        std::cout << referencia.loadFromMemory(buffer, lSize);
-
-        pixels = referencia.getPixelsPtr();
-
-        sf::Vector2u tamanho = referencia.getSize();
-        textura.create(tamanho.x, tamanho.y);
-
         gerarPopulacaoInicial(tamanhoPopulacao, comprimentoCromossomo);
     }
 
@@ -131,10 +98,7 @@ public:
     }
 
     double avaliarIndividuo(const Individuo& individuo) {
-        textura.clear();
-        gerarTextura(textura, individuo.cromossomo, 100, 203, 200);
 
-        return 1 / computarDiferenca(textura.getTexture().copyToImage().getPixelsPtr(), pixels, referencia.getSize());
     }
 
     /**
@@ -224,43 +188,6 @@ public:
      * Caso o cruzamento falhe, os próprios indivíduos serão
      * retornados, inalterados.
      */
-//    std::vector<Individuo> aplicarCruzamento(const Individuo& a, const Individuo& b) {
-//        std::vector<Individuo> resultado;
-
-//        if (gerarAleatorio() < taxaCruzamento) {
-//            int comprimento = a.cromossomo.size();
-
-//            // Converter (arredondando para baixo) o produto entre um número
-//            // aleatório, de 0 a 1, e o comprimento do cromossomo.
-//            int corte = static_cast<int>(gerarAleatorio() * comprimento);
-
-//            Individuo filhoA;
-//            Individuo filhoB;
-
-//            for (int i = 0; i < comprimento; i++) {
-//                if (i < corte) {
-//                    // Abaixo do corte: recebe do pai contrário
-//                    filhoA.cromossomo.push_back(b.cromossomo[i]);
-//                    filhoB.cromossomo.push_back(a.cromossomo[i]);
-//                } else {
-//                    // Acima do corte: recebe do mesmo pai
-//                    filhoA.cromossomo.push_back(a.cromossomo[i]);
-//                    filhoB.cromossomo.push_back(b.cromossomo[i]);
-//                }
-//            }
-
-//            resultado.push_back(filhoA);
-//            resultado.push_back(filhoB);
-//        } else {
-//            resultado.push_back(a);
-//            resultado.push_back(b);
-//        }
-
-//        return resultado;
-//    }
-
-
-    // Uniforme
     std::vector<Individuo> aplicarCruzamento(const Individuo& a, const Individuo& b) {
         std::vector<Individuo> resultado;
 

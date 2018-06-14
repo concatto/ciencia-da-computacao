@@ -24,7 +24,7 @@ int main() {
     sf::Vector2u tamanho = window.getSize();
     textura.create(tamanho.x, tamanho.y);
 
-    AlgoritmoGenetico ag(100, 8000, false);
+    AlgoritmoGenetico ag(60, 8000, false);
 
 
     auto start = std::chrono::high_resolution_clock::now();

@@ -5,6 +5,20 @@
 #include <vector>
 #include <limits>
 #include <string>
+#include <cmath>
+
+struct Ponto {
+    double x;
+    double y;
+
+    Ponto(double x, double y) : x(x), y(y) {}
+};
+
+std::ostream& operator<<(std::ostream& out, const Ponto& ponto) {
+    out << "(" << ponto.x << ", " << ponto.y << ")";
+
+    return out;
+}
 
 struct Limitador {
     double min;
@@ -23,6 +37,13 @@ std::string paraString(const std::vector<int>& cromossomo) {
         str.append(std::to_string(v));
     }
     return str;
+}
+
+double distanciaEuclidiana(const Ponto& a, const Ponto& b) {
+    double dx = a.x - b.x;
+    double dy = a.y - b.y;
+
+    return std::sqrt(dx * dx + dy * dy);
 }
 
 double gerarAleatorio() {
