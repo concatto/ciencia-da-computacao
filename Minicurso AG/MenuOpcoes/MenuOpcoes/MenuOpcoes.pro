@@ -8,4 +8,5 @@ SOURCES += \
 
 HEADERS += \
     util.h \
-    leitor.h
+    leitor.h \
+    algoritmo_genetico.h
