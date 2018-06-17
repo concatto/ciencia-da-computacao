@@ -98,3 +98,34 @@ if (gerarAleatorio() < 0.01) {
     }
 }
 ```
+
+
+
+# Evolução
+
+```cpp
+void evoluir() {
+    std::vector<Solucao> novaPopulacao;
+
+    while (novaPopulacao.size() < populacao.size()) {
+        std::vector<int> pais = selecionar();
+
+        std::vector<Solucao> filhos = aplicarCruzamento(populacao[pais[0]], populacao[pais[1]]);
+
+        aplicarMutacao(filhos[0]);
+        aplicarMutacao(filhos[1]);
+
+        filhos[0].aptidao = avaliar(filhos[0]);
+        filhos[1].aptidao = avaliar(filhos[1]);
+
+        novaPopulacao.push_back(filhos[0]);
+        novaPopulacao.push_back(filhos[1]);
+    }
+
+    // Elitismo (opcional, porém bom)
+    int indice = std::rand() % novaPopulacao.size();
+    novaPopulacao[indice] = getMelhorIndividuo();
+
+    populacao = novaPopulacao;
+}
+```
