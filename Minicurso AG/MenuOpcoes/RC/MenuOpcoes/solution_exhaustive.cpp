@@ -74,8 +74,7 @@ void imprimirOpcao(const Instancia& instancia, int indice) {
     std::cout << "Custo: " << instancia.custos[indice] << "\n";
 }
 
-
-int main() {
+Instancia carregarProblema() {
     std::vector<std::vector<std::string>> dados = lerInstancia("instancia20.csv");
 
     Instancia problema;
@@ -88,6 +87,12 @@ int main() {
 
         adicionarOpcao(problema, nome, importancia, custo);
     }
+    
+    return problema;
+}
+
+int main() {
+    Instancia problema = carregarProblema();
 
     int bits = problema.nomes.size();
 
