@@ -4,10 +4,10 @@
 // Para cada i em tamanhoPopulacao
 Solucao individuo;
 
-for (int j = 0; j < problema.importancias.size(); i++) {
-    individuo.bits[j] = std::rand() % 2;
-//  individuo.bits[j] = std::round(gerarAleatorio());
-//  individuo.bits[j] = (gerarAleatorio() < 0.5) ? 0 : 1;
+for (int j = 0; j < problema.importancias.size(); j++) {
+    individuo.bits.push_back(std::rand() % 2);
+//  individuo.bits.push_back(std::round(gerarAleatorio()));
+//  individuo.bits.push_back((gerarAleatorio() < 0.5) ? 0 : 1);
 }
 
 individuo.aptidao = avaliar(individuo);
