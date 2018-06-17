@@ -20,7 +20,7 @@ void imprimirOpcao(const Instancia& instancia, int indice) {
 int main() {
     std::srand(std::time(nullptr));
 
-    std::vector<std::vector<std::string>> dados = lerInstancia("instancia40.csv");
+    std::vector<std::vector<std::string>> dados = lerInstancia("instancia.csv");
 
     Instancia problema;
     problema.custoMaximo = paraReal(dados[0][0]);
@@ -42,9 +42,9 @@ int main() {
 //    problema.custoMaximo = 20;
 
     AlgoritmoGenetico ag(problema);
-    ag.gerarPopulacaoInicial(1000);
+    ag.gerarPopulacaoInicial(50);
 
-    for (int i = 0; i < 100000; i++) {
+    for (int i = 0; i < 100; i++) {
         ag.evoluir();
 
         Solucao melhor = ag.getMelhorIndividuo();

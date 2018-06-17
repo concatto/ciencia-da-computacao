@@ -76,7 +76,7 @@ void imprimirOpcao(const Instancia& instancia, int indice) {
 
 
 int main() {
-    std::vector<std::vector<std::string>> dados = lerInstancia("instancia.csv");
+    std::vector<std::vector<std::string>> dados = lerInstancia("instancia20.csv");
 
     Instancia problema;
     problema.custoMaximo = paraReal(dados[0][0]);
@@ -94,7 +94,8 @@ int main() {
     Solucao melhor;
     double melhorQualidade = 0;
 
-    for (int i = 0; i < std::pow(2, bits); i++) {
+    int total = std::pow(2, bits);
+    for (int i = 0; i < total; i++) {
         Solucao solucao;
 
         for (int j = 0; j < bits; j++) {
@@ -108,6 +109,7 @@ int main() {
             melhor = solucao;
         }
 
+        std::cout << i << "/" << total << " => " << melhorQualidade << "\n";
         //std::cout << "A qualidade da solucao é igual a: " << qualidade << "\n";
     }
 

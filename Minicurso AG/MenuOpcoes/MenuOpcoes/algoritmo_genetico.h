@@ -72,7 +72,7 @@ public:
         }
 
         if (custoTotal > problema.custoMaximo) {
-            return 0;
+            return problema.custoMaximo - custoTotal;
         }
 
         return qualidade;
@@ -86,7 +86,9 @@ public:
         for (int i = 0; i < tamanhoPopulacao; i++) {
             Solucao individuo;
 
-            // TODO Preencher o material genético do indivíduo aleatoriamente.
+            for (int j = 0; j < problema.importancias.size(); j++) {
+                individuo.bits.push_back(std::rand() % 2);
+            }
 
             individuo.aptidao = avaliar(individuo);
             populacao.push_back(individuo);
@@ -115,7 +117,23 @@ public:
     void evoluir() {
         std::vector<Solucao> novaPopulacao;
 
-        // TODO preencher a nova população!
+        while (novaPopulacao.size() < populacao.size()) {
+            std::vector<int> pais = selecionar();
+
+            std::vector<Solucao> filhos = aplicarCruzamento(populacao[pais[0]], populacao[pais[1]]);
+
+            aplicarMutacao(filhos[0]);
+            aplicarMutacao(filhos[1]);
+
+            filhos[0].aptidao = avaliar(filhos[0]);
+            filhos[1].aptidao = avaliar(filhos[1]);
+
+            novaPopulacao.push_back(filhos[0]);
+            novaPopulacao.push_back(filhos[1]);
+        }
+
+        int indice = std::rand() % novaPopulacao.size();
+        novaPopulacao[indice] = getMelhorIndividuo();
 
         populacao = novaPopulacao;
     }
@@ -126,9 +144,14 @@ public:
      * mutação. Caso consiga, deve inverter o valor do gene.
      */
     void aplicarMutacao(Solucao& individuo) {
-        for (int i = 0; /* TAMANHO DO CROMOSSOMO */; i++) {
-            // TODO Verificar se este gene sofrerá mutação
-            // e aplicá-la caso positivo.
+        for (int i = 0; i < individuo.bits.size(); i++) {
+            if (gerarAleatorio() < 0.01) {
+                if (individuo.bits[i] == 0) {
+                    individuo.bits[i] = 1;
+                } else {
+                    individuo.bits[i] = 0;
+                }
+            }
         }
     }
 
@@ -141,9 +164,40 @@ public:
     std::vector<int> selecionar() {
         std::vector<int> resultado;
 
-        // TODO Quem serão os dois índices escolhidos?
+        double p = 0.8;
+
+        int a = torneio(p);
+        int b;
+
+        do {
+            b = torneio(p);
+        } while (a == b);
+
+        resultado.push_back(a);
+        resultado.push_back(b);
 
         return resultado;
+    }
+
+    int torneio(double p) {
+        int a = std::rand() % populacao.size();
+        int b = std::rand() % populacao.size();
+
+        if (gerarAleatorio() < p) {
+            // Retornar o mais forte
+            if (populacao[a].aptidao > populacao[b].aptidao) {
+                return a;
+            } else {
+                return b;
+            }
+        } else {
+            // Retornar o mais fraco
+            if (populacao[a].aptidao > populacao[b].aptidao) {
+                return b;
+            } else {
+                return a;
+            }
+        }
     }
 
     /**
@@ -155,7 +209,25 @@ public:
     std::vector<Solucao> aplicarCruzamento(const Solucao& a, const Solucao& b) {
         std::vector<Solucao> resultado;
 
-        // TODO Executar o cruzamento entre a e b.
+        Solucao filhoA = a;
+        Solucao filhoB = b;
+
+        double chance = 0.9;
+
+        if (gerarAleatorio() < chance) {
+            int ponto = std::rand() % a.bits.size();
+
+            for (int i = 0; i < ponto; i++) {
+//              int alelo = filhoA.bits[i];
+//              filhoA.bits[i] = filhoB.bits[i];
+//              filhoB.bits[i] = alelo;
+
+                std::swap(filhoA.bits[i], filhoB.bits[i]);
+            }
+        }
+
+        resultado.push_back(filhoA);
+        resultado.push_back(filhoB);
 
         return resultado;
     }
