@@ -7,6 +7,7 @@
 #include <string>
 #include <cmath>
 #include <algorithm>
+#include <unordered_set>
 
 struct Ponto {
     double x;
@@ -89,6 +90,11 @@ bool contem(const T& valor, const std::vector<T>& lista) {
     return std::find(lista.begin(), lista.end(), valor) != lista.end();
 }
 
+template <class T>
+bool contem(const T& valor, const std::unordered_set<T>& lista) {
+    return std::find(lista.begin(), lista.end(), valor) != lista.end();
+}
+
 std::vector<std::vector<int>> segmentar(const std::vector<int>& binario, int segmentos) {
     std::vector<std::vector<int>> resultado;
     int tamanhoSegmento = binario.size() / segmentos;
@@ -159,5 +165,21 @@ int buscarIndice(const T& valor, const std::vector<T>& lista) {
     return -1;
 }
 
+// Fonte: https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#C++
+unsigned int levenshtein(const std::string& s1, const std::string& s2) {
+    const std::size_t len1 = s1.size(), len2 = s2.size();
+    std::vector<std::vector<unsigned int>> d(len1 + 1, std::vector<unsigned int>(len2 + 1));
+
+    d[0][0] = 0;
+    for(unsigned int i = 1; i <= len1; ++i) d[i][0] = i;
+    for(unsigned int i = 1; i <= len2; ++i) d[0][i] = i;
+
+    for(unsigned int i = 1; i <= len1; ++i)
+        for(unsigned int j = 1; j <= len2; ++j)
+            // note that std::min({arg1, arg2, arg3}) works only in C++11,
+            // for C++98 use std::min(std::min(arg1, arg2), arg3)
+            d[i][j] = std::min({ d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (s1[i - 1] == s2[j - 1] ? 0 : 1) });
+    return d[len1][len2];
+}
 
 #endif // UTIL_H

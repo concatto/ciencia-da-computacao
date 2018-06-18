@@ -5,6 +5,8 @@
 #include <vector>
 #include <cmath>
 #include <cstdlib>
+#include <unordered_map>
+#include <unordered_set>
 
 /**
  * Este struct representa um indivíduo da população,
@@ -28,11 +30,18 @@ private:
     std::vector<Individuo> populacao;
     double taxaCruzamento = 0.9;
     double taxaMutacao = 0.01;
+    double pressao = 0.8;
 
 public:
     AlgoritmoGenetico(int tamanhoPopulacao, const std::vector<Ponto>& cidades, bool debug = false) : debug(debug) {
         this->cidades = cidades;
         gerarPopulacaoInicial(tamanhoPopulacao);
+    }
+
+    void definirParametros(double pressao, double cruzamento, double mutacao) {
+        this->pressao = pressao;
+        this->taxaCruzamento = cruzamento;
+        this->taxaMutacao = mutacao;
     }
 
     void gerarPopulacaoInicial(int tamanhoPopulacao) {
@@ -42,8 +51,6 @@ public:
             individuo.cromossomo = conjuntoOrdenadoAleatorio(cidades.size());
             individuo.aptidao = avaliarIndividuo(individuo);
             populacao.push_back(individuo);
-
-            std::cout << i << ": " << individuo.aptidao << "\n";
         }
     }
 
@@ -210,12 +217,17 @@ public:
             std::swap(inicio, fim);
         }
 
-        std::vector<int> trecho;
+        std::unordered_set<int> trecho;
         // Copiar os valores do trecho de A para o filho
         for (int i = inicio; i < fim; i++) {
             filho.cromossomo[i] = a.cromossomo[i];
 
-            trecho.push_back(a.cromossomo[i]);
+            trecho.insert(a.cromossomo[i]);
+        }
+
+        std::unordered_map<int, int> lookupB;
+        for (int i = 0; i < b.cromossomo.size(); i++) {
+            lookupB[b.cromossomo[i]] = i;
         }
 
         for (int i = inicio; i < fim; i++) {
@@ -227,7 +239,7 @@ public:
                 do {
                     int valorA = a.cromossomo[indiceA];
 
-                    indiceA = buscarIndice(valorA, b.cromossomo);
+                    indiceA = lookupB[valorA];
                     if (indiceA < inicio || indiceA >= fim) {
                         finalizado = true;
                     }
