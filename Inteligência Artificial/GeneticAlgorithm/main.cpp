@@ -10,11 +10,11 @@ int main() {
     std::srand(std::time(nullptr));
 
     std::vector<Ponto> cidades = lerTSP("test.tsp");
-    AlgoritmoGenetico ag(50, cidades, false);
+    AlgoritmoGenetico ag(100, cidades, false);
 
     auto start = std::chrono::high_resolution_clock::now();
 
-    for (int i = 0; i <= 500; i++) {
+    for (int i = 0; i <= 100000; i++) {
         std::cout << "Starting generation " << i << "\n";
         ag.evoluir();
 

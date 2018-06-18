@@ -26,8 +26,8 @@ private:
     bool debug;
     std::vector<Ponto> cidades;
     std::vector<Individuo> populacao;
-    double taxaCruzamento = 0.7;
-    double taxaMutacao = 0.0009;
+    double taxaCruzamento = 0.9;
+    double taxaMutacao = 0.01;
 
 public:
     AlgoritmoGenetico(int tamanhoPopulacao, const std::vector<Ponto>& cidades, bool debug = false) : debug(debug) {
@@ -93,6 +93,7 @@ public:
             novaPopulacao.push_back(filhos[1]);
         }
 
+        // Elitismo
         int pos = gerarAleatorio() * novaPopulacao.size();
         novaPopulacao[pos] = melhor;
 
@@ -114,8 +115,6 @@ public:
             int b = cromossomo[destino];
 
             double dist = distanciaEuclidiana(cidades[a], cidades[b]);
-
-            std::cout << "Distancia entre " << a << " e " << b << " = " << dist << "\n";
 
             soma += dist;
         }
@@ -143,7 +142,7 @@ public:
      * apenas dois elementos (os índices).
      */
     std::vector<int> selecionar() {
-        double pressao = 0.85;
+        double pressao = 0.8;
 
         int primeiro = executarTorneio(pressao);
         int segundo;
@@ -158,24 +157,6 @@ public:
         resultado.push_back(segundo);
 
         return resultado;
-    }
-
-    int executarRoleta() {
-        double aptidaoTotal = 0;
-        for (const Individuo& individuo : populacao) {
-            aptidaoTotal += individuo.aptidao;
-        }
-
-        double valor = gerarAleatorio() * aptidaoTotal;
-        double soma = 0;
-        for (int i = 0; i < populacao.size(); i++) {
-            // Se fosse passar do ponto escolhido, retornar o índice atual.
-            if (soma + populacao[i].aptidao >= valor) {
-                return i;
-            }
-
-            soma += populacao[i].aptidao;
-        }
     }
 
     int executarTorneio(double pressao) {
@@ -238,25 +219,21 @@ public:
         }
 
         for (int i = inicio; i < fim; i++) {
-            int valorTrecho = trecho[i - inicio];
             int valorB = b.cromossomo[i];
 
             if (!contem(valorB, trecho)) {
-
                 int indiceA = i;
                 bool finalizado = false;
                 do {
                     int valorA = a.cromossomo[indiceA];
 
-                    int indice = buscarIndice(valorA, b.cromossomo);
-                    if (indice >= inicio && indice < fim) {
-                        indiceA = indice;
-                    } else {
+                    indiceA = buscarIndice(valorA, b.cromossomo);
+                    if (indiceA < inicio || indiceA >= fim) {
                         finalizado = true;
                     }
                 } while (!finalizado);
 
-                filho.cromossomo[indiceA] = valorTrecho;
+                filho.cromossomo[indiceA] = valorB;
             }
         }
 
