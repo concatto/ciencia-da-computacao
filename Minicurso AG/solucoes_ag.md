@@ -13,6 +13,7 @@ for (int i = 0; i < 200; i++) {
 }
 ```
 
+<br>
 
 ## Busca exaustiva
 
@@ -47,6 +48,7 @@ for (int i = 0; i < bits; i++) {
 }
 ```
 
+<br>
 
 ## Função de avaliação
 
@@ -71,6 +73,7 @@ double avaliar(const Solucao& solucao, const Instancia& problema) {
 }
 ```
 
+<br>
 
 ## Geração de população inicial
 
@@ -87,6 +90,8 @@ for (int j = 0; j < problema.importancias.size(); j++) {
 individuo.aptidao = avaliar(individuo);
 populacao.push_back(individuo);
 ```
+
+<br>
 
 ## Seleção por torneio
 
@@ -135,6 +140,8 @@ int torneio(double p) {
 }
 ```
 
+<br>
+
 ## Cruzamento
 
 ```cpp
@@ -159,6 +166,8 @@ resultado.push_back(filhoA);
 resultado.push_back(filhoB);
 ```
 
+<br>
+
 ## Mutação
 
 ```cpp
@@ -173,7 +182,7 @@ if (gerarAleatorio() < 0.01) {
 }
 ```
 
-
+<br>
 
 # Evolução
 
@@ -203,3 +212,18 @@ void evoluir() {
     populacao = novaPopulacao;
 }
 ```
+
+<br>
+<br>
+
+## Questões
+
+* #8 O que é possível deduzir sobre a função visualizando apenas a vizinhança de um ponto?
+* #21 Quantas soluções existem considerando uma cadeia de n bits?
+* #22 Qual a qualidade de uma solução cuja soma dos custos excede F?
+* #26 Sendo os "indivíduos" as soluções para o problema, como medir suas "chances de sobreviver"?
+* #33 Como gerar uma solução razoavelmente boa rapidamente?
+* #36 Qual a consequência de selecionar apenas os melhores indivíduos para cruzar?
+* #41 Qual o benefício do cruzamento de ponto duplo sobre ponto único?
+* #44 O que aconteceria se a taxa de mutação fosse igual a 50%?
+* #46 É possível que a aptidão do melhor indivíduo piore de uma geração para outra?
