@@ -1,3 +1,77 @@
+## main.cpp
+
+```cpp
+AlgoritmoGenetico ag(problema);
+ag.gerarPopulacaoInicial(100);
+
+for (int i = 0; i < 200; i++) {
+    ag.evoluir();
+
+    Solucao melhor = ag.getMelhorIndividuo();
+
+    std::cout << "Melhor solucao encontrada tem qualidade " << melhor.aptidao << "\n";
+}
+```
+
+
+## Busca exaustiva
+
+```cpp
+Solucao melhor;
+double melhorQualidade = 0;
+
+int total = std::pow(2, bits);
+for (int i = 0; i < total; i++) {
+    Solucao solucao;
+
+    for (int j = 0; j < bits; j++) {
+        solucao.bits.push_back(obterBit(i, j));
+    }
+
+    double qualidade = avaliar(solucao, problema);
+
+    if (qualidade > melhorQualidade) {
+        melhorQualidade = qualidade;
+        melhor = solucao;
+    }
+
+    std::cout << i << "/" << total << " => " << melhorQualidade << "\n";
+}
+
+std::cout << "Melhor solucao encontrada tem qualidade " << melhorQualidade << "\n";
+std::cout << "Opcoes no maximo:\n";
+for (int i = 0; i < bits; i++) {
+    if (melhor.bits[i] == 1) {
+        imprimirOpcao(problema, i);
+    }
+}
+```
+
+
+## Função de avaliação
+
+```cpp
+// No AG não precisa receber o problema.
+double avaliar(const Solucao& solucao, const Instancia& problema) {
+    double custoTotal = 0;
+    double qualidade = 0;
+
+    for (int i = 0; i < solucao.bits.size(); i++) {
+        if (solucao.bits[i] == 1) {
+            custoTotal += problema.custos[i];
+            qualidade += problema.importancias[i];
+        }
+    }
+
+    if (custoTotal > problema.custoMaximo) {
+        return 0; // Será?
+    }
+
+    return qualidade;
+}
+```
+
+
 ## Geração de população inicial
 
 ```cpp
