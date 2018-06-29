@@ -70,7 +70,7 @@ void buscaExaustiva() {
 int main() {
     std::srand(std::time(nullptr));
 
-    std::vector<std::vector<std::string>> dados = lerInstancia("instancia100.csv");
+    std::vector<std::vector<std::string>> dados = lerInstancia("instancia60.csv");
 
     Instancia problema;
     problema.custoMaximo = paraReal(dados[0][0]);
