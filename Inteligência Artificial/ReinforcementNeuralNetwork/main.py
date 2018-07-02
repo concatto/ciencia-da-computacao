@@ -23,7 +23,7 @@ print(y_test)
 
 print(r_test)
 
-epochs = 1000
+epochs = 5000
 
 
 def single_run(hidden_neurons, learning_rate, hidden_activation, output_activation):
@@ -132,6 +132,6 @@ def run_experiment(replications, portion):
 		writer.writerows(results)
 
 
-single_run(40, 0.08, 'tanh', 'tanh')
+single_run(10, 0.08, 'tanh', 'tanh')
 
 

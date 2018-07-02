@@ -22,4 +22,4 @@ while True:
 		# Open for writing then close, erasing the file's contents
 		open(file_path, "w").close()
 
-	time.sleep(1)
+	time.sleep(0.1)
