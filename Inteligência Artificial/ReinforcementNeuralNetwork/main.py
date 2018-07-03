@@ -13,7 +13,7 @@ def adjust_output(data):
 np.random.seed()
 # This is the configuration of the present experiment.
 
-X, y, r, X_test, y_test, r_test = loader.load_dataset("~/robo_data.csv", input_dimension=9, test_ratio=0.3)
+X, y, r, X_test, y_test, r_test = loader.load_dataset("~/anti_stationary.csv", input_dimension=9, test_ratio=0.3)
 
 y = adjust_output(y)
 y_test = adjust_output(y_test)
