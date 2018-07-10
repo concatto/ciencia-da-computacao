@@ -48,7 +48,7 @@ function make_movement(solution::Solution, instance::Instance, from::Int, to::In
 	original_weight = compute_weight(solution, instance)
 	best_index = 0
 
-	for (index, value) ∈ enumerate(solution.items)
+	for (index, value) ∈ shuffle(collect(enumerate(solution.items)))
 		# if index % 100 == 0
 		# 	println("Checking neighbor n. $index; last improvement: $last_improvement")
 		# end
@@ -56,7 +56,7 @@ function make_movement(solution::Solution, instance::Instance, from::Int, to::In
 		if value == from
 			#neighbor = Solution(copy(solution.items))
 			#neighbor.items[index] = to
-			change = delta_quality(solution, instance, index, to, original_weight)
+			change = Δquality(solution, instance, index, to, original_weight)
 			#neighbor_quality = evaluate(neighbor, instance)
 			# println("Changed an item which cost ", instance.items[index].weight)
 			# println("Improvement: ", neighbor_quality - original_quality)
@@ -65,7 +65,7 @@ function make_movement(solution::Solution, instance::Instance, from::Int, to::In
 				best_quality = original_quality + change
 				best_index = index
 
-				break
+				break # first improvement
 			end
 		end
 	end
@@ -92,7 +92,7 @@ function try_exchange(solution::Solution, instance::Instance)
 	best = solution
 	best_quality = evaluate(solution, instance)
 
-	for (index, value) ∈ enumerate(solution.items)
+	for (index, value) ∈ shuffle(collect(enumerate(solution.items)))
 		if value == 1
 			# Let's remove this item
 			neighbor = Solution(copy(solution.items))
@@ -148,7 +148,7 @@ end
 
 
 function run_experiments(replications)
-	files = filter(x -> endswith(x, ".lia"), readdir("."))
+	files = filter(x -> endswith(x, "a10000.lia"), readdir("."))
 
 	experiments = DataFrame(
 		file=AbstractString[],
@@ -169,6 +169,8 @@ function run_experiments(replications)
 			best = local_search(initial, inst)
 			time = toq()
 			quality = evaluate(best, inst)
+			println(best)
+			println(compute_weight(best, inst))
 
 			row = [file_name, replication, time, quality, length(inst.items)]
 			println(row)
@@ -176,7 +178,7 @@ function run_experiments(replications)
 		end
 	end
 
-	CSV.write("experiments.csv", experiments)
+	#CSV.write("experiments2.csv", experiments)
 end
 
 
@@ -189,4 +191,4 @@ end
 #println(compute_weight(best, inst))
 
 run_experiments(1)
-run_experiments(30)
+#run_experiments(30)

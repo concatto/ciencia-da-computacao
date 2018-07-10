@@ -40,14 +40,14 @@ function evaluate(solution::Solution, instance::Instance)
 end
 
 
-function delta_weight(solution::Solution, instance::Instance, index::Int, new_value::Int)
+function Δweight(solution::Solution, instance::Instance, index::Int, new_value::Int)
 	weight = instance.items[index].weight
 
 	return new_value == 0 ? -weight : weight
 end
 
-function delta_quality(solution::Solution, instance::Instance, index::Int, new_value::Int, previous_weight::Int)
-	new_weight = previous_weight + delta_weight(solution, instance, index, new_value)
+function Δquality(solution::Solution, instance::Instance, index::Int, new_value::Int, previous_weight::Int)
+	new_weight = previous_weight + Δweight(solution, instance, index, new_value)
 
 	if new_weight <= instance.total_weight
 		value = instance.items[index].value
