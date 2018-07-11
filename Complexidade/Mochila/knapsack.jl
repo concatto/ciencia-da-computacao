@@ -126,7 +126,6 @@ function local_search(initial::Solution, instance::Instance)
 
 		if new_best_quality > best_quality
 			best = new_best
-			best_quality = new_best_quality
 		else
 			break
 		end
