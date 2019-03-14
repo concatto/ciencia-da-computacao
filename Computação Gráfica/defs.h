@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdint.h>
 
 template <class T>
 using Mapper = std::function<T(const T&)>;

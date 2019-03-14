@@ -3,7 +3,6 @@
 #include "defs.h"
 
 namespace improc {
-
     cv::Mat overrideColor(const cv::Mat& image, const Mapper<cv::Vec3b>& mapper) {
         cv::Mat clone = image.clone();
 
