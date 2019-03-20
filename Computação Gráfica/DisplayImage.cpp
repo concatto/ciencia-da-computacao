@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
         return -1;
     }
 
-    cv::Mat image = improc::brightnessGrayscale(cv::imread(argv[1], 1));
+    cv::Mat image = improc::grayscale::singleChannel(cv::imread(argv[1], 1));
 
     if (!image.data) {
         printf("No image data \n");
@@ -21,10 +21,26 @@ int main(int argc, char** argv) {
     cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE);
 
 
-    cv::imshow("Original", improc::threshold(image, 100));
-    cv::imshow("Red", improc::isolateChannel(image, 2));
-    cv::imshow("Green", improc::isolateChannel(image, 1));
-    cv::imshow("Blue", improc::isolateChannel(image, 0));
+    cv::imshow("Original", improc::grayscale::autoWindowing(image));
+    // for (int i = 0; i < 256; i++) {
+    //     cv::imshow("Threshold", improc::grayscale::threshold(image, i));
+    //     cv::waitKey(10);
+    // }
+    // cv::imshow("Red", improc::isolateChannel(image, 2));
+    // cv::imshow("Green", improc::isolateChannel(image, 1));
+    // cv::imshow("Blue", improc::isolateChannel(image, 0));
+
+    std::vector<double> histogram = improc::grayscale::histogram(image);
+
+    double sum = 0;
+    for (int i = 0; i < histogram.size(); i++) {
+        std::cout << i << " => " << histogram[i] << "\n";
+        sum += histogram[i];
+    }
+
+    std::cout << "Sum = " << sum << "\n";
+
+    cv::imshow("histogram", improc::visualizeHistogram(histogram));
 
     cv::waitKey(0);
     return 0;
