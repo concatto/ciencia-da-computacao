@@ -2,6 +2,7 @@
 #include <vector>
 #include <cmath>
 #include <algorithm>
+#include <utility>
 #include <opencv2/opencv.hpp>
 #include "defs.h"
 
@@ -10,6 +11,40 @@ double lerp(double alpha, double a, double b) {
     //std::cout << "Alpha = " << alpha << ". Scaled = " << r << "\n";
     return r;
 }
+
+double normalize(double x, double lower, double upper) {    
+    return (x - lower) / static_cast<double>(upper - lower);
+}
+
+struct PiecewiseLinearFunction {
+    std::vector<IntPair> coordinates;
+
+    PiecewiseLinearFunction(const std::vector<IntPair>& coordinates) : coordinates(coordinates) {
+
+    }
+
+    int apply(int input) {
+        int iUpper = 0;
+        for (int i = 0; i < coordinates.size(); i++) {
+            if (input <= coordinates[i].first) {
+                iUpper = i;
+                break;
+            }
+        }
+
+        IntPair lower = coordinates[iUpper - 1];
+        IntPair upper = coordinates[iUpper];
+
+        double x = normalize(input, lower.first, upper.first);
+
+        double ret = lerp(x, lower.second, upper.second);
+
+        // std::cout << "in: " << input << "; norm: " << x << ";\n";
+        // std::cout << "x0: " << lower.first << "; x1: " << upper.first << ";\n";
+        // std::cout << "y0: " << lower.second << "; y1: " << upper.second << ". Out = " << ret << "\n";
+        return ret;
+    }
+};
 
 namespace improc {
     template <class PixelType>
@@ -148,7 +183,7 @@ namespace improc::grayscale {
                 newValue = 255;
             } else {
                 double delta = second - first;
-                newValue = std::round(lerp((pixel - first) / static_cast<double>(delta), 0, 255));
+                newValue = std::round(lerp(normalize(pixel, first, second), 0, 255));
             }
 
             return static_cast<Pixel>(newValue);
@@ -182,5 +217,34 @@ namespace improc::grayscale {
         std::cout << "First nonzero at " << first << ". Last nonzero at " << last << "\n";
 
         return windowing(image, first, last);
+    }
+
+    cv::Mat logarithm(const cv::Mat& image) {
+        double c = 255.0 / std::log(256.0);
+
+        return overrideColor<Pixel>(image, [&](const Pixel& pixel) {
+            return c * std::log(1 + pixel);
+        });
+    }
+
+    cv::Mat power(const cv::Mat& image, double gamma) {
+        double c = 255.0 / std::pow(255, gamma);
+
+        return overrideColor<Pixel>(image, [&](const Pixel& pixel) {
+            return c * std::pow(pixel, gamma);
+        });
+    }
+
+    cv::Mat piecewiseLinearTransform(const cv::Mat& image, int x1, int y1, int x2, int y2) {
+        PiecewiseLinearFunction func({
+            {0, 0},
+            {x1, y1}, 
+            {x2, y2}, 
+            {255, 255}
+        });
+
+        return overrideColor<Pixel>(image, [&](const Pixel& pixel) {
+            return func.apply(pixel);
+        });
     }
 }
