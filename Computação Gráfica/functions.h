@@ -1,3 +1,6 @@
+#ifndef FUNCTIONS_H
+#define FUNCTIONS_H
+
 #include <functional>
 #include <vector>
 #include <cmath>
@@ -5,46 +8,8 @@
 #include <utility>
 #include <opencv2/opencv.hpp>
 #include "defs.h"
-
-double lerp(double alpha, double a, double b) {
-    double r = b * alpha + a * (1 - alpha);
-    //std::cout << "Alpha = " << alpha << ". Scaled = " << r << "\n";
-    return r;
-}
-
-double normalize(double x, double lower, double upper) {    
-    return (x - lower) / static_cast<double>(upper - lower);
-}
-
-struct PiecewiseLinearFunction {
-    std::vector<IntPair> coordinates;
-
-    PiecewiseLinearFunction(const std::vector<IntPair>& coordinates) : coordinates(coordinates) {
-
-    }
-
-    int apply(int input) {
-        int iUpper = 0;
-        for (int i = 0; i < coordinates.size(); i++) {
-            if (input <= coordinates[i].first) {
-                iUpper = i;
-                break;
-            }
-        }
-
-        IntPair lower = coordinates[iUpper - 1];
-        IntPair upper = coordinates[iUpper];
-
-        double x = normalize(input, lower.first, upper.first);
-
-        double ret = lerp(x, lower.second, upper.second);
-
-        // std::cout << "in: " << input << "; norm: " << x << ";\n";
-        // std::cout << "x0: " << lower.first << "; x1: " << upper.first << ";\n";
-        // std::cout << "y0: " << lower.second << "; y1: " << upper.second << ". Out = " << ret << "\n";
-        return ret;
-    }
-};
+#include "utils.h"
+#include "piecewise.h"
 
 namespace improc {
     template <class PixelType>
@@ -75,7 +40,7 @@ namespace improc {
         cv::Mat viz(histogram.size(), histogram.size(), CV_8U, 255);
 
         double max = *std::max_element(histogram.begin(), histogram.end());
-        double coefficient = 1 / max;
+        double coefficient = 0.9 / max;
 
         for (int i = 0; i < histogram.size(); i++) {
             double value = histogram[i];
@@ -86,6 +51,16 @@ namespace improc {
 
                 viz.at<ubyte>(yPos, i) = 0;
             }
+        }
+
+        return viz;
+    }
+
+    cv::Mat visualizeHistogram(const std::vector<double>& histogram, int highlight) {
+        cv::Mat viz = visualizeHistogram(histogram);
+
+        for (int i = 0; i < histogram.size(); i++) {
+            viz.at<ubyte>(i, highlight) = 0;
         }
 
         return viz;
@@ -248,3 +223,5 @@ namespace improc::grayscale {
         });
     }
 }
+
+#endif
