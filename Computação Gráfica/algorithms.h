@@ -6,7 +6,7 @@
 #include <iostream>
 #include <algorithm>
 #include <limits>
-#include "functions.h"
+#include "grayscale.h"
 #include "utils.h"
 
 namespace algorithms {

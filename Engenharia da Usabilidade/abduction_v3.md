@@ -48,17 +48,17 @@ O fluxo de trabalho padrão é composto por duas etapas: Movimentação até a s
 
 O óculos de realidade aumentada deverá apresentar informações úteis e relevantes, como a distância do humano alvo até o disco voador, o status do raio abdutivo (on/off), além de um feedback em tempo real da manobra sendo executada. O painel transmissor também fortalece este quesito.
 
--- Aqui imagem da visão do ET --
+![Visão do ET](/home/concatto/ciencia-da-computacao/Engenharia da Usabilidade/Resources/default_view4.jpg)
 
-Como ilustrado na imagem, o ET pode determinar qual visor está sendo utilizado, em qual modo ele se encontra e a distância do alvo.
+Como ilustrado na imagem, o ET pode determinar qual visor está sendo utilizado, em qual modo de operação ele se encontra e a distância do alvo.
 
--- aqui imagem da visão do et na hora de trocar os visores --
+![Seleção do Visor](/home/concatto/ciencia-da-computacao/Engenharia da Usabilidade/Resources/default_view_visor_select.jpg)
 
 ### 3.2 Controle do usuário e liberdade
 
 Opção de voltar no tempo (por tempo limitado - 5 minutos) para permitir que o ET desfaça ações indesejadas, duas opções de pausa no processo, uma através do docking e a outra através do controle Dazr Reathadder.
 
--- Imagem do controle Dazr Reathadder --
+![Controle Softmicro 063](/home/concatto/ciencia-da-computacao/Engenharia da Usabilidade/Resources/controller.jpg){height=7cm}
 
 O controle apresenta várias opções de controle do sistema de forma intuitiva e sucinta, dando poder de forma simples ao ET.
 
@@ -70,11 +70,16 @@ Para a abdução, estabeleceu-se um modo de *estase*, onde o ser humano que se s
 
 Para a escotilha da nave, implementou-se um sensor de presença que realiza sua abertura automaticamente quando o humano se aproxima pelo lado de fora. Caso o usuário queira controlá-la manualmente, basta acessar o menu do sistema; neste, também existem diálogos para confirmação.
 
+![Visão do ET](/home/concatto/ciencia-da-computacao/Engenharia da Usabilidade/Resources/default_view4.jpg)
+
+É possível visualizar o modo *estase* na imagem acima.
+
 ### 3.4 Estética e design minimalista
 
 Buscou-se minimizar a quantidade de textos, ícones e controles no estado padrão do sistema, onde o usuário vê o mundo através do *drone*. Ícones dos visores seguem um padrão de design *flat*, mantendo a inteligibilidade apesar da simplicidade. Controles de seleção de visor, avanço e retrocesso no tempo e medidor de progresso da abdução são apresentados somente conforme existir necessidade. Adicionalmente, para evitar adição de mais controles para manipulação fina do posicionamento do ser humano sendo abduzido, implementou-se um materializador de uma versão holográfica do mesmo, que pode ser controlada pelo usuário como um objeto físico qualquer.
 
--- novamente, imagem da visão do et --
+![Controle do Tempo](/home/concatto/ciencia-da-computacao/Engenharia da Usabilidade/Resources/time_stop.jpg){height=4cm}
+![Seleção do Visor](/home/concatto/ciencia-da-computacao/Engenharia da Usabilidade/Resources/default_view_visor_select.jpg){height=4cm}
 
 ## 3.5 Compatibilidade de um sistema com o mundo real
 
@@ -82,7 +87,22 @@ O sistema MAGIA busca oferecer uma experiência equivalente a tarefas realizadas
 
 Além disso, o processo de movimentação do humano alvo, assim como sua abdução propriamente dita, se dá por meio de um objeto físico que o usuário pode mover livremente em todas as três dimensões, tendendo a voltar a um ponto fixo no espaço através de uma força de atração. À medida que o usuário movimenta o objeto, o raio abdutor fará com que o humano alvo seja movimentado na mesma direção, com a mesma intensidade.
 
+![Salão de Abdução](/home/concatto/ciencia-da-computacao/Engenharia da Usabilidade/Resources/control_room.jpg){width=15cm}
 
 ## 4. Funcionalidades e Pontos Críticos (Imagens)
 
---todas as imagens aqui--
+![Salão de Abdução](/home/concatto/ciencia-da-computacao/Engenharia da Usabilidade/Resources/control_room.jpg)
+
+![Drone IJD - Espião dourado, versão limitada](/home/concatto/ciencia-da-computacao/Engenharia da Usabilidade/Resources/drone.jpg)
+
+![Controle Softmicro 063](/home/concatto/ciencia-da-computacao/Engenharia da Usabilidade/Resources/controller.jpg)
+
+![Visão do ET](/home/concatto/ciencia-da-computacao/Engenharia da Usabilidade/Resources/default_view_visor_select.jpg)
+
+![Visor Termal](/home/concatto/ciencia-da-computacao/Engenharia da Usabilidade/Resources/DC_thermal_surveillance_03.jpg)
+
+![Visor de Sonda](/home/concatto/ciencia-da-computacao/Engenharia da Usabilidade/Resources/scan_visor.jpg)
+
+![Visor de Raio X](/home/concatto/ciencia-da-computacao/Engenharia da Usabilidade/Resources/xray.jpg)
+
+![Controle do Tempo](/home/concatto/ciencia-da-computacao/Engenharia da Usabilidade/Resources/time_stop.jpg)

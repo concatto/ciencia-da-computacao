@@ -16,6 +16,17 @@ double normalize(double x, double lower, double upper) {
     return (x - lower) / static_cast<double>(upper - lower);
 }
 
+template <class T, class U>
+T constrain(T input, U lowerBound, U upperBound) { // Lower bound is inclusive, upper bound is exclusive
+  if (input < lowerBound) {
+    return lowerBound;
+  } else if (input >= upperBound) {
+    return upperBound - 1;
+  }
+
+  return input;
+}
+
 template <class T>
 T vectorSum(const std::vector<T>& vector) {
   return std::accumulate(vector.begin(), vector.end(), static_cast<T>(0));
