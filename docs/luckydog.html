@@ -11,11 +11,14 @@
       #dog {
         width: 300px;
       }
+      #person {
+        margin: 20px 0px;
+      }
     </style>
   </head>
   <body>
     <div id="container">
-      <img id="dog" src="canis-maior-constellation-vector-12479315.jpg/>
+      <img id="dog" src="canis-maior-constellation-vector-12479315.jpg"/>
     
       <h3 id="person">
         ???????
@@ -26,16 +29,21 @@
     
     
     <script>
-      var people = [
-        'a',
-        'b',
-      ];
+      var fn = function() {
+        var people = [
+          'a',
+          'b',
+        ];
+
+        document.getElementById('generate').addEventListener('click', function() {
+          var index = Math.floor(Math.random() * people.length);
+          console.log(index);
+
+          document.getElementById('person').innerHtml = people[index];
+        });
+      };
       
-      document.getElementById('generate').addEventListener('click', function() {
-        var index = Math.floor(Math.random() * people.length);
-        
-        document.getElementById('person').innerHtml = people[index];
-      });
+      document.addEventListener('DOMContentLoaded', fn, false);
     </script>
   </body>
 </html
