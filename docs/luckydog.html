@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lucky Dog?</title>
+    <style>
+      #container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #dog {
+        width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <img id="dog" src="https://cdn1.vectorstock.com/i/1000x1000/93/15/canis-maior-constellation-vector-12479315.jpg"/>
+    
+      <h3 id="person">
+        ???????
+      </h3>
+      
+      <input type="button" id="generate" value="Lucky Dog?"/>
+    </div>
+    
+    
+    <script>
+      var people = [
+        'a',
+        'b',
+      ];
+      
+      document.getElementById('generate').addEventListener('click', function() {
+        var index = Math.floor(Math.random() * people.length);
+        
+        document.getElementById('person').innerHtml = people[index];
+      });
+    </script>
+  </body>
+</html
